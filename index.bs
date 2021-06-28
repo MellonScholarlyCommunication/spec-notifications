@@ -35,6 +35,10 @@ table th {
   background: #005A9C;
   color: #fff;
 }
+table tbody > tr > th {
+  background: #fff;
+  color: #005A9C;
+}
 table th.last {
   border-right: none;
 }
@@ -66,63 +70,86 @@ This document defines the different notification types that can be used and how 
 Activities {#activities}
 ===========
 
+In the network, [[spec-overview#actor|actors]] can perform activities that are linked to a certain artefact. 
+Actors are either [[spec-overview#service-hub|Service Hubs]] or [[spec-overview#maintainer|Maintainers]] (see [[#mappings]]).
+By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
+Activities that somehow impact an artefact's lifecycle result in [[spec-overview#event|lifecycle events]].
 
+The table below summarizes the possible notification types that actors can exchange.
 
 <table>
   <thead>
     <tr>
     <th>Activity
-    <th>Type
+    <th>ActivityStreams 2.0 Type
     <th>Purpose
   <tbody>
+      <tr>
+      <th colspan="3">Disseminating lifecycle aspects</th>
+    </tr>
     <tr>
-      <td>
-      <td>[as:Create](https://www.w3.org/ns/activitystreams#Create)
-      <td>
+      <td>Create
+      <td>[[activitystreams-vocabulary#Create|as:Create]]
+      <td>An [[spec-overview#actor|actor]] creates an [[spec-overview#artefact|artefact]] in its data pod.
     <tr>
-      <td>
-      <td>[as:Update](https://www.w3.org/ns/activitystreams#Update)
-      <td>
+      <td>Update
+      <td>[[activitystreams-vocabulary#update|as:Update]]
+      <td>An [[spec-overview#actor|actor]] updates an [[spec-overview#artefact|artefact]] in its data pod.
+    <tr>
+      <td>Remove
+      <td>[[activitystreams-vocabulary#Remove|as:Remove]]
+      <td>An [[spec-overview#actor|actor]] removes an [[spec-overview#artefact|artefact]] from it's data pod.
   <tbody>
     <tr>
-      <td>
-      <td>[as:Announce](https://www.w3.org/ns/activitystreams#Announce)
-      <td>
-    <tr>
-      <td>
-      <td>[as:Undo](https://www.w3.org/ns/activitystreams#Undo)
-      <td>
+      <td>Announce
+      <td>[[activitystreams-vocabulary#Announce|as:Announce]]
+      <td>An [[spec-overview#actor|actor]] announces the existence of an [[spec-overview#artefact|artefact]].
+
   <tbody>
     <tr>
-      <td>
-      <td>[as:Offer](https://www.w3.org/ns/activitystreams#Offer)
-      <td>
+      <th colspan="3">Requesting services</th>
+    </tr>
     <tr>
-      <td>
-      <td>[as:Accept](https://www.w3.org/ns/activitystreams#Accept)
-      <td>
+      <td>Offer
+      <td>[[activitystreams-vocabulary#Offer|as:Offer]]
+      <td>An [[spec-overview#actor|actor]] offers an [[spec-overview#artefact|artefact]] to another actor in order to conduct an [[spec-overview#activity|activity]] with that artefact as object.
     <tr>
-      <td>
-      <td>[as:Reject](https://www.w3.org/ns/activitystreams#Reject)
-      <td>
+      <td>Accept
+      <td>[[activitystreams-vocabulary#Accept|as:Accept]]
+      <td>A [[spec-overview#actor|actor]] accepts an [[spec-overview#artefact|artefact]] offer from another [[spec-overview#actor|actor]].
+    <tr>
+      <td>Reject
+      <td>[[activitystreams-vocabulary#Reject|as:Reject]]
+      <td>A [[spec-overview#actor|actor]] rejects an [[spec-overview#artefact|artefact]] offer from another [[spec-overview#actor|actor]].
+    <tr>
+      <td>Undo
+      <td>[[activitystreams-vocabulary#Undo|as:Undo]]
+      <td>An [[spec-overview#actor|actor]] retracts a prior [[spec-overview#activity|activity]].
 </table>
 
-Mappings {#definitions}
+Mappings {#mappings}
 ===========
+
+In [[activitystreams-core#activities]], instances of an `Activity` have the properties `actor`, `object`, and `target`: 
+- `actor` refers to the entity that performs or is expected to perform the activity. 
+- `object` refers to the direct object on which the activity is performed. 
+- `target` refers to where the activity is targeted at, usually another actor.
+
+This section describes how each of these properties must be used in the context of a decentralized artefact exchange network.
+The terms in [[spec-overview#definitions]] are mapped to specific types from [[activitystreams-vocabulary#actor-types]] and [[schema-org]].
 
 ## Actors
 
 The following [[activitystreams-vocabulary#actors]] mapping MUST be used:
 
 <table>
-<tr>
-<td>[[spec-overview#Service-Hub|Service Hub]]
-<td>[as:Service](https://www.w3.org/ns/activitystreams#Service)
-<tr>
-<td>[[spec-overview#Maintainer|Maintainer]]
-<td>[as:Organization](https://www.w3.org/ns/activitystreams#Organization) or [as:Person](https://www.w3.org/ns/activitystreams#Person)
-
-<tbody>
+  <tr>
+  <td>[[spec-overview#Service-Hub|Service Hub]]
+  <td>[as:Service](https://www.w3.org/ns/activitystreams#Service)
+  <tr>
+  <td>[[spec-overview#Maintainer|Maintainer]]
+  <td>[as:Organization](https://www.w3.org/ns/activitystreams#Organization) or [as:Person](https://www.w3.org/ns/activitystreams#Person)
+</table>
 
 ## Artefacts
 
@@ -131,10 +158,17 @@ It SHOULD have one of the following types:
 - https://www.w3.org/ns/activitystreams#Object
 
 
+<table>
+  <tr>
+  <td>[[spec-overview#object|Object]]
+  <td>[as:Object](https://www.w3.org/ns/activitystreams#Object)
+</table>
+
+
 Payloads {#payloads}
 ===========
 
-#### [as:Create](https://www.w3.org/ns/activitystreams#Create)
+## [as:Create](https://www.w3.org/ns/activitystreams#Create)
 
 A new dataset was created by the institution.
 
@@ -180,7 +214,7 @@ Example:
 ```
 
 
-#### [as:Announce](https://www.w3.org/ns/activitystreams#Announce)
+## [as:Announce](https://www.w3.org/ns/activitystreams#Announce)
 
 An institution announces the existence of a dataset. 
 
@@ -188,12 +222,12 @@ An institution announces the existence of a dataset.
 | :------------- | :----------- |
 | target | [as:Service](https://www.w3.org/ns/activitystreams#Service) \| [as:Organization](https://www.w3.org/ns/activitystreams#Organization) |
 
-#### [as:Update](https://www.w3.org/ns/activitystreams#Update)
+## [as:Update](https://www.w3.org/ns/activitystreams#Update)
 
 
 
 
-#### [as:Delete](https://www.w3.org/ns/activitystreams#Delete)
+## [as:Delete](https://www.w3.org/ns/activitystreams#Delete)
 
 
 
