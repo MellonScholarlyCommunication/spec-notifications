@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="1c4f7c42d49ff50074eb1e26be571bdaec041c02" name="document-revision">
+  <meta content="d7e1833a991a0c8756ade5c63c076a5f0835c7e7" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1471,6 +1471,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <dd><a class="u-url" href="https://mellonscholarlycommunication.github.io/spec-notifications">https://mellonscholarlycommunication.github.io/spec-notifications</a>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/">GitHub</a>
+     <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:miel.vandersande@meemoo.be">Miel Vander Sande</a> (<span class="p-org org">meemoo - <a href="https://meemoo.be">Flemish Institute for Archiving</a></span>)
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org">Ghent University</span>)
@@ -1507,12 +1508,12 @@ Parts of this work may be from another specification document.  If so, those par
     <li>
      <a href="#payloads"><span class="secno">5</span> <span class="content">Payloads</span></a>
      <ol class="toc">
-      <li><a href="#ascreate"><span class="secno">5.1</span> <span class="content"><span>as:Create</span></span></a>
-      <li><a href="#asannounce"><span class="secno">5.2</span> <span class="content"><span>as:Announce</span></span></a>
-      <li><a href="#asupdate"><span class="secno">5.3</span> <span class="content"><span>as:Update</span></span></a>
+      <li><a href="#create"><span class="secno">5.1</span> <span class="content">Create</span></a>
+      <li><a href="#update"><span class="secno">5.2</span> <span class="content">Update</span></a>
+      <li><a href="#announce"><span class="secno">5.3</span> <span class="content">Announce</span></a>
       <li><a href="#asdelete"><span class="secno">5.4</span> <span class="content"><span>as:Delete</span></span></a>
-      <li><a href="#create"><span class="secno">5.5</span> <span class="content">Create</span></a>
-      <li><a href="#update"><span class="secno">5.6</span> <span class="content">Update</span></a>
+      <li><a href="#create①"><span class="secno">5.5</span> <span class="content">Create</span></a>
+      <li><a href="#update①"><span class="secno">5.6</span> <span class="content">Update</span></a>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -1521,6 +1522,7 @@ Parts of this work may be from another specification document.  If so, those par
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
       <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
+    <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
    </ol>
   </nav>
   <main>
@@ -1570,9 +1572,9 @@ Activities that somehow impact an artefact’s lifecycle result in <a href="http
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#update">as:Update</a> 
       <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> updates an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> in its data pod. 
      <tr>
-      <td>Remove 
+      <td>Delete 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Remove">as:Remove</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> removes an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from it’s data pod. 
+      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> deletes an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from it’s data pod. 
     <tbody>
      <tr>
       <td>Announce 
@@ -1630,42 +1632,47 @@ It MUST use the following type mapping:</p>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
    </table>
    <p>The actor MUST be identifyable with an HTTP URI, which SHOULD be a <a data-link-type="biblio" href="#biblio-webid">[webid]</a> It MAY have an <code>ldp:inbox</code> that refers to the inbox URI where the actor can receive replies.
-The actor MAY have a name using <code>schema:name</code>.</p>
-   <div class="example" id="example-866774d8">
-    <a class="self-link" href="#example-866774d8"></a> Example of an organization as actor: 
+The actor MAY have a name using <code>as:name</code>.</p>
+   <div class="example" id="example-8692de1c">
+    <a class="self-link" href="#example-8692de1c"></a> Example of an organization as actor: 
 <pre class="language-json highlight"><c- p>{</c->
-    <c- f>"@context"</c-><c- p>:</c-> <c- p>{</c->
-      <c- f>"@vocab"</c-><c- p>:</c-> <c- u>"https://schema.org/"</c-><c- p>,</c->
-      <c- f>"as"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
+    <c- p>{</c->
+      <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
       <c- f>"inbox"</c-><c- p>:</c-> <c- p>{</c-><c- f>"@id"</c-><c- p>:</c-> <c- u>"http://www.w3.org/ns/ldp#inbox"</c-><c- p>,</c-> <c- f>"@type"</c-><c- p>:</c-> <c- u>"@id"</c-><c- p>}</c->
-    <c- p>},</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"as:Organization"</c-><c- p>,</c-> <c- u>"Organization"</c-><c- p>],</c->
-  	<c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
-    <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
+    <c- p>}</c->
+  <c- p>],</c->
+  <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+  <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
 <c- p>}</c->
 </pre>
    </div>
    <h3 class="heading settled" data-level="4.2" id="artefacts"><span class="secno">4.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
    <p>The object of an activity MUST describe the artefact on which the activity has effect.
 It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a>.</p>
-   <div class="example" id="example-9c842010">
-    <a class="self-link" href="#example-9c842010"></a> Example of a Dataset as artefact: 
+   <div class="example" id="example-2c4f4dff">
+    <a class="self-link" href="#example-2c4f4dff"></a> Example of a Dataset as artefact: 
 <pre class="language-json highlight"><c- p>{</c->
-    <c- f>"@context"</c-><c- p>:</c-> <c- p>{</c->
-      <c- f>"@vocab"</c-><c- p>:</c-> <c- u>"https://schema.org/"</c-><c- p>,</c->
-      <c- f>"as"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
-      <c- f>"inbox"</c-><c- p>:</c-> <c- p>{</c-><c- f>"@id"</c-><c- p>:</c-> <c- u>"http://www.w3.org/ns/ldp#inbox"</c-><c- p>,</c-> <c- f>"@type"</c-><c- p>:</c-> <c- u>"@id"</c-><c- p>}</c->
-    <c- p>},</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"as:Object"</c-><c- p>,</c-> <c- u>"Dataset"</c-><c- p>],</c->
-    <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
+  <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
+    <c- p>{</c->
+      <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c->
+    <c- p>}</c->
+  <c- p>],</c->
+  <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
 <c- p>}</c->
 </pre>
    </div>
    <h2 class="heading settled" data-level="5" id="payloads"><span class="secno">5. </span><span class="content">Payloads</span><a class="self-link" href="#payloads"></a></h2>
-   <h3 class="heading settled" data-level="5.1" id="ascreate"><span class="secno">5.1. </span><span class="content"><a href="https://www.w3.org/ns/activitystreams#Create">as:Create</a></span><a class="self-link" href="#ascreate"></a></h3>
-   <p>A new dataset was created by the institution.</p>
+   <p class="issue" id="issue-de9c75aa"><a class="self-link" href="#issue-de9c75aa"></a> Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1></a></p>
+   <h3 class="heading settled" data-level="5.1" id="create"><span class="secno">5.1. </span><span class="content">Create</span><a class="self-link" href="#create"></a></h3>
+   <p>A new artefact was created by the actor.</p>
+   <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a></p>
    <table>
     <thead>
      <tr>
@@ -1673,42 +1680,120 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
       <th>Type 
     <tbody>
      <tr>
-      <td>actor  | <a href="https://www.w3.org/ns/activitystreams#Organization">as:Organization</a> | 
-      <td>object | <a href="http://schema.org/Dataset">schema:Dataset</a> | 
-      <td>origin | <a href="https://schema.org/SoftwareApplication">schema:SoftwareApplication</a> | 
+      <td>actor 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+     <tr>
+      <td>object 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+     <tr>
+      <td>origin 
+      <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
    </table>
-   <p>Example:</p>
+   <div class="example" id="example-c3b743aa">
+    <a class="self-link" href="#example-c3b743aa"></a> Example of a dataset that is being created by an cultural heritage institution: 
 <pre class="language-json highlight"><c- p>{</c->
-  <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams"</c-><c- p>,</c->
-  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek announces Alba"</c-><c- p>,</c->
-  <c- f>"type"</c-><c- p>:</c-> <c- u>"Create"</c-><c- p>,</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
+    <c- p>{</c->
+      <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
+      <c- f>"inbox"</c-><c- p>:</c-> <c- p>{</c-><c- f>"@id"</c-><c- p>:</c-> <c- u>"http://www.w3.org/ns/ldp#inbox"</c-><c- p>,</c-> <c- f>"@type"</c-><c- p>:</c-> <c- u>"@id"</c-><c- p>}</c->
+    <c- p>}</c->
+  <c- p>],</c->
+  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek created Alba dataset"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Create"</c-><c- p>,</c->
   <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://schema.org/"</c-><c- p>,</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
-    <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c-><c- p>,</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/"</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
   <c- p>},</c->
   <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://schema.org/"</c-><c- p>,</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- u>"Dataset"</c-><c- p>,</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://data.bibliotheken.nl/doc/dataset/rise-alba"</c-><c- p>,</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
   <c- p>},</c->
   <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://schema.org/"</c-><c- p>,</c->
     <c- f>"@id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- u>"SoftwareApplication"</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
   <c- p>},</c->
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
 <c- p>}</c->
 </pre>
-   <h3 class="heading settled" data-level="5.2" id="asannounce"><span class="secno">5.2. </span><span class="content"><a href="https://www.w3.org/ns/activitystreams#Announce">as:Announce</a></span><a class="self-link" href="#asannounce"></a></h3>
-   <p>An institution announces the existence of a dataset.</p>
-   <p>| property  | type              |
-| :------------- | :----------- |
-| target | <a href="https://www.w3.org/ns/activitystreams#Service">as:Service</a> \| <a href="https://www.w3.org/ns/activitystreams#Organization">as:Organization</a> |</p>
-   <h3 class="heading settled" data-level="5.3" id="asupdate"><span class="secno">5.3. </span><span class="content"><a href="https://www.w3.org/ns/activitystreams#Update">as:Update</a></span><a class="self-link" href="#asupdate"></a></h3>
+   </div>
+   <h3 class="heading settled" data-level="5.2" id="update"><span class="secno">5.2. </span><span class="content">Update</span><a class="self-link" href="#update"></a></h3>
+   <p>An artefact was updated by the actor.</p>
+   <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Update">as:Update</a></p>
+   <table>
+    <thead>
+     <tr>
+      <th>Property 
+      <th>Type 
+    <tbody>
+     <tr>
+      <td>actor 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+     <tr>
+      <td>object 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+     <tr>
+      <td>origin 
+      <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+   </table>
+   <div class="example" id="example-3c64ce05">
+    <a class="self-link" href="#example-3c64ce05"></a> Example of a dataset that is being updated by an cultural heritage institution: 
+<pre class="language-json highlight"><c- p>{</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
+    <c- p>{</c->
+      <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
+      <c- f>"inbox"</c-><c- p>:</c-> <c- p>{</c-><c- f>"@id"</c-><c- p>:</c-> <c- u>"http://www.w3.org/ns/ldp#inbox"</c-><c- p>,</c-> <c- f>"@type"</c-><c- p>:</c-> <c- u>"@id"</c-><c- p>}</c->
+    <c- p>}</c->
+  <c- p>],</c->
+  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek updates the Alba dataset"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Update"</c-><c- p>,</c->
+  <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
+  <c- p>},</c->
+  <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
+  <c- p>},</c->
+  <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
+  <c- p>},</c->
+  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+<c- p>}</c->
+</pre>
+   </div>
+   <h3 class="heading settled" data-level="5.3" id="announce"><span class="secno">5.3. </span><span class="content">Announce</span><a class="self-link" href="#announce"></a></h3>
+   <p>A maintainer announces the existence of an artefact to a Service Hub.</p>
+   <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a></p>
+   <table>
+    <thead>
+     <tr>
+      <th>Property 
+      <th>Type 
+    <tbody>
+     <tr>
+      <td>actor 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+     <tr>
+      <td>object 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+     <tr>
+      <td>target 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+     <tr>
+      <td>origin 
+      <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+   </table>
    <h3 class="heading settled" data-level="5.4" id="asdelete"><span class="secno">5.4. </span><span class="content"><a href="https://www.w3.org/ns/activitystreams#Delete">as:Delete</a></span><a class="self-link" href="#asdelete"></a></h3>
-   <h3 class="heading settled" data-level="5.5" id="create"><span class="secno">5.5. </span><span class="content">Create</span><a class="self-link" href="#create"></a></h3>
+   <h3 class="heading settled" data-level="5.5" id="create①"><span class="secno">5.5. </span><span class="content">Create</span><a class="self-link" href="#create①"></a></h3>
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams"</c-><c- p>,</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek announces Alba"</c-><c- p>,</c->
@@ -1732,7 +1817,7 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
 <c- p>}</c->
 </pre>
-   <h3 class="heading settled" data-level="5.6" id="update"><span class="secno">5.6. </span><span class="content">Update</span><a class="self-link" href="#update"></a></h3>
+   <h3 class="heading settled" data-level="5.6" id="update①"><span class="secno">5.6. </span><span class="content">Update</span><a class="self-link" href="#update①"></a></h3>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -1897,3 +1982,7 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
    <dt id="biblio-webid">[WEBID]
    <dd>Andrei Sambra; Henry Story; Tim Berners-Lee. <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID 1.0</a>. Editor’s Draft. URL: <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html</a>
   </dl>
+  <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
+  <div style="counter-reset:issue">
+   <div class="issue"> Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1></a><a href="#issue-de9c75aa"> ↵ </a></div>
+  </div>
