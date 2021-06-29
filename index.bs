@@ -96,9 +96,9 @@ The table below summarizes the possible notification types that actors can excha
       <td>[[activitystreams-vocabulary#update|as:Update]]
       <td>An [[spec-overview#actor|actor]] updates an [[spec-overview#artefact|artefact]] in its data pod.
     <tr>
-      <td>Remove
+      <td>Delete
       <td>[[activitystreams-vocabulary#Remove|as:Remove]]
-      <td>An [[spec-overview#actor|actor]] removes an [[spec-overview#artefact|artefact]] from it's data pod.
+      <td>An [[spec-overview#actor|actor]] deletes an [[spec-overview#artefact|artefact]] from it's data pod.
   <tbody>
     <tr>
       <td>Announce
@@ -161,22 +161,24 @@ It MUST use the following type mapping:
 
 The actor MUST be identifyable with an HTTP URI, which SHOULD be a [[webid]]
 It MAY have an `ldp:inbox` that refers to the inbox URI where the actor can receive replies.
-The actor MAY have a name using `schema:name`.
+The actor MAY have a name using `as:name`.
 
 <div class=example>
 Example of an organization as actor:
 
 ``` json
 {
-    "@context": {
-      "@vocab": "https://schema.org/",
-      "as": "https://www.w3.org/ns/activitystreams/",
+  "@context": [
+    "https://www.w3.org/ns/activitystreams/", 
+    {
+      "schema": "http://schema.org/",
       "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    },
-    "@id": "https://www.kb.nl#me",
-    "@type": ["as:Organization", "Organization"],
-  	"inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
+    }
+  ],
+  "@id": "https://www.kb.nl#me",
+  "@type": ["Organization", "schema:Organization"],
+  "inbox": "https://www.kb.nl#inbox",
+  "name": "Koninklijke Bibliotheek"    
 }
 ```
 </div>
@@ -191,14 +193,15 @@ Example of a Dataset as artefact:
 
 ``` json
 {
-    "@context": {
-      "@vocab": "https://schema.org/",
-      "as": "https://www.w3.org/ns/activitystreams/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    },
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["as:Object", "Dataset"],
-    "name": "Dataset about WOII"    
+  "@context": [
+    "https://www.w3.org/ns/activitystreams/", 
+    {
+      "schema": "http://schema.org/"
+    }
+  ],
+  "@id": "https://www.kb.nl/datasets/1",
+  "@type": ["Object", "schema:Dataset"],
+  "name": "Dataset about WOII"    
 }
 ```
 </div>
@@ -206,61 +209,150 @@ Example of a Dataset as artefact:
 Payloads {#payloads}
 ===========
 
-## [as:Create](https://www.w3.org/ns/activitystreams#Create)
+Issue(1): Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics?
 
-A new dataset was created by the institution.
+## Create
+
+A new artefact was created by the actor.
+
+Type: [[activitystreams-vocabulary#Create|as:Create]]
 
 <table>
 <thead>
-    <tr>
+  <tr>
     <th>Property
     <th>Type
 <tbody>
-<tr>
-<td>actor  | [as:Organization](https://www.w3.org/ns/activitystreams#Organization) |
-<td>object | [schema:Dataset](http://schema.org/Dataset) |
-<td>origin | [schema:SoftwareApplication](https://schema.org/SoftwareApplication) |
+  <tr>
+    <td>actor  
+    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
+  <tr>
+    <td>object
+    <td>[[activitystreams-vocabulary#Object|as:Object]]
+  <tr>  
+    <td>origin
+    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
 </table>
 
-Example:
+<div class=example>
+Example of a dataset that is being created by an cultural heritage institution:
 
 ``` json
-
 {
-  "@context": "https://www.w3.org/ns/activitystreams",
-  "summary": "Koninklijke Bibliotheek announces Alba",
-  "type": "Create",
+  "@context": [
+    "https://www.w3.org/ns/activitystreams/", 
+    {
+      "schema": "http://schema.org/",
+      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
+    }
+  ],
+  "summary": "Koninklijke Bibliotheek created Alba dataset",
+  "@type": "Create",
   "actor": {
-    "@context": "https://schema.org/",
-    "@type": "Organization",
-    "name": "Koninklijke Bibliotheek",
-    "@id": "https://www.kb.nl/"
+    "@id": "https://www.kb.nl#me",
+    "@type": ["Organization", "schema:Organization"],
+    "inbox": "https://www.kb.nl#inbox",
+    "name": "Koninklijke Bibliotheek"    
   },
   "object": {
-    "@context": "https://schema.org/",
-    "@type": "Dataset",
-    "@id": "https://data.bibliotheken.nl/doc/dataset/rise-alba",
+    "@id": "https://www.kb.nl/datasets/1",
+    "@type": ["Object", "schema:Dataset"],
+    "name": "Dataset about WOII"    
   },
   "origin": {
-    "@context": "https://schema.org/",
     "@id": "http://example.org/Adlib",
-    "@type": "SoftwareApplication"
+    "@type": "schema:SoftwareApplication"
   },
   "updated": "2021-01-28T19:56:20.114Z"
 }
-
 ```
+</div>
+
+## Update
+
+An artefact was updated by the actor.
+
+Type: [[activitystreams-vocabulary#Update|as:Update]]
+
+<table>
+<thead>
+  <tr>
+    <th>Property
+    <th>Type
+<tbody>
+  <tr>
+    <td>actor  
+    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
+  <tr>
+    <td>object
+    <td>[[activitystreams-vocabulary#Object|as:Object]]
+  <tr>  
+    <td>origin
+    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+</table>
+
+<div class=example>
+Example of a dataset that is being updated by an cultural heritage institution:
+
+``` json
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams/", 
+    {
+      "schema": "http://schema.org/",
+      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
+    }
+  ],
+  "summary": "Koninklijke Bibliotheek updates the Alba dataset",
+  "@type": "Update",
+  "actor": {
+    "@id": "https://www.kb.nl#me",
+    "@type": ["Organization", "schema:Organization"],
+    "inbox": "https://www.kb.nl#inbox",
+    "name": "Koninklijke Bibliotheek"    
+  },
+  "object": {
+    "@id": "https://www.kb.nl/datasets/1",
+    "@type": ["Object", "schema:Dataset"],
+    "name": "Dataset about WOII"    
+  },
+  "origin": {
+    "@id": "http://example.org/Adlib",
+    "@type": "schema:SoftwareApplication"
+  },
+  "updated": "2021-01-28T19:56:20.114Z"
+}
+```
+</div>
+
+## Announce
+
+A maintainer announces the existence of an artefact to a Service Hub. 
+
+Type: [[activitystreams-vocabulary#Announce|as:Announce]]
+
+<table>
+<thead>
+  <tr>
+    <th>Property
+    <th>Type
+<tbody>
+  <tr>
+    <td>actor  
+    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
+  <tr>
+    <td>object
+    <td>[[activitystreams-vocabulary#Object|as:Object]]
+  <tr>
+    <td>target
+    <td>[[activitystreams-vocabulary#Service|as:Service]]
+  <tr>  
+    <td>origin
+    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+</table>
 
 
-## [as:Announce](https://www.w3.org/ns/activitystreams#Announce)
 
-An institution announces the existence of a dataset. 
-
-| property  | type              |
-| :------------- | :----------- |
-| target | [as:Service](https://www.w3.org/ns/activitystreams#Service) \| [as:Organization](https://www.w3.org/ns/activitystreams#Organization) |
-
-## [as:Update](https://www.w3.org/ns/activitystreams#Update)
 
 
 
