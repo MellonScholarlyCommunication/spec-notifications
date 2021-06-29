@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="86d42d3e7aca36eeb767750027a5ba79f32e4a9b" name="document-revision">
+  <meta content="1c4f7c42d49ff50074eb1e26be571bdaec041c02" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1464,7 +1464,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">List of notifications</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard, <time class="dt-updated" datetime="2021-06-28">28 June 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard, <time class="dt-updated" datetime="2021-06-29">29 June 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1481,7 +1481,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 28 June 2021,
+In addition, as of 29 June 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1599,41 +1599,70 @@ Activities that somehow impact an artefact’s lifecycle result in <a href="http
       <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>. 
    </table>
    <h2 class="heading settled" data-level="4" id="mappings"><span class="secno">4. </span><span class="content">Mappings</span><a class="self-link" href="#mappings"></a></h2>
-   <p>In <a href="https://www.w3.org/TR/activitystreams-core/#activities">Activity Streams 2.0 §activities</a>, instances of an <code>Activity</code> have the properties <code>actor</code>, <code>object</code>, and <code>target</code>:</p>
+   <p>All payloads in  a decentralized artefact exchange network define a <a href="https://www.w3.org/TR/activitystreams-vocabulary/#activity">Activity Vocabulary §activity</a>.
+They MUST be typed as <code>as:Activity</code>.
+The properties <code>as:actor</code>, <code>as:object</code>, and <code>as:target</code>, as defined in <a href="https://www.w3.org/TR/activitystreams-core/#activities">Activity Streams 2.0 §activities</a>, are used consistently across all notifications.</p>
    <ul>
     <li data-md>
-     <p><code>actor</code> refers to the entity that performs or is expected to perform the activity.</p>
+     <p><code>as:actor</code> refers to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> that performs or is expected to perform the <code>activity</code>.</p>
     <li data-md>
-     <p><code>object</code> refers to the direct object on which the activity is performed.</p>
+     <p><code>as:object</code> refers to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> on which the <code>activity</code> is performed.</p>
     <li data-md>
-     <p><code>target</code> refers to where the activity is targeted at, usually another actor.</p>
+     <p><code>as:origin</code> refers to the sender of the activity; this can refer to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>, the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#dashboard">dashboard</a> or the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#orchestrator">orchestrator</a>.</p>
+    <li data-md>
+     <p><code>as:target</code> refers to the destination of the activity; the other <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> that is being notified of this activity.</p>
    </ul>
-   <p>This section describes how each of these properties must be used in the context of a decentralized artefact exchange network.
-The terms in <a href="http://mellonscholarlycommunication.github.io/spec-overview/#definitions">Overview of the ResearcherPod specifications §definitions</a> are mapped to specific types from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">Activity Vocabulary §actor-types</a> and <a data-link-type="biblio" href="#biblio-schema-org">[schema-org]</a>.</p>
+   <p>The terms in <a href="http://mellonscholarlycommunication.github.io/spec-overview/#definitions">Overview of the ResearcherPod specifications §definitions</a> should be mapped in a specific way, using specific types from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">Activity Vocabulary §actor-types</a> and <a data-link-type="biblio" href="#biblio-schema-org">[schema-org]</a>.
+this is outlined in more detail below.</p>
    <h3 class="heading settled" data-level="4.1" id="actors"><span class="secno">4.1. </span><span class="content">Actors</span><a class="self-link" href="#actors"></a></h3>
-   <p>The following <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actors">Activity Vocabulary §actors</a> mapping MUST be used:</p>
+   <p>The actor of an activity MUST describe the <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actors">Activity Vocabulary §actors</a> that created the activity.
+It MUST use the following type mapping:</p>
    <table>
     <tbody>
+     <tr>
+      <th>Actor 
+      <th>Type 
      <tr>
       <td><a href="http://mellonscholarlycommunication.github.io/spec-overview/#Service-Hub">Service Hub</a> 
-      <td><a href="https://www.w3.org/ns/activitystreams#Service">as:Service</a> 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
      <tr>
       <td><a href="http://mellonscholarlycommunication.github.io/spec-overview/#Maintainer">Maintainer</a> 
-      <td><a href="https://www.w3.org/ns/activitystreams#Organization">as:Organization</a> or <a href="https://www.w3.org/ns/activitystreams#Person">as:Person</a> 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
    </table>
+   <p>The actor MUST be identifyable with an HTTP URI, which SHOULD be a <a data-link-type="biblio" href="#biblio-webid">[webid]</a> It MAY have an <code>ldp:inbox</code> that refers to the inbox URI where the actor can receive replies.
+The actor MAY have a name using <code>schema:name</code>.</p>
+   <div class="example" id="example-866774d8">
+    <a class="self-link" href="#example-866774d8"></a> Example of an organization as actor: 
+<pre class="language-json highlight"><c- p>{</c->
+    <c- f>"@context"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"@vocab"</c-><c- p>:</c-> <c- u>"https://schema.org/"</c-><c- p>,</c->
+      <c- f>"as"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
+      <c- f>"inbox"</c-><c- p>:</c-> <c- p>{</c-><c- f>"@id"</c-><c- p>:</c-> <c- u>"http://www.w3.org/ns/ldp#inbox"</c-><c- p>,</c-> <c- f>"@type"</c-><c- p>:</c-> <c- u>"@id"</c-><c- p>}</c->
+    <c- p>},</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"as:Organization"</c-><c- p>,</c-> <c- u>"Organization"</c-><c- p>],</c->
+  	<c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
+<c- p>}</c->
+</pre>
+   </div>
    <h3 class="heading settled" data-level="4.2" id="artefacts"><span class="secno">4.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
-   <p>The object MUST contain the artefact to which the action has effect.
-It SHOULD have one of the following types:</p>
-   <ul>
-    <li data-md>
-     <p>https://www.w3.org/ns/activitystreams#Object</p>
-   </ul>
-   <table>
-    <tbody>
-     <tr>
-      <td><a href="http://mellonscholarlycommunication.github.io/spec-overview/#object">Object</a> 
-      <td><a href="https://www.w3.org/ns/activitystreams#Object">as:Object</a> 
-   </table>
+   <p>The object of an activity MUST describe the artefact on which the activity has effect.
+It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a>.</p>
+   <div class="example" id="example-9c842010">
+    <a class="self-link" href="#example-9c842010"></a> Example of a Dataset as artefact: 
+<pre class="language-json highlight"><c- p>{</c->
+    <c- f>"@context"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"@vocab"</c-><c- p>:</c-> <c- u>"https://schema.org/"</c-><c- p>,</c->
+      <c- f>"as"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
+      <c- f>"inbox"</c-><c- p>:</c-> <c- p>{</c-><c- f>"@id"</c-><c- p>:</c-> <c- u>"http://www.w3.org/ns/ldp#inbox"</c-><c- p>,</c-> <c- f>"@type"</c-><c- p>:</c-> <c- u>"@id"</c-><c- p>}</c->
+    <c- p>},</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"as:Object"</c-><c- p>,</c-> <c- u>"Dataset"</c-><c- p>],</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
+<c- p>}</c->
+</pre>
+   </div>
    <h2 class="heading settled" data-level="5" id="payloads"><span class="secno">5. </span><span class="content">Payloads</span><a class="self-link" href="#payloads"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="ascreate"><span class="secno">5.1. </span><span class="content"><a href="https://www.w3.org/ns/activitystreams#Create">as:Create</a></span><a class="self-link" href="#ascreate"></a></h3>
    <p>A new dataset was created by the institution.</p>
@@ -1865,4 +1894,6 @@ It SHOULD have one of the following types:</p>
    <dd>Sarven Capadisli; Amy Guy. <a href="https://www.w3.org/TR/ldn/">Linked Data Notifications</a>. 2 May 2017. REC. URL: <a href="https://www.w3.org/TR/ldn/">https://www.w3.org/TR/ldn/</a>
    <dt id="biblio-schema-org">[SCHEMA-ORG]
    <dd>W3C Schema.org Community Group. <a href="https://schema.org/">Schema.org</a>. 6.0. URL: <a href="https://schema.org/">https://schema.org/</a>
+   <dt id="biblio-webid">[WEBID]
+   <dd>Andrei Sambra; Henry Story; Tim Berners-Lee. <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID 1.0</a>. Editor’s Draft. URL: <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html</a>
   </dl>

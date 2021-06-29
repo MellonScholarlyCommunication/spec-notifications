@@ -130,40 +130,78 @@ The table below summarizes the possible notification types that actors can excha
 Mappings {#mappings}
 ===========
 
-In [[activitystreams-core#activities]], instances of an `Activity` have the properties `actor`, `object`, and `target`: 
-- `actor` refers to the entity that performs or is expected to perform the activity. 
-- `object` refers to the direct object on which the activity is performed. 
-- `target` refers to where the activity is targeted at, usually another actor.
+All payloads in  a decentralized artefact exchange network define a [[activitystreams-vocabulary#activity]].
+They MUST be typed as `as:Activity`.
+The properties `as:actor`, `as:object`, and `as:target`, as defined in [[activitystreams-core#activities]], are used consistently across all notifications.
 
-This section describes how each of these properties must be used in the context of a decentralized artefact exchange network.
-The terms in [[spec-overview#definitions]] are mapped to specific types from [[activitystreams-vocabulary#actor-types]] and [[schema-org]].
+- `as:actor` refers to the [[spec-overview#actor|actor]] that performs or is expected to perform the `activity`. 
+- `as:object` refers to the [[spec-overview#artefact|artefact]] on which the `activity` is performed. 
+- `as:origin` refers to the sender of the activity; this can refer to the [[spec-overview#actor|actor]], the [[spec-overview#dashboard|dashboard]] or the [[spec-overview#orchestrator|orchestrator]]. 
+- `as:target` refers to the destination of the activity; the other [[spec-overview#actor|actor]] that is being notified of this activity.
+
+The terms in [[spec-overview#definitions]] should be mapped in a specific way, using specific types from [[activitystreams-vocabulary#actor-types]] and [[schema-org]].
+this is outlined in more detail below.
 
 ## Actors
 
-The following [[activitystreams-vocabulary#actors]] mapping MUST be used:
+The actor of an activity MUST describe the [[activitystreams-vocabulary#actors]] that created the activity. 
+It MUST use the following type mapping:
 
 <table>
   <tr>
+  <th>Actor
+  <th>Type
+  <tr>
   <td>[[spec-overview#Service-Hub|Service Hub]]
-  <td>[as:Service](https://www.w3.org/ns/activitystreams#Service)
+  <td>[[activitystreams-vocabulary#Service|as:Service]]
   <tr>
   <td>[[spec-overview#Maintainer|Maintainer]]
-  <td>[as:Organization](https://www.w3.org/ns/activitystreams#Organization) or [as:Person](https://www.w3.org/ns/activitystreams#Person)
+  <td>[[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]]
 </table>
+
+The actor MUST be identifyable with an HTTP URI, which SHOULD be a [[webid]]
+It MAY have an `ldp:inbox` that refers to the inbox URI where the actor can receive replies.
+The actor MAY have a name using `schema:name`.
+
+<div class=example>
+Example of an organization as actor:
+
+``` json
+{
+    "@context": {
+      "@vocab": "https://schema.org/",
+      "as": "https://www.w3.org/ns/activitystreams/",
+      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
+    },
+    "@id": "https://www.kb.nl#me",
+    "@type": ["as:Organization", "Organization"],
+  	"inbox": "https://www.kb.nl#inbox",
+    "name": "Koninklijke Bibliotheek"    
+}
+```
+</div>
 
 ## Artefacts
 
-The object MUST contain the artefact to which the action has effect.
-It SHOULD have one of the following types:
-- https://www.w3.org/ns/activitystreams#Object
+The object of an activity MUST describe the artefact on which the activity has effect.
+It MUST be of type [[activitystreams-vocabulary#Object|as:Object]].
 
+<div class=example>
+Example of a Dataset as artefact:
 
-<table>
-  <tr>
-  <td>[[spec-overview#object|Object]]
-  <td>[as:Object](https://www.w3.org/ns/activitystreams#Object)
-</table>
-
+``` json
+{
+    "@context": {
+      "@vocab": "https://schema.org/",
+      "as": "https://www.w3.org/ns/activitystreams/",
+      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
+    },
+    "@id": "https://www.kb.nl/datasets/1",
+    "@type": ["as:Object", "Dataset"],
+    "name": "Dataset about WOII"    
+}
+```
+</div>
 
 Payloads {#payloads}
 ===========
@@ -314,6 +352,20 @@ An institution announces the existence of a dataset.
 		"publisher": "Solid project",
 		"deliveredBy": [
 			"https://www.w3.org/community/solid/"
+		]
+	},
+  "webid": {
+		"authors": [
+			"Andrei Sambra",
+			"Henry Story",
+			"Tim Berners-Lee"
+		],
+		"href": "https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html",
+		"title": "WebID 1.0",
+		"status": "Editor’s Draft",
+		"publisher": "WebID Community Group",
+		"deliveredBy": [
+			"https://www.w3.org/community/webid/"
 		]
 	},
 	"solid-protocol": {
