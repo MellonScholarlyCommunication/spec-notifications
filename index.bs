@@ -59,10 +59,10 @@ This document is one of the specifications produced by the **ResearcherPod** and
 Introduction {#intro}
 =====================
 
-In a decentralized artefact exchange network, actors communicate using Linked Data Notifications [[ldn]].
+In a decentralized artefact exchange network, actors communicate using [[ldn|Linked Data Notifications]].
 An actor notifies interested other actors about events that have affected a particular artefact,
 allowing the recepient to react (eg. by downloading the artefact) or respond.
-The notification payloads are expressed in [[activitystreams-vocabulary]] with additional domain-specific volcabularies such as Schema.org.
+The notification payloads are expressed in [[activitystreams-vocabulary]] with additional domain-specific vocabularies such as [[schema-org|Schema.org]].
 
 This document defines the different notification types that can be used and how to construct their payloads.
 
@@ -186,7 +186,7 @@ Example of an organization as actor:
 ## Artefacts
 
 The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type [[activitystreams-vocabulary#Object|as:Object]].
+It MUST be of type [[activitystreams-vocabulary#Object|as:Object]], but having additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network) are RECOMMENDED.  
 
 <div class=example>
 Example of a Dataset as artefact:

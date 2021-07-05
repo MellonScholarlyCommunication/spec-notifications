@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="d7e1833a991a0c8756ade5c63c076a5f0835c7e7" name="document-revision">
+  <meta content="245b1b9694ab87d95ceb4449f6a05767e2c6c7ff" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1464,7 +1464,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">List of notifications</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard, <time class="dt-updated" datetime="2021-06-29">29 June 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard, <time class="dt-updated" datetime="2021-07-05">5 July 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1482,7 +1482,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 29 June 2021,
+In addition, as of 5 July 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1543,10 +1543,10 @@ Parts of this work may be from another specification document.  If so, those par
      <p><a href="/spec-notifications/">Notifications</a></p>
    </ol>
    <h2 class="heading settled" data-level="2" id="intro"><span class="secno">2. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-   <p>In a decentralized artefact exchange network, actors communicate using Linked Data Notifications <a data-link-type="biblio" href="#biblio-ldn">[ldn]</a>.
+   <p>In a decentralized artefact exchange network, actors communicate using <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notifications</a>.
 An actor notifies interested other actors about events that have affected a particular artefact,
 allowing the recepient to react (eg. by downloading the artefact) or respond.
-The notification payloads are expressed in <a data-link-type="biblio" href="#biblio-activitystreams-vocabulary">[activitystreams-vocabulary]</a> with additional domain-specific volcabularies such as Schema.org.</p>
+The notification payloads are expressed in <a data-link-type="biblio" href="#biblio-activitystreams-vocabulary">[activitystreams-vocabulary]</a> with additional domain-specific vocabularies such as <a data-link-type="biblio" href="#biblio-schema-org">Schema.org</a>.</p>
    <p>This document defines the different notification types that can be used and how to construct their payloads.</p>
    <h2 class="heading settled" data-level="3" id="activities"><span class="secno">3. </span><span class="content">Activities</span><a class="self-link" href="#activities"></a></h2>
    <p>In the network, <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actors</a> can perform activities that are linked to a certain artefact.
@@ -1652,7 +1652,7 @@ The actor MAY have a name using <code>as:name</code>.</p>
    </div>
    <h3 class="heading settled" data-level="4.2" id="artefacts"><span class="secno">4.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
    <p>The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a>.</p>
+It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a>, but having additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network) are RECOMMENDED.</p>
    <div class="example" id="example-2c4f4dff">
     <a class="self-link" href="#example-2c4f4dff"></a> Example of a Dataset as artefact: 
 <pre class="language-json highlight"><c- p>{</c->
