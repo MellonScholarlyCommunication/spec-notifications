@@ -60,8 +60,8 @@ Introduction {#intro}
 =====================
 
 In a decentralized artefact exchange network, actors communicate using [[ldn|Linked Data Notifications]].
-An actor notifies interested other actors about events that have affected a particular artefact,
-allowing the recepient to react (eg. by downloading the artefact) or respond.
+An actor notifies other interested actors about its activities that affect particular artefacts.
+By being notified, the recepient is allowed to react (eg. by downloading the artefact) or respond to such events.
 The notification payloads are expressed in [[activitystreams-vocabulary]] with additional domain-specific vocabularies such as [[schema-org|Schema.org]].
 
 This document defines the different notification types that can be used and how to construct their payloads.
@@ -73,7 +73,7 @@ Activities {#activities}
 In the network, [[spec-overview#actor|actors]] can perform activities that are linked to a certain artefact. 
 Actors are either [[spec-overview#service-hub|Service Hubs]] or [[spec-overview#maintainer|Maintainers]] (see [[#mappings]]).
 By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
-Activities that somehow impact an artefact's lifecycle result in [[spec-overview#event|lifecycle events]].
+Activities that somehow impact an artefact's lifecycle result in [[spec-overview#artefact-lifecycle-event|lifecycle events]].
 
 The table below summarizes the possible notification types that actors can exchange.
 
@@ -140,7 +140,7 @@ The properties `as:actor`, `as:object`, and `as:target`, as defined in [[activit
 - `as:target` refers to the destination of the activity; the other [[spec-overview#actor|actor]] that is being notified of this activity.
 
 The terms in [[spec-overview#definitions]] should be mapped in a specific way, using specific types from [[activitystreams-vocabulary#actor-types]] and [[schema-org]].
-this is outlined in more detail below.
+This is outlined in more detail below.
 
 ## Actors
 
