@@ -189,7 +189,7 @@ Example of an organization as actor:
 ## Artefacts
 
 The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type [[activitystreams-vocabulary#Object|as:Object]], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
+It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types]ActivityStreams Object types], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
 
 <div class=example>
 Example of a Dataset as artefact:
