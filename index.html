@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="53d00a0abe08b179ede8edc4a58aeb4719f0d6d7" name="document-revision">
+  <meta content="52a133e7f48db858fe4f295816dcb63608fc88a2" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1663,7 +1663,7 @@ The actor MAY have a name using <code>as:name</code>.</p>
    </div>
    <h3 class="heading settled" data-level="4.2" id="artefacts"><span class="secno">4.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
    <p>The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a>, but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
+It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types]ActivityStreams Object types], but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
    <div class="example" id="example-738ef1db">
     <a class="self-link" href="#example-738ef1db"></a> Example of a Dataset as artefact: 
 <pre class="language-json highlight"><c- p>{</c->
