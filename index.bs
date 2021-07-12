@@ -176,13 +176,10 @@ Example of an organization as actor:
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    }
+    { "schema": "http://schema.org/" }
   ],
-  "@id": "https://www.kb.nl#me",
-  "@type": ["Organization", "schema:Organization"],
+  "id": "https://www.kb.nl#me",
+  "type": ["Organization", "schema:Organization"],
   "inbox": "https://www.kb.nl#inbox",
   "name": "Koninklijke Bibliotheek"    
 }
@@ -201,12 +198,10 @@ Example of a Dataset as artefact:
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/"
-    }
+    { "schema": "http://schema.org/" }
   ],
-  "@id": "https://www.kb.nl/datasets/1",
-  "@type": ["Object", "schema:Dataset"],
+  "id": "https://www.kb.nl/datasets/1",
+  "type": ["Object", "schema:Dataset"],
   "name": "Dataset about WOII"    
 }
 ```
@@ -239,6 +234,9 @@ Type: [[activitystreams-vocabulary#Create|as:Create]]
   <tr>
     <td>object
     <td>[[activitystreams-vocabulary#Object|as:Object]]
+  <tr>
+    <td>target
+    <td>[[activitystreams-vocabulary#Service|as:Service]]
   <tr>  
     <td>origin
     <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
@@ -251,36 +249,33 @@ Example of a dataset that is being created by an cultural heritage institution:
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    }
+    { "schema": "http://schema.org/" }
   ],
   "summary": "Koninklijke Bibliotheek created Alba dataset",
   "@type": "Create",
   "actor": {
-    "@id": "https://www.kb.nl#me",
-    "@type": ["Organization", "schema:Organization"],
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
     "inbox": "https://www.kb.nl#inbox",
     "name": "Koninklijke Bibliotheek"    
   },
   "object": {
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["Object", "schema:Dataset"],
+    "id": "https://www.kb.nl/datasets/1",
+    "type": ["Object", "schema:Dataset"],
     "name": "Dataset about WOII"    
   },
   "origin": {
-    "@id": "http://example.org/Adlib",
-    "@type": "schema:SoftwareApplication"
+    "id": "http://example.org/Adlib",
+    "type": "schema:SoftwareApplication"
   },
-  "updated": "2021-01-28T19:56:20.114Z"
+  "published": "2014-09-30T12:34:56Z"
 }
 ```
 </div>
 
 ### Update
 
-An artefact was updated by the actor.
+An existing artefact was updated by the actor.
 
 Type: [[activitystreams-vocabulary#Update|as:Update]]
 
@@ -296,6 +291,9 @@ Type: [[activitystreams-vocabulary#Update|as:Update]]
   <tr>
     <td>object
     <td>[[activitystreams-vocabulary#Object|as:Object]]
+  <tr>
+    <td>target
+    <td>[[activitystreams-vocabulary#Service|as:Service]]
   <tr>  
     <td>origin
     <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
@@ -308,32 +306,91 @@ Example of a dataset that is being updated by an cultural heritage institution:
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    }
+    { "schema": "http://schema.org/" }
   ],
   "summary": "Koninklijke Bibliotheek updates the Alba dataset",
-  "@type": "Update",
+  "type": "Update",
   "actor": {
-    "@id": "https://www.kb.nl#me",
-    "@type": ["Organization", "schema:Organization"],
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
     "inbox": "https://www.kb.nl#inbox",
     "name": "Koninklijke Bibliotheek"    
   },
   "object": {
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["Object", "schema:Dataset"],
+    "id": "https://www.kb.nl/datasets/1",
+    "type": ["Object", "schema:Dataset"],
     "name": "Dataset about WOII"    
   },
   "origin": {
-    "@id": "http://example.org/Adlib",
-    "@type": "schema:SoftwareApplication"
+    "id": "http://example.org/Adlib",
+    "type": "schema:SoftwareApplication"
   },
+  "published": "2021-02-15T12:34:56Z",
   "updated": "2021-01-28T19:56:20.114Z"
 }
 ```
 </div>
+
+### Delete
+
+A maintainer deletes an artefact. 
+
+Type: [[activitystreams-vocabulary#Delete|as:Delete]]
+
+<table>
+<thead>
+  <tr>
+    <th>Property
+    <th>Type
+<tbody>
+  <tr>
+    <td>actor  
+    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
+  <tr>
+    <td>object
+    <td>[[activitystreams-vocabulary#Object|as:Object]]
+  <tr>
+    <td>target
+    <td>[[activitystreams-vocabulary#Service|as:Service]]
+  <tr>  
+    <td>origin
+    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+</table> 
+
+<div class=example>
+Example of a dataset that was by an cultural heritage institution:
+
+``` json
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams/", 
+    { "schema": "http://schema.org/" }
+  ],
+  "summary": "Koninklijke Bibliotheek deleted Alba dataset",
+  "type": "Delete",
+  "actor": {
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
+    "inbox": "https://www.kb.nl#inbox",
+    "name": "Koninklijke Bibliotheek"    
+  },
+  "object": https://www.kb.nl/datasets/1,
+  "origin": {
+    "id": "http://example.org/Adlib",
+    "type": "schema:SoftwareApplication"
+  },
+  "target": {
+    "id": "http://meemoo.be#me",
+    "type": ["Organization", "schema:Organization"],
+    "name": "meemoo"  
+  },
+  "updated": "2021-01-28T19:56:20.114Z",
+  "published": "2021-02-15T12:34:56Z"
+}
+```
+</div>
+
+## Requesting services
 
 ### Announce
 
@@ -368,94 +425,29 @@ Example of a dataset that is being created by an cultural heritage institution:
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    }
+    { "schema": "http://schema.org/" }
   ],
-  "summary": "Koninklijke Bibliotheek created Alba dataset",
-  "@type": "Create",
+  "summary": "Koninklijke Bibliotheek announces Alba dataset",
+  "type": "Announce",
   "actor": {
-    "@id": "https://www.kb.nl#me",
-    "@type": ["Organization", "schema:Organization"],
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
     "inbox": "https://www.kb.nl#inbox",
     "name": "Koninklijke Bibliotheek"    
   },
   "object": {
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["Object", "schema:Dataset"],
+    "id": "https://www.kb.nl/datasets/1",
+    "type": ["Object", "schema:Dataset"],
     "name": "Dataset about WOII"    
   },
   "origin": {
-    "@id": "http://example.org/Adlib",
-    "@type": "schema:SoftwareApplication"
+    "id": "http://example.org/Adlib",
+    "type": "schema:SoftwareApplication"
   },
   "updated": "2021-01-28T19:56:20.114Z"
 }
 ```
 </div>
-
-### Delete
-
-A maintainer announces the existence of an artefact to a Service Hub. 
-
-Type: [[activitystreams-vocabulary#Delete|as:Delete]]
-
-<table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-</table> 
-
-<div class=example>
-Example of a dataset that was by an cultural heritage institution:
-
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    }
-  ],
-  "summary": "Koninklijke Bibliotheek created Alba dataset",
-  "@type": "Create",
-  "actor": {
-    "@id": "https://www.kb.nl#me",
-    "@type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["Object", "schema:Dataset"],
-    "name": "Dataset about WOII"    
-  },
-  "origin": {
-    "@id": "http://example.org/Adlib",
-    "@type": "schema:SoftwareApplication"
-  },
-  "updated": "2021-01-28T19:56:20.114Z"
-}
-```
-</div>
-
-## Requesting services
 
 ### Offer
 
@@ -490,27 +482,29 @@ Example of a dataset that was by an cultural heritage institution:
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    }
+    { "schema": "http://schema.org/" }
   ],
-  "summary": "Koninklijke Bibliotheek created Alba dataset",
-  "@type": "Create",
+  "summary": "Koninklijke Bibliotheek offers Alba dataset to archive",
+  "@type": "Offer",
   "actor": {
-    "@id": "https://www.kb.nl#me",
-    "@type": ["Organization", "schema:Organization"],
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
     "inbox": "https://www.kb.nl#inbox",
     "name": "Koninklijke Bibliotheek"    
   },
   "object": {
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["Object", "schema:Dataset"],
+    "id": "https://www.kb.nl/datasets/1",
+    "type": ["Object", "schema:Dataset"],
     "name": "Dataset about WOII"    
   },
   "origin": {
-    "@id": "http://example.org/Adlib",
-    "@type": "schema:SoftwareApplication"
+    "id": "http://example.org/Adlib",
+    "type": "schema:SoftwareApplication"
+  },
+  "target": {
+    "id": "http://meemoo.be#me",
+    "type": ["Organization", "schema:Organization"],
+    "name": "meemoo"  
   },
   "updated": "2021-01-28T19:56:20.114Z"
 }
@@ -531,13 +525,13 @@ Type: [[activitystreams-vocabulary#Accept|as:Accept]]
 <tbody>
   <tr>
     <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
+    <td>[[activitystreams-vocabulary#Service|as:Service]]
   <tr>
     <td>object
     <td>[[activitystreams-vocabulary#Object|as:Object]]
   <tr>
     <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
+    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
   <tr>  
     <td>origin
     <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
@@ -551,8 +545,7 @@ Example of a dataset that was by an cultural heritage institution:
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
     {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
+      "schema": "http://schema.org/"
     }
   ],
   "summary": "Koninklijke Bibliotheek created Alba dataset",
@@ -610,10 +603,7 @@ Example of a dataset that was by an cultural heritage institution:
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/",
-      "inbox": {"@id": "http://www.w3.org/ns/ldp#inbox", "@type": "@id"}
-    }
+    { "schema": "http://schema.org/" }
   ],
   "summary": "Koninklijke Bibliotheek created Alba dataset",
   "@type": "Create",
