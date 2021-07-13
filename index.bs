@@ -240,23 +240,28 @@ A new artefact was created by the actor.
 Type: [[activitystreams-vocabulary#Create|as:Create]]
 
 <table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+  <thead>
+    <tr>
+      <th>Property
+      <th>Type
+      <th>Mandatory
+  <tbody>
+    <tr>
+      <td>actor  
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+      <td>✅
+    <tr>
+      <td>object
+      <td>[[activitystreams-vocabulary#Object|as:Object]]
+      <td>✅
+    <tr>
+      <td>target
+      <td>[[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>  
+      <td>instrument
+      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+      <td>
 </table>
 
 <div class=example>
@@ -281,7 +286,7 @@ Example of a dataset that is being created by an cultural heritage institution:
     "type": ["Object", "schema:Dataset"],
     "name": "Dataset about WOII"    
   },
-  "origin": {
+  "instrument": {
     "id": "http://example.org/Adlib",
     "type": "schema:SoftwareApplication"
   },
@@ -297,23 +302,28 @@ An existing artefact was updated by the actor.
 Type: [[activitystreams-vocabulary#Update|as:Update]]
 
 <table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+  <thead>
+    <tr>
+      <th>Property
+      <th>Type
+      <th>Mandatory
+  <tbody>
+    <tr>
+      <td>actor  
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+      <td>✅
+    <tr>
+      <td>object
+      <td>[[activitystreams-vocabulary#Object|as:Object]]
+      <td>✅
+    <tr>
+      <td>target
+      <td>[[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>  
+      <td>instrument
+      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+      <td>
 </table>
 
 <div class=example>
@@ -355,24 +365,29 @@ A maintainer deletes an artefact.
 Type: [[activitystreams-vocabulary#Delete|as:Delete]]
 
 <table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-</table> 
+  <thead>
+    <tr>
+      <th>Property
+      <th>Type
+      <th>Mandatory
+  <tbody>
+    <tr>
+      <td>actor  
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+      <td>✅
+    <tr>
+      <td>object
+      <td>[[activitystreams-vocabulary#Object|as:Object]]
+      <td>✅
+    <tr>
+      <td>target
+      <td>[[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>  
+      <td>instrument
+      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+      <td>
+</table>
 
 <div class=example>
 Example of a dataset that was by an cultural heritage institution:
@@ -411,28 +426,36 @@ Example of a dataset that was by an cultural heritage institution:
 
 ### Announce
 
-A maintainer announces the existence of an artefact to a Service Hub. 
+An actor draws attention from another actor to an artefact. 
+Either a maintainer announces the existence of an artefact to a Service Hub or a Service Hub informs a Maintainer about processing an artefact.
 
 Type: [[activitystreams-vocabulary#Announce|as:Announce]]
 
 <table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+  <thead>
+    <tr>
+      <th>Property
+      <th>Type
+      <th>Mandatory
+  <tbody>
+    <tr>
+      <td>actor  
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]]<br />
+      or [[activitystreams-vocabulary#Person|as:Person]]<br /> or [[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>
+      <td>object
+      <td>[[activitystreams-vocabulary#Object|as:Object]]
+      <td>✅
+    <tr>
+      <td>target
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]]<br />
+      or [[activitystreams-vocabulary#Person|as:Person]]<br /> or [[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>  
+      <td>instrument
+      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+      <td>
 </table>
 
 <div class=example>
@@ -468,29 +491,35 @@ Example of a dataset that is being created by an cultural heritage institution:
 
 ### Offer
 
-A maintainer offers an artefact to a Service Hub in order to perform a service. 
+A maintainer offers an artefact to a Service Hub in order to perform a service.
+The property `instrument` MAY be used to indicate whether a Dashboard or an Orchestrator was involved in performing the activity and sending then notification. 
 
 Type: [[activitystreams-vocabulary#Offer|as:Offer]]
 
 <table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-</table> 
+  <thead>
+    <tr>
+      <th>Property
+      <th>Type
+      <th>Mandatory
+  <tbody>
+    <tr>
+      <td>actor  
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+      <td>✅
+    <tr>
+      <td>object
+      <td>[[activitystreams-vocabulary#Object|as:Object]]
+      <td>✅
+    <tr>
+      <td>target
+      <td>[[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>  
+      <td>instrument
+      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+      <td>
+</table>
 
 <div class=example>
 Example of a dataset that was by an cultural heritage institution:
@@ -516,7 +545,7 @@ Example of a dataset that was by an cultural heritage institution:
     "name": "Dataset about WOII"    
   },
   "origin": {
-    "id": "http://example.org/Adlib",
+    "id": "http://example.org/Orchestrator",
     "type": "schema:SoftwareApplication"
   },
   "target": {
@@ -536,27 +565,32 @@ A Service Hub accepts the artefact offered by an actor.
 Type: [[activitystreams-vocabulary#Accept|as:Accept]]
 
 <table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-</table> 
+  <thead>
+    <tr>
+      <th>Property
+      <th>Type
+      <th>Mandatory
+  <tbody>
+    <tr>
+      <td>actor  
+      <td>[[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>
+      <td>object
+      <td>[[activitystreams-vocabulary#Object|as:Object]]
+      <td>✅
+    <tr>
+      <td>target
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+      <td>✅
+    <tr>  
+      <td>instrument
+      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+      <td>
+</table>
 
 <div class=example>
-Example of a dataset that was by an cultural heritage institution:
+Example of a dataset that was accepted by an archival service:
 
 ``` json
 {
@@ -566,11 +600,16 @@ Example of a dataset that was by an cultural heritage institution:
       "schema": "http://schema.org/"
     }
   ],
-  "summary": "Koninklijke Bibliotheek created Alba dataset",
-  "@type": "Create",
+  "summary": "Meemoo accepted Alba dataset from Koninklijke Bibliotheek",
+  "@type": "Accept",
   "actor": {
-    "@id": "https://www.kb.nl#me",
-    "@type": ["Organization", "schema:Organization"],
+    "id": "http://meemoo.be#me",
+    "type": ["Organization", "schema:Organization"],
+    "name": "meemoo"  
+  },
+  "target": {
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
     "inbox": "https://www.kb.nl#inbox",
     "name": "Koninklijke Bibliotheek"    
   },
@@ -579,8 +618,8 @@ Example of a dataset that was by an cultural heritage institution:
     "@type": ["Object", "schema:Dataset"],
     "name": "Dataset about WOII"    
   },
-  "origin": {
-    "@id": "http://example.org/Adlib",
+  "instrument": {
+    "@id": "http://meemoo.be#orchestrator",
     "@type": "schema:SoftwareApplication"
   },
   "updated": "2021-01-28T19:56:20.114Z"
@@ -593,41 +632,52 @@ Example of a dataset that was by an cultural heritage institution:
 A Service Hub rejects the artefact offered by an actor. 
 
 Type: [[activitystreams-vocabulary#Reject|as:Reject]]
-
 <table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Object|as:Object]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-</table> 
+  <thead>
+    <tr>
+      <th>Property
+      <th>Type
+      <th>Mandatory
+  <tbody>
+    <tr>
+      <td>actor  
+      <td>[[activitystreams-vocabulary#Service|as:Service]]
+      <td>✅
+    <tr>
+      <td>object
+      <td>[[activitystreams-vocabulary#Object|as:Object]]
+      <td>✅
+    <tr>
+      <td>target
+      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+      <td>✅
+    <tr>  
+      <td>instrument
+      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+      <td>
+</table>
 
 <div class=example>
-Example of a dataset that was by an cultural heritage institution:
+Example of a dataset that was rejected by an archival service:
 
 ``` json
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
+    {
+      "schema": "http://schema.org/"
+    }
   ],
-  "summary": "Koninklijke Bibliotheek created Alba dataset",
+  "summary": "Meemoo rejects Alba dataset from Koninklijke Bibliotheek",
   "@type": "Reject",
   "actor": {
-    "@id": "https://www.kb.nl#me",
-    "@type": ["Organization", "schema:Organization"],
+    "id": "http://meemoo.be#me",
+    "type": ["Organization", "schema:Organization"],
+    "name": "meemoo"  
+  },
+  "target": {
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
     "inbox": "https://www.kb.nl#inbox",
     "name": "Koninklijke Bibliotheek"    
   },
@@ -636,8 +686,8 @@ Example of a dataset that was by an cultural heritage institution:
     "@type": ["Object", "schema:Dataset"],
     "name": "Dataset about WOII"    
   },
-  "origin": {
-    "@id": "http://example.org/Adlib",
+  "instrument": {
+    "@id": "http://meemoo.be#orchestrator",
     "@type": "schema:SoftwareApplication"
   },
   "updated": "2021-01-28T19:56:20.114Z"
