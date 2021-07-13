@@ -121,16 +121,18 @@ The table below summarizes the possible notification types that actors can excha
       <td>Delete
       <td>[[activitystreams-vocabulary#Remove|as:Remove]]
       <td>An [[spec-overview#actor|actor]] deletes an [[spec-overview#artefact|artefact]] from it's data pod.
-  <tbody>
     <tr>
-      <td>Announce
-      <td>[[activitystreams-vocabulary#Announce|as:Announce]]
-      <td>An [[spec-overview#actor|actor]] announces the existence of an [[spec-overview#artefact|artefact]].
-
+      <td>Undo
+      <td>[[activitystreams-vocabulary#Undo|as:Undo]]
+      <td>An [[spec-overview#actor|actor]] retracts a prior [[spec-overview#activity|activity]].
   <tbody>
     <tr>
       <th colspan="3">Requesting services</th>
     </tr>
+    <tr>
+      <td>Announce
+      <td>[[activitystreams-vocabulary#Announce|as:Announce]]
+      <td>An [[spec-overview#actor|actor]] announces the existence of an [[spec-overview#artefact|artefact]].
     <tr>
       <td>Offer
       <td>[[activitystreams-vocabulary#Offer|as:Offer]]
@@ -138,15 +140,11 @@ The table below summarizes the possible notification types that actors can excha
     <tr>
       <td>Accept
       <td>[[activitystreams-vocabulary#Accept|as:Accept]]
-      <td>A [[spec-overview#actor|actor]] accepts an [[spec-overview#artefact|artefact]] offer from another [[spec-overview#actor|actor]].
+      <td>A [[spec-overview#actor|actor]] accepts an [[spec-overview#artefact|artefact]] from another [[spec-overview#actor|actor]].
     <tr>
       <td>Reject
       <td>[[activitystreams-vocabulary#Reject|as:Reject]]
-      <td>A [[spec-overview#actor|actor]] rejects an [[spec-overview#artefact|artefact]] offer from another [[spec-overview#actor|actor]].
-    <tr>
-      <td>Undo
-      <td>[[activitystreams-vocabulary#Undo|as:Undo]]
-      <td>An [[spec-overview#actor|actor]] retracts a prior [[spec-overview#activity|activity]].
+      <td>A [[spec-overview#actor|actor]] rejects an [[spec-overview#artefact|artefact]] from another [[spec-overview#actor|actor]].
 </table>
 
 Type mapping {#mappings}
@@ -157,27 +155,24 @@ Therefore, the notification payload MUST be typed as `as:Activity`.
 Payloads MUST also include the properties `as:origin`, `as:object`, and `as:target`, as defined in [[activitystreams-core#activities]]
 The use of these properties is consistent across all notifications:
 
-- `as:origin` refers to the sender of the activity; this can refer to the [[spec-overview#actor|actor]], the [[spec-overview#dashboard|dashboard]] or the [[spec-overview#orchestrator|orchestrator]]. 
+- `as:actor` refers to the [[spec-overview#actor|actor]] that is responsible for the `activity`; most likely the performer of the activity and sender of the notification
 - `as:object` refers to the [[spec-overview#artefact|artefact]] on which the `activity` is performed. 
 - `as:target` refers to the destination of the activity; the other [[spec-overview#actor|actor]] that is being notified of this activity.
-
-It SHOULD also include a reference to the actor that is responsible for the activity:
-
-- `as:actor` refers to the [[spec-overview#actor|actor]] that performs or is expected to perform the `activity`. 
 
 The terms in [[spec-overview#definitions]] should be mapped in a specific way, using specific types from [[activitystreams-vocabulary#actor-types]] and [[schema-org]].
 This is outlined in more detail below.
 
 ## Actors
 
-The actor of an activity MUST describe the [[activitystreams-vocabulary#actors]] that created the activity. 
-It MUST use the following type mapping:
+The actor of an activity MUST describe the [[activitystreams-vocabulary#actors]] that are responsible for the activity and serve as contact points for the recepient.
+In most cases, this will be the actor sending the notification using either the [[spec-overview#dashboard|Dashboard]] or the [[spec-overview#orchstrator|Orchestrator]] as intermediate.
+A notification payload MUST refer to the actor using the `as:actor` property and it MUST use the following type mapping:
 
 <table>
 <thead>
   <tr>
-  <th>Actor
-  <th>Type
+  <th>Actor type
+  <th>AS Type
 <tbody>
   <tr>
   <td>[[spec-overview#Service-Hub|Service Hub]]
@@ -211,7 +206,7 @@ Example of an organization as actor:
 ## Artefacts
 
 The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types]ActivityStreams Object Types], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
+It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
 
 <div class=example>
 Example of a Dataset as artefact:
@@ -223,7 +218,7 @@ Example of a Dataset as artefact:
     { "schema": "http://schema.org/" }
   ],
   "id": "https://www.kb.nl/datasets/1",
-  "type": ["Object", "schema:Dataset"],
+  "type": ["Document", "schema:Dataset"],
   "name": "Dataset about WOII"    
 }
 ```
@@ -506,6 +501,7 @@ Example of a dataset that was by an cultural heritage institution:
     "https://www.w3.org/ns/activitystreams/", 
     { "schema": "http://schema.org/" }
   ],
+  "id": "http://example.org/offer/123",
   "summary": "Koninklijke Bibliotheek offers Alba dataset to archive",
   "@type": "Offer",
   "actor": {
@@ -628,7 +624,7 @@ Example of a dataset that was by an cultural heritage institution:
     { "schema": "http://schema.org/" }
   ],
   "summary": "Koninklijke Bibliotheek created Alba dataset",
-  "@type": "Create",
+  "@type": "Reject",
   "actor": {
     "@id": "https://www.kb.nl#me",
     "@type": ["Organization", "schema:Organization"],
@@ -645,6 +641,67 @@ Example of a dataset that was by an cultural heritage institution:
     "@type": "schema:SoftwareApplication"
   },
   "updated": "2021-01-28T19:56:20.114Z"
+}
+```
+</div>
+
+### Undo
+
+A maintainer retracts a prior offer.
+
+Type: [[activitystreams-vocabulary#Undo|as:Undo]]
+
+<table>
+<thead>
+  <tr>
+    <th>Property
+    <th>Type
+<tbody>
+  <tr>
+    <td>actor  
+    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
+  <tr>
+    <td>object
+    <td>[[activitystreams-vocabulary#Activity|as:Activity]]
+  <tr>
+    <td>target
+    <td>[[activitystreams-vocabulary#Service|as:Service]]
+  <tr>  
+    <td>origin
+    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+</table> 
+
+<div class=example>
+Example of a dataset that was by an cultural heritage institution:
+
+``` json
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams/", 
+    { "schema": "http://schema.org/" }
+  ],
+  "summary": "Koninklijke Bibliotheek retracts offer to archive the Alba dataset",
+  "type": "Undo",
+  "actor": {
+    "id": "https://www.kb.nl#me",
+    "type": ["Organization", "schema:Organization"],
+    "inbox": "https://www.kb.nl#inbox",
+    "name": "Koninklijke Bibliotheek"    
+  },
+  "object": {
+    "id": "http://example.org/offer/123",
+    "type": ["Offer"]
+  },
+  "origin": {
+    "id": "https://www.kb.nl#orchestrator,
+    "type": "ex:Orchestrator"
+  },
+  "target": {
+    "id": "http://meemoo.be#me",
+    "type": ["Organization", "schema:Organization"],
+    "name": "meemoo"  
+  },
+  "published": "2021-02-15T12:34:56Z"
 }
 ```
 </div>
