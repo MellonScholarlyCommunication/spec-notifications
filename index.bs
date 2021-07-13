@@ -67,6 +67,28 @@ The notification payloads are expressed in [[activitystreams-vocabulary]] with a
 This document defines the different notification types that can be used and how to construct their payloads.
 
 
+Document Conventions
+=====================
+
+Within this document, the following namespace prefix bindings are used: 
+
+<table>
+  <thead>
+    <tr>
+      <th>Prefix
+      <th>Namespace
+  <tbody>
+    <tr>
+      <td>as
+      <td>https://www.w3.org/ns/activitystreams#
+    <tr>
+      <td>schema
+      <td>https://schema.org
+    <tr>
+      <td>ldp
+      <td>http://www.w3.org/ns/ldp#
+</table>
+
 Activities {#activities}
 ===========
 
@@ -127,10 +149,10 @@ The table below summarizes the possible notification types that actors can excha
       <td>An [[spec-overview#actor|actor]] retracts a prior [[spec-overview#activity|activity]].
 </table>
 
-Mappings {#mappings}
+Type mapping {#mappings}
 ===========
 
-Notifications in  a decentralized artefact exchange network communicate about [[activitystreams-vocabulary#activity]].
+Notifications in  a decentralized artefact exchange network communicate about [[activitystreams-vocabulary#activity|ActivityStreams 2 activities]].
 Therefore, the notification payload MUST be typed as `as:Activity`.
 Payloads MUST also include the properties `as:origin`, `as:object`, and `as:target`, as defined in [[activitystreams-core#activities]]
 The use of these properties is consistent across all notifications:
@@ -189,7 +211,7 @@ Example of an organization as actor:
 ## Artefacts
 
 The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types]ActivityStreams Object types], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
+It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types]ActivityStreams Object Types], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
 
 <div class=example>
 Example of a Dataset as artefact:
