@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="dec5f051194f63b374ddae898210945451ca7f06" name="document-revision">
+  <meta content="849932d1632d0bd0245d246312aaf708e99577ff" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1523,6 +1523,7 @@ Parts of this work may be from another specification document.  If so, those par
         <li><a href="#offer"><span class="secno">6.2.2</span> <span class="content">Offer</span></a>
         <li><a href="#accept"><span class="secno">6.2.3</span> <span class="content">Accept</span></a>
         <li><a href="#reject"><span class="secno">6.2.4</span> <span class="content">Reject</span></a>
+        <li><a href="#undo"><span class="secno">6.2.5</span> <span class="content">Undo</span></a>
        </ol>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1603,14 +1604,17 @@ Activities that somehow impact an artefact’s lifecycle result in <a href="http
       <td>Delete 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Remove">as:Remove</a> 
       <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> deletes an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from it’s data pod. 
+     <tr>
+      <td>Undo 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a> 
+      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>. 
     <tbody>
+     <tr>
+      <th colspan="3">Requesting services
      <tr>
       <td>Announce 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a> 
       <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> announces the existence of an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a>. 
-    <tbody>
-     <tr>
-      <th colspan="3">Requesting services
      <tr>
       <td>Offer 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a> 
@@ -1618,15 +1622,11 @@ Activities that somehow impact an artefact’s lifecycle result in <a href="http
      <tr>
       <td>Accept 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Accept">as:Accept</a> 
-      <td>A <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> accepts an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> offer from another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>. 
+      <td>A <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> accepts an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>. 
      <tr>
       <td>Reject 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Reject">as:Reject</a> 
-      <td>A <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> rejects an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> offer from another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>. 
-     <tr>
-      <td>Undo 
-      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>. 
+      <td>A <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> rejects an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>. 
    </table>
    <h2 class="heading settled" data-level="5" id="mappings"><span class="secno">5. </span><span class="content">Type mapping</span><a class="self-link" href="#mappings"></a></h2>
    <p>Notifications in  a decentralized artefact exchange network communicate about <a href="https://www.w3.org/TR/activitystreams-vocabulary/#activity">ActivityStreams 2 activities</a>.
@@ -1634,27 +1634,23 @@ Therefore, the notification payload MUST be typed as <code>as:Activity</code>.
 Payloads MUST also include the properties <code>as:origin</code>, <code>as:object</code>, and <code>as:target</code>, as defined in <a href="https://www.w3.org/TR/activitystreams-core/#activities">Activity Streams 2.0 §activities</a> The use of these properties is consistent across all notifications:</p>
    <ul>
     <li data-md>
-     <p><code>as:origin</code> refers to the sender of the activity; this can refer to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>, the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#dashboard">dashboard</a> or the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#orchestrator">orchestrator</a>.</p>
+     <p><code>as:actor</code> refers to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> that is responsible for the <code>activity</code>; most likely the performer of the activity and sender of the notification</p>
     <li data-md>
      <p><code>as:object</code> refers to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> on which the <code>activity</code> is performed.</p>
     <li data-md>
      <p><code>as:target</code> refers to the destination of the activity; the other <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> that is being notified of this activity.</p>
    </ul>
-   <p>It SHOULD also include a reference to the actor that is responsible for the activity:</p>
-   <ul>
-    <li data-md>
-     <p><code>as:actor</code> refers to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> that performs or is expected to perform the <code>activity</code>.</p>
-   </ul>
    <p>The terms in <a href="http://mellonscholarlycommunication.github.io/spec-overview/#definitions">Overview of the ResearcherPod specifications §definitions</a> should be mapped in a specific way, using specific types from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">Activity Vocabulary §actor-types</a> and <a data-link-type="biblio" href="#biblio-schema-org">[schema-org]</a>.
 This is outlined in more detail below.</p>
    <h3 class="heading settled" data-level="5.1" id="actors"><span class="secno">5.1. </span><span class="content">Actors</span><a class="self-link" href="#actors"></a></h3>
-   <p>The actor of an activity MUST describe the <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actors">Activity Vocabulary §actors</a> that created the activity.
-It MUST use the following type mapping:</p>
+   <p>The actor of an activity MUST describe the <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actors">Activity Vocabulary §actors</a> that are responsible for the activity and serve as contact points for the recepient.
+In most cases, this will be the actor sending the notification using either the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#dashboard">Dashboard</a> or the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#orchstrator">Orchestrator</a> as intermediate.
+A notification payload MUST refer to the actor using the <code>as:actor</code> property and it MUST use the following type mapping:</p>
    <table>
     <thead>
      <tr>
-      <th>Actor 
-      <th>Type 
+      <th>Actor type 
+      <th>AS Type 
     <tbody>
      <tr>
       <td><a href="http://mellonscholarlycommunication.github.io/spec-overview/#Service-Hub">Service Hub</a> 
@@ -1682,16 +1678,16 @@ The actor MAY have a name using <code>as:name</code>.</p>
    </div>
    <h3 class="heading settled" data-level="5.2" id="artefacts"><span class="secno">5.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
    <p>The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types]ActivityStreams Object Types], but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
-   <div class="example" id="example-738ef1db">
-    <a class="self-link" href="#example-738ef1db"></a> Example of a Dataset as artefact: 
+It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types], but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
+   <div class="example" id="example-0743685f">
+    <a class="self-link" href="#example-0743685f"></a> Example of a Dataset as artefact: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
     <c- p>{</c-> <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-> <c- p>}</c->
   <c- p>],</c->
   <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
-  <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Document"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
   <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
 <c- p>}</c->
 </pre>
@@ -1926,13 +1922,14 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
       <td>origin 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
    </table>
-   <div class="example" id="example-44e587a2">
-    <a class="self-link" href="#example-44e587a2"></a> Example of a dataset that was by an cultural heritage institution: 
+   <div class="example" id="example-2e0655b4">
+    <a class="self-link" href="#example-2e0655b4"></a> Example of a dataset that was by an cultural heritage institution: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
     <c- p>{</c-> <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-> <c- p>}</c->
   <c- p>],</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/offer/123"</c-><c- p>,</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek offers Alba dataset to archive"</c-><c- p>,</c->
   <c- f>"@type"</c-><c- p>:</c-> <c- u>"Offer"</c-><c- p>,</c->
   <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
@@ -2033,15 +2030,15 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
       <td>origin 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
    </table>
-   <div class="example" id="example-3f56b39c①">
-    <a class="self-link" href="#example-3f56b39c①"></a> Example of a dataset that was by an cultural heritage institution: 
+   <div class="example" id="example-acf05d99">
+    <a class="self-link" href="#example-acf05d99"></a> Example of a dataset that was by an cultural heritage institution: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
     <c- p>{</c-> <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-> <c- p>}</c->
   <c- p>],</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek created Alba dataset"</c-><c- p>,</c->
-  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Create"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Reject"</c-><c- p>,</c->
   <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
     <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
@@ -2058,6 +2055,60 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
     <c- f>"@type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
   <c- p>},</c->
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+<c- p>}</c->
+</pre>
+   </div>
+   <h4 class="heading settled" data-level="6.2.5" id="undo"><span class="secno">6.2.5. </span><span class="content">Undo</span><a class="self-link" href="#undo"></a></h4>
+   <p>A maintainer retracts a prior offer.</p>
+   <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a></p>
+   <table>
+    <thead>
+     <tr>
+      <th>Property 
+      <th>Type 
+    <tbody>
+     <tr>
+      <td>actor 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+     <tr>
+      <td>object 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a> 
+     <tr>
+      <td>target 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+     <tr>
+      <td>origin 
+      <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+   </table>
+   <div class="example" id="example-7a77bb36">
+    <a class="self-link" href="#example-7a77bb36"></a> Example of a dataset that was by an cultural heritage institution: 
+<pre class="language-json highlight"><c- p>{</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
+    <c- p>{</c-> <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-> <c- p>}</c->
+  <c- p>],</c->
+  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek retracts offer to archive the Alba dataset"</c-><c- p>,</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"Undo"</c-><c- p>,</c->
+  <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
+  <c- p>},</c->
+  <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/offer/123"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Offer"</c-><c- p>]</c->
+  <c- p>},</c->
+  <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#orchestrator,</c->
+<c- u>    "</c->type<c- u>": "</c->ex<c- p>:</c->Orchestrator<c- u>"</c->
+<c- u>  },</c->
+<c- u>  "</c->target<c- u>": {</c->
+<c- u>    "</c->id<c- u>": "</c->http<c- p>:</c->//meemoo.be#me<c- u>",</c->
+<c- u>    "</c->type<c- u>": ["</c->Organization<c- u>", "</c->schema<c- p>:</c->Organization<c- u>"],</c->
+<c- u>    "</c->name<c- u>": "</c->meemoo<c- u>"  </c->
+<c- u>  },</c->
+<c- u>  "</c->published<c- u>": "</c-><c- mi>2021-02-15</c->T<c- mi>12</c-><c- p>:</c-><c- mi>34</c-><c- p>:</c-><c- mi>56</c->Z"
 <c- p>}</c->
 </pre>
    </div>
