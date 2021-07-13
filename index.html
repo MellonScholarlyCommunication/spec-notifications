@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="849932d1632d0bd0245d246312aaf708e99577ff" name="document-revision">
+  <meta content="813c3e2caba414c9a62f03bc78fd6c2c1a29aea9" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1704,22 +1704,27 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
      <tr>
       <th>Property 
       <th>Type 
+      <th>Mandatory 
     <tbody>
      <tr>
       <td>actor 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td>✅ 
      <tr>
       <td>object 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+      <td>✅ 
      <tr>
       <td>target 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
-      <td>origin 
+      <td>instrument 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+      <td>
    </table>
-   <div class="example" id="example-60205690">
-    <a class="self-link" href="#example-60205690"></a> Example of a dataset that is being created by an cultural heritage institution: 
+   <div class="example" id="example-070750d7">
+    <a class="self-link" href="#example-070750d7"></a> Example of a dataset that is being created by an cultural heritage institution: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
@@ -1738,7 +1743,7 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
     <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
   <c- p>},</c->
-  <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
+  <c- f>"instrument"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
   <c- p>},</c->
@@ -1754,19 +1759,24 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
      <tr>
       <th>Property 
       <th>Type 
+      <th>Mandatory 
     <tbody>
      <tr>
       <td>actor 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td>✅ 
      <tr>
       <td>object 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+      <td>✅ 
      <tr>
       <td>target 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
-      <td>origin 
+      <td>instrument 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+      <td>
    </table>
    <div class="example" id="example-43436a86">
     <a class="self-link" href="#example-43436a86"></a> Example of a dataset that is being updated by an cultural heritage institution: 
@@ -1805,19 +1815,24 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
      <tr>
       <th>Property 
       <th>Type 
+      <th>Mandatory 
     <tbody>
      <tr>
       <td>actor 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td>✅ 
      <tr>
       <td>object 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+      <td>✅ 
      <tr>
       <td>target 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
-      <td>origin 
+      <td>instrument 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+      <td>
    </table>
    <div class="example" id="example-ba6a6a7c">
     <a class="self-link" href="#example-ba6a6a7c"></a> Example of a dataset that was by an cultural heritage institution: 
@@ -1851,26 +1866,32 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
    </div>
    <h3 class="heading settled" data-level="6.2" id="requesting-services"><span class="secno">6.2. </span><span class="content">Requesting services</span><a class="self-link" href="#requesting-services"></a></h3>
    <h4 class="heading settled" data-level="6.2.1" id="announce"><span class="secno">6.2.1. </span><span class="content">Announce</span><a class="self-link" href="#announce"></a></h4>
-   <p>A maintainer announces the existence of an artefact to a Service Hub.</p>
+   <p>An actor draws attention from another actor to an artefact.
+Either a maintainer announces the existence of an artefact to a Service Hub or a Service Hub informs a Maintainer about processing an artefact.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a></p>
    <table>
     <thead>
      <tr>
       <th>Property 
       <th>Type 
+      <th>Mandatory 
     <tbody>
      <tr>
       <td>actor 
-      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a><br> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a><br> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
       <td>object 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+      <td>✅ 
      <tr>
       <td>target 
-      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a><br> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a><br> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
-      <td>origin 
+      <td>instrument 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+      <td>
    </table>
    <div class="example" id="example-f8b316c5">
     <a class="self-link" href="#example-f8b316c5"></a> Example of a dataset that is being created by an cultural heritage institution: 
@@ -1901,29 +1922,35 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
 </pre>
    </div>
    <h4 class="heading settled" data-level="6.2.2" id="offer"><span class="secno">6.2.2. </span><span class="content">Offer</span><a class="self-link" href="#offer"></a></h4>
-   <p>A maintainer offers an artefact to a Service Hub in order to perform a service.</p>
+   <p>A maintainer offers an artefact to a Service Hub in order to perform a service.
+The property <code>instrument</code> MAY be used to indicate whether a Dashboard or an Orchestrator was involved in performing the activity and sending then notification.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a></p>
    <table>
     <thead>
      <tr>
       <th>Property 
       <th>Type 
+      <th>Mandatory 
     <tbody>
      <tr>
       <td>actor 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td>✅ 
      <tr>
       <td>object 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+      <td>✅ 
      <tr>
       <td>target 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
-      <td>origin 
+      <td>instrument 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+      <td>
    </table>
-   <div class="example" id="example-2e0655b4">
-    <a class="self-link" href="#example-2e0655b4"></a> Example of a dataset that was by an cultural heritage institution: 
+   <div class="example" id="example-508928e0">
+    <a class="self-link" href="#example-508928e0"></a> Example of a dataset that was by an cultural heritage institution: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
@@ -1944,7 +1971,7 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
   <c- p>},</c->
   <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Orchestrator"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
   <c- p>},</c->
   <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
@@ -1964,22 +1991,27 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
      <tr>
       <th>Property 
       <th>Type 
+      <th>Mandatory 
     <tbody>
      <tr>
       <td>actor 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
       <td>object 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+      <td>✅ 
      <tr>
       <td>target 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td>✅ 
      <tr>
-      <td>origin 
+      <td>instrument 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+      <td>
    </table>
-   <div class="example" id="example-3f56b39c">
-    <a class="self-link" href="#example-3f56b39c"></a> Example of a dataset that was by an cultural heritage institution: 
+   <div class="example" id="example-d58bc399">
+    <a class="self-link" href="#example-d58bc399"></a> Example of a dataset that was accepted by an archival service: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
@@ -1987,11 +2019,16 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
       <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c->
     <c- p>}</c->
   <c- p>],</c->
-  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek created Alba dataset"</c-><c- p>,</c->
-  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Create"</c-><c- p>,</c->
+  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Meemoo accepted Alba dataset from Koninklijke Bibliotheek"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Accept"</c-><c- p>,</c->
   <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
+  <c- p>},</c->
+  <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
     <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
   <c- p>},</c->
@@ -2000,8 +2037,8 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
     <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
   <c- p>},</c->
-  <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
+  <c- f>"instrument"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#orchestrator"</c-><c- p>,</c->
     <c- f>"@type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
   <c- p>},</c->
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
@@ -2016,32 +2053,44 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
      <tr>
       <th>Property 
       <th>Type 
+      <th>Mandatory 
     <tbody>
      <tr>
       <td>actor 
-      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td>✅ 
      <tr>
       <td>object 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> 
+      <td>✅ 
      <tr>
       <td>target 
-      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> 
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> 
+      <td>✅ 
      <tr>
-      <td>origin 
+      <td>instrument 
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
+      <td>
    </table>
-   <div class="example" id="example-acf05d99">
-    <a class="self-link" href="#example-acf05d99"></a> Example of a dataset that was by an cultural heritage institution: 
+   <div class="example" id="example-47fe64ea">
+    <a class="self-link" href="#example-47fe64ea"></a> Example of a dataset that was rejected by an archival service: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
-    <c- p>{</c-> <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-> <c- p>}</c->
+    <c- p>{</c->
+      <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c->
+    <c- p>}</c->
   <c- p>],</c->
-  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek created Alba dataset"</c-><c- p>,</c->
+  <c- f>"summary"</c-><c- p>:</c-> <c- u>"Meemoo rejects Alba dataset from Koninklijke Bibliotheek"</c-><c- p>,</c->
   <c- f>"@type"</c-><c- p>:</c-> <c- u>"Reject"</c-><c- p>,</c->
   <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
+  <c- p>},</c->
+  <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
     <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
   <c- p>},</c->
@@ -2050,8 +2099,8 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
     <c- f>"@type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
   <c- p>},</c->
-  <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
+  <c- f>"instrument"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#orchestrator"</c-><c- p>,</c->
     <c- f>"@type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
   <c- p>},</c->
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
