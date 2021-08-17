@@ -165,7 +165,7 @@ This is outlined in more detail below.
 
 ## Actors
 
-The actor of an activity MUST describe the [[activitystreams-vocabulary#actors]] that are responsible for the activity and serve as contact points for the recepient.
+The actor of an activity MUST describe the [[activitystreams-vocabulary#actors | actors]] that are responsible for the activity and serve as contact points for the recepient.
 In most cases, this will be the actor sending the notification using either the [[spec-overview#dashboard|Dashboard]] or the [[spec-overview#orchstrator|Orchestrator]] as intermediate.
 A notification payload MUST refer to the actor using the `as:actor` property and it MUST use the following type mapping:
 
@@ -187,6 +187,8 @@ The actor MUST be identifyable with an HTTP URI, which SHOULD be a [[webid|WebID
 It MAY have an `ldp:inbox` that refers to the inbox URI where the actor can receive replies.
 The actor MAY have a name using `as:name`.
 
+Issue: Explain what the implications are between Service, Person, and Organization
+
 <div class=example>
 Example of an organization as actor:
 
@@ -207,7 +209,9 @@ Example of an organization as actor:
 ## Artefacts
 
 The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
+It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types]], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
+
+Issue: Add some more information on how application domains can describe the artefact further.
 
 <div class=example>
 Example of a Dataset as artefact:
@@ -407,7 +411,7 @@ Example of a dataset that was by an cultural heritage institution:
     "inbox": "https://www.kb.nl#inbox",
     "name": "Koninklijke Bibliotheek"    
   },
-  "object": https://www.kb.nl/datasets/1,
+  "object": "https://www.kb.nl/datasets/1",
   "origin": {
     "id": "http://example.org/Adlib",
     "type": "schema:SoftwareApplication"
