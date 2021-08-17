@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="4cc69d05bded6b9b6a639775e0aae2e7b0f692c5" name="document-revision">
+  <meta content="7194521b74e1acaec6731f677355d82dc9f44128" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1645,7 +1645,7 @@ Payloads MUST also include the properties <code>as:origin</code>, <code>as:objec
    <p>The terms in <a href="http://mellonscholarlycommunication.github.io/spec-overview/#definitions">Overview of the ResearcherPod specifications §definitions</a> should be mapped in a specific way, using specific types from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">Activity Vocabulary §actor-types</a> and <a data-link-type="biblio" href="#biblio-schema-org">[schema-org]</a>.
 This is outlined in more detail below.</p>
    <h3 class="heading settled" data-level="5.1" id="actors"><span class="secno">5.1. </span><span class="content">Actors</span><a class="self-link" href="#actors"></a></h3>
-   <p>The actor of an activity MUST describe the <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actors">Activity Vocabulary §actors</a> that are responsible for the activity and serve as contact points for the recepient.
+   <p>The actor of an activity MUST describe the [[activitystreams-vocabulary#actors | actors]] that are responsible for the activity and serve as contact points for the recepient.
 In most cases, this will be the actor sending the notification using either the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#dashboard">Dashboard</a> or the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#orchstrator">Orchestrator</a> as intermediate.
 A notification payload MUST refer to the actor using the <code>as:actor</code> property and it MUST use the following type mapping:</p>
    <table>
@@ -1664,6 +1664,7 @@ A notification payload MUST refer to the actor using the <code>as:actor</code> p
    <p>The actor MUST be identifyable with an HTTP URI, which SHOULD be a <a data-link-type="biblio" href="#biblio-webid">WebID</a>.
 It MAY have an <code>ldp:inbox</code> that refers to the inbox URI where the actor can receive replies.
 The actor MAY have a name using <code>as:name</code>.</p>
+   <p class="issue" id="issue-b0766d85"><a class="self-link" href="#issue-b0766d85"></a> Explain what the implications are between Service, Person, and Organization</p>
    <div class="example" id="example-588156ea">
     <a class="self-link" href="#example-588156ea"></a> Example of an organization as actor: 
 <pre class="language-json highlight"><c- p>{</c->
@@ -1680,7 +1681,8 @@ The actor MAY have a name using <code>as:name</code>.</p>
    </div>
    <h3 class="heading settled" data-level="5.2" id="artefacts"><span class="secno">5.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
    <p>The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types], but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
+It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types]], but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
+   <p class="issue" id="issue-78cdca70"><a class="self-link" href="#issue-78cdca70"></a> Add some more information on how application domains can describe the artefact further.</p>
    <div class="example" id="example-0743685f">
     <a class="self-link" href="#example-0743685f"></a> Example of a Dataset as artefact: 
 <pre class="language-json highlight"><c- p>{</c->
@@ -1836,8 +1838,8 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
       <td><a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a> 
       <td>
    </table>
-   <div class="example" id="example-ba6a6a7c">
-    <a class="self-link" href="#example-ba6a6a7c"></a> Example of a dataset that was by an cultural heritage institution: 
+   <div class="example" id="example-1fb4ebb2">
+    <a class="self-link" href="#example-1fb4ebb2"></a> Example of a dataset that was by an cultural heritage institution: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
     <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
@@ -1851,7 +1853,7 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
     <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
   <c- p>},</c->
-  <c- f>"object"</c-><c- p>:</c-> https<c- p>:</c->//www.kb.nl/datasets/<c- mi>1</c-><c- p>,</c->
+  <c- f>"object"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
   <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
@@ -2329,5 +2331,7 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
+   <div class="issue"> Explain what the implications are between Service, Person, and Organization<a href="#issue-b0766d85"> ↵ </a></div>
+   <div class="issue"> Add some more information on how application domains can describe the artefact further.<a href="#issue-78cdca70"> ↵ </a></div>
    <div class="issue"> Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1></a><a href="#issue-de9c75aa"> ↵ </a></div>
   </div>
