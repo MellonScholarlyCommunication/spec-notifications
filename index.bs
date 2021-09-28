@@ -4,7 +4,7 @@ Shortname: notifications
 Level: 1
 Status: LD
 URL: https://mellonscholarlycommunication.github.io/spec-notifications
-Editor: Miel Vander Sande, meemoo - [Flemish Institute for Archiving](https://meemoo.be), miel.vandersande@meemoo.be
+Editor: Miel Vander Sande, [meemoo - Flemish Institute for Archives](https://meemoo.be), miel.vandersande@meemoo.be
 Editor: Patrick Hochstenbach, Ghent University, patrick.hochstenbach@ugent.be
 Editor: Ruben Dedecker, Ghent University, ruben.dedecker@ugent.be
 Editor: Jeroen Werbrouck, Ghent University, Jeroen.Werbrouck@ugent.be
@@ -60,13 +60,13 @@ This document is one of the specifications produced by the **ResearcherPod** and
 Introduction {#intro}
 =====================
 
-In a decentralized artefact exchange network, actors communicate using [[ldn|Linked Data Notifications]].
-An actor notifies other interested actors about its activities that affect particular artefacts.
-By being notified, the recepient is allowed to react (eg. by downloading the artefact) or respond to such events.
-The notification payloads are expressed in [[activitystreams-vocabulary]] with additional domain-specific vocabularies such as [[schema-org|Schema.org]].
+This document defines general requirements for using [[ldn|Linked Data Notifications]] in a decentralized artefact exchange network.
+The goal of these requirements is application-agnostic communication between actors, 
+which provides groundwork for any use case that applies a decentralized artefact exchange network and that might introduce additional requirements.
 
-This document defines the different notification types that can be used and how to construct their payloads.
-
+Notifications contain a payload that represents an activity.
+This document lists the different activity types that can be used, covers the possible communication patterns between actors, and defines how to construct their payloads.
+Payloads can be extended per use case by applying domain-specific vocabularies such as [[schema-org|Schema.org]].
 
 Document Conventions
 =====================
@@ -90,69 +90,213 @@ Within this document, the following namespace prefix bindings are used:
       <td>http://www.w3.org/ns/ldp#
 </table>
 
+Examples of notification payloads use [[JSON-LD]] as syntax. 
+
+Network communication patterns
+==========
+
+In a decentralized artefact exchange network, actors communicate by sending [[ldn|Linked Data Notifications]] to each other.
+For instance, an actor can notify other interested actors about its activities that affect particular artefacts.
+The receiving actor can then react (eg. by downloading the artefact or performing some follow-up action) and/or respond to such notification with a new notification.
+
+An actor is either 
+
+- a [[spec-overview#maintainer|Maintainer]] of a data pod; or 
+- a [[spec-overview#service-hub|Service Hub]] that provides a certain service.
+
+Interaction is thus possible between two maintainers, between two service hubs or between a maintainer and a service hub.
+Depending on the type of interaction,
+an actor takes the role of notification [[ldn#sender]] or [[ldn#receiver]].
+This results in two possible communication patterns:
+
+## One-way pattern
+
+Issue: add diagram
+
+The sender of a notification should not expect a direct reply from the receiver. 
+This style of communication is more informative. 
+A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.
+
+## Request-response pattern
+
+Issue: add diagram
+
+The sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
+A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
+and what the resulting action will be. 
+
+
 Activities {#activities}
 ===========
 
-In the network, [[spec-overview#actor|actors]] can perform activities that are linked to a certain artefact. 
-Actors are either [[spec-overview#service-hub|Service Hubs]] or [[spec-overview#maintainer|Maintainers]] (see [[#mappings]]).
-By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
-Activities that somehow impact an artefact's lifecycle result in [[spec-overview#artefact-lifecycle-event|lifecycle events]].
+A notification is sent by a [[spec-overview#actor|network actor]] to inform another [[spec-overview#actor|network actor]] about an activity.
+An <dfn>Activity</dfn> is some action that occurred, related to a certain [=artefact=] in the network.
+Activities are contained in the notification **payload**.
 
-The table below summarizes the possible notification types that actors can exchange.
+Notification payloads are expressed in [[activitystreams-vocabulary]] and use [[JSON-LD]] as default syntax (other RDF syntaxes are allowed as well). 
+A payload is uniquely identified, indicates the type of activity it is describing, and includes some descriptive metadata about the activity.
+It also describes the parties involved:
+
+- the actor who performed the activity (the <dfn>actor</dfn>);
+- the actor who is supposed to receive the notification (the <dfn>target</dfn>);
+- the software or [=actor=] who was responsible for sending the notification (the <dfn>origin</dfn>);
+- the artefact or former activity that this activity is about (the <dfn>object</dfn>).
+
+The minimal example below illustrates an interaction between the two [=human actors=] Bob and Alice.
+Bob ([=actor=]) notifies Alice ([=target=]) using his network dashboard ([=origin=]) to inform her about the artefact ([=object=]) he created.
+
+<pre class=include-code>
+path: examples/minimal.jsonld
+highlight: json
+show: 
+</pre>
+
+## Types of activities
+
+Notification payloads apply the [[activitystreams-vocabulary#activity|ActivityStreams 2.0 vocabulary]].
+Therefore, the notification payload MUST be typed as a `as:Activity` or as one of its more specialized subtypes.
+
+A decentralized artefact exchange network only allows a limited set of [[activitystreams-vocabulary#activity-types|AS2.0 Activity Types]].
+Activities, along with their types, are divided into two categories:
+
+- Activities that are about facts related to an artefact. This includes the types `Create`, `Remove`, and `Update`. These activities are used in a one-way communication pattern.
+- Activities that are about requesting services. This includes the types `Offer`, `Reject`, `Accept`, `Undo`, and `Announce`. These activities are used in a request–response communication pattern.
+
+The following table summarizes the possible activity types according to category.
 
 <table>
   <thead>
     <tr>
-    <th>Activity
-    <th>ActivityStreams 2.0 Type
+    <th>Activity Type
     <th>Purpose
   <tbody>
       <tr>
-      <th colspan="3">Disseminating lifecycle aspects</th>
+      <th colspan="2">Activities about facts related to an artefact</th>
     </tr>
     <tr>
-      <td>Create
       <td>[[activitystreams-vocabulary#Create|as:Create]]
-      <td>An [[spec-overview#actor|actor]] creates an [[spec-overview#artefact|artefact]] in its data pod.
+      <td>An [[spec-overview#actor|actor]] created an [[spec-overview#artefact|artefact]] in its data pod.
     <tr>
-      <td>Update
       <td>[[activitystreams-vocabulary#update|as:Update]]
-      <td>An [[spec-overview#actor|actor]] updates an [[spec-overview#artefact|artefact]] in its data pod.
+      <td>An [[spec-overview#actor|actor]] updated an [[spec-overview#artefact|artefact]] in its data pod.
     <tr>
-      <td>Delete
       <td>[[activitystreams-vocabulary#Remove|as:Remove]]
-      <td>An [[spec-overview#actor|actor]] deletes an [[spec-overview#artefact|artefact]] from it's data pod.
-    <tr>
-      <td>Undo
-      <td>[[activitystreams-vocabulary#Undo|as:Undo]]
-      <td>An [[spec-overview#actor|actor]] retracts a prior [[spec-overview#activity|activity]].
+      <td>An [[spec-overview#actor|actor]] deletes an [[spec-overview#artefact|artefact]] from its data pod.
   <tbody>
     <tr>
-      <th colspan="3">Requesting services</th>
+      <th colspan="2">Activities about requesting services</th>
     </tr>
     <tr>
-      <td>Announce
       <td>[[activitystreams-vocabulary#Announce|as:Announce]]
-      <td>An [[spec-overview#actor|actor]] announces the existence of an [[spec-overview#artefact|artefact]].
+      <td>
+      An [[spec-overview#actor|actor]] announces the **existence** of an [[spec-overview#artefact|artefact]]. 
+      This activity is different from [[activitystreams-vocabulary#Create|as:Create]], which denotes a fact (ie. the what, when, where and how a new artefact was created).
+      With [[activitystreams-vocabulary#Announce|as:Announce]], the sender doesn't say anything about when the artefact was created, but only desires that the consumer is notified about its existence.
     <tr>
-      <td>Offer
       <td>[[activitystreams-vocabulary#Offer|as:Offer]]
-      <td>An [[spec-overview#actor|actor]] offers an [[spec-overview#artefact|artefact]] to another actor in order to conduct an [[spec-overview#activity|activity]] with that artefact as object.
+      <td>
+      An [[spec-overview#actor|actor]] offers an [[spec-overview#artefact|artefact]] to another actor in order to invoke a service. 
+      The execution of this service may lead to a new [[spec-overview#activity|activity]] with the same artefact as the object.
     <tr>
-      <td>Accept
       <td>[[activitystreams-vocabulary#Accept|as:Accept]]
-      <td>A [[spec-overview#actor|actor]] accepts an [[spec-overview#artefact|artefact]] from another [[spec-overview#actor|actor]].
+      <td>
+        An [[spec-overview#actor|actor]] accepts to execute a service on a specified artefact, as requested by another actor.
+        This is a direct reply to a received [[activitystreams-vocabulary#Offer|as:Offer]].
     <tr>
-      <td>Reject
       <td>[[activitystreams-vocabulary#Reject|as:Reject]]
-      <td>A [[spec-overview#actor|actor]] rejects an [[spec-overview#artefact|artefact]] from another [[spec-overview#actor|actor]].
+      <td>
+        An [[spec-overview#actor|actor]] rejects to execute a service on a specified artefact, because it is somehow unable to fulfill the request by another actor.
+        This is a direct reply to a received [[activitystreams-vocabulary#Offer|as:Offer]].
+    <tr>
+      <td>[[activitystreams-vocabulary#Undo|as:Undo]]
+      <td>An [[spec-overview#actor|actor]] retracts a prior [[spec-overview#activity|activity]], which can be of any of the above types.
 </table>
+
+## Identifying an activity
+
+To establish robust communication on a decentralized artefact exchange network,
+activities have to be at least uniquely indentifyable within the scope of the network.
+Therefore, an identifier of any kind used MUST be a valid [[IRI]].
+
+There are two identifiers who operate at the level of the notification:
+
+- the <dfn>notification identifier</dfn>, which is the minted [[URL]] at the end of the target actor as part of the [=inbox=]; and
+- the <dfn>activity identifier</dfn>, which is the [[IRI]] enclosed in the notification payload as value of the `id` property in the activity description.
+
+A sender
+
+Issue: complete this section
+
+
+
+
+We distinguish two ide
+
+
+- The client creates the activity @id.
+- The receiver keeps the activity @id as-is.
+- The receiver can mint any notification identifier, this identifier can have a relation with the activity identifier or just be a random URL.
+
+## Object
+
+The object is always another [=activity=].
+
+ The object is always an [=artefact=].
+
+
+Issue: iets zeggen over object Identification en dereferencability
+
+
+
+## Possible actors
+
+
+
+Issue: continue rationale 
+
+, 
+which are performed by a  and 
+A notification informs a target party about its occurence.
+Activities 
+
+
+
+In the network, [[spec-overview#actor|actors]] can perform  that . 
+Actors are either [[spec-overview#service-hub|Service Hubs]] or [[spec-overview#maintainer|Maintainers]] (see [[#mappings]]).
+By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
+An activity that somehow impact an artefact's lifecycle can result in a [[spec-overview#artefact-lifecycle-event|lifecycle event]].
+
+
+...some intro...
+
+## Actors
+
+
+## Identification
+
+client chooses id
+server mag geen id geven indien niet aanwezig
+
+
+
+## ActivityTypes
+
+in a decentralized artefact exchange network
+
+- artefact facts
+- requesting services
+
+The table below summarizes the possible notification types that actors can exchange.
+
+
 
 Type mapping {#mappings}
 ===========
 
-Notifications in  a decentralized artefact exchange network communicate about [[activitystreams-vocabulary#activity|ActivityStreams 2 activities]].
-Therefore, the notification payload MUST be typed as `as:Activity`.
+
+
+
+
 Payloads MUST also include the properties `as:origin`, `as:object`, and `as:target`, as defined in [[activitystreams-core#activities]]
 The use of these properties is consistent across all notifications:
 
@@ -760,6 +904,11 @@ Example of a dataset that was by an cultural heritage institution:
 }
 ```
 </div>
+
+Responding to notifications
+==========================
+
+A response is a new notification that can be direct - the notification is about the former notification, or indirect - the notification is about  
 
 
 <pre class=biblio>
