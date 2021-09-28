@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="7194521b74e1acaec6731f677355d82dc9f44128" name="document-revision">
+  <meta content="00795a0cacf365957ea7049bd4778ee41c21d375" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1346,6 +1346,43 @@ figcaption {
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
 }</style>
+<style>/* style-dfn-panel */
+
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    height: auto;
+    width: -webkit-fit-content;
+    width: fit-content;
+    max-width: 300px;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: #DDDDDD;
+    color: black;
+    border: outset 0.2em;
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: black; }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0; }
+.dfn-panel li { list-style: inside; }
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
+
+.dfn-paneled { cursor: pointer; }
+</style>
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1464,7 +1501,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">List of notifications</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-08-17">17 August 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-09-28">28 September 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1473,7 +1510,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <dd><a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editors:
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:miel.vandersande@meemoo.be">Miel Vander Sande</a> (<span class="p-org org">meemoo - <a href="https://meemoo.be">Flemish Institute for Archiving</a></span>)
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:miel.vandersande@meemoo.be">Miel Vander Sande</a> (<span class="p-org org"><a href="https://meemoo.be">meemoo - Flemish Institute for Archives</a></span>)
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org">Ghent University</span>)
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:ruben.dedecker@ugent.be">Ruben Dedecker</a> (<span class="p-org org">Ghent University</span>)
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:Jeroen.Werbrouck@ugent.be">Jeroen Werbrouck</a> (<span class="p-org org">Ghent University</span>)
@@ -1482,7 +1519,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 17 August 2021,
+In addition, as of 28 September 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1499,34 +1536,56 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#set"><span class="secno">1</span> <span class="content">Set of documents</span></a>
     <li><a href="#intro"><span class="secno">2</span> <span class="content">Introduction</span></a>
     <li><a href="#document-conventions"><span class="secno">3</span> <span class="content">Document Conventions</span></a>
-    <li><a href="#activities"><span class="secno">4</span> <span class="content">Activities</span></a>
     <li>
-     <a href="#mappings"><span class="secno">5</span> <span class="content">Type mapping</span></a>
+     <a href="#network-communication-patterns"><span class="secno">4</span> <span class="content">Network communication patterns</span></a>
      <ol class="toc">
-      <li><a href="#actors"><span class="secno">5.1</span> <span class="content">Actors</span></a>
-      <li><a href="#artefacts"><span class="secno">5.2</span> <span class="content">Artefacts</span></a>
+      <li><a href="#one-way-pattern"><span class="secno">4.1</span> <span class="content">One-way pattern</span></a>
+      <li><a href="#request-response-pattern"><span class="secno">4.2</span> <span class="content">Request-response pattern</span></a>
      </ol>
     <li>
-     <a href="#payloads"><span class="secno">6</span> <span class="content">Payloads</span></a>
+     <a href="#activities"><span class="secno">5</span> <span class="content">Activities</span></a>
+     <ol class="toc">
+      <li><a href="#types-of-activities"><span class="secno">5.1</span> <span class="content">Types of activities</span></a>
+      <li><a href="#identifying-an-activity"><span class="secno">5.2</span> <span class="content">Identifying an activity</span></a>
+      <li><a href="#object①"><span class="secno">5.3</span> <span class="content">Object</span></a>
+      <li><a href="#possible-actors"><span class="secno">5.4</span> <span class="content">Possible actors</span></a>
+      <li><a href="#actors"><span class="secno">5.5</span> <span class="content">Actors</span></a>
+      <li><a href="#identification"><span class="secno">5.6</span> <span class="content">Identification</span></a>
+      <li><a href="#activitytypes"><span class="secno">5.7</span> <span class="content">ActivityTypes</span></a>
+     </ol>
+    <li>
+     <a href="#mappings"><span class="secno">6</span> <span class="content">Type mapping</span></a>
+     <ol class="toc">
+      <li><a href="#actors①"><span class="secno">6.1</span> <span class="content">Actors</span></a>
+      <li><a href="#artefacts"><span class="secno">6.2</span> <span class="content">Artefacts</span></a>
+     </ol>
+    <li>
+     <a href="#payloads"><span class="secno">7</span> <span class="content">Payloads</span></a>
      <ol class="toc">
       <li>
-       <a href="#disseminating-lifecycle-aspects"><span class="secno">6.1</span> <span class="content">Disseminating lifecycle aspects</span></a>
+       <a href="#disseminating-lifecycle-aspects"><span class="secno">7.1</span> <span class="content">Disseminating lifecycle aspects</span></a>
        <ol class="toc">
-        <li><a href="#create"><span class="secno">6.1.1</span> <span class="content">Create</span></a>
-        <li><a href="#update"><span class="secno">6.1.2</span> <span class="content">Update</span></a>
-        <li><a href="#delete"><span class="secno">6.1.3</span> <span class="content">Delete</span></a>
+        <li><a href="#create"><span class="secno">7.1.1</span> <span class="content">Create</span></a>
+        <li><a href="#update"><span class="secno">7.1.2</span> <span class="content">Update</span></a>
+        <li><a href="#delete"><span class="secno">7.1.3</span> <span class="content">Delete</span></a>
        </ol>
       <li>
-       <a href="#requesting-services"><span class="secno">6.2</span> <span class="content">Requesting services</span></a>
+       <a href="#requesting-services"><span class="secno">7.2</span> <span class="content">Requesting services</span></a>
        <ol class="toc">
-        <li><a href="#announce"><span class="secno">6.2.1</span> <span class="content">Announce</span></a>
-        <li><a href="#offer"><span class="secno">6.2.2</span> <span class="content">Offer</span></a>
-        <li><a href="#accept"><span class="secno">6.2.3</span> <span class="content">Accept</span></a>
-        <li><a href="#reject"><span class="secno">6.2.4</span> <span class="content">Reject</span></a>
-        <li><a href="#undo"><span class="secno">6.2.5</span> <span class="content">Undo</span></a>
+        <li><a href="#announce"><span class="secno">7.2.1</span> <span class="content">Announce</span></a>
+        <li><a href="#offer"><span class="secno">7.2.2</span> <span class="content">Offer</span></a>
+        <li><a href="#accept"><span class="secno">7.2.3</span> <span class="content">Accept</span></a>
+        <li><a href="#reject"><span class="secno">7.2.4</span> <span class="content">Reject</span></a>
+        <li><a href="#undo"><span class="secno">7.2.5</span> <span class="content">Undo</span></a>
        </ol>
      </ol>
+    <li><a href="#responding-to-notifications"><span class="secno">8</span> <span class="content">Responding to notifications</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+     </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
@@ -1556,11 +1615,12 @@ Parts of this work may be from another specification document.  If so, those par
      <p><a href="/spec-collector/">Collector</a></p>
    </ol>
    <h2 class="heading settled" data-level="2" id="intro"><span class="secno">2. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-   <p>In a decentralized artefact exchange network, actors communicate using <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notifications</a>.
-An actor notifies other interested actors about its activities that affect particular artefacts.
-By being notified, the recepient is allowed to react (eg. by downloading the artefact) or respond to such events.
-The notification payloads are expressed in <a data-link-type="biblio" href="#biblio-activitystreams-vocabulary">[activitystreams-vocabulary]</a> with additional domain-specific vocabularies such as <a data-link-type="biblio" href="#biblio-schema-org">Schema.org</a>.</p>
-   <p>This document defines the different notification types that can be used and how to construct their payloads.</p>
+   <p>This document defines general requirements for using <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notifications</a> in a decentralized artefact exchange network.
+The goal of these requirements is application-agnostic communication between actors, 
+which provides groundwork for any use case that applies a decentralized artefact exchange network and that might introduce additional requirements.</p>
+   <p>Notifications contain a payload that represents an activity.
+This document lists the different activity types that can be used, covers the possible communication patterns between actors, and defines how to construct their payloads.
+Payloads can be extended per use case by applying domain-specific vocabularies such as <a data-link-type="biblio" href="#biblio-schema-org">Schema.org</a>.</p>
    <h2 class="heading settled" data-level="3" id="document-conventions"><span class="secno">3. </span><span class="content">Document Conventions</span><a class="self-link" href="#document-conventions"></a></h2>
    <p>Within this document, the following namespace prefix bindings are used:</p>
    <table>
@@ -1579,61 +1639,182 @@ The notification payloads are expressed in <a data-link-type="biblio" href="#bib
       <td>ldp 
       <td>http://www.w3.org/ns/ldp# 
    </table>
-   <h2 class="heading settled" data-level="4" id="activities"><span class="secno">4. </span><span class="content">Activities</span><a class="self-link" href="#activities"></a></h2>
-   <p>In the network, <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actors</a> can perform activities that are linked to a certain artefact.
-Actors are either <a href="http://mellonscholarlycommunication.github.io/spec-overview/#service-hub">Service Hubs</a> or <a href="http://mellonscholarlycommunication.github.io/spec-overview/#maintainer">Maintainers</a> (see <a href="#mappings">§ 5 Type mapping</a>).
-By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
-Activities that somehow impact an artefact’s lifecycle result in <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact-lifecycle-event">lifecycle events</a>.</p>
-   <p>The table below summarizes the possible notification types that actors can exchange.</p>
+   <p>Examples of notification payloads use <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> as syntax.</p>
+   <h2 class="heading settled" data-level="4" id="network-communication-patterns"><span class="secno">4. </span><span class="content">Network communication patterns</span><a class="self-link" href="#network-communication-patterns"></a></h2>
+   <p>In a decentralized artefact exchange network, actors communicate by sending <a data-link-type="biblio" href="#biblio-ldn">Linked Data Notifications</a> to each other.
+For instance, an actor can notify other interested actors about its activities that affect particular artefacts.
+The receiving actor can then react (eg. by downloading the artefact or performing some follow-up action) and/or respond to such notification with a new notification.</p>
+   <p>An actor is either</p>
+   <ul>
+    <li data-md>
+     <p>a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#maintainer">Maintainer</a> of a data pod; or</p>
+    <li data-md>
+     <p>a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#service-hub">Service Hub</a> that provides a certain service.</p>
+   </ul>
+   <p>Interaction is thus possible between two maintainers, between two service hubs or between a maintainer and a service hub.
+Depending on the type of interaction,
+an actor takes the role of notification <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a> or <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a>.
+This results in two possible communication patterns:</p>
+   <h3 class="heading settled" data-level="4.1" id="one-way-pattern"><span class="secno">4.1. </span><span class="content">One-way pattern</span><a class="self-link" href="#one-way-pattern"></a></h3>
+   <p class="issue" id="issue-810d8be5"><a class="self-link" href="#issue-810d8be5"></a> add diagram</p>
+   <p>The sender of a notification should not expect a direct reply from the receiver.
+This style of communication is more informative. 
+A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.</p>
+   <h3 class="heading settled" data-level="4.2" id="request-response-pattern"><span class="secno">4.2. </span><span class="content">Request-response pattern</span><a class="self-link" href="#request-response-pattern"></a></h3>
+   <p class="issue" id="issue-810d8be5①"><a class="self-link" href="#issue-810d8be5①"></a> add diagram</p>
+   <p>The sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
+A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
+and what the resulting action will be.</p>
+   <h2 class="heading settled" data-level="5" id="activities"><span class="secno">5. </span><span class="content">Activities</span><a class="self-link" href="#activities"></a></h2>
+   <p>A notification is sent by a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> to inform another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> about an activity.
+An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="activity">Activity</dfn> is some action that occurred, related to a certain <a data-link-type="dfn">artefact</a> in the network.
+Activities are contained in the notification <strong>payload</strong>.</p>
+   <p>Notification payloads are expressed in <a data-link-type="biblio" href="#biblio-activitystreams-vocabulary">[activitystreams-vocabulary]</a> and use <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> as default syntax (other RDF syntaxes are allowed as well).
+A payload is uniquely identified, indicates the type of activity it is describing, and includes some descriptive metadata about the activity.
+It also describes the parties involved:</p>
+   <ul>
+    <li data-md>
+     <p>the actor who performed the activity (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="actor">actor</dfn>);</p>
+    <li data-md>
+     <p>the actor who is supposed to receive the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="target">target</dfn>);</p>
+    <li data-md>
+     <p>the software or <a data-link-type="dfn" href="#actor" id="ref-for-actor">actor</a> who was responsible for sending the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="origin">origin</dfn>);</p>
+    <li data-md>
+     <p>the artefact or former activity that this activity is about (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="object">object</dfn>).</p>
+   </ul>
+   <p>The minimal example below illustrates an interaction between the two <a data-link-type="dfn">human actors</a> Bob and Alice.
+Bob (<a data-link-type="dfn" href="#actor" id="ref-for-actor①">actor</a>) notifies Alice (<a data-link-type="dfn" href="#target" id="ref-for-target">target</a>) using his network dashboard (<a data-link-type="dfn" href="#origin" id="ref-for-origin">origin</a>) to inform her about the artefact (<a data-link-type="dfn" href="#object" id="ref-for-object">object</a>) he created.</p>
+<pre class="include-code highlight" data-code-show path="examples/minimal.jsonld"><c- p>{</c->
+    <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams"</c-><c- p>,</c->
+    <c- f>"summary"</c-><c- p>:</c-> <c- u>"Bob created an artefact"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- u>"Create"</c-><c- p>,</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/activities/1"</c-><c- p>,</c->
+    <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/bob"</c-><c- p>,</c->
+      <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Person"</c-><c- p>],</c->
+      <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/joe#inbox"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"Bob"</c->   
+    <c- p>},</c->
+    <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/alice"</c-><c- p>,</c->
+      <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Person"</c-><c- p>],</c->
+      <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/alice#inbox"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"Alice"</c->   
+    <c- p>},</c->
+    <c- f>"object"</c-><c- p>:</c-> <c- u>"http://example.org/artefacts/1"</c-><c- p>,</c->
+    <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
+      <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"Dashboard of Bob"</c-> 
+    <c- p>},</c->
+    <c- f>"published"</c-><c- p>:</c-> <c- u>"2014-09-30T12:34:56Z"</c->
+  <c- p>}</c->
+  </pre>
+   <h3 class="heading settled" data-level="5.1" id="types-of-activities"><span class="secno">5.1. </span><span class="content">Types of activities</span><a class="self-link" href="#types-of-activities"></a></h3>
+   <p>Notification payloads apply the <a href="https://www.w3.org/TR/activitystreams-vocabulary/#activity">ActivityStreams 2.0 vocabulary</a>.
+Therefore, the notification payload MUST be typed as a <code>as:Activity</code> or as one of its more specialized subtypes.</p>
+   <p>A decentralized artefact exchange network only allows a limited set of <a href="https://www.w3.org/TR/activitystreams-vocabulary/#activity-types">AS2.0 Activity Types</a>.
+Activities, along with their types, are divided into two categories:</p>
+   <ul>
+    <li data-md>
+     <p>Activities that are about facts related to an artefact. This includes the types <code>Create</code>, <code>Remove</code>, and <code>Update</code>. These activities are used in a one-way communication pattern.</p>
+    <li data-md>
+     <p>Activities that are about requesting services. This includes the types <code>Offer</code>, <code>Reject</code>, <code>Accept</code>, <code>Undo</code>, and <code>Announce</code>. These activities are used in a request–response communication pattern.</p>
+   </ul>
+   <p>The following table summarizes the possible activity types according to category.</p>
    <table>
     <thead>
      <tr>
-      <th>Activity 
-      <th>ActivityStreams 2.0 Type 
+      <th>Activity Type 
       <th>Purpose 
     <tbody>
      <tr>
-      <th colspan="3">Disseminating lifecycle aspects
+      <th colspan="2">Activities about facts related to an artefact
      <tr>
-      <td>Create 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> creates an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> in its data pod. 
+      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> created an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> in its data pod. 
      <tr>
-      <td>Update 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#update">as:Update</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> updates an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> in its data pod. 
+      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> updated an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> in its data pod. 
      <tr>
-      <td>Delete 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Remove">as:Remove</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> deletes an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from it’s data pod. 
-     <tr>
-      <td>Undo 
-      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>. 
+      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> deletes an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from its data pod. 
     <tbody>
      <tr>
-      <th colspan="3">Requesting services
+      <th colspan="2">Activities about requesting services
      <tr>
-      <td>Announce 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> announces the existence of an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a>. 
+      <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> announces the <strong>existence</strong> of an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a>. 
+      This activity is different from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a>, which denotes a fact (ie. the what, when, where and how a new artefact was created).
+      With <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a>, the sender doesn’t say anything about when the artefact was created, but only desires that the consumer is notified about its existence. 
      <tr>
-      <td>Offer 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> offers an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> to another actor in order to conduct an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a> with that artefact as object. 
+      <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> offers an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> to another actor in order to invoke a service. 
+      The execution of this service may lead to a new <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a> with the same artefact as the object. 
      <tr>
-      <td>Accept 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Accept">as:Accept</a> 
-      <td>A <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> accepts an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>. 
+      <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> accepts to execute a service on a specified artefact, as requested by another actor.
+        This is a direct reply to a received <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. 
      <tr>
-      <td>Reject 
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Reject">as:Reject</a> 
-      <td>A <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> rejects an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a>. 
+      <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> rejects to execute a service on a specified artefact, because it is somehow unable to fulfill the request by another actor.
+        This is a direct reply to a received <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. 
+     <tr>
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a> 
+      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>, which can be of any of the above types. 
    </table>
-   <h2 class="heading settled" data-level="5" id="mappings"><span class="secno">5. </span><span class="content">Type mapping</span><a class="self-link" href="#mappings"></a></h2>
-   <p>Notifications in  a decentralized artefact exchange network communicate about <a href="https://www.w3.org/TR/activitystreams-vocabulary/#activity">ActivityStreams 2 activities</a>.
-Therefore, the notification payload MUST be typed as <code>as:Activity</code>.
-Payloads MUST also include the properties <code>as:origin</code>, <code>as:object</code>, and <code>as:target</code>, as defined in <a href="https://www.w3.org/TR/activitystreams-core/#activities">Activity Streams 2.0 §activities</a> The use of these properties is consistent across all notifications:</p>
+   <h3 class="heading settled" data-level="5.2" id="identifying-an-activity"><span class="secno">5.2. </span><span class="content">Identifying an activity</span><a class="self-link" href="#identifying-an-activity"></a></h3>
+   <p>To establish robust communication on a decentralized artefact exchange network,
+activities have to be at least uniquely indentifyable within the scope of the network.
+Therefore, an identifier of any kind used MUST be a valid <a data-link-type="biblio" href="#biblio-iri">[IRI]</a>.</p>
+   <p>There are two identifiers who operate at the level of the notification:</p>
+   <ul>
+    <li data-md>
+     <p>the <dfn data-dfn-type="dfn" data-noexport id="notification-identifier">notification identifier<a class="self-link" href="#notification-identifier"></a></dfn>, which is the minted <a data-link-type="biblio" href="#biblio-url">[URL]</a> at the end of the target actor as part of the <a data-link-type="dfn">inbox</a>; and</p>
+    <li data-md>
+     <p>the <dfn data-dfn-type="dfn" data-noexport id="activity-identifier">activity identifier<a class="self-link" href="#activity-identifier"></a></dfn>, which is the <a data-link-type="biblio" href="#biblio-iri">[IRI]</a> enclosed in the notification payload as value of the <code>id</code> property in the activity description.</p>
+   </ul>
+   <p>A sender</p>
+   <p class="issue" id="issue-f270f122"><a class="self-link" href="#issue-f270f122"></a> complete this section</p>
+   <p>We distinguish two ide</p>
+   <ul>
+    <li data-md>
+     <p>The client creates the activity @id.</p>
+    <li data-md>
+     <p>The receiver keeps the activity @id as-is.</p>
+    <li data-md>
+     <p>The receiver can mint any notification identifier, this identifier can have a relation with the activity identifier or just be a random URL.</p>
+   </ul>
+   <h3 class="heading settled" data-level="5.3" id="object①"><span class="secno">5.3. </span><span class="content">Object</span><a class="self-link" href="#object①"></a></h3>
+   <p>The object is always another <a data-link-type="dfn" href="#activity" id="ref-for-activity">activity</a>.</p>
+   <p>The object is always an <a data-link-type="dfn">artefact</a>.</p>
+   <p class="issue" id="issue-83ece189"><a class="self-link" href="#issue-83ece189"></a> iets zeggen over object Identification en dereferencability</p>
+   <h3 class="heading settled" data-level="5.4" id="possible-actors"><span class="secno">5.4. </span><span class="content">Possible actors</span><a class="self-link" href="#possible-actors"></a></h3>
+   <p class="issue" id="issue-a7f44f67"><a class="self-link" href="#issue-a7f44f67"></a> continue rationale</p>
+   <p>,
+which are performed by a  and 
+A notification informs a target party about its occurence.
+Activities</p>
+   <p>In the network, <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actors</a> can perform  that .
+Actors are either <a href="http://mellonscholarlycommunication.github.io/spec-overview/#service-hub">Service Hubs</a> or <a href="http://mellonscholarlycommunication.github.io/spec-overview/#maintainer">Maintainers</a> (see <a href="#mappings">§ 6 Type mapping</a>).
+By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
+An activity that somehow impact an artefact’s lifecycle can result in a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact-lifecycle-event">lifecycle event</a>.</p>
+   <p>...some intro...</p>
+   <h3 class="heading settled" data-level="5.5" id="actors"><span class="secno">5.5. </span><span class="content">Actors</span><a class="self-link" href="#actors"></a></h3>
+   <h3 class="heading settled" data-level="5.6" id="identification"><span class="secno">5.6. </span><span class="content">Identification</span><a class="self-link" href="#identification"></a></h3>
+   <p>client chooses id
+server mag geen id geven indien niet aanwezig</p>
+   <h3 class="heading settled" data-level="5.7" id="activitytypes"><span class="secno">5.7. </span><span class="content">ActivityTypes</span><a class="self-link" href="#activitytypes"></a></h3>
+   <p>in a decentralized artefact exchange network</p>
+   <ul>
+    <li data-md>
+     <p>artefact facts</p>
+    <li data-md>
+     <p>requesting services</p>
+   </ul>
+   <p>The table below summarizes the possible notification types that actors can exchange.</p>
+   <h2 class="heading settled" data-level="6" id="mappings"><span class="secno">6. </span><span class="content">Type mapping</span><a class="self-link" href="#mappings"></a></h2>
+   <p>Payloads MUST also include the properties <code>as:origin</code>, <code>as:object</code>, and <code>as:target</code>, as defined in <a href="https://www.w3.org/TR/activitystreams-core/#activities">Activity Streams 2.0 §activities</a> The use of these properties is consistent across all notifications:</p>
    <ul>
     <li data-md>
      <p><code>as:actor</code> refers to the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> that is responsible for the <code>activity</code>; most likely the performer of the activity and sender of the notification</p>
@@ -1644,7 +1825,7 @@ Payloads MUST also include the properties <code>as:origin</code>, <code>as:objec
    </ul>
    <p>The terms in <a href="http://mellonscholarlycommunication.github.io/spec-overview/#definitions">Overview of the ResearcherPod specifications §definitions</a> should be mapped in a specific way, using specific types from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">Activity Vocabulary §actor-types</a> and <a data-link-type="biblio" href="#biblio-schema-org">[schema-org]</a>.
 This is outlined in more detail below.</p>
-   <h3 class="heading settled" data-level="5.1" id="actors"><span class="secno">5.1. </span><span class="content">Actors</span><a class="self-link" href="#actors"></a></h3>
+   <h3 class="heading settled" data-level="6.1" id="actors①"><span class="secno">6.1. </span><span class="content">Actors</span><a class="self-link" href="#actors①"></a></h3>
    <p>The actor of an activity MUST describe the [[activitystreams-vocabulary#actors | actors]] that are responsible for the activity and serve as contact points for the recepient.
 In most cases, this will be the actor sending the notification using either the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#dashboard">Dashboard</a> or the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#orchstrator">Orchestrator</a> as intermediate.
 A notification payload MUST refer to the actor using the <code>as:actor</code> property and it MUST use the following type mapping:</p>
@@ -1679,7 +1860,7 @@ The actor MAY have a name using <code>as:name</code>.</p>
 <c- p>}</c->
 </pre>
    </div>
-   <h3 class="heading settled" data-level="5.2" id="artefacts"><span class="secno">5.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
+   <h3 class="heading settled" data-level="6.2" id="artefacts"><span class="secno">6.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
    <p>The object of an activity MUST describe the artefact on which the activity has effect.
 It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types]], but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
    <p class="issue" id="issue-78cdca70"><a class="self-link" href="#issue-78cdca70"></a> Add some more information on how application domains can describe the artefact further.</p>
@@ -1696,11 +1877,11 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
 <c- p>}</c->
 </pre>
    </div>
-   <h2 class="heading settled" data-level="6" id="payloads"><span class="secno">6. </span><span class="content">Payloads</span><a class="self-link" href="#payloads"></a></h2>
+   <h2 class="heading settled" data-level="7" id="payloads"><span class="secno">7. </span><span class="content">Payloads</span><a class="self-link" href="#payloads"></a></h2>
    <p>The following payload patterns can be used between actors.</p>
    <p class="issue" id="issue-de9c75aa"><a class="self-link" href="#issue-de9c75aa"></a> Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1></a></p>
-   <h3 class="heading settled" data-level="6.1" id="disseminating-lifecycle-aspects"><span class="secno">6.1. </span><span class="content">Disseminating lifecycle aspects</span><a class="self-link" href="#disseminating-lifecycle-aspects"></a></h3>
-   <h4 class="heading settled" data-level="6.1.1" id="create"><span class="secno">6.1.1. </span><span class="content">Create</span><a class="self-link" href="#create"></a></h4>
+   <h3 class="heading settled" data-level="7.1" id="disseminating-lifecycle-aspects"><span class="secno">7.1. </span><span class="content">Disseminating lifecycle aspects</span><a class="self-link" href="#disseminating-lifecycle-aspects"></a></h3>
+   <h4 class="heading settled" data-level="7.1.1" id="create"><span class="secno">7.1.1. </span><span class="content">Create</span><a class="self-link" href="#create"></a></h4>
    <p>A new artefact was created by the actor.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a></p>
    <table>
@@ -1755,7 +1936,7 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
 <c- p>}</c->
 </pre>
    </div>
-   <h4 class="heading settled" data-level="6.1.2" id="update"><span class="secno">6.1.2. </span><span class="content">Update</span><a class="self-link" href="#update"></a></h4>
+   <h4 class="heading settled" data-level="7.1.2" id="update"><span class="secno">7.1.2. </span><span class="content">Update</span><a class="self-link" href="#update"></a></h4>
    <p>An existing artefact was updated by the actor.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Update">as:Update</a></p>
    <table>
@@ -1811,7 +1992,7 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
 <c- p>}</c->
 </pre>
    </div>
-   <h4 class="heading settled" data-level="6.1.3" id="delete"><span class="secno">6.1.3. </span><span class="content">Delete</span><a class="self-link" href="#delete"></a></h4>
+   <h4 class="heading settled" data-level="7.1.3" id="delete"><span class="secno">7.1.3. </span><span class="content">Delete</span><a class="self-link" href="#delete"></a></h4>
    <p>A maintainer deletes an artefact.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Delete">as:Delete</a></p>
    <table>
@@ -1868,8 +2049,8 @@ It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Ob
 <c- p>}</c->
 </pre>
    </div>
-   <h3 class="heading settled" data-level="6.2" id="requesting-services"><span class="secno">6.2. </span><span class="content">Requesting services</span><a class="self-link" href="#requesting-services"></a></h3>
-   <h4 class="heading settled" data-level="6.2.1" id="announce"><span class="secno">6.2.1. </span><span class="content">Announce</span><a class="self-link" href="#announce"></a></h4>
+   <h3 class="heading settled" data-level="7.2" id="requesting-services"><span class="secno">7.2. </span><span class="content">Requesting services</span><a class="self-link" href="#requesting-services"></a></h3>
+   <h4 class="heading settled" data-level="7.2.1" id="announce"><span class="secno">7.2.1. </span><span class="content">Announce</span><a class="self-link" href="#announce"></a></h4>
    <p>An actor draws attention from another actor to an artefact.
 Either a maintainer announces the existence of an artefact to a Service Hub or a Service Hub informs a Maintainer about processing an artefact.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a></p>
@@ -1925,7 +2106,7 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
 <c- p>}</c->
 </pre>
    </div>
-   <h4 class="heading settled" data-level="6.2.2" id="offer"><span class="secno">6.2.2. </span><span class="content">Offer</span><a class="self-link" href="#offer"></a></h4>
+   <h4 class="heading settled" data-level="7.2.2" id="offer"><span class="secno">7.2.2. </span><span class="content">Offer</span><a class="self-link" href="#offer"></a></h4>
    <p>A maintainer offers an artefact to a Service Hub in order to perform a service.
 The property <code>instrument</code> MAY be used to indicate whether a Dashboard or an Orchestrator was involved in performing the activity and sending then notification.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a></p>
@@ -1987,7 +2168,7 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
 <c- p>}</c->
 </pre>
    </div>
-   <h4 class="heading settled" data-level="6.2.3" id="accept"><span class="secno">6.2.3. </span><span class="content">Accept</span><a class="self-link" href="#accept"></a></h4>
+   <h4 class="heading settled" data-level="7.2.3" id="accept"><span class="secno">7.2.3. </span><span class="content">Accept</span><a class="self-link" href="#accept"></a></h4>
    <p>A Service Hub accepts the artefact offered by an actor.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Accept">as:Accept</a></p>
    <table>
@@ -2049,7 +2230,7 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
 <c- p>}</c->
 </pre>
    </div>
-   <h4 class="heading settled" data-level="6.2.4" id="reject"><span class="secno">6.2.4. </span><span class="content">Reject</span><a class="self-link" href="#reject"></a></h4>
+   <h4 class="heading settled" data-level="7.2.4" id="reject"><span class="secno">7.2.4. </span><span class="content">Reject</span><a class="self-link" href="#reject"></a></h4>
    <p>A Service Hub rejects the artefact offered by an actor.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Reject">as:Reject</a></p>
    <table>
@@ -2111,7 +2292,7 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
 <c- p>}</c->
 </pre>
    </div>
-   <h4 class="heading settled" data-level="6.2.5" id="undo"><span class="secno">6.2.5. </span><span class="content">Undo</span><a class="self-link" href="#undo"></a></h4>
+   <h4 class="heading settled" data-level="7.2.5" id="undo"><span class="secno">7.2.5. </span><span class="content">Undo</span><a class="self-link" href="#undo"></a></h4>
    <p>A maintainer retracts a prior offer.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a></p>
    <table>
@@ -2165,6 +2346,8 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
 <c- p>}</c->
 </pre>
    </div>
+   <h2 class="heading settled" data-level="8" id="responding-to-notifications"><span class="secno">8. </span><span class="content">Responding to notifications</span><a class="self-link" href="#responding-to-notifications"></a></h2>
+   <p>A response is a new notification that can be direct - the notification is about the former notification, or indirect - the notification is about</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2312,6 +2495,17 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
 
 })();
 </script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#activity">Activity</a><span>, in §5</span>
+   <li><a href="#activity-identifier">activity identifier</a><span>, in §5.2</span>
+   <li><a href="#actor">actor</a><span>, in §5</span>
+   <li><a href="#notification-identifier">notification identifier</a><span>, in §5.2</span>
+   <li><a href="#object">object</a><span>, in §5</span>
+   <li><a href="#origin">origin</a><span>, in §5</span>
+   <li><a href="#target">target</a><span>, in §5</span>
+  </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
@@ -2322,16 +2516,113 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
   <dl>
    <dt id="biblio-activitystreams-vocabulary">[ACTIVITYSTREAMS-VOCABULARY]
    <dd>James Snell; Evan Prodromou. <a href="https://www.w3.org/TR/activitystreams-vocabulary/">Activity Vocabulary</a>. 23 May 2017. REC. URL: <a href="https://www.w3.org/TR/activitystreams-vocabulary/">https://www.w3.org/TR/activitystreams-vocabulary/</a>
+   <dt id="biblio-iri">[IRI]
+   <dd>M. Duerst; M. Suignard. <a href="https://tools.ietf.org/html/rfc3987">Internationalized Resource Identifiers (IRIs)</a>. January 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc3987">https://tools.ietf.org/html/rfc3987</a>
+   <dt id="biblio-json-ld">[JSON-LD]
+   <dd>Manu Sporny; Gregg Kellogg; Markus Lanthaler. <a href="https://www.w3.org/TR/json-ld/">JSON-LD 1.0</a>. 16 January 2014. REC. URL: <a href="https://www.w3.org/TR/json-ld/">https://www.w3.org/TR/json-ld/</a>
    <dt id="biblio-ldn">[LDN]
    <dd>Sarven Capadisli; Amy Guy. <a href="https://www.w3.org/TR/ldn/">Linked Data Notifications</a>. 2 May 2017. REC. URL: <a href="https://www.w3.org/TR/ldn/">https://www.w3.org/TR/ldn/</a>
    <dt id="biblio-schema-org">[SCHEMA-ORG]
    <dd>W3C Schema.org Community Group. <a href="https://schema.org/">Schema.org</a>. 6.0. URL: <a href="https://schema.org/">https://schema.org/</a>
+   <dt id="biblio-url">[URL]
+   <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-webid">[WEBID]
    <dd>Andrei Sambra; Henry Story; Tim Berners-Lee. <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID 1.0</a>. Editor’s Draft. URL: <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
+   <div class="issue"> add diagram<a href="#issue-810d8be5"> ↵ </a></div>
+   <div class="issue"> add diagram<a href="#issue-810d8be5①"> ↵ </a></div>
+   <div class="issue"> complete this section<a href="#issue-f270f122"> ↵ </a></div>
+   <div class="issue"> iets zeggen over object Identification en dereferencability<a href="#issue-83ece189"> ↵ </a></div>
+   <div class="issue"> continue rationale<a href="#issue-a7f44f67"> ↵ </a></div>
    <div class="issue"> Explain what the implications are between Service, Person, and Organization<a href="#issue-b0766d85"> ↵ </a></div>
    <div class="issue"> Add some more information on how application domains can describe the artefact further.<a href="#issue-78cdca70"> ↵ </a></div>
    <div class="issue"> Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1></a><a href="#issue-de9c75aa"> ↵ </a></div>
   </div>
+  <aside class="dfn-panel" data-for="activity">
+   <b><a href="#activity">#activity</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-activity">5.3. Object</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="actor">
+   <b><a href="#actor">#actor</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-actor">5. Activities</a> <a href="#ref-for-actor①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="target">
+   <b><a href="#target">#target</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-target">5. Activities</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="origin">
+   <b><a href="#origin">#origin</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-origin">5. Activities</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="object">
+   <b><a href="#object">#object</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-object">5. Activities</a>
+   </ul>
+  </aside>
+<script>/* script-dfn-panel */
+
+document.body.addEventListener("click", function(e) {
+    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+    // Find the dfn element or panel, if any, that was clicked on.
+    var el = e.target;
+    var target;
+    var hitALink = false;
+    while(el.parentElement) {
+        if(el.tagName == "A") {
+            // Clicking on a link in a <dfn> shouldn't summon the panel
+            hitALink = true;
+        }
+        if(el.classList.contains("dfn-paneled")) {
+            target = "dfn";
+            break;
+        }
+        if(el.classList.contains("dfn-panel")) {
+            target = "dfn-panel";
+            break;
+        }
+        el = el.parentElement;
+    }
+    if(target != "dfn-panel") {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+            el.classList.remove("on");
+            el.classList.remove("activated");
+        });
+    }
+    if(target == "dfn" && !hitALink) {
+        // open the panel
+        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+        if(dfnPanel) {
+            dfnPanel.classList.add("on");
+            var rect = el.getBoundingClientRect();
+            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+            dfnPanel.style.top = window.scrollY + rect.top + "px";
+            var panelRect = dfnPanel.getBoundingClientRect();
+            var panelWidth = panelRect.right - panelRect.left;
+            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                // Reposition, because the panel is overflowing
+                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+            }
+        } else {
+            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+        }
+    } else if(target == "dfn-panel") {
+        // Switch it to "activated" state, which pins it.
+        el.classList.add("activated");
+        el.style.left = null;
+        el.style.top = null;
+    }
+
+});
+</script>
