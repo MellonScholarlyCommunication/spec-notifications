@@ -1,0 +1,26 @@
+{
+    "@context": "https://www.w3.org/ns/activitystreams",
+    "summary": "Bob created an artefact",
+    "type": "Create",
+    "id": "http://example.org/activities/1",
+    "actor": {
+      "id": "http://example.org/profiles/bob",
+      "type": ["Person"],
+      "inbox": "http://example.org/profiles/joe#inbox",
+      "name": "Bob"   
+    },
+    "target": {
+      "id": "http://example.org/profiles/alice",
+      "type": ["Person"],
+      "inbox": "http://example.org/profiles/alice#inbox",
+      "name": "Alice"   
+    },
+    "object": "http://example.org/artefacts/1",
+    "origin": {
+      "id": "http://example.org/Adlib",
+      "type": "Application",
+      "name": "Dashboard of Bob" 
+    },
+    "published": "2014-09-30T12:34:56Z"
+  }
+  
