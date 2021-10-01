@@ -138,8 +138,8 @@ A payload is uniquely identified, indicates the type of activity it is describin
 It also describes the parties involved:
 
 - the actor who performed the activity (the <dfn>actor</dfn>);
-- the actor who is supposed to receive the notification (the <dfn>target</dfn>);
-- the software or [=actor=] who was responsible for sending the notification (the <dfn>origin</dfn>);
+- the intended [[ldn#receiver]]; ie. the actor who is supposed to receive the notification (the <dfn>target</dfn>);
+- the [[ldn#sender]]; ie. software or [=actor=] who was responsible for sending the notification (the <dfn>origin</dfn>);
 - the artefact or former activity that this activity is about (the <dfn>object</dfn>).
 
 The minimal example below illustrates an interaction between the two [=human actors=] Bob and Alice.
@@ -223,28 +223,76 @@ There are two identifiers who operate at the level of the notification:
 - the <dfn>notification identifier</dfn>, which is the minted [[URL]] at the end of the target actor as part of the [=inbox=]; and
 - the <dfn>activity identifier</dfn>, which is the [[IRI]] enclosed in the notification payload as value of the `id` property in the activity description.
 
-A sender
+When linking to an activity inside a notification, for instance in a reply, one MUST always use the [=activity identifier=]. 
+The [=notification identifier=] MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was origally posted by the [[ldn#sender]].
+A [[ldn#sender]] SHOULD define an [=activity identifier=] for every notification. 
+The [[ldn#receiver]] MUST NOT define or alter the [=activity identifier=] of a received notification.
+He MAY mint any [=notification identifier=], which in most cases, is a derivative of the [=inbox=] resource [[URL]], but can be any [[URL]] of choice.
 
-Issue: complete this section
+## The object of an activity
+
+All [=activities=] MUST contain a [=object=] using the `as:object` predicate.
+Depending on the activity type, the [=object=] can refer to an [=artefact=] or an [=activity=].
+
+Some activities directly impact or refer to an artefact.
+Hence, if an [=activity=] is of type `as:Create`,`as:Remove`,`as:Update`,`as:Offer`, or `as:Announce`,
+the object MUST describe the [=artefact=] on which the activity has effect.
+An artefact MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types]].
+Additionally, an artefact SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).
+
+<div class=example>
+Example of a document as artefact:
+
+``` json
+{
+  "@context": "https://www.w3.org/ns/activitystreams/",
+  "id": "https://example.org/publications/1",
+  "type": ["Document"],
+  "name": "Dataset about WOII"    
+}
+```
+</div>
+
+Some activities can only exist because of a prior activity, such as a response.
+Hence, if an [=activity=] is of type `as:Reject`, `as:Accept`, or `as:Undo`, the object MUST be another [=activity=] with type `as:Activity`.
+In case of `as:Reject` and `as:Accept`, the object SHOULD be an activity typed as `as:Offer`.
+
+<div class=example>
+Example of an Offer as object:
+
+``` json
+{
+  "@context": "https://www.w3.org/ns/activitystreams/",
+  "id": "https://example.org/offers",
+  "type": ["Offer"],
+  "name": "Dataset about WOII"    
+}
+```
+</div>
+
+Issue(17): can artefacts be rejected?
+
+An [=object=] MUST contain an identifier, which must be an [[URI]].
 
 
 
-
-We distinguish two ide
-
-
-- The client creates the activity @id.
-- The receiver keeps the activity @id as-is.
-- The receiver can mint any notification identifier, this identifier can have a relation with the activity identifier or just be a random URL.
-
-## Object
-
-The object is always another [=activity=].
-
- The object is always an [=artefact=].
 
 
 Issue: iets zeggen over object Identification en dereferencability
+
+
+## Interpreting dates
+
+
+
+
+
+
+
+ 
+
+
+
 
 
 
@@ -350,28 +398,6 @@ Example of an organization as actor:
 ```
 </div>
 
-## Artefacts
-
-The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types]], but it SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).  
-
-Issue: Add some more information on how application domains can describe the artefact further.
-
-<div class=example>
-Example of a Dataset as artefact:
-
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "id": "https://www.kb.nl/datasets/1",
-  "type": ["Document", "schema:Dataset"],
-  "name": "Dataset about WOII"    
-}
-```
-</div>
 
 Payloads {#payloads}
 ===========

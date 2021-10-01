@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="00795a0cacf365957ea7049bd4778ee41c21d375" name="document-revision">
+  <meta content="cca240af92926915fdfe8058e583aee9b22e6fda" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1501,7 +1501,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">List of notifications</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-09-28">28 September 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-01">1 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1519,7 +1519,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 28 September 2021,
+In addition, as of 1 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1547,17 +1547,17 @@ Parts of this work may be from another specification document.  If so, those par
      <ol class="toc">
       <li><a href="#types-of-activities"><span class="secno">5.1</span> <span class="content">Types of activities</span></a>
       <li><a href="#identifying-an-activity"><span class="secno">5.2</span> <span class="content">Identifying an activity</span></a>
-      <li><a href="#object①"><span class="secno">5.3</span> <span class="content">Object</span></a>
-      <li><a href="#possible-actors"><span class="secno">5.4</span> <span class="content">Possible actors</span></a>
-      <li><a href="#actors"><span class="secno">5.5</span> <span class="content">Actors</span></a>
-      <li><a href="#identification"><span class="secno">5.6</span> <span class="content">Identification</span></a>
-      <li><a href="#activitytypes"><span class="secno">5.7</span> <span class="content">ActivityTypes</span></a>
+      <li><a href="#the-object-of-an-activity"><span class="secno">5.3</span> <span class="content">The object of an activity</span></a>
+      <li><a href="#interpreting-dates"><span class="secno">5.4</span> <span class="content">Interpreting dates</span></a>
+      <li><a href="#possible-actors"><span class="secno">5.5</span> <span class="content">Possible actors</span></a>
+      <li><a href="#actors"><span class="secno">5.6</span> <span class="content">Actors</span></a>
+      <li><a href="#identification"><span class="secno">5.7</span> <span class="content">Identification</span></a>
+      <li><a href="#activitytypes"><span class="secno">5.8</span> <span class="content">ActivityTypes</span></a>
      </ol>
     <li>
      <a href="#mappings"><span class="secno">6</span> <span class="content">Type mapping</span></a>
      <ol class="toc">
       <li><a href="#actors①"><span class="secno">6.1</span> <span class="content">Actors</span></a>
-      <li><a href="#artefacts"><span class="secno">6.2</span> <span class="content">Artefacts</span></a>
      </ol>
     <li>
      <a href="#payloads"><span class="secno">7</span> <span class="content">Payloads</span></a>
@@ -1676,9 +1676,9 @@ It also describes the parties involved:</p>
     <li data-md>
      <p>the actor who performed the activity (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="actor">actor</dfn>);</p>
     <li data-md>
-     <p>the actor who is supposed to receive the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="target">target</dfn>);</p>
+     <p>the intended <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a>; ie. the actor who is supposed to receive the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="target">target</dfn>);</p>
     <li data-md>
-     <p>the software or <a data-link-type="dfn" href="#actor" id="ref-for-actor">actor</a> who was responsible for sending the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="origin">origin</dfn>);</p>
+     <p>the <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>; ie. software or <a data-link-type="dfn" href="#actor" id="ref-for-actor">actor</a> who was responsible for sending the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="origin">origin</dfn>);</p>
     <li data-md>
      <p>the artefact or former activity that this activity is about (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="object">object</dfn>).</p>
    </ul>
@@ -1770,26 +1770,51 @@ Therefore, an identifier of any kind used MUST be a valid <a data-link-type="bib
    <p>There are two identifiers who operate at the level of the notification:</p>
    <ul>
     <li data-md>
-     <p>the <dfn data-dfn-type="dfn" data-noexport id="notification-identifier">notification identifier<a class="self-link" href="#notification-identifier"></a></dfn>, which is the minted <a data-link-type="biblio" href="#biblio-url">[URL]</a> at the end of the target actor as part of the <a data-link-type="dfn">inbox</a>; and</p>
+     <p>the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="notification-identifier">notification identifier</dfn>, which is the minted <a data-link-type="biblio" href="#biblio-url">[URL]</a> at the end of the target actor as part of the <a data-link-type="dfn">inbox</a>; and</p>
     <li data-md>
-     <p>the <dfn data-dfn-type="dfn" data-noexport id="activity-identifier">activity identifier<a class="self-link" href="#activity-identifier"></a></dfn>, which is the <a data-link-type="biblio" href="#biblio-iri">[IRI]</a> enclosed in the notification payload as value of the <code>id</code> property in the activity description.</p>
+     <p>the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="activity-identifier">activity identifier</dfn>, which is the <a data-link-type="biblio" href="#biblio-iri">[IRI]</a> enclosed in the notification payload as value of the <code>id</code> property in the activity description.</p>
    </ul>
-   <p>A sender</p>
-   <p class="issue" id="issue-f270f122"><a class="self-link" href="#issue-f270f122"></a> complete this section</p>
-   <p>We distinguish two ide</p>
-   <ul>
-    <li data-md>
-     <p>The client creates the activity @id.</p>
-    <li data-md>
-     <p>The receiver keeps the activity @id as-is.</p>
-    <li data-md>
-     <p>The receiver can mint any notification identifier, this identifier can have a relation with the activity identifier or just be a random URL.</p>
-   </ul>
-   <h3 class="heading settled" data-level="5.3" id="object①"><span class="secno">5.3. </span><span class="content">Object</span><a class="self-link" href="#object①"></a></h3>
-   <p>The object is always another <a data-link-type="dfn" href="#activity" id="ref-for-activity">activity</a>.</p>
-   <p>The object is always an <a data-link-type="dfn">artefact</a>.</p>
+   <p>When linking to an activity inside a notification, for instance in a reply, one MUST always use the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier">activity identifier</a>.
+The <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier">notification identifier</a> MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was origally posted by the <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>.
+A <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a> SHOULD define an <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier①">activity identifier</a> for every notification. 
+The <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> MUST NOT define or alter the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier②">activity identifier</a> of a received notification.
+He MAY mint any <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier①">notification identifier</a>, which in most cases, is a derivative of the <a data-link-type="dfn">inbox</a> resource <a data-link-type="biblio" href="#biblio-url">[URL]</a>, but can be any <a data-link-type="biblio" href="#biblio-url">[URL]</a> of choice.</p>
+   <h3 class="heading settled" data-level="5.3" id="the-object-of-an-activity"><span class="secno">5.3. </span><span class="content">The object of an activity</span><a class="self-link" href="#the-object-of-an-activity"></a></h3>
+   <p>All <a data-link-type="dfn" href="#activity" id="ref-for-activity">activities</a> MUST contain a <a data-link-type="dfn" href="#object" id="ref-for-object①">object</a> using the <code>as:object</code> predicate.
+Depending on the activity type, the <a data-link-type="dfn" href="#object" id="ref-for-object②">object</a> can refer to an <a data-link-type="dfn">artefact</a> or an <a data-link-type="dfn" href="#activity" id="ref-for-activity①">activity</a>.</p>
+   <p>Some activities directly impact or refer to an artefact.
+Hence, if an <a data-link-type="dfn" href="#activity" id="ref-for-activity②">activity</a> is of type <code>as:Create</code>,<code>as:Remove</code>,<code>as:Update</code>,<code>as:Offer</code>, or <code>as:Announce</code>,
+the object MUST describe the <a data-link-type="dfn">artefact</a> on which the activity has effect.
+An artefact MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types]].
+Additionally, an artefact SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
+   <div class="example" id="example-9e383954">
+    <a class="self-link" href="#example-9e383954"></a> Example of a document as artefact: 
+<pre class="language-json highlight"><c- p>{</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"https://example.org/publications/1"</c-><c- p>,</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Document"</c-><c- p>],</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
+<c- p>}</c->
+</pre>
+   </div>
+   <p>Some activities can only exist because of a prior activity, such as a response.
+Hence, if an <a data-link-type="dfn" href="#activity" id="ref-for-activity③">activity</a> is of type <code>as:Reject</code>, <code>as:Accept</code>, or <code>as:Undo</code>, the object MUST be another <a data-link-type="dfn" href="#activity" id="ref-for-activity④">activity</a> with type <code>as:Activity</code>.
+In case of <code>as:Reject</code> and <code>as:Accept</code>, the object SHOULD be an activity typed as <code>as:Offer</code>.</p>
+   <div class="example" id="example-018fd5fd">
+    <a class="self-link" href="#example-018fd5fd"></a> Example of an Offer as object: 
+<pre class="language-json highlight"><c- p>{</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"https://example.org/offers"</c-><c- p>,</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Offer"</c-><c- p>],</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
+<c- p>}</c->
+</pre>
+   </div>
+   <p class="issue" id="issue-ac129ba3"><a class="self-link" href="#issue-ac129ba3"></a> can artefacts be rejected? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/17">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/17></a></p>
+   <p>An <a data-link-type="dfn" href="#object" id="ref-for-object③">object</a> MUST contain an identifier, which must be an <a data-link-type="biblio" href="#biblio-uri">[URI]</a>.</p>
    <p class="issue" id="issue-83ece189"><a class="self-link" href="#issue-83ece189"></a> iets zeggen over object Identification en dereferencability</p>
-   <h3 class="heading settled" data-level="5.4" id="possible-actors"><span class="secno">5.4. </span><span class="content">Possible actors</span><a class="self-link" href="#possible-actors"></a></h3>
+   <h3 class="heading settled" data-level="5.4" id="interpreting-dates"><span class="secno">5.4. </span><span class="content">Interpreting dates</span><a class="self-link" href="#interpreting-dates"></a></h3>
+   <h3 class="heading settled" data-level="5.5" id="possible-actors"><span class="secno">5.5. </span><span class="content">Possible actors</span><a class="self-link" href="#possible-actors"></a></h3>
    <p class="issue" id="issue-a7f44f67"><a class="self-link" href="#issue-a7f44f67"></a> continue rationale</p>
    <p>,
 which are performed by a  and 
@@ -1800,11 +1825,11 @@ Actors are either <a href="http://mellonscholarlycommunication.github.io/spec-ov
 By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
 An activity that somehow impact an artefact’s lifecycle can result in a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact-lifecycle-event">lifecycle event</a>.</p>
    <p>...some intro...</p>
-   <h3 class="heading settled" data-level="5.5" id="actors"><span class="secno">5.5. </span><span class="content">Actors</span><a class="self-link" href="#actors"></a></h3>
-   <h3 class="heading settled" data-level="5.6" id="identification"><span class="secno">5.6. </span><span class="content">Identification</span><a class="self-link" href="#identification"></a></h3>
+   <h3 class="heading settled" data-level="5.6" id="actors"><span class="secno">5.6. </span><span class="content">Actors</span><a class="self-link" href="#actors"></a></h3>
+   <h3 class="heading settled" data-level="5.7" id="identification"><span class="secno">5.7. </span><span class="content">Identification</span><a class="self-link" href="#identification"></a></h3>
    <p>client chooses id
 server mag geen id geven indien niet aanwezig</p>
-   <h3 class="heading settled" data-level="5.7" id="activitytypes"><span class="secno">5.7. </span><span class="content">ActivityTypes</span><a class="self-link" href="#activitytypes"></a></h3>
+   <h3 class="heading settled" data-level="5.8" id="activitytypes"><span class="secno">5.8. </span><span class="content">ActivityTypes</span><a class="self-link" href="#activitytypes"></a></h3>
    <p>in a decentralized artefact exchange network</p>
    <ul>
     <li data-md>
@@ -1857,23 +1882,6 @@ The actor MAY have a name using <code>as:name</code>.</p>
   <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
   <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
   <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
-<c- p>}</c->
-</pre>
-   </div>
-   <h3 class="heading settled" data-level="6.2" id="artefacts"><span class="secno">6.2. </span><span class="content">Artefacts</span><a class="self-link" href="#artefacts"></a></h3>
-   <p>The object of an activity MUST describe the artefact on which the activity has effect.
-It MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the [[activitystreams-vocabulary#object-types | ActivityStreams Object Types]], but it SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
-   <p class="issue" id="issue-78cdca70"><a class="self-link" href="#issue-78cdca70"></a> Add some more information on how application domains can describe the artefact further.</p>
-   <div class="example" id="example-0743685f">
-    <a class="self-link" href="#example-0743685f"></a> Example of a Dataset as artefact: 
-<pre class="language-json highlight"><c- p>{</c->
-  <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
-    <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
-    <c- p>{</c-> <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-> <c- p>}</c->
-  <c- p>],</c->
-  <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
-  <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Document"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
-  <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
 <c- p>}</c->
 </pre>
    </div>
@@ -2524,6 +2532,8 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
    <dd>Sarven Capadisli; Amy Guy. <a href="https://www.w3.org/TR/ldn/">Linked Data Notifications</a>. 2 May 2017. REC. URL: <a href="https://www.w3.org/TR/ldn/">https://www.w3.org/TR/ldn/</a>
    <dt id="biblio-schema-org">[SCHEMA-ORG]
    <dd>W3C Schema.org Community Group. <a href="https://schema.org/">Schema.org</a>. 6.0. URL: <a href="https://schema.org/">https://schema.org/</a>
+   <dt id="biblio-uri">[URI]
+   <dd>T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
    <dt id="biblio-url">[URL]
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-webid">[WEBID]
@@ -2533,17 +2543,16 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
   <div style="counter-reset:issue">
    <div class="issue"> add diagram<a href="#issue-810d8be5"> ↵ </a></div>
    <div class="issue"> add diagram<a href="#issue-810d8be5①"> ↵ </a></div>
-   <div class="issue"> complete this section<a href="#issue-f270f122"> ↵ </a></div>
+   <div class="issue"> can artefacts be rejected? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/17">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/17></a><a href="#issue-ac129ba3"> ↵ </a></div>
    <div class="issue"> iets zeggen over object Identification en dereferencability<a href="#issue-83ece189"> ↵ </a></div>
    <div class="issue"> continue rationale<a href="#issue-a7f44f67"> ↵ </a></div>
    <div class="issue"> Explain what the implications are between Service, Person, and Organization<a href="#issue-b0766d85"> ↵ </a></div>
-   <div class="issue"> Add some more information on how application domains can describe the artefact further.<a href="#issue-78cdca70"> ↵ </a></div>
    <div class="issue"> Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/1></a><a href="#issue-de9c75aa"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="activity">
    <b><a href="#activity">#activity</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-activity">5.3. Object</a>
+    <li><a href="#ref-for-activity">5.3. The object of an activity</a> <a href="#ref-for-activity①">(2)</a> <a href="#ref-for-activity②">(3)</a> <a href="#ref-for-activity③">(4)</a> <a href="#ref-for-activity④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="actor">
@@ -2568,6 +2577,19 @@ The property <code>instrument</code> MAY be used to indicate whether a Dashboard
    <b><a href="#object">#object</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-object">5. Activities</a>
+    <li><a href="#ref-for-object①">5.3. The object of an activity</a> <a href="#ref-for-object②">(2)</a> <a href="#ref-for-object③">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="notification-identifier">
+   <b><a href="#notification-identifier">#notification-identifier</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-notification-identifier">5.2. Identifying an activity</a> <a href="#ref-for-notification-identifier①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="activity-identifier">
+   <b><a href="#activity-identifier">#activity-identifier</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-activity-identifier">5.2. Identifying an activity</a> <a href="#ref-for-activity-identifier①">(2)</a> <a href="#ref-for-activity-identifier②">(3)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
