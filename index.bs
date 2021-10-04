@@ -111,7 +111,9 @@ This results in two possible communication patterns:
 
 ## One-way pattern
 
-Issue: add diagram
+<pre class='include'>
+path: images/one-way.svg
+</pre>
 
 The sender of a notification should not expect a direct reply from the receiver. 
 This style of communication is more informative. 
@@ -119,7 +121,9 @@ A one-way pattern is used when actors need to be made aware of an activity, but 
 
 ## Request-response pattern
 
-Issue: add diagram
+<pre class='include'>
+path: images/request-response.svg
+</pre>
 
 The sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
 A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
@@ -293,7 +297,7 @@ it is not directly delivered to a fellow [[spec-overview#actor|network actor]], 
 Therefore, the notification's payload should indicate what [[spec-overview#actor|network actor]] it intends to address.
 Thus, an activity MUST contain a [=target=] using the `as:target` predicate.
 
-Accordingly, the notification's payload should also indicate which [[spec-overview#actor|network actor]] has sent the notification.
+Accordingly, the payload should also indicate which [[spec-overview#actor|network actor]] performed the activity.
 Hence, an activity MUST also contain an [=actor=] using the `as:actor` predicate.
 
 Both the [=target=] and [=actor=] MUST be identifyable with an HTTP URI, which SHOULD be a [[webid|WebID]].
@@ -308,14 +312,15 @@ The [=actor=] SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where 
 The [=target=] MAY have such `ldp:inbox`.
 Both the [=target=] and [=actor=] MAY have a name using `as:name`.
 
-In case the sending of the notification was delegated to a third-party (eg. a software application such as the [=orchestrator=]),
-an activity SHOULD also contain an [=origin=] using the `as:origin` predicate to refer to that third-party.
-The [=origin=] MAY also have an `ldp:inbox` that refers to an inbox [[URI]] where the sender can be reached.
+Lastly, a notification can also provide more information on how the notification got sent.
+Therefore, an activity SHOULD provide an [=origin=] using the `as:origin` predicate.
+It refers to the software component, such as the [=orchestrator=], that was responsible for sending the activity over the network.
+The [=origin=] MAY also have an `ldp:inbox` that refers to an inbox [[URI]] where it can be reached.
 
 When a [[ldn#receiver]] intends to respond to a notification, thus switching to the role of [[ldn#sender]],
 it should be able to derive a valid [=inbox=] URL from the notification payload.
 In this case, it MUST use the value of `ldp:inbox` in the [=actor=] description.
-If the [=actor=] does not contain a `ldp:inbox`, the response notification MUST be sent to the [=origin=]'s' `ldp:inbox`. 
+If the [=actor=] does not contain a `ldp:inbox`, the response notification MUST be sent to the [=origin=]'s `ldp:inbox`. 
 
 ## Interpreting dates
 
@@ -325,6 +330,8 @@ Publication and update values MUST always refer to the [=activity=] and MUST NOT
 
 One-way notification patterns
 =============================
+
+This section covers notification patterns using activity types `as:Create`, `as:Remove`, `as:Update`.
 
 ## Maintainer created a new artefact
 
@@ -388,19 +395,28 @@ show:
 Request-response notification patterns
 ======================================
 
-A response is a new notification that can be direct - the notification is about the former notification, or indirect - the notification is about  
+This section covers notification patterns using activity types `as:Offer`, `as:Reject`, `as:Accept`, `as:Undo`, and `as:Announce`.
+These patterns are used in interactions where a sender sends a notification to a receiver (<dfn>request notification</dfn>) and eventually expects to receive a new notification as reply (<dfn>response notification</dfn>).
+
+Issue: fix this section
+
+A request notification offers an [=artefact=] to an actor to perform a service.
+The enclosed activity MUST be of type `as:Offer`.
+
+The activity type ofResponse notifications
+
+
+
+can be .
+Response notMUST include two additional predicates:
+
+- `as:context`: points to the original artefact in a notification thread, ie. the [=object=] of the request notification;
+- `as:inReplyTo`: points to the [=activity identifier=] of the request notification to which an this activity is a response. The `as:inReplyTo` is a URL of the previous notification (without further inline predicate)
+
 
 ## A service request with direct response
 
-as:context
-
-    We discussed the usage of as:context in scholarly communication contexts to point to the original artefact in an notification thread
-        E.g. Alice send an Offer about pub1 to a Review Service...further notifications that are sent back and forth can contain in as:context the URL of pub1 (without further inline predicates)
-
-as:inReplyTo
-
-    We discussed the usage of as:inReplyTo in scholarly communcation context to point to a previous notification to which an Activity is a response. The as:inReplyTo is a URL of the previous notification (without further inline predicate)
-
+A direct response is about the activity it is replying to and MUST be of type `as:Reject`, `as:Accept` or `as:Undo`.
 
 A maintainer offers an artefact to a Service Hub in order to perform a service.
 The property `origin` MAY be used to indicate whether a Dashboard or an Orchestrator was involved in performing the activity and sending then notification. 
@@ -431,6 +447,9 @@ show:
 </pre>
 
 ## A service request with indirect response
+
+An indirect response is about an artifact that is somehow related to the former activity.
+Response notifications MUST be of type `as:Reject`, `as:Accept`, `as:Undo`, or `as:Announce`.
 
 An actor draws attention from another actor to an artefact. 
 Either a maintainer announces the existence of an artefact to a Service Hub or a Service Hub informs a Maintainer about processing an artefact.
