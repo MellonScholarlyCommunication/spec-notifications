@@ -1,0 +1,25 @@
+{
+    "@context": [
+      "https://www.w3.org/ns/activitystreams/", 
+      { "schema": "http://schema.org/" }
+    ],
+    "summary": "Koninklijke Bibliotheek updates the Alba dataset",
+    "type": "Update",
+    "actor": {
+      "id": "https://www.kb.nl#me",
+      "type": ["Organization", "schema:Organization"],
+      "inbox": "https://www.kb.nl#inbox",
+      "name": "Koninklijke Bibliotheek"    
+    },
+    "object": {
+      "id": "https://www.kb.nl/datasets/1",
+      "type": ["Object", "schema:Dataset"],
+      "name": "Dataset about WOII"    
+    },
+    "origin": {
+      "id": "http://example.org/Adlib",
+      "type": "schema:SoftwareApplication"
+    },
+    "published": "2021-02-15T12:34:56Z",
+    "updated": "2021-01-28T19:56:20.114Z"
+  }

@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="9acbf0c3acd0914b416bea2956a165ff8b2eca7a" name="document-revision">
+  <meta content="a3ec20f679c497ce8018de2257ec4ffe8148453c" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1644,12 +1644,221 @@ Depending on the type of interaction,
 an actor takes the role of notification <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a> or <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a>.
 This results in two possible communication patterns:</p>
    <h3 class="heading settled" data-level="4.1" id="one-way-pattern"><span class="secno">4.1. </span><span class="content">One-way pattern</span><a class="self-link" href="#one-way-pattern"></a></h3>
-   <p class="issue" id="issue-810d8be5"><a class="self-link" href="#issue-810d8be5"></a> add diagram</p>
+   <svg content="<mxfile><diagram name=&quot;one-way&quot; id=&quot;908UhZnWfeWfuIsrQv4d&quot;>3VdNc5swEP01PjYDyGByrO00OThj1z407aUjowWUyMgjRGz86yuBMGDIZ/Mxk4tH+6RdtLvv7cgDNNnsLwXextecABs4FtkP0HTgOK5vq18N5CWAnGEJRIKSErJrYEUPYEDLoBklkLYOSs6ZpNs2GPAkgUC2MCwE37WPhZy1v7rFEXSAVYBZF/1FiYxL1HdGNX4FNIqrL9veebmzwdVhk0kaY8J3DQhdDNBEcC7L1WY/AaZrV9XFXy9u59ZyJg9XywNauux6ePWtDPbjJS7HFAQk8m1DozL0PWaZqdcSAqD3IEzOMq8KKXiWENDBrAEa72IqYbXFgd7dKeYoLJYbpixbLUPK2IQzLgpfBDZxYaTwVAp+B42dc2+EsKd2zEVASNifdO6JtO1jLxSHgW9Ailz5mShDy7TP8NdGxt412GCguEGEkcGw4V90jFzXWC1MmV9Q8mGnskAUY43JhYx5xBPMLmp03K59fWbG+dZU/BakzI38cCZ5ux+wp/Kmsf6tQ525xpruTeTCyCsjUeneNI2GlzZrt8Kq/Mr8dFKv6KMqDM9EAI+cc80UwSKCx+Khfl4IYFgqhrcnzVt32e0IawWqhV9GVv7nqcqVy7/8Z3bpzRfkT54Pc8HokTyfoirrJapSxgIEVWmD+E+lFdZpMILTuEjK/gAt+l0t9rbH6ifTm2ux9+NOR4t4zTPZy5gZXqv3T6vLmNEoUetAlUxXeazVRNUL47vZ2FBCSkJBSg94XcTTrdhymsgiG3c8cKdawDyRFSmra3W1ad5CJlL9Amm27WEVPKhZ68zxhqit29J6dh9M7IVOrBOlcuBhmILstO14oddPVb/TyYRLGqpmSMqTTkPVi22rl+oQPD1c1zi4i4qZMM8kowkYnGBxN1deVBa6O7O0LNNyJth6zTRnFjylxSV6iDI7OXAkzPOpdTL51dz3ybBv8vvOGnnvOfkd9+nRP+oZ/d57jX6rK2+Vc4iDrsK/LiHCELwg6CMEGZ2vLesDCfF+fFBm/XernCn1f1Z08Q8=</diagram><diagram name=&quot;request-response&quot; id=&quot;wvXQjPP3Ur-OENx53_RM&quot;>7VnbcptIEP0aPdrFRYD0GAklW1vOxmWlEu1TaoAGJkaMdhhZwl+/DQyCEegSx7a8rn1RTTc9t+4+fXpKA3O63H7iZBV/ZgEkA0MLtgPTHRiGNdLxt1DklcI0hpUi4jSoVHqjmNNHkEpNatc0gEwxFIwlgq5Upc/SFHyh6AjnbKOahSxRd12RCDqKuU+SrvY7DURcaUeG0+j/ABrF9c66Pa6+LEltLG+SxSRgm5bKnA3MKWdMVKPldgpJ4bvaL9biuzubrL5OXNv7y81vkj/vyFW12MdfmbK7AodUPO/StryayGt/QYDukyLjImYRS0kya7QTztZpAMWqGkqNzQ1jK1TqqPwJQuQyF8haMFTFYpnIr7ClYiGnF+O/i/G1Y0nR3ba+uXktpILni3qFQmhPK+RmXinVE6sbFtfaS4gT3pR2GVtzH47YGTKpCY/g2HrDXcog1IAtAQ+J8zgkRNAH9XBEJn20s2sCiwMZ21+IszzkA0nWcqc78AG35Z0EUMO7iamA+YqULthghVBDGdIkmbKE8XKuCXpggYP6THB2D60vY9sxib0LB24sYPuEgHQdKFcZahKmsk7pppQ3LdRLVdwG/Fh7IZ+bl8SWrmDLOBNbmoot49LYGp6JLeOS2Bp2sDUHDOK7QdborQFrfFHSurba0DqOKxRugVO8NvAO1q6tNtr0E1Arpf3FApLF5aX0VwCjcyYYrUuCsW47W2gkHluL3pS5IR42u0qYSUKjFMc++qxw86TAE8V28oP8sKRBUGUUZPSReOV6RSxWjKaivI41GVhuAWGWijorawLuolM2vnKlpt08GbfxUdRq15plmgpy6y7g7EjIxW+Lm7VMWBhmIDqh2p3h6dGzOsHj8M8aMtzMTtAXEw+rqh0Vo5QJGmJgBGVpJ7jYqq+KIRrB6VLrEf8+KgvEl7VIaApSHxB+/wVnUVGCEB1a1N+qQOjFOCny55ZltDxET9Lc7Bnskuf8NNvjAWSBUTDs44GR4Zn2S/KAYZ0mAqeHCOxn4IFP3Pe/ueZXl3z7PIrvftIfj9MrrRP3Sz1e2izgKDSg12xxmAeUnkthAUulAdNpKOOtMcHUzLcLNzCi2yv2MJv/yBfzzau1Zb3Z0X3yYKVFSPzHqeAwEg4C9wpbDWOkUoH+1qnA6aGCbMXSDP7ngpoLCIxCv48LbH8EXviKXIDP71fjgt5ScxkuOPBuPvVsfvEKfl5lPqPS/24vv1c26uyx9zqJ/bSoziVnNZnxgXOSt8xknT28z7B/n49n2qvmOKgO8NQ61xsJvVPn3sF75TBEj7xXDHuovld+k6Py3gnPwljHMNWOJDovJH43mO+Xk8IQbL+XkwJn7GnaS3LSXlXpeZ5Yz0NJKDZ/+1Tp0/x3Zs7+BQ==</diagram></mxfile>" height="171px" version="1.1" viewBox="-0.5 -0.5 401 171" width="401px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <defs></defs>
+    <g>
+     <rect fill="#e1d5e7" height="70" pointer-events="all" stroke="#9673a6" width="80" x="320" y="100"></rect>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 135px; margin-left: 321px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Receiver</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="360" y="139">Receiver</text>
+      </switch>
+     </g>
+     <path d="M 80 135 L 313.63 135" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 318.88 135 L 311.88 138.5 L 313.63 135 L 311.88 131.5 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <rect fill="#e1d5e7" height="70" pointer-events="all" stroke="#9673a6" width="80" x="0" y="100"></rect>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 135px; margin-left: 1px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Sender</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="40" y="139">Sender</text>
+      </switch>
+     </g>
+     <path d="M 170 130 L 150 130 L 150 30 L 163.63 30" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 168.88 30 L 161.88 33.5 L 163.63 30 L 161.88 26.5 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 63px; margin-left: 150px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">about</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="150" y="66">about</text>
+      </switch>
+     </g>
+     <path d="M 170 100 L 225 100 L 240 115 L 240 160 L 170 160 L 170 100 Z" fill="#d5e8d4" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
+     <path d="M 225 100 L 225 115 L 240 115 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 225 100 L 225 115 L 240 115" fill="none" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 130px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">notification</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="134">notification</text>
+      </switch>
+     </g>
+     <path d="M 170 0 L 225 0 L 240 15 L 240 60 L 170 60 L 170 0 Z" fill="#ffe6cc" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
+     <path d="M 225 0 L 225 15 L 240 15 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 225 0 L 225 15 L 240 15" fill="none" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 30px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">artefact</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="34">artefact</text>
+      </switch>
+     </g>
+    </g>
+    <switch>
+     <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+     <a target="_blank" transform="translate(0,-5)" href="https://www.diagrams.net/doc/faq/svg-export-text-problems">
+      <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+     </a>
+    </switch>
+   </svg>
    <p>The sender of a notification should not expect a direct reply from the receiver.
 This style of communication is more informative. 
 A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.</p>
    <h3 class="heading settled" data-level="4.2" id="request-response-pattern"><span class="secno">4.2. </span><span class="content">Request-response pattern</span><a class="self-link" href="#request-response-pattern"></a></h3>
-   <p class="issue" id="issue-810d8be5①"><a class="self-link" href="#issue-810d8be5①"></a> add diagram</p>
+   <svg content="<mxfile><diagram name=&quot;one-way&quot; id=&quot;908UhZnWfeWfuIsrQv4d&quot;>3VdNc5swEP01PjYDyGByrO00OThj1z407aUjowWUyMgjRGz86yuBMGDIZ/Mxk4tH+6RdtLvv7cgDNNnsLwXextecABs4FtkP0HTgOK5vq18N5CWAnGEJRIKSErJrYEUPYEDLoBklkLYOSs6ZpNs2GPAkgUC2MCwE37WPhZy1v7rFEXSAVYBZF/1FiYxL1HdGNX4FNIqrL9veebmzwdVhk0kaY8J3DQhdDNBEcC7L1WY/AaZrV9XFXy9u59ZyJg9XywNauux6ePWtDPbjJS7HFAQk8m1DozL0PWaZqdcSAqD3IEzOMq8KKXiWENDBrAEa72IqYbXFgd7dKeYoLJYbpixbLUPK2IQzLgpfBDZxYaTwVAp+B42dc2+EsKd2zEVASNifdO6JtO1jLxSHgW9Ailz5mShDy7TP8NdGxt412GCguEGEkcGw4V90jFzXWC1MmV9Q8mGnskAUY43JhYx5xBPMLmp03K59fWbG+dZU/BakzI38cCZ5ux+wp/Kmsf6tQ525xpruTeTCyCsjUeneNI2GlzZrt8Kq/Mr8dFKv6KMqDM9EAI+cc80UwSKCx+Khfl4IYFgqhrcnzVt32e0IawWqhV9GVv7nqcqVy7/8Z3bpzRfkT54Pc8HokTyfoirrJapSxgIEVWmD+E+lFdZpMILTuEjK/gAt+l0t9rbH6ifTm2ux9+NOR4t4zTPZy5gZXqv3T6vLmNEoUetAlUxXeazVRNUL47vZ2FBCSkJBSg94XcTTrdhymsgiG3c8cKdawDyRFSmra3W1ad5CJlL9Amm27WEVPKhZ68zxhqit29J6dh9M7IVOrBOlcuBhmILstO14oddPVb/TyYRLGqpmSMqTTkPVi22rl+oQPD1c1zi4i4qZMM8kowkYnGBxN1deVBa6O7O0LNNyJth6zTRnFjylxSV6iDI7OXAkzPOpdTL51dz3ybBv8vvOGnnvOfkd9+nRP+oZ/d57jX6rK2+Vc4iDrsK/LiHCELwg6CMEGZ2vLesDCfF+fFBm/XernCn1f1Z08Q8=</diagram><diagram name=&quot;request-response&quot; id=&quot;wvXQjPP3Ur-OENx53_RM&quot;>7VnbcptIEP0aPdrFRYD0GAklW1vOxmWlEu1TaoAGJkaMdhhZwl+/DQyCEegSx7a8rn1RTTc9t+4+fXpKA3O63H7iZBV/ZgEkA0MLtgPTHRiGNdLxt1DklcI0hpUi4jSoVHqjmNNHkEpNatc0gEwxFIwlgq5Upc/SFHyh6AjnbKOahSxRd12RCDqKuU+SrvY7DURcaUeG0+j/ABrF9c66Pa6+LEltLG+SxSRgm5bKnA3MKWdMVKPldgpJ4bvaL9biuzubrL5OXNv7y81vkj/vyFW12MdfmbK7AodUPO/StryayGt/QYDukyLjImYRS0kya7QTztZpAMWqGkqNzQ1jK1TqqPwJQuQyF8haMFTFYpnIr7ClYiGnF+O/i/G1Y0nR3ba+uXktpILni3qFQmhPK+RmXinVE6sbFtfaS4gT3pR2GVtzH47YGTKpCY/g2HrDXcog1IAtAQ+J8zgkRNAH9XBEJn20s2sCiwMZ21+IszzkA0nWcqc78AG35Z0EUMO7iamA+YqULthghVBDGdIkmbKE8XKuCXpggYP6THB2D60vY9sxib0LB24sYPuEgHQdKFcZahKmsk7pppQ3LdRLVdwG/Fh7IZ+bl8SWrmDLOBNbmoot49LYGp6JLeOS2Bp2sDUHDOK7QdborQFrfFHSurba0DqOKxRugVO8NvAO1q6tNtr0E1Arpf3FApLF5aX0VwCjcyYYrUuCsW47W2gkHluL3pS5IR42u0qYSUKjFMc++qxw86TAE8V28oP8sKRBUGUUZPSReOV6RSxWjKaivI41GVhuAWGWijorawLuolM2vnKlpt08GbfxUdRq15plmgpy6y7g7EjIxW+Lm7VMWBhmIDqh2p3h6dGzOsHj8M8aMtzMTtAXEw+rqh0Vo5QJGmJgBGVpJ7jYqq+KIRrB6VLrEf8+KgvEl7VIaApSHxB+/wVnUVGCEB1a1N+qQOjFOCny55ZltDxET9Lc7Bnskuf8NNvjAWSBUTDs44GR4Zn2S/KAYZ0mAqeHCOxn4IFP3Pe/ueZXl3z7PIrvftIfj9MrrRP3Sz1e2izgKDSg12xxmAeUnkthAUulAdNpKOOtMcHUzLcLNzCi2yv2MJv/yBfzzau1Zb3Z0X3yYKVFSPzHqeAwEg4C9wpbDWOkUoH+1qnA6aGCbMXSDP7ngpoLCIxCv48LbH8EXviKXIDP71fjgt5ScxkuOPBuPvVsfvEKfl5lPqPS/24vv1c26uyx9zqJ/bSoziVnNZnxgXOSt8xknT28z7B/n49n2qvmOKgO8NQ61xsJvVPn3sF75TBEj7xXDHuovld+k6Py3gnPwljHMNWOJDovJH43mO+Xk8IQbL+XkwJn7GnaS3LSXlXpeZ5Yz0NJKDZ/+1Tp0/x3Zs7+BQ==</diagram></mxfile>" height="291px" version="1.1" viewBox="-0.5 -0.5 401 291" width="401px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <defs></defs>
+    <g>
+     <path d="M 320 242.5 L 86.37 242.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 81.12 242.5 L 88.12 239 L 86.37 242.5 L 88.12 246 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <rect fill="#e1d5e7" height="190" pointer-events="all" stroke="#9673a6" width="80" x="320" y="100"></rect>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 195px; margin-left: 321px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Receiver</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="360" y="199">Receiver</text>
+      </switch>
+     </g>
+     <path d="M 80 147.5 L 313.63 147.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 318.88 147.5 L 311.88 151 L 313.63 147.5 L 311.88 144 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <rect fill="#e1d5e7" height="190" pointer-events="all" stroke="#9673a6" width="80" x="0" y="100"></rect>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 195px; margin-left: 1px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Sender</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="40" y="199">Sender</text>
+      </switch>
+     </g>
+     <path d="M 205 210 L 205 166.37" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 205 161.12 L 208.5 168.12 L 205 166.37 L 201.5 168.12 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 185px; margin-left: 208px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">about</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="208" y="188">about</text>
+      </switch>
+     </g>
+     <path d="M 170 100 L 225 100 L 240 115 L 240 160 L 170 160 L 170 100 Z" fill="#d5e8d4" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
+     <path d="M 225 100 L 225 115 L 240 115 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 225 100 L 225 115 L 240 115" fill="none" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 130px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">request<br>notification</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="134">request...</text>
+      </switch>
+     </g>
+     <path d="M 240 225 L 260 225 L 260 37.5 L 236.37 37.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 231.12 37.5 L 238.12 34 L 236.37 37.5 L 238.12 41 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 190px; margin-left: 262px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">context</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="262" y="193">context</text>
+      </switch>
+     </g>
+     <path d="M 170 210 L 225 210 L 240 225 L 240 270 L 170 270 L 170 210 Z" fill="#dae8fc" pointer-events="all" stroke="#6c8ebf" stroke-miterlimit="10"></path>
+     <path d="M 225 210 L 225 225 L 240 225 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 225 210 L 225 225 L 240 225" fill="none" pointer-events="all" stroke="#6c8ebf" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 240px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">response<br>notification</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="244">response...</text>
+      </switch>
+     </g>
+     <path d="M 170 130 L 160 130 L 160 30 L 173.63 30" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 178.88 30 L 171.88 33.5 L 173.63 30 L 171.88 26.5 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 60px; margin-left: 160px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">about</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="160" y="63">about</text>
+      </switch>
+     </g>
+     <path d="M 180 0 L 215 0 L 230 15 L 230 60 L 180 60 L 180 0 Z" fill="#ffe6cc" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
+     <path d="M 215 0 L 215 15 L 230 15 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 215 0 L 215 15 L 230 15" fill="none" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 48px; height: 1px; padding-top: 30px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">artefact</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="34">artefact</text>
+      </switch>
+     </g>
+    </g>
+    <switch>
+     <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+     <a target="_blank" transform="translate(0,-5)" href="https://www.diagrams.net/doc/faq/svg-export-text-problems">
+      <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+     </a>
+    </switch>
+   </svg>
    <p>The sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
 A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
 and what the resulting action will be.</p>
@@ -1817,7 +2026,7 @@ This can be identified by comparing the last-modified date of the HTTP response 
 it is not directly delivered to a fellow <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a>, but to a related <a data-link-type="dfn">inbox</a>.
 Therefore, the notification’s payload should indicate what <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> it intends to address.
 Thus, an activity MUST contain a <a data-link-type="dfn" href="#target" id="ref-for-target①">target</a> using the <code>as:target</code> predicate.</p>
-   <p>Accordingly, the notification’s payload should also indicate which <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> has sent the notification.
+   <p>Accordingly, the payload should also indicate which <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> performed the activity.
 Hence, an activity MUST also contain an <a data-link-type="dfn" href="#actor" id="ref-for-actor②">actor</a> using the <code>as:actor</code> predicate.</p>
    <p>Both the <a data-link-type="dfn" href="#target" id="ref-for-target②">target</a> and <a data-link-type="dfn" href="#actor" id="ref-for-actor③">actor</a> MUST be identifyable with an HTTP URI, which SHOULD be a <a data-link-type="biblio" href="#biblio-webid">WebID</a>.
 They MUST be of the following type:</p>
@@ -1831,18 +2040,20 @@ They MUST be of the following type:</p>
    <p>The <a data-link-type="dfn" href="#actor" id="ref-for-actor④">actor</a> SHOULD have an <code>ldp:inbox</code> that refers to the inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where the actor can be reached.
 The <a data-link-type="dfn" href="#target" id="ref-for-target③">target</a> MAY have such <code>ldp:inbox</code>.
 Both the <a data-link-type="dfn" href="#target" id="ref-for-target④">target</a> and <a data-link-type="dfn" href="#actor" id="ref-for-actor⑤">actor</a> MAY have a name using <code>as:name</code>.</p>
-   <p>In case the sending of the notification was delegated to a third-party (eg. a software application such as the <a data-link-type="dfn">orchestrator</a>),
-an activity SHOULD also contain an <a data-link-type="dfn" href="#origin" id="ref-for-origin①">origin</a> using the <code>as:origin</code> predicate to refer to that third-party.
-The <a data-link-type="dfn" href="#origin" id="ref-for-origin②">origin</a> MAY also have an <code>ldp:inbox</code> that refers to an inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where the sender can be reached.</p>
+   <p>Lastly, a notification can also provide more information on how the notification got sent.
+Therefore, an activity SHOULD provide an <a data-link-type="dfn" href="#origin" id="ref-for-origin①">origin</a> using the <code>as:origin</code> predicate.
+It refers to the software component, such as the <a data-link-type="dfn">orchestrator</a>, that was responsible for sending the activity over the network.
+The <a data-link-type="dfn" href="#origin" id="ref-for-origin②">origin</a> MAY also have an <code>ldp:inbox</code> that refers to an inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where it can be reached.</p>
    <p>When a <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> intends to respond to a notification, thus switching to the role of <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>,
 it should be able to derive a valid <a data-link-type="dfn">inbox</a> URL from the notification payload.
 In this case, it MUST use the value of <code>ldp:inbox</code> in the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑥">actor</a> description.
-If the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑦">actor</a> does not contain a <code>ldp:inbox</code>, the response notification MUST be sent to the <a data-link-type="dfn" href="#origin" id="ref-for-origin③">origin</a><a class="property" data-link-type="propdesc">s</a> <code>ldp:inbox</code>.</p>
+If the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑦">actor</a> does not contain a <code>ldp:inbox</code>, the response notification MUST be sent to the <a data-link-type="dfn" href="#origin" id="ref-for-origin③">origin</a>'s <code>ldp:inbox</code>.</p>
    <h3 class="heading settled" data-level="5.5" id="interpreting-dates"><span class="secno">5.5. </span><span class="content">Interpreting dates</span><a class="self-link" href="#interpreting-dates"></a></h3>
    <p>An notification payload MAY include a <code>as:published</code> or <code>as:updated</code> predicate to indicate when the activity was published and when it was last updated.
 The value MUST be a valid <a href="https://www.w3.org/TR/xmlschema11-2/#dateTime">xsd:dateTime</a>.
 Publication and update values MUST always refer to the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑥">activity</a> and MUST NOT refer to its <a data-link-type="dfn" href="#object" id="ref-for-object⑥">object</a>.</p>
    <h2 class="heading settled" data-level="6" id="one-way-notification-patterns"><span class="secno">6. </span><span class="content">One-way notification patterns</span><a class="self-link" href="#one-way-notification-patterns"></a></h2>
+   <p>This section covers notification patterns using activity types <code>as:Create</code>, <code>as:Remove</code>, <code>as:Update</code>.</p>
    <h3 class="heading settled" data-level="6.1" id="maintainer-created-a-new-artefact"><span class="secno">6.1. </span><span class="content">Maintainer created a new artefact</span><a class="self-link" href="#maintainer-created-a-new-artefact"></a></h3>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a> actor: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> object: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> target: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> origin: <a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a></p>
    <div class="example" id="example-070750d7">
@@ -1874,9 +2085,33 @@ Publication and update values MUST always refer to the <a data-link-type="dfn" h
    </div>
    <h3 class="heading settled" data-level="6.2" id="maintainer-updated-an-existing-artefact"><span class="secno">6.2. </span><span class="content">Maintainer updated an existing artefact</span><a class="self-link" href="#maintainer-updated-an-existing-artefact"></a></h3>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Update">as:Update</a> actor: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> object: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> target: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> origin: <a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a></p>
-   <div class="example" id="example-aced4f62">
-    <a class="self-link" href="#example-aced4f62"></a> Example of a dataset that is being updated by an cultural heritage institution: 
-<pre class="include-code highlight" data-code-show path="examples/update.jsonld"></pre>
+   <div class="example" id="example-43436a86">
+    <a class="self-link" href="#example-43436a86"></a> Example of a dataset that is being updated by an cultural heritage institution: 
+<pre class="include-code highlight" data-code-show path="examples/update.jsonld"><c- p>{</c->
+    <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
+      <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
+      <c- p>{</c-> <c- f>"schema"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-> <c- p>}</c->
+    <c- p>],</c->
+    <c- f>"summary"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek updates the Alba dataset"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- u>"Update"</c-><c- p>,</c->
+    <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
+      <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Organization"</c-><c- p>,</c-> <c- u>"schema:Organization"</c-><c- p>],</c->
+      <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#inbox"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
+    <c- p>},</c->
+    <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/datasets/1"</c-><c- p>,</c->
+      <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Object"</c-><c- p>,</c-> <c- u>"schema:Dataset"</c-><c- p>],</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
+    <c- p>},</c->
+    <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
+      <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:SoftwareApplication"</c->
+    <c- p>},</c->
+    <c- f>"published"</c-><c- p>:</c-> <c- u>"2021-02-15T12:34:56Z"</c-><c- p>,</c->
+    <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+  <c- p>}</c-></pre>
    </div>
    <h4 class="heading settled" data-level="6.2.1" id="maintainer-removed-an-artefact"><span class="secno">6.2.1. </span><span class="content">Maintainer removed an artefact</span><a class="self-link" href="#maintainer-removed-an-artefact"></a></h4>
    <p>A maintainer deletes an artefact.</p>
@@ -1886,13 +2121,22 @@ Publication and update values MUST always refer to the <a data-link-type="dfn" h
 <pre class="include-code highlight" data-code-show path="examples/remove.jsonld"></pre>
    </div>
    <h2 class="heading settled" data-level="7" id="request-response-notification-patterns"><span class="secno">7. </span><span class="content">Request-response notification patterns</span><a class="self-link" href="#request-response-notification-patterns"></a></h2>
-   <p>A response is a new notification that can be direct - the notification is about the former notification, or indirect - the notification is about</p>
+   <p>This section covers notification patterns using activity types <code>as:Offer</code>, <code>as:Reject</code>, <code>as:Accept</code>, <code>as:Undo</code>, and <code>as:Announce</code>.
+These patterns are used in interactions where a sender sends a notification to a receiver (<dfn data-dfn-type="dfn" data-noexport id="request-notification">request notification<a class="self-link" href="#request-notification"></a></dfn>) and eventually expects to receive a new notification as reply (<dfn data-dfn-type="dfn" data-noexport id="response-notification">response notification<a class="self-link" href="#response-notification"></a></dfn>).</p>
+   <p class="issue" id="issue-fcae3519"><a class="self-link" href="#issue-fcae3519"></a> fix this section</p>
+   <p>A request notification offers an <a data-link-type="dfn">artefact</a> to an actor to perform a service.
+The enclosed activity MUST be of type <code>as:Offer</code>.</p>
+   <p>The activity type ofResponse notifications</p>
+   <p>can be .
+Response notMUST include two additional predicates:</p>
+   <ul>
+    <li data-md>
+     <p><code>as:context</code>: points to the original artefact in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑦">object</a> of the request notification;</p>
+    <li data-md>
+     <p><code>as:inReplyTo</code>: points to the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier③">activity identifier</a> of the request notification to which an this activity is a response. The <code>as:inReplyTo</code> is a URL of the previous notification (without further inline predicate)</p>
+   </ul>
    <h3 class="heading settled" data-level="7.1" id="a-service-request-with-direct-response"><span class="secno">7.1. </span><span class="content">A service request with direct response</span><a class="self-link" href="#a-service-request-with-direct-response"></a></h3>
-   <p>as:context</p>
-   <p>We discussed the usage of as:context in scholarly communication contexts to point to the original artefact in an notification thread
-        E.g. Alice send an Offer about pub1 to a Review Service...further notifications that are sent back and forth can contain in as:context the URL of pub1 (without further inline predicates)</p>
-   <p>as:inReplyTo</p>
-   <p>We discussed the usage of as:inReplyTo in scholarly communcation context to point to a previous notification to which an Activity is a response. The as:inReplyTo is a URL of the previous notification (without further inline predicate)</p>
+   <p>A direct response is about the activity it is replying to and MUST be of type <code>as:Reject</code>, <code>as:Accept</code> or <code>as:Undo</code>.</p>
    <p>A maintainer offers an artefact to a Service Hub in order to perform a service.
 The property <code>origin</code> MAY be used to indicate whether a Dashboard or an Orchestrator was involved in performing the activity and sending then notification.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a></p>
@@ -1991,6 +2235,8 @@ The property <code>origin</code> MAY be used to indicate whether a Dashboard or 
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
 <c- p>}</c-></pre>
    <h3 class="heading settled" data-level="7.2" id="a-service-request-with-indirect-response"><span class="secno">7.2. </span><span class="content">A service request with indirect response</span><a class="self-link" href="#a-service-request-with-indirect-response"></a></h3>
+   <p>An indirect response is about an artifact that is somehow related to the former activity.
+Response notifications MUST be of type <code>as:Reject</code>, <code>as:Accept</code>, <code>as:Undo</code>, or <code>as:Announce</code>.</p>
    <p>An actor draws attention from another actor to an artefact.
 Either a maintainer announces the existence of an artefact to a Service Hub or a Service Hub informs a Maintainer about processing an artefact.</p>
    <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a></p>
@@ -2246,6 +2492,8 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
    <li><a href="#object">object</a><span>, in §5</span>
    <li><a href="#origin">origin</a><span>, in §5</span>
    <li><a href="#out-of-band">out-of-band</a><span>, in §5.3</span>
+   <li><a href="#request-notification">request notification</a><span>, in §7</span>
+   <li><a href="#response-notification">response notification</a><span>, in §7</span>
    <li><a href="#target">target</a><span>, in §5</span>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2275,10 +2523,9 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
-   <div class="issue"> add diagram<a href="#issue-810d8be5"> ↵ </a></div>
-   <div class="issue"> add diagram<a href="#issue-810d8be5①"> ↵ </a></div>
    <div class="issue"> can artefacts be rejected? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/17">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/17></a><a href="#issue-ac129ba3"> ↵ </a></div>
    <div class="issue"> How to define Service Hub types? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18></a><a href="#issue-9d2ca58c"> ↵ </a></div>
+   <div class="issue"> fix this section<a href="#issue-fcae3519"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="activity">
    <b><a href="#activity">#activity</a></b><b>Referenced in:</b>
@@ -2314,6 +2561,7 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
     <li><a href="#ref-for-object">5. Activities</a>
     <li><a href="#ref-for-object①">5.3. The object of an activity</a> <a href="#ref-for-object②">(2)</a> <a href="#ref-for-object③">(3)</a> <a href="#ref-for-object④">(4)</a> <a href="#ref-for-object⑤">(5)</a>
     <li><a href="#ref-for-object⑥">5.5. Interpreting dates</a>
+    <li><a href="#ref-for-object⑦">7. Request-response notification patterns</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="notification-identifier">
@@ -2326,6 +2574,7 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
    <b><a href="#activity-identifier">#activity-identifier</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-activity-identifier">5.2. Identifying an activity</a> <a href="#ref-for-activity-identifier①">(2)</a> <a href="#ref-for-activity-identifier②">(3)</a>
+    <li><a href="#ref-for-activity-identifier③">7. Request-response notification patterns</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="out-of-band">
