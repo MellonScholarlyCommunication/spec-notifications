@@ -265,7 +265,7 @@ Example of an Offer as object:
   "@context": "https://www.w3.org/ns/activitystreams/",
   "id": "https://example.org/offers",
   "type": ["Offer"],
-  "name": "Dataset about WOII"    
+  "name": "Request to archive dataset about WOII"    
 }
 ```
 </div>
@@ -273,668 +273,204 @@ Example of an Offer as object:
 Issue(17): can artefacts be rejected?
 
 An [=object=] MUST contain an identifier, which must be an [[URI]].
+The [=object=] identifier SHOULD be dereferenceable, so possible artefacts can be retrieved.
 
+A description of the object SHOULD be delivered in one of two methods:
 
+- <dfn>out-of-band</dfn>: an RDF description is available by dereferencing the [=object=] identifier;
+- <dfn>in-band</dfn>: the object is described as part of the notification payload.
 
+If a description is given [=in-band=],
+its contents MUST be given priority to a dereferenceable description.
+[=Receivers=] MAY also dereference the object's identifier to retrieve an additional [=out-of-band=] description.
+In case conflicts arise between both descriptions, the most recent description MUST be given priority.
+This can be identified by comparing the last-modified date of the HTTP response with the [=activity's=] published date in `as:published`.
 
+## Addressing the receiver and sender
 
-Issue: iets zeggen over object Identification en dereferencability
+When a notification is sent to a [[ldn#receiver]],
+it is not directly delivered to a fellow [[spec-overview#actor|network actor]], but to a related [=inbox=].
+Therefore, the notification's payload should indicate what [[spec-overview#actor|network actor]] it intends to address.
+Thus, an activity MUST contain a [=target=] using the `as:target` predicate.
 
+Accordingly, the notification's payload should also indicate which [[spec-overview#actor|network actor]] has sent the notification.
+Hence, an activity MUST also contain an [=actor=] using the `as:actor` predicate.
+
+Both the [=target=] and [=actor=] MUST be identifyable with an HTTP URI, which SHOULD be a [[webid|WebID]].
+They MUST be of the following type:
+
+- [[activitystreams-vocabulary#Service|as:Service]] in case the receiving actor is a [[spec-overview#Service-Hub|Service Hub]];
+- [[activitystreams-vocabulary#Person|as:Person]], [[activitystreams-vocabulary#Organization|as:Organization]], or [[activitystreams-vocabulary#Application|as:Application]] in case the receiving actor is a [[spec-overview#Maintainer|Maintainer]] and an individual, organization, or a software application, respectively.
+
+Issue(18): How to define Service Hub types?
+
+The [=actor=] SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached.
+The [=target=] MAY have such `ldp:inbox`.
+Both the [=target=] and [=actor=] MAY have a name using `as:name`.
+
+In case the sending of the notification was delegated to a third-party (eg. a software application such as the [=orchestrator=]),
+an activity SHOULD also contain an [=origin=] using the `as:origin` predicate to refer to that third-party.
+The [=origin=] MAY also have an `ldp:inbox` that refers to an inbox [[URI]] where the sender can be reached.
+
+When a [[ldn#receiver]] intends to respond to a notification, thus switching to the role of [[ldn#sender]],
+it should be able to derive a valid [=inbox=] URL from the notification payload.
+In this case, it MUST use the value of `ldp:inbox` in the [=actor=] description.
+If the [=actor=] does not contain a `ldp:inbox`, the response notification MUST be sent to the [=origin=]'s' `ldp:inbox`. 
 
 ## Interpreting dates
 
+An notification payload MAY include a `as:published` or `as:updated` predicate to indicate when the activity was published and when it was last updated.
+The value MUST be a valid [[xmlschema11-2#dateTime|xsd:dateTime]].
+Publication and update values MUST always refer to the [=activity=] and MUST NOT refer to its [=object=].
 
+One-way notification patterns
+=============================
 
+## Maintainer created a new artefact
 
-
-
-
- 
-
-
-
-
-
-
-## Possible actors
-
-
-
-Issue: continue rationale 
-
-, 
-which are performed by a  and 
-A notification informs a target party about its occurence.
-Activities 
-
-
-
-In the network, [[spec-overview#actor|actors]] can perform  that . 
-Actors are either [[spec-overview#service-hub|Service Hubs]] or [[spec-overview#maintainer|Maintainers]] (see [[#mappings]]).
-By notifying eachother about these activities, actors can communicate and accomplish collaborative actions in a distributed setting. 
-An activity that somehow impact an artefact's lifecycle can result in a [[spec-overview#artefact-lifecycle-event|lifecycle event]].
-
-
-...some intro...
-
-## Actors
-
-
-## Identification
-
-client chooses id
-server mag geen id geven indien niet aanwezig
-
-
-
-## ActivityTypes
-
-in a decentralized artefact exchange network
-
-- artefact facts
-- requesting services
-
-The table below summarizes the possible notification types that actors can exchange.
-
-
-
-Type mapping {#mappings}
-===========
-
-
-
-
-
-Payloads MUST also include the properties `as:origin`, `as:object`, and `as:target`, as defined in [[activitystreams-core#activities]]
-The use of these properties is consistent across all notifications:
-
-- `as:actor` refers to the [[spec-overview#actor|actor]] that is responsible for the `activity`; most likely the performer of the activity and sender of the notification
-- `as:object` refers to the [[spec-overview#artefact|artefact]] on which the `activity` is performed. 
-- `as:target` refers to the destination of the activity; the other [[spec-overview#actor|actor]] that is being notified of this activity.
-
-The terms in [[spec-overview#definitions]] should be mapped in a specific way, using specific types from [[activitystreams-vocabulary#actor-types]] and [[schema-org]].
-This is outlined in more detail below.
-
-## Actors
-
-The actor of an activity MUST describe the [[activitystreams-vocabulary#actors | actors]] that are responsible for the activity and serve as contact points for the recepient.
-In most cases, this will be the actor sending the notification using either the [[spec-overview#dashboard|Dashboard]] or the [[spec-overview#orchstrator|Orchestrator]] as intermediate.
-A notification payload MUST refer to the actor using the `as:actor` property and it MUST use the following type mapping:
-
-<table>
-<thead>
-  <tr>
-  <th>Actor type
-  <th>AS Type
-<tbody>
-  <tr>
-  <td>[[spec-overview#Service-Hub|Service Hub]]
-  <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>
-  <td>[[spec-overview#Maintainer|Maintainer]]
-  <td>[[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]]
-</table>
-
-The actor MUST be identifyable with an HTTP URI, which SHOULD be a [[webid|WebID]].
-It MAY have an `ldp:inbox` that refers to the inbox URI where the actor can receive replies.
-The actor MAY have a name using `as:name`.
-
-Issue: Explain what the implications are between Service, Person, and Organization
-
-<div class=example>
-Example of an organization as actor:
-
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "id": "https://www.kb.nl#me",
-  "type": ["Organization", "schema:Organization"],
-  "inbox": "https://www.kb.nl#inbox",
-  "name": "Koninklijke Bibliotheek"    
-}
-```
-</div>
-
-
-Payloads {#payloads}
-===========
-
-The following payload patterns can be used between actors.
-
-Issue(1): Do we specify the semantics of AS payloads or do provide an additionaly vocabulary that encorporates these semantics?
-
-## Disseminating lifecycle aspects
-
-### Create
-
-A new artefact was created by the actor.
 
 Type: [[activitystreams-vocabulary#Create|as:Create]]
-
-<table>
-  <thead>
-    <tr>
-      <th>Property
-      <th>Type
-      <th>Mandatory
-  <tbody>
-    <tr>
-      <td>actor  
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-      <td>✅
-    <tr>
-      <td>object
-      <td>[[activitystreams-vocabulary#Object|as:Object]]
-      <td>✅
-    <tr>
-      <td>target
-      <td>[[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>  
-      <td>instrument
-      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-      <td>
-</table>
+actor: [[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+object: [[activitystreams-vocabulary#Object|as:Object]]
+target: [[activitystreams-vocabulary#Service|as:Service]]
+origin: [[schema-org#SoftwareApplication|schema:SoftwareApplication]]
 
 <div class=example>
 Example of a dataset that is being created by an cultural heritage institution:
 
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "summary": "Koninklijke Bibliotheek created Alba dataset",
-  "@type": "Create",
-  "actor": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "id": "https://www.kb.nl/datasets/1",
-    "type": ["Object", "schema:Dataset"],
-    "name": "Dataset about WOII"    
-  },
-  "instrument": {
-    "id": "http://example.org/Adlib",
-    "type": "schema:SoftwareApplication"
-  },
-  "published": "2014-09-30T12:34:56Z"
-}
-```
+<pre class=include-code>
+path: examples/create.jsonld
+highlight: json
+show: 
+</pre>
+
 </div>
 
-### Update
-
-An existing artefact was updated by the actor.
+## Maintainer updated an existing artefact
 
 Type: [[activitystreams-vocabulary#Update|as:Update]]
-
-<table>
-  <thead>
-    <tr>
-      <th>Property
-      <th>Type
-      <th>Mandatory
-  <tbody>
-    <tr>
-      <td>actor  
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-      <td>✅
-    <tr>
-      <td>object
-      <td>[[activitystreams-vocabulary#Object|as:Object]]
-      <td>✅
-    <tr>
-      <td>target
-      <td>[[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>  
-      <td>instrument
-      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-      <td>
-</table>
+actor: [[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+object: [[activitystreams-vocabulary#Object|as:Object]]
+target: [[activitystreams-vocabulary#Service|as:Service]]
+origin: [[schema-org#SoftwareApplication|schema:SoftwareApplication]]
 
 <div class=example>
 Example of a dataset that is being updated by an cultural heritage institution:
 
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "summary": "Koninklijke Bibliotheek updates the Alba dataset",
-  "type": "Update",
-  "actor": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "id": "https://www.kb.nl/datasets/1",
-    "type": ["Object", "schema:Dataset"],
-    "name": "Dataset about WOII"    
-  },
-  "origin": {
-    "id": "http://example.org/Adlib",
-    "type": "schema:SoftwareApplication"
-  },
-  "published": "2021-02-15T12:34:56Z",
-  "updated": "2021-01-28T19:56:20.114Z"
-}
-```
+<pre class=include-code>
+path: examples/update.jsonld
+highlight: json
+show: 
+</pre>
 </div>
 
-### Delete
+### Maintainer removed an artefact
 
 A maintainer deletes an artefact. 
 
 Type: [[activitystreams-vocabulary#Delete|as:Delete]]
-
-<table>
-  <thead>
-    <tr>
-      <th>Property
-      <th>Type
-      <th>Mandatory
-  <tbody>
-    <tr>
-      <td>actor  
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-      <td>✅
-    <tr>
-      <td>object
-      <td>[[activitystreams-vocabulary#Object|as:Object]]
-      <td>✅
-    <tr>
-      <td>target
-      <td>[[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>  
-      <td>instrument
-      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-      <td>
-</table>
+actor: [[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
+object: [[activitystreams-vocabulary#Object|as:Object]]
+target: [[activitystreams-vocabulary#Service|as:Service]]
+origin: [[schema-org#SoftwareApplication|schema:SoftwareApplication]]
 
 <div class=example>
 Example of a dataset that was by an cultural heritage institution:
 
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "summary": "Koninklijke Bibliotheek deleted Alba dataset",
-  "type": "Delete",
-  "actor": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": "https://www.kb.nl/datasets/1",
-  "origin": {
-    "id": "http://example.org/Adlib",
-    "type": "schema:SoftwareApplication"
-  },
-  "target": {
-    "id": "http://meemoo.be#me",
-    "type": ["Organization", "schema:Organization"],
-    "name": "meemoo"  
-  },
-  "updated": "2021-01-28T19:56:20.114Z",
-  "published": "2021-02-15T12:34:56Z"
-}
-```
+<pre class=include-code>
+path: examples/remove.jsonld
+highlight: json
+show: 
+</pre>
 </div>
 
-## Requesting services
 
-### Announce
+Request-response notification patterns
+======================================
+
+A response is a new notification that can be direct - the notification is about the former notification, or indirect - the notification is about  
+
+## A service request with direct response
+
+as:context
+
+    We discussed the usage of as:context in scholarly communication contexts to point to the original artefact in an notification thread
+        E.g. Alice send an Offer about pub1 to a Review Service...further notifications that are sent back and forth can contain in as:context the URL of pub1 (without further inline predicates)
+
+as:inReplyTo
+
+    We discussed the usage of as:inReplyTo in scholarly communcation context to point to a previous notification to which an Activity is a response. The as:inReplyTo is a URL of the previous notification (without further inline predicate)
+
+
+A maintainer offers an artefact to a Service Hub in order to perform a service.
+The property `origin` MAY be used to indicate whether a Dashboard or an Orchestrator was involved in performing the activity and sending then notification. 
+
+Type: [[activitystreams-vocabulary#Offer|as:Offer]]
+
+
+<pre class=include-code>
+path: examples/offer.jsonld
+highlight: json
+show: 
+</pre>
+
+A Service Hub accepts the artefact offered by an actor. 
+
+<pre class=include-code>
+path: examples/direct-response-accept.jsonld
+highlight: json
+show: 
+</pre>
+
+A Service Hub rejects the artefact offered by an actor. 
+
+<pre class=include-code>
+path: examples/direct-response-reject.jsonld
+highlight: json
+show: 
+</pre>
+
+## A service request with indirect response
 
 An actor draws attention from another actor to an artefact. 
 Either a maintainer announces the existence of an artefact to a Service Hub or a Service Hub informs a Maintainer about processing an artefact.
 
 Type: [[activitystreams-vocabulary#Announce|as:Announce]]
 
-<table>
-  <thead>
-    <tr>
-      <th>Property
-      <th>Type
-      <th>Mandatory
-  <tbody>
-    <tr>
-      <td>actor  
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]]<br />
-      or [[activitystreams-vocabulary#Person|as:Person]]<br /> or [[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>
-      <td>object
-      <td>[[activitystreams-vocabulary#Object|as:Object]]
-      <td>✅
-    <tr>
-      <td>target
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]]<br />
-      or [[activitystreams-vocabulary#Person|as:Person]]<br /> or [[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>  
-      <td>instrument
-      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-      <td>
-</table>
+<pre class=include-code>
+path: examples/offer.jsonld
+highlight: json
+show: 
+</pre>
 
-<div class=example>
-Example of a dataset that is being created by an cultural heritage institution:
 
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "summary": "Koninklijke Bibliotheek announces Alba dataset",
-  "type": "Announce",
-  "actor": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "id": "https://www.kb.nl/datasets/1",
-    "type": ["Object", "schema:Dataset"],
-    "name": "Dataset about WOII"    
-  },
-  "origin": {
-    "id": "http://example.org/Adlib",
-    "type": "schema:SoftwareApplication"
-  },
-  "updated": "2021-01-28T19:56:20.114Z"
-}
-```
-</div>
+<pre class=include-code>
+path: examples/indirect-response-announce.jsonld
+highlight: json
+show: 
+</pre>
 
-### Offer
 
-A maintainer offers an artefact to a Service Hub in order to perform a service.
-The property `instrument` MAY be used to indicate whether a Dashboard or an Orchestrator was involved in performing the activity and sending then notification. 
 
-Type: [[activitystreams-vocabulary#Offer|as:Offer]]
 
-<table>
-  <thead>
-    <tr>
-      <th>Property
-      <th>Type
-      <th>Mandatory
-  <tbody>
-    <tr>
-      <td>actor  
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-      <td>✅
-    <tr>
-      <td>object
-      <td>[[activitystreams-vocabulary#Object|as:Object]]
-      <td>✅
-    <tr>
-      <td>target
-      <td>[[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>  
-      <td>instrument
-      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-      <td>
-</table>
-
-<div class=example>
-Example of a dataset that was by an cultural heritage institution:
-
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "id": "http://example.org/offer/123",
-  "summary": "Koninklijke Bibliotheek offers Alba dataset to archive",
-  "@type": "Offer",
-  "actor": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "id": "https://www.kb.nl/datasets/1",
-    "type": ["Object", "schema:Dataset"],
-    "name": "Dataset about WOII"    
-  },
-  "origin": {
-    "id": "http://example.org/Orchestrator",
-    "type": "schema:SoftwareApplication"
-  },
-  "target": {
-    "id": "http://meemoo.be#me",
-    "type": ["Organization", "schema:Organization"],
-    "name": "meemoo"  
-  },
-  "updated": "2021-01-28T19:56:20.114Z"
-}
-```
-</div>
-
-### Accept
-
-A Service Hub accepts the artefact offered by an actor. 
-
-Type: [[activitystreams-vocabulary#Accept|as:Accept]]
-
-<table>
-  <thead>
-    <tr>
-      <th>Property
-      <th>Type
-      <th>Mandatory
-  <tbody>
-    <tr>
-      <td>actor  
-      <td>[[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>
-      <td>object
-      <td>[[activitystreams-vocabulary#Object|as:Object]]
-      <td>✅
-    <tr>
-      <td>target
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-      <td>✅
-    <tr>  
-      <td>instrument
-      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-      <td>
-</table>
-
-<div class=example>
-Example of a dataset that was accepted by an archival service:
-
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/"
-    }
-  ],
-  "summary": "Meemoo accepted Alba dataset from Koninklijke Bibliotheek",
-  "@type": "Accept",
-  "actor": {
-    "id": "http://meemoo.be#me",
-    "type": ["Organization", "schema:Organization"],
-    "name": "meemoo"  
-  },
-  "target": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["Object", "schema:Dataset"],
-    "name": "Dataset about WOII"    
-  },
-  "instrument": {
-    "@id": "http://meemoo.be#orchestrator",
-    "@type": "schema:SoftwareApplication"
-  },
-  "updated": "2021-01-28T19:56:20.114Z"
-}
-```
-</div>
-
-### Reject
-
-A Service Hub rejects the artefact offered by an actor. 
-
-Type: [[activitystreams-vocabulary#Reject|as:Reject]]
-<table>
-  <thead>
-    <tr>
-      <th>Property
-      <th>Type
-      <th>Mandatory
-  <tbody>
-    <tr>
-      <td>actor  
-      <td>[[activitystreams-vocabulary#Service|as:Service]]
-      <td>✅
-    <tr>
-      <td>object
-      <td>[[activitystreams-vocabulary#Object|as:Object]]
-      <td>✅
-    <tr>
-      <td>target
-      <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-      <td>✅
-    <tr>  
-      <td>instrument
-      <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-      <td>
-</table>
-
-<div class=example>
-Example of a dataset that was rejected by an archival service:
-
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    {
-      "schema": "http://schema.org/"
-    }
-  ],
-  "summary": "Meemoo rejects Alba dataset from Koninklijke Bibliotheek",
-  "@type": "Reject",
-  "actor": {
-    "id": "http://meemoo.be#me",
-    "type": ["Organization", "schema:Organization"],
-    "name": "meemoo"  
-  },
-  "target": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "@id": "https://www.kb.nl/datasets/1",
-    "@type": ["Object", "schema:Dataset"],
-    "name": "Dataset about WOII"    
-  },
-  "instrument": {
-    "@id": "http://meemoo.be#orchestrator",
-    "@type": "schema:SoftwareApplication"
-  },
-  "updated": "2021-01-28T19:56:20.114Z"
-}
-```
-</div>
-
-### Undo
+## Undoing a prior activity
 
 A maintainer retracts a prior offer.
 
 Type: [[activitystreams-vocabulary#Undo|as:Undo]]
 
-<table>
-<thead>
-  <tr>
-    <th>Property
-    <th>Type
-<tbody>
-  <tr>
-    <td>actor  
-    <td>[[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]] 
-  <tr>
-    <td>object
-    <td>[[activitystreams-vocabulary#Activity|as:Activity]]
-  <tr>
-    <td>target
-    <td>[[activitystreams-vocabulary#Service|as:Service]]
-  <tr>  
-    <td>origin
-    <td>[[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-</table> 
 
 <div class=example>
 Example of a dataset that was by an cultural heritage institution:
 
-``` json
-{
-  "@context": [
-    "https://www.w3.org/ns/activitystreams/", 
-    { "schema": "http://schema.org/" }
-  ],
-  "summary": "Koninklijke Bibliotheek retracts offer to archive the Alba dataset",
-  "type": "Undo",
-  "actor": {
-    "id": "https://www.kb.nl#me",
-    "type": ["Organization", "schema:Organization"],
-    "inbox": "https://www.kb.nl#inbox",
-    "name": "Koninklijke Bibliotheek"    
-  },
-  "object": {
-    "id": "http://example.org/offer/123",
-    "type": ["Offer"]
-  },
-  "origin": {
-    "id": "https://www.kb.nl#orchestrator,
-    "type": "ex:Orchestrator"
-  },
-  "target": {
-    "id": "http://meemoo.be#me",
-    "type": ["Organization", "schema:Organization"],
-    "name": "meemoo"  
-  },
-  "published": "2021-02-15T12:34:56Z"
-}
-```
+<pre class=include-code>
+path: examples/undo.jsonld
+highlight: json
+show: 
+</pre>
+
 </div>
 
-Responding to notifications
-==========================
-
-A response is a new notification that can be direct - the notification is about the former notification, or indirect - the notification is about  
 
 
 <pre class=biblio>
