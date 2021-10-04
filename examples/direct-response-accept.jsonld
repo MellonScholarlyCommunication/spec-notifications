@@ -1,0 +1,31 @@
+{
+    "@context": [
+      "https://www.w3.org/ns/activitystreams/", 
+      {
+        "schema": "http://schema.org/"
+      }
+    ],
+    "summary": "Meemoo accepted Alba dataset from Koninklijke Bibliotheek",
+    "@type": "Accept",
+    "actor": {
+      "id": "http://meemoo.be#me",
+      "type": ["Organization", "schema:Organization"],
+      "name": "meemoo"  
+    },
+    "target": {
+      "id": "https://www.kb.nl#me",
+      "type": ["Organization", "schema:Organization"],
+      "inbox": "https://www.kb.nl#inbox",
+      "name": "Koninklijke Bibliotheek"    
+    },
+    "object": {
+      "@id": "https://www.kb.nl/datasets/1",
+      "@type": ["Object", "schema:Dataset"],
+      "name": "Dataset about WOII"    
+    },
+    "instrument": {
+      "@id": "http://meemoo.be#orchestrator",
+      "@type": "schema:SoftwareApplication"
+    },
+    "updated": "2021-01-28T19:56:20.114Z"
+  }
