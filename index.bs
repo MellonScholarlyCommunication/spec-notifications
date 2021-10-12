@@ -164,7 +164,7 @@ A decentralized artefact exchange network only allows a limited set of [[activit
 Activities, along with their types, are divided into two categories:
 
 - Activities that are about facts related to an artefact. This includes the types `Create`, `Remove`, and `Update`. These activities are used in a [=one-way pattern=] communication.
-- Activities that are about requesting services. This includes the types `Offer`, `Reject`, `Accept`, `Undo`, and `Announce`. These activities are used in a [=request–response pattern=] communication.
+- Activities that are about requesting services. This includes the types `Offer`, `Reject`, `Accept`, `Undo`, and `Announce`. These activities are used in a [=request-response pattern=] communication.
 
 The following table summarizes the possible activity types according to category.
 
@@ -216,7 +216,7 @@ The following table summarizes the possible activity types according to category
       <td>An [[spec-overview#actor|actor]] retracts a prior [[spec-overview#activity|activity]], which can be of any of the above types.
 </table>
 
-## Identifying an activity
+## Identifying an activity ## {#activity-id}
 
 To establish robust communication on a decentralized artefact exchange network,
 activities have to be at least uniquely indentifyable within the scope of the network.
@@ -233,7 +233,7 @@ A [[ldn#sender]] SHOULD define an [=activity identifier=] for every notification
 The [[ldn#receiver]] MUST NOT define or alter the [=activity identifier=] of a received notification.
 He MAY mint any [=notification identifier=], which in most cases, is a derivative of the [=inbox=] resource [[URL]], but can be any [[URL]] of choice.
 
-## The object of an activity
+## The object of an activity ## {#activity-object}
 
 All [=activities=] MUST contain a [=object=] using the `as:object` predicate.
 Depending on the activity type, the [=object=] can refer to an [=artefact=] or an [=activity=].
@@ -290,7 +290,7 @@ its contents MUST be given priority to a dereferenceable description.
 In case conflicts arise between both descriptions, the most recent description MUST be given priority.
 This can be identified by comparing the last-modified date of the HTTP response with the [=activity's=] published date in `as:published`.
 
-## Addressing the receiver and sender
+## Addressing the receiver and sender ## {#activity-addressing}
 
 When a notification is sent to a [[ldn#receiver]],
 it is not directly delivered to a fellow [[spec-overview#actor|network actor]], but to a related [=inbox=].
@@ -332,18 +332,23 @@ One-way notification patterns
 =============================
 
 This section covers notification patterns using activity types `as:Create`, `as:Remove`, `as:Update`.
+The [[JSON-LD]] payload MUST contain at least the following properties:
 
-## Maintainer created a new artefact
+- `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see {{#activity-id}}). 
+- `type`: this MUST include one of the types [[activitystreams-vocabulary#Create|as:Create]], [[activitystreams-vocabulary#Remove|as:Remove]], or [[activitystreams-vocabulary#Update|as:Update]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
+- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=actor=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see {{#activity-addressing}}).
+- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=actor=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see {{#activity-addressing}}).
+- `object`: the artefact that this activity is about. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see {{#activity-object}}).
 
+The [[JSON-LD]] payload SHOULD also contain the following property:
+- `origin`: the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]].
 
-Type: [[activitystreams-vocabulary#Create|as:Create]]
-actor: [[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-object: [[activitystreams-vocabulary#Object|as:Object]]
-target: [[activitystreams-vocabulary#Service|as:Service]]
-origin: [[schema-org#SoftwareApplication|schema:SoftwareApplication]]
+## Pattern 1: Maintainer has created a new artefact
 
-<div class=example>
-Example of a dataset that is being created by an cultural heritage institution:
+This pattern is used to disseminate new artefacts.
+A [=data pod=] [=maintainer=] makes a [=Service Hub=] or another [=maintainer=] aware of the creation of that artefact,
+without expecting immediate action.
+
 
 <pre class=include-code>
 path: examples/create.jsonld
@@ -353,43 +358,29 @@ show:
 
 </div>
 
-## Maintainer updated an existing artefact
+## Pattern 2: Maintainer has updated an existing artefact
 
-Type: [[activitystreams-vocabulary#Update|as:Update]]
-actor: [[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-object: [[activitystreams-vocabulary#Object|as:Object]]
-target: [[activitystreams-vocabulary#Service|as:Service]]
-origin: [[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-
-<div class=example>
-Example of a dataset that is being updated by an cultural heritage institution:
+This pattern is used to inform involved actors about artefact changes.
+A [=data pod=] [=maintainer=] informs a [=Service Hub=] or another [=maintainer=] without obligation that the artefact has been updated and follow-up action might be needed.
 
 <pre class=include-code>
 path: examples/update.jsonld
 highlight: json
 show: 
 </pre>
-</div>
 
-### Maintainer removed an artefact
+### Pattern 3: Maintainer has removed an artefact
 
-A maintainer deletes an artefact. 
+This pattern is used to inform involved actors about deleted artefacts.
+A [=data pod=] [=maintainer=] informs a [=Service Hub=] or another [=maintainer=] without obligation that an artefact has been removed from the [=data pod=] and follow-up action might be needed.
 
-Type: [[activitystreams-vocabulary#Delete|as:Delete]]
-actor: [[activitystreams-vocabulary#Organization|as:Organization]] | [[activitystreams-vocabulary#Person|as:Person]]
-object: [[activitystreams-vocabulary#Object|as:Object]]
-target: [[activitystreams-vocabulary#Service|as:Service]]
-origin: [[schema-org#SoftwareApplication|schema:SoftwareApplication]]
-
-<div class=example>
-Example of a dataset that was by an cultural heritage institution:
 
 <pre class=include-code>
 path: examples/remove.jsonld
 highlight: json
 show: 
 </pre>
-</div>
+
 
 
 Request-response notification patterns
