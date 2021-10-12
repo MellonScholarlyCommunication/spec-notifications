@@ -115,7 +115,7 @@ This results in two possible communication patterns:
 path: images/one-way.svg
 </pre>
 
-The sender of a notification should not expect a direct reply from the receiver. 
+In a <dfn>one-way pattern</dfn>, the sender of a notification should not expect a direct reply from the receiver. 
 This style of communication is more informative. 
 A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.
 
@@ -125,7 +125,7 @@ A one-way pattern is used when actors need to be made aware of an activity, but 
 path: images/request-response.svg
 </pre>
 
-The sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
+In a <dfn>request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
 A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
 and what the resulting action will be. 
 
@@ -163,8 +163,8 @@ Therefore, the notification payload MUST be typed as a `as:Activity` or as one o
 A decentralized artefact exchange network only allows a limited set of [[activitystreams-vocabulary#activity-types|AS2.0 Activity Types]].
 Activities, along with their types, are divided into two categories:
 
-- Activities that are about facts related to an artefact. This includes the types `Create`, `Remove`, and `Update`. These activities are used in a one-way communication pattern.
-- Activities that are about requesting services. This includes the types `Offer`, `Reject`, `Accept`, `Undo`, and `Announce`. These activities are used in a request–response communication pattern.
+- Activities that are about facts related to an artefact. This includes the types `Create`, `Remove`, and `Update`. These activities are used in a [=one-way pattern=] communication.
+- Activities that are about requesting services. This includes the types `Offer`, `Reject`, `Accept`, `Undo`, and `Announce`. These activities are used in a [=request–response pattern=] communication.
 
 The following table summarizes the possible activity types according to category.
 
