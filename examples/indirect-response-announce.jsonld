@@ -1,30 +1,28 @@
 {
-    "@context": [
-      "https://www.w3.org/ns/activitystreams/", 
-      { "schema": "http://schema.org/" }
-    ],
-    "inReplyTo": {
-
-    },
-    "context": {
-
-    },
-    "summary": "Koninklijke Bibliotheek announces Alba dataset",
-    "type": "Announce",
-    "actor": {
-      "id": "https://www.kb.nl#me",
-      "type": ["Organization", "schema:Organization"],
-      "inbox": "https://www.kb.nl#inbox",
-      "name": "Koninklijke Bibliotheek"    
-    },
-    "object": {
-      "id": "https://www.kb.nl/datasets/1",
-      "type": ["Object", "schema:Dataset"],
-      "name": "Dataset about WOII"    
-    },
-    "origin": {
-      "id": "http://example.org/Adlib",
-      "type": "schema:SoftwareApplication"
-    },
-    "updated": "2021-01-28T19:56:20.114Z"
-  }
+  "@context": "https://www.w3.org/ns/activitystreams/",
+  "summary": "Meemoo accepted Alba dataset from Koninklijke Bibliotheek",
+  "type": "Accept",
+  "actor": {
+    "id": "http://meemoo.be#me",
+    "type": "Organization",
+    "inbox": "http://meemoo.be/inbox",
+    "name": "meemoo"
+  },
+  "target": {
+    "id": "http://meemoo.be#me",
+    "type": "Organization",
+    "inbox": "http://meemoo.be/inbox",
+    "name": "meemoo"
+  },
+  "object": {
+    "id": "http://meemoo.be/archived/1",
+    "type": "ex:ArchivedDataset"
+  },
+  "inReplyTo": "http://example.org/offer/123",
+  "context": "https://www.kb.nl/datasets/1",
+  "origin": {
+    "id": "http://meemoo.be#orchestrator",
+    "type": "Application"
+  },
+  "updated": "2021-01-28T19:56:20.114Z"
+}

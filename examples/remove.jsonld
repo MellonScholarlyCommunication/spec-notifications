@@ -1,0 +1,23 @@
+{
+    "@context": "https://www.w3.org/ns/activitystreams/",
+    "summary": "Koninklijke Bibliotheek deletes the Alba dataset",
+    "type": "Remove",
+    "actor": {
+      "id": "https://www.kb.nl#me",
+      "type": "Organization",
+      "inbox": "https://www.kb.nl/inbox",
+      "name": "Koninklijke Bibliotheek"
+    },
+    "object": {
+      "id": "https://www.kb.nl/datasets/1",
+      "type": "Object",
+      "name": "Dataset about WOII"
+    },
+    "origin": {
+      "id": "http://example.org/Adlib",
+      "type": "Application"
+    },
+    "updated": "2021-01-28T19:56:20.114Z",
+    "published": "2021-02-15T12:34:56Z"
+  }
+  
