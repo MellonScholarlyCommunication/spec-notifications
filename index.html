@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="1fe35e61081b5c228d7e303e3fdefdf848be80d8" name="document-revision">
+  <meta content="99bbbada428be5fb025970fa74698266b9efb36c" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1546,19 +1546,19 @@ Parts of this work may be from another specification document.  If so, those par
      <a href="#activities"><span class="secno">5</span> <span class="content">Activities</span></a>
      <ol class="toc">
       <li><a href="#types-of-activities"><span class="secno">5.1</span> <span class="content">Types of activities</span></a>
-      <li><a href="#identifying-an-activity"><span class="secno">5.2</span> <span class="content">Identifying an activity</span></a>
-      <li><a href="#the-object-of-an-activity"><span class="secno">5.3</span> <span class="content">The object of an activity</span></a>
-      <li><a href="#addressing-the-receiver-and-sender"><span class="secno">5.4</span> <span class="content">Addressing the receiver and sender</span></a>
+      <li><a href="#activity-id"><span class="secno">5.2</span> <span class="content">Identifying an activity</span></a>
+      <li><a href="#activity-object"><span class="secno">5.3</span> <span class="content">The object of an activity</span></a>
+      <li><a href="#activity-addressing"><span class="secno">5.4</span> <span class="content">Addressing the receiver and sender</span></a>
       <li><a href="#interpreting-dates"><span class="secno">5.5</span> <span class="content">Interpreting dates</span></a>
      </ol>
     <li>
      <a href="#one-way-notification-patterns"><span class="secno">6</span> <span class="content">One-way notification patterns</span></a>
      <ol class="toc">
-      <li><a href="#maintainer-created-a-new-artefact"><span class="secno">6.1</span> <span class="content">Maintainer created a new artefact</span></a>
+      <li><a href="#pattern-1-maintainer-has-created-a-new-artefact"><span class="secno">6.1</span> <span class="content">Pattern 1: Maintainer has created a new artefact</span></a>
       <li>
-       <a href="#maintainer-updated-an-existing-artefact"><span class="secno">6.2</span> <span class="content">Maintainer updated an existing artefact</span></a>
+       <a href="#pattern-2-maintainer-has-updated-an-existing-artefact"><span class="secno">6.2</span> <span class="content">Pattern 2: Maintainer has updated an existing artefact</span></a>
        <ol class="toc">
-        <li><a href="#maintainer-removed-an-artefact"><span class="secno">6.2.1</span> <span class="content">Maintainer removed an artefact</span></a>
+        <li><a href="#pattern-3-maintainer-has-removed-an-artefact"><span class="secno">6.2.1</span> <span class="content">Pattern 3: Maintainer has removed an artefact</span></a>
        </ol>
      </ol>
     <li>
@@ -1859,7 +1859,7 @@ A one-way pattern is used when actors need to be made aware of an activity, but 
      </a>
     </switch>
    </svg>
-   <p>In a <dfn data-dfn-type="dfn" data-noexport id="request-response-pattern①">request-response pattern<a class="self-link" href="#request-response-pattern①"></a></dfn>, the sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
+   <p>In a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="request-response-pattern①">request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
 A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
 and what the resulting action will be.</p>
    <h2 class="heading settled" data-level="5" id="activities"><span class="secno">5. </span><span class="content">Activities</span><a class="self-link" href="#activities"></a></h2>
@@ -1916,7 +1916,7 @@ Activities, along with their types, are divided into two categories:</p>
     <li data-md>
      <p>Activities that are about facts related to an artefact. This includes the types <code>Create</code>, <code>Remove</code>, and <code>Update</code>. These activities are used in a <a data-link-type="dfn" href="#one-way-pattern①" id="ref-for-one-way-pattern①">one-way pattern</a> communication.</p>
     <li data-md>
-     <p>Activities that are about requesting services. This includes the types <code>Offer</code>, <code>Reject</code>, <code>Accept</code>, <code>Undo</code>, and <code>Announce</code>. These activities are used in a <a data-link-type="dfn">request–response pattern</a> communication.</p>
+     <p>Activities that are about requesting services. This includes the types <code>Offer</code>, <code>Reject</code>, <code>Accept</code>, <code>Undo</code>, and <code>Announce</code>. These activities are used in a <a data-link-type="dfn" href="#request-response-pattern①" id="ref-for-request-response-pattern①">request-response pattern</a> communication.</p>
    </ul>
    <p>The following table summarizes the possible activity types according to category.</p>
    <table>
@@ -1960,7 +1960,7 @@ Activities, along with their types, are divided into two categories:</p>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a> 
       <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>, which can be of any of the above types. 
    </table>
-   <h3 class="heading settled" data-level="5.2" id="identifying-an-activity"><span class="secno">5.2. </span><span class="content">Identifying an activity</span><a class="self-link" href="#identifying-an-activity"></a></h3>
+   <h3 class="heading settled" data-level="5.2" id="activity-id"><span class="secno">5.2. </span><span class="content">Identifying an activity</span><a class="self-link" href="#activity-id"></a></h3>
    <p>To establish robust communication on a decentralized artefact exchange network,
 activities have to be at least uniquely indentifyable within the scope of the network.
 Therefore, an identifier of any kind used MUST be a valid <a data-link-type="biblio" href="#biblio-iri">[IRI]</a>.</p>
@@ -1976,7 +1976,7 @@ The <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notifica
 A <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a> SHOULD define an <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier①">activity identifier</a> for every notification. 
 The <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> MUST NOT define or alter the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier②">activity identifier</a> of a received notification.
 He MAY mint any <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier①">notification identifier</a>, which in most cases, is a derivative of the <a data-link-type="dfn">inbox</a> resource <a data-link-type="biblio" href="#biblio-url">[URL]</a>, but can be any <a data-link-type="biblio" href="#biblio-url">[URL]</a> of choice.</p>
-   <h3 class="heading settled" data-level="5.3" id="the-object-of-an-activity"><span class="secno">5.3. </span><span class="content">The object of an activity</span><a class="self-link" href="#the-object-of-an-activity"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id="activity-object"><span class="secno">5.3. </span><span class="content">The object of an activity</span><a class="self-link" href="#activity-object"></a></h3>
    <p>All <a data-link-type="dfn" href="#activity" id="ref-for-activity">activities</a> MUST contain a <a data-link-type="dfn" href="#object" id="ref-for-object①">object</a> using the <code>as:object</code> predicate.
 Depending on the activity type, the <a data-link-type="dfn" href="#object" id="ref-for-object②">object</a> can refer to an <a data-link-type="dfn">artefact</a> or an <a data-link-type="dfn" href="#activity" id="ref-for-activity①">activity</a>.</p>
    <p>Some activities directly impact or refer to an artefact.
@@ -2021,7 +2021,7 @@ The <a data-link-type="dfn" href="#object" id="ref-for-object④">object</a> ide
 its contents MUST be given priority to a dereferenceable description. <a data-link-type="dfn">Receivers</a> MAY also dereference the object’s identifier to retrieve an additional <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band">out-of-band</a> description.
 In case conflicts arise between both descriptions, the most recent description MUST be given priority.
 This can be identified by comparing the last-modified date of the HTTP response with the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑤">activity’s</a> published date in <code>as:published</code>.</p>
-   <h3 class="heading settled" data-level="5.4" id="addressing-the-receiver-and-sender"><span class="secno">5.4. </span><span class="content">Addressing the receiver and sender</span><a class="self-link" href="#addressing-the-receiver-and-sender"></a></h3>
+   <h3 class="heading settled" data-level="5.4" id="activity-addressing"><span class="secno">5.4. </span><span class="content">Addressing the receiver and sender</span><a class="self-link" href="#activity-addressing"></a></h3>
    <p>When a notification is sent to a <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a>,
 it is not directly delivered to a fellow <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a>, but to a related <a data-link-type="dfn">inbox</a>.
 Therefore, the notification’s payload should indicate what <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> it intends to address.
@@ -2053,11 +2053,29 @@ If the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑦">actor</a> doe
 The value MUST be a valid <a href="https://www.w3.org/TR/xmlschema11-2/#dateTime">xsd:dateTime</a>.
 Publication and update values MUST always refer to the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑥">activity</a> and MUST NOT refer to its <a data-link-type="dfn" href="#object" id="ref-for-object⑥">object</a>.</p>
    <h2 class="heading settled" data-level="6" id="one-way-notification-patterns"><span class="secno">6. </span><span class="content">One-way notification patterns</span><a class="self-link" href="#one-way-notification-patterns"></a></h2>
-   <p>This section covers notification patterns using activity types <code>as:Create</code>, <code>as:Remove</code>, <code>as:Update</code>.</p>
-   <h3 class="heading settled" data-level="6.1" id="maintainer-created-a-new-artefact"><span class="secno">6.1. </span><span class="content">Maintainer created a new artefact</span><a class="self-link" href="#maintainer-created-a-new-artefact"></a></h3>
-   <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a> actor: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> object: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> target: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> origin: <a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a></p>
-   <div class="example" id="example-070750d7">
-    <a class="self-link" href="#example-070750d7"></a> Example of a dataset that is being created by an cultural heritage institution: 
+   <p>This section covers notification patterns using activity types <code>as:Create</code>, <code>as:Remove</code>, <code>as:Update</code>.
+The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST contain at least the following properties:</p>
+   <ul>
+    <li data-md>
+     <p><code>id</code>: this MUST contain the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier③">activity identifier</a>, which MUST be a valid <a data-link-type="biblio" href="#biblio-uri">[URI]</a> (see <code class="idl"><a data-link-type="idl">#activity-id</a></code>).</p>
+    <li data-md>
+     <p><code>type</code>: this MUST include one of the types <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Remove">as:Remove</a>, or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Update">as:Update</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
+    <li data-md>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑧">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <code class="idl"><a data-link-type="idl">#activity-addressing</a></code>).</p>
+    <li data-md>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor⑨">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <code class="idl"><a data-link-type="idl">#activity-addressing</a></code>).</p>
+    <li data-md>
+     <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band①">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band①">out-of-band</a> description (see <code class="idl"><a data-link-type="idl">#activity-object</a></code>).</p>
+   </ul>
+   <p>The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload SHOULD also contain the following property:</p>
+   <ul>
+    <li data-md>
+     <p><code>origin</code>: the software component that was responsible for sending the activity over the network. It MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Application">as:Application</a>.</p>
+   </ul>
+   <h3 class="heading settled" data-level="6.1" id="pattern-1-maintainer-has-created-a-new-artefact"><span class="secno">6.1. </span><span class="content">Pattern 1: Maintainer has created a new artefact</span><a class="self-link" href="#pattern-1-maintainer-has-created-a-new-artefact"></a></h3>
+   <p>This pattern is used to disseminate new artefacts.
+A <a data-link-type="dfn">data pod</a> <a data-link-type="dfn">maintainer</a> makes a <a data-link-type="dfn">Service Hub</a> or another <a data-link-type="dfn">maintainer</a> aware of the creation of that artefact,
+without expecting immediate action.</p>
 <pre class="include-code highlight" data-code-show path="examples/create.jsonld"><c- p>{</c->
     <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
       <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
@@ -2082,11 +2100,9 @@ Publication and update values MUST always refer to the <a data-link-type="dfn" h
     <c- p>},</c->
     <c- f>"published"</c-><c- p>:</c-> <c- u>"2014-09-30T12:34:56Z"</c->
   <c- p>}</c-></pre>
-   </div>
-   <h3 class="heading settled" data-level="6.2" id="maintainer-updated-an-existing-artefact"><span class="secno">6.2. </span><span class="content">Maintainer updated an existing artefact</span><a class="self-link" href="#maintainer-updated-an-existing-artefact"></a></h3>
-   <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Update">as:Update</a> actor: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> object: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> target: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> origin: <a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a></p>
-   <div class="example" id="example-43436a86">
-    <a class="self-link" href="#example-43436a86"></a> Example of a dataset that is being updated by an cultural heritage institution: 
+   <h3 class="heading settled" data-level="6.2" id="pattern-2-maintainer-has-updated-an-existing-artefact"><span class="secno">6.2. </span><span class="content">Pattern 2: Maintainer has updated an existing artefact</span><a class="self-link" href="#pattern-2-maintainer-has-updated-an-existing-artefact"></a></h3>
+   <p>This pattern is used to inform involved actors about artefact changes.
+A <a data-link-type="dfn">data pod</a> <a data-link-type="dfn">maintainer</a> informs a <a data-link-type="dfn">Service Hub</a> or another <a data-link-type="dfn">maintainer</a> without obligation that the artefact has been updated and follow-up action might be needed.</p>
 <pre class="include-code highlight" data-code-show path="examples/update.jsonld"><c- p>{</c->
     <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c->
       <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c-> 
@@ -2112,14 +2128,10 @@ Publication and update values MUST always refer to the <a data-link-type="dfn" h
     <c- f>"published"</c-><c- p>:</c-> <c- u>"2021-02-15T12:34:56Z"</c-><c- p>,</c->
     <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
   <c- p>}</c-></pre>
-   </div>
-   <h4 class="heading settled" data-level="6.2.1" id="maintainer-removed-an-artefact"><span class="secno">6.2.1. </span><span class="content">Maintainer removed an artefact</span><a class="self-link" href="#maintainer-removed-an-artefact"></a></h4>
-   <p>A maintainer deletes an artefact.</p>
-   <p>Type: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Delete">as:Delete</a> actor: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> | <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> object: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> target: <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> origin: <a href="https://schema.org/#SoftwareApplication">schema:SoftwareApplication</a></p>
-   <div class="example" id="example-baf5a2b5">
-    <a class="self-link" href="#example-baf5a2b5"></a> Example of a dataset that was by an cultural heritage institution: 
+   <h4 class="heading settled" data-level="6.2.1" id="pattern-3-maintainer-has-removed-an-artefact"><span class="secno">6.2.1. </span><span class="content">Pattern 3: Maintainer has removed an artefact</span><a class="self-link" href="#pattern-3-maintainer-has-removed-an-artefact"></a></h4>
+   <p>This pattern is used to inform involved actors about deleted artefacts.
+A <a data-link-type="dfn">data pod</a> <a data-link-type="dfn">maintainer</a> informs a <a data-link-type="dfn">Service Hub</a> or another <a data-link-type="dfn">maintainer</a> without obligation that an artefact has been removed from the <a data-link-type="dfn">data pod</a> and follow-up action might be needed.</p>
 <pre class="include-code highlight" data-code-show path="examples/remove.jsonld"></pre>
-   </div>
    <h2 class="heading settled" data-level="7" id="request-response-notification-patterns"><span class="secno">7. </span><span class="content">Request-response notification patterns</span><a class="self-link" href="#request-response-notification-patterns"></a></h2>
    <p>This section covers notification patterns using activity types <code>as:Offer</code>, <code>as:Reject</code>, <code>as:Accept</code>, <code>as:Undo</code>, and <code>as:Announce</code>.
 These patterns are used in interactions where a sender sends a notification to a receiver (<dfn data-dfn-type="dfn" data-noexport id="request-notification">request notification<a class="self-link" href="#request-notification"></a></dfn>) and eventually expects to receive a new notification as reply (<dfn data-dfn-type="dfn" data-noexport id="response-notification">response notification<a class="self-link" href="#response-notification"></a></dfn>).</p>
@@ -2133,7 +2145,7 @@ Response notMUST include two additional predicates:</p>
     <li data-md>
      <p><code>as:context</code>: points to the original artefact in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑦">object</a> of the request notification;</p>
     <li data-md>
-     <p><code>as:inReplyTo</code>: points to the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier③">activity identifier</a> of the request notification to which an this activity is a response. The <code>as:inReplyTo</code> is a URL of the previous notification (without further inline predicate)</p>
+     <p><code>as:inReplyTo</code>: points to the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier④">activity identifier</a> of the request notification to which an this activity is a response. The <code>as:inReplyTo</code> is a URL of the previous notification (without further inline predicate)</p>
    </ul>
    <h3 class="heading settled" data-level="7.1" id="a-service-request-with-direct-response"><span class="secno">7.1. </span><span class="content">A service request with direct response</span><a class="self-link" href="#a-service-request-with-direct-response"></a></h3>
    <p>A direct response is about the activity it is replying to and MUST be of type <code>as:Reject</code>, <code>as:Accept</code> or <code>as:Undo</code>.</p>
@@ -2535,6 +2547,12 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
     <li><a href="#ref-for-one-way-pattern①">5.1. Types of activities</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="request-response-pattern①">
+   <b><a href="#request-response-pattern①">#request-response-pattern①</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-request-response-pattern①">5.1. Types of activities</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="activity">
    <b><a href="#activity">#activity</a></b><b>Referenced in:</b>
    <ul>
@@ -2547,6 +2565,7 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
    <ul>
     <li><a href="#ref-for-actor">5. Activities</a> <a href="#ref-for-actor①">(2)</a>
     <li><a href="#ref-for-actor②">5.4. Addressing the receiver and sender</a> <a href="#ref-for-actor③">(2)</a> <a href="#ref-for-actor④">(3)</a> <a href="#ref-for-actor⑤">(4)</a> <a href="#ref-for-actor⑥">(5)</a> <a href="#ref-for-actor⑦">(6)</a>
+    <li><a href="#ref-for-actor⑧">6. One-way notification patterns</a> <a href="#ref-for-actor⑨">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="target">
@@ -2582,19 +2601,22 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
    <b><a href="#activity-identifier">#activity-identifier</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-activity-identifier">5.2. Identifying an activity</a> <a href="#ref-for-activity-identifier①">(2)</a> <a href="#ref-for-activity-identifier②">(3)</a>
-    <li><a href="#ref-for-activity-identifier③">7. Request-response notification patterns</a>
+    <li><a href="#ref-for-activity-identifier③">6. One-way notification patterns</a>
+    <li><a href="#ref-for-activity-identifier④">7. Request-response notification patterns</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="out-of-band">
    <b><a href="#out-of-band">#out-of-band</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-out-of-band">5.3. The object of an activity</a>
+    <li><a href="#ref-for-out-of-band①">6. One-way notification patterns</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="in-band">
    <b><a href="#in-band">#in-band</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-in-band">5.3. The object of an activity</a>
+    <li><a href="#ref-for-in-band①">6. One-way notification patterns</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
