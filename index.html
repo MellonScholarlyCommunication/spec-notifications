@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="a3ec20f679c497ce8018de2257ec4ffe8148453c" name="document-revision">
+  <meta content="1fe35e61081b5c228d7e303e3fdefdf848be80d8" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1501,7 +1501,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">List of notifications</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-04">4 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-12">12 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1519,7 +1519,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 4 October 2021,
+In addition, as of 12 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1727,7 +1727,7 @@ This results in two possible communication patterns:</p>
      </a>
     </switch>
    </svg>
-   <p>The sender of a notification should not expect a direct reply from the receiver.
+   <p>In a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="one-way-pattern①">one-way pattern</dfn>, the sender of a notification should not expect a direct reply from the receiver.
 This style of communication is more informative. 
 A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.</p>
    <h3 class="heading settled" data-level="4.2" id="request-response-pattern"><span class="secno">4.2. </span><span class="content">Request-response pattern</span><a class="self-link" href="#request-response-pattern"></a></h3>
@@ -1859,7 +1859,7 @@ A one-way pattern is used when actors need to be made aware of an activity, but 
      </a>
     </switch>
    </svg>
-   <p>The sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
+   <p>In a <dfn data-dfn-type="dfn" data-noexport id="request-response-pattern①">request-response pattern<a class="self-link" href="#request-response-pattern①"></a></dfn>, the sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
 A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
 and what the resulting action will be.</p>
    <h2 class="heading settled" data-level="5" id="activities"><span class="secno">5. </span><span class="content">Activities</span><a class="self-link" href="#activities"></a></h2>
@@ -1914,9 +1914,9 @@ Therefore, the notification payload MUST be typed as a <code>as:Activity</code> 
 Activities, along with their types, are divided into two categories:</p>
    <ul>
     <li data-md>
-     <p>Activities that are about facts related to an artefact. This includes the types <code>Create</code>, <code>Remove</code>, and <code>Update</code>. These activities are used in a one-way communication pattern.</p>
+     <p>Activities that are about facts related to an artefact. This includes the types <code>Create</code>, <code>Remove</code>, and <code>Update</code>. These activities are used in a <a data-link-type="dfn" href="#one-way-pattern①" id="ref-for-one-way-pattern①">one-way pattern</a> communication.</p>
     <li data-md>
-     <p>Activities that are about requesting services. This includes the types <code>Offer</code>, <code>Reject</code>, <code>Accept</code>, <code>Undo</code>, and <code>Announce</code>. These activities are used in a request–response communication pattern.</p>
+     <p>Activities that are about requesting services. This includes the types <code>Offer</code>, <code>Reject</code>, <code>Accept</code>, <code>Undo</code>, and <code>Announce</code>. These activities are used in a <a data-link-type="dfn">request–response pattern</a> communication.</p>
    </ul>
    <p>The following table summarizes the possible activity types according to category.</p>
    <table>
@@ -2490,9 +2490,11 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
    <li><a href="#in-band">in-band</a><span>, in §5.3</span>
    <li><a href="#notification-identifier">notification identifier</a><span>, in §5.2</span>
    <li><a href="#object">object</a><span>, in §5</span>
+   <li><a href="#one-way-pattern①">one-way pattern</a><span>, in §4.1</span>
    <li><a href="#origin">origin</a><span>, in §5</span>
    <li><a href="#out-of-band">out-of-band</a><span>, in §5.3</span>
    <li><a href="#request-notification">request notification</a><span>, in §7</span>
+   <li><a href="#request-response-pattern①">request-response pattern</a><span>, in §4.2</span>
    <li><a href="#response-notification">response notification</a><span>, in §7</span>
    <li><a href="#target">target</a><span>, in §5</span>
   </ul>
@@ -2527,6 +2529,12 @@ Either a maintainer announces the existence of an artefact to a Service Hub or a
    <div class="issue"> How to define Service Hub types? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18></a><a href="#issue-9d2ca58c"> ↵ </a></div>
    <div class="issue"> fix this section<a href="#issue-fcae3519"> ↵ </a></div>
   </div>
+  <aside class="dfn-panel" data-for="one-way-pattern①">
+   <b><a href="#one-way-pattern①">#one-way-pattern①</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-one-way-pattern①">5.1. Types of activities</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="activity">
    <b><a href="#activity">#activity</a></b><b>Referenced in:</b>
    <ul>
