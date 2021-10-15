@@ -83,9 +83,6 @@ Within this document, the following namespace prefix bindings are used:
       <td>as
       <td>https://www.w3.org/ns/activitystreams#
     <tr>
-      <td>schema
-      <td>https://schema.org
-    <tr>
       <td>ldp
       <td>http://www.w3.org/ns/ldp#
 </table>
@@ -117,7 +114,7 @@ path: images/one-way.svg
 
 In a <dfn>one-way pattern</dfn>, the sender of a notification should not expect a direct reply from the receiver. 
 This style of communication is more informative. 
-A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.
+A one-way pattern is used when another actor needs to be made aware of an activity, but not necessarily needs to respond.
 
 ## Request-response pattern
 
@@ -125,10 +122,10 @@ A one-way pattern is used when actors need to be made aware of an activity, but 
 path: images/request-response.svg
 </pre>
 
-In a <dfn>request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
-A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
-and what the resulting action will be. 
-
+In a <dfn>request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return.
+This style of communication is more transactional. 
+A request-response pattern is used when some service is required from another actor and result of the service attempt is delivered as a response.
+This can include an acknowledgment phase, where before attempting the service, the actor indicates that it is willing to do the attempt or not in an additional response.  
 
 Activities {#activities}
 ===========
@@ -231,7 +228,7 @@ When linking to an activity inside a notification, for instance in a reply, one 
 The [=notification identifier=] MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was origally posted by the [[ldn#sender]].
 A [[ldn#sender]] SHOULD define an [=activity identifier=] for every notification. 
 The [[ldn#receiver]] MUST NOT define or alter the [=activity identifier=] of a received notification.
-He MAY mint any [=notification identifier=], which in most cases, is a derivative of the [=inbox=] resource [[URL]], but can be any [[URL]] of choice.
+The [[ldn#receiver|receiver]] MAY mint any [=notification identifier=], which in most cases, is a derivative of the [=inbox=] resource [[URL]], but can be any [[URL]] of choice.
 
 ## The object of an activity ## {#activity-object}
 
@@ -242,7 +239,7 @@ Some activities directly impact or refer to an artefact.
 Hence, if an [=activity=] is of type `as:Create`,`as:Remove`,`as:Update`,`as:Offer`, or `as:Announce`,
 the object MUST describe the [=artefact=] on which the activity has effect.
 An artefact MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types|ActivityStreams Object Types]].
-Additionally, an artefact SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).
+Additionally, an artefact MAY have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).
 
 <div class=example>
 Example of a document as artefact:
@@ -251,8 +248,8 @@ Example of a document as artefact:
 {
   "@context": "https://www.w3.org/ns/activitystreams/",
   "id": "https://example.org/publications/1",
-  "type": ["Document"],
-  "name": "Dataset about WOII"    
+  "type": "Document",
+  "name": "Publication about WOII"    
 }
 ```
 </div>
@@ -267,9 +264,9 @@ Example of an Offer as object:
 ``` json
 {
   "@context": "https://www.w3.org/ns/activitystreams/",
-  "id": "https://example.org/offers",
-  "type": ["Offer"],
-  "name": "Request to archive dataset about WOII"    
+  "id": "http://example.org/bob/notifications/aa534f09-76ce-4638-ad28-711622c47cc1",
+  "type": "Offer",
+  "name": "Request to archive publication about WOII"    
 }
 ```
 </div>
@@ -292,9 +289,8 @@ This can be identified by comparing the last-modified date of the HTTP response 
 
 ## Addressing the receiver and sender ## {#activity-addressing}
 
-When a notification is sent to a [[ldn#receiver]],
-it is not directly delivered to a fellow [[spec-overview#actor|network actor]], but to a related [=inbox=].
-Therefore, the notification's payload should indicate what [[spec-overview#actor|network actor]] it intends to address.
+A notification that is sent to a [[ldn#receiver]] is delivered to an [=inbox=].
+Since inboxes can be shared by more than one actor, the notification's payload should indicate what [[spec-overview#actor|network actor]] it intends to address.
 Thus, an activity MUST contain a [=target=] using the `as:target` predicate.
 
 Accordingly, the payload should also indicate which [[spec-overview#actor|network actor]] performed the activity.
@@ -308,9 +304,8 @@ They MUST be of the following type:
 
 Issue(18): How to define Service Hub types?
 
-The [=actor=] SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached.
-The [=target=] MAY have such `ldp:inbox`.
-Both the [=target=] and [=actor=] MAY have a name using `as:name`.
+The [=actor=] and [=target=] SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached.
+They MAY have a name using `as:name`.
 
 Lastly, a notification can also provide more information on how the notification got sent.
 Therefore, an activity SHOULD provide an [=origin=] using the `as:origin` predicate.
@@ -440,7 +435,7 @@ The [[JSON-LD]] payload SHOULD also contain the following property:
 - `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
 - `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
 
-Option 1: A Service Hub *accepts* the artefact offered by an actor. 
+Option 1: A Service Hub *accepts* the offer by an actor. 
 
 <pre class=include-code>
 path: examples/direct-response-accept.jsonld
@@ -448,7 +443,7 @@ highlight: json
 show: 
 </pre>
 
-Option 2: A Service Hub *rejects* the artefact offered by an actor. 
+Option 2: A Service Hub *rejects* the offer by an actor. 
 
 <pre class=include-code>
 path: examples/direct-response-reject.jsonld

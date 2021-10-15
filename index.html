@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="3216fb3352842ca00ea8e148bbbda2bc7dad4a62" name="document-revision">
+  <meta content="17d9d7591245b4d61485aaf8fa5cfa2b4e0118f4" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1501,7 +1501,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">List of notifications</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-12">12 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-15">15 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1519,7 +1519,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 12 October 2021,
+In addition, as of 15 October 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1619,9 +1619,6 @@ Payloads can be extended per use case by applying domain-specific vocabularies s
      <tr>
       <td>as 
       <td>https://www.w3.org/ns/activitystreams# 
-     <tr>
-      <td>schema 
-      <td>https://schema.org 
      <tr>
       <td>ldp 
       <td>http://www.w3.org/ns/ldp# 
@@ -1728,126 +1725,145 @@ This results in two possible communication patterns:</p>
    </svg>
    <p>In a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="one-way-pattern①">one-way pattern</dfn>, the sender of a notification should not expect a direct reply from the receiver.
 This style of communication is more informative. 
-A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.</p>
+A one-way pattern is used when another actor needs to be made aware of an activity, but not necessarily needs to respond.</p>
    <h3 class="heading settled" data-level="4.2" id="request-response-pattern"><span class="secno">4.2. </span><span class="content">Request-response pattern</span><a class="self-link" href="#request-response-pattern"></a></h3>
-   <svg content="<mxfile><diagram name=&quot;one-way&quot; id=&quot;908UhZnWfeWfuIsrQv4d&quot;>3VdNc5swEP01PjYDyGByrO00OThj1z407aUjowWUyMgjRGz86yuBMGDIZ/Mxk4tH+6RdtLvv7cgDNNnsLwXextecABs4FtkP0HTgOK5vq18N5CWAnGEJRIKSErJrYEUPYEDLoBklkLYOSs6ZpNs2GPAkgUC2MCwE37WPhZy1v7rFEXSAVYBZF/1FiYxL1HdGNX4FNIqrL9veebmzwdVhk0kaY8J3DQhdDNBEcC7L1WY/AaZrV9XFXy9u59ZyJg9XywNauux6ePWtDPbjJS7HFAQk8m1DozL0PWaZqdcSAqD3IEzOMq8KKXiWENDBrAEa72IqYbXFgd7dKeYoLJYbpixbLUPK2IQzLgpfBDZxYaTwVAp+B42dc2+EsKd2zEVASNifdO6JtO1jLxSHgW9Ailz5mShDy7TP8NdGxt412GCguEGEkcGw4V90jFzXWC1MmV9Q8mGnskAUY43JhYx5xBPMLmp03K59fWbG+dZU/BakzI38cCZ5ux+wp/Kmsf6tQ525xpruTeTCyCsjUeneNI2GlzZrt8Kq/Mr8dFKv6KMqDM9EAI+cc80UwSKCx+Khfl4IYFgqhrcnzVt32e0IawWqhV9GVv7nqcqVy7/8Z3bpzRfkT54Pc8HokTyfoirrJapSxgIEVWmD+E+lFdZpMILTuEjK/gAt+l0t9rbH6ifTm2ux9+NOR4t4zTPZy5gZXqv3T6vLmNEoUetAlUxXeazVRNUL47vZ2FBCSkJBSg94XcTTrdhymsgiG3c8cKdawDyRFSmra3W1ad5CJlL9Amm27WEVPKhZ68zxhqit29J6dh9M7IVOrBOlcuBhmILstO14oddPVb/TyYRLGqpmSMqTTkPVi22rl+oQPD1c1zi4i4qZMM8kowkYnGBxN1deVBa6O7O0LNNyJth6zTRnFjylxSV6iDI7OXAkzPOpdTL51dz3ybBv8vvOGnnvOfkd9+nRP+oZ/d57jX6rK2+Vc4iDrsK/LiHCELwg6CMEGZ2vLesDCfF+fFBm/XernCn1f1Z08Q8=</diagram><diagram name=&quot;request-response&quot; id=&quot;wvXQjPP3Ur-OENx53_RM&quot;>7VnbcptIEP0aPdrFRYD0GAklW1vOxmWlEu1TaoAGJkaMdhhZwl+/DQyCEegSx7a8rn1RTTc9t+4+fXpKA3O63H7iZBV/ZgEkA0MLtgPTHRiGNdLxt1DklcI0hpUi4jSoVHqjmNNHkEpNatc0gEwxFIwlgq5Upc/SFHyh6AjnbKOahSxRd12RCDqKuU+SrvY7DURcaUeG0+j/ABrF9c66Pa6+LEltLG+SxSRgm5bKnA3MKWdMVKPldgpJ4bvaL9biuzubrL5OXNv7y81vkj/vyFW12MdfmbK7AodUPO/StryayGt/QYDukyLjImYRS0kya7QTztZpAMWqGkqNzQ1jK1TqqPwJQuQyF8haMFTFYpnIr7ClYiGnF+O/i/G1Y0nR3ba+uXktpILni3qFQmhPK+RmXinVE6sbFtfaS4gT3pR2GVtzH47YGTKpCY/g2HrDXcog1IAtAQ+J8zgkRNAH9XBEJn20s2sCiwMZ21+IszzkA0nWcqc78AG35Z0EUMO7iamA+YqULthghVBDGdIkmbKE8XKuCXpggYP6THB2D60vY9sxib0LB24sYPuEgHQdKFcZahKmsk7pppQ3LdRLVdwG/Fh7IZ+bl8SWrmDLOBNbmoot49LYGp6JLeOS2Bp2sDUHDOK7QdborQFrfFHSurba0DqOKxRugVO8NvAO1q6tNtr0E1Arpf3FApLF5aX0VwCjcyYYrUuCsW47W2gkHluL3pS5IR42u0qYSUKjFMc++qxw86TAE8V28oP8sKRBUGUUZPSReOV6RSxWjKaivI41GVhuAWGWijorawLuolM2vnKlpt08GbfxUdRq15plmgpy6y7g7EjIxW+Lm7VMWBhmIDqh2p3h6dGzOsHj8M8aMtzMTtAXEw+rqh0Vo5QJGmJgBGVpJ7jYqq+KIRrB6VLrEf8+KgvEl7VIaApSHxB+/wVnUVGCEB1a1N+qQOjFOCny55ZltDxET9Lc7Bnskuf8NNvjAWSBUTDs44GR4Zn2S/KAYZ0mAqeHCOxn4IFP3Pe/ueZXl3z7PIrvftIfj9MrrRP3Sz1e2izgKDSg12xxmAeUnkthAUulAdNpKOOtMcHUzLcLNzCi2yv2MJv/yBfzzau1Zb3Z0X3yYKVFSPzHqeAwEg4C9wpbDWOkUoH+1qnA6aGCbMXSDP7ngpoLCIxCv48LbH8EXviKXIDP71fjgt5ScxkuOPBuPvVsfvEKfl5lPqPS/24vv1c26uyx9zqJ/bSoziVnNZnxgXOSt8xknT28z7B/n49n2qvmOKgO8NQ61xsJvVPn3sF75TBEj7xXDHuovld+k6Py3gnPwljHMNWOJDovJH43mO+Xk8IQbL+XkwJn7GnaS3LSXlXpeZ5Yz0NJKDZ/+1Tp0/x3Zs7+BQ==</diagram></mxfile>" height="291px" version="1.1" viewBox="-0.5 -0.5 401 291" width="401px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+   <svg content="<mxfile><diagram name=&quot;one-way&quot; id=&quot;908UhZnWfeWfuIsrQv4d&quot;>3VdNc9owEP01HJvxBzbkWEiaHMhA4dC0l46w1rYS4WVkOWB+fSVbxnbsISFNJjM5oX1arbW77+2IgTvd7G8E2cZ3SIEPHIvuB+7VwHFs23PUj0byEvHsUQlEglHjVAMrdgADWgbNGIW05SgRuWTbNhhgkkAgWxgRAndttxB5+6tbEkEHWAWEd9FfjMq4RMfOqMZvgUVx9WXbvyx3NqRyNpmkMaG4a0Du9cCdCkRZrjb7KXBdvKou4/XiYW4tZ/Jwuzy4S4/fDW+/lcF+nHPkmIKARL5vaLcM/UR4Zuq1hADYEwiTs8yrQgrMEgo6mDVwJ7uYSVhtSaB3d4o6CovlhivLVsuQcT5FjqI464JNPRgpPJUCH6Gxc+mPXOKrnVfmaGqhLihh3+iwyfkGcANS5MrF7A4t0z7DX9s19q7BBgPFDSKMDEYM/6Jj5LrGamHKfEbJh53KAlWMNSYKGWOECeHXNTpp1772mSFuTcUfQMrcyI9kEtv9gD2T9431bx3qwjPW1d5ELoy8MhKV7n3TaJzSZn2ssKpz53UyxUwEcMLPM0ODiAhOxTNU1sU8yQsBnEjF8Pakee8uex1hrUC18MvIavx5qvLk8i/+zG78+YL+yfNhLjg7sulTVGWdoyplLEAwlTaI/1RaYT0PRkkaF0nZ76/FcVeLvd2wPkuLvbdxOloka8xkL2NmZK0eQK0uE86iRK0DVUNd5YlWCVMvjO9mY8MoLQkFKTuQdRFPt2KLLJFFNt5k4F1pAWMiK1I63eaconZHm8c3k/li61nSp1nrwvGHblu3pfXqPpjYC51YJ0p1AMMwBdlp2/FCb5+q404nE5QsVM2QDJNOQ9WLbauXygleHq5rEjxGxUyYZ5KzBAxOiXicq1NMFrq7sLQs03Im2HrNNWcWmLLiEj1EmT1zOBLm9dR6NvnV3B/TYd/kHztr1//Iye94L4/+Uc/o9z9q9FtdeatcQhJ0Ff51CRGG4AdBHyHo6HJtnf8uezshPo4Pyqz/bpUzpf7T6l7/Aw==</diagram><diagram name=&quot;request-response&quot; id=&quot;wvXQjPP3Ur-OENx53_RM&quot;>7Vpbd6I6GP01PtrFRS59rOLpWed0znhq14x9mhUhQFokTIhV++sngSBEUKnF1jVrnko+ciH59v72btqePlqsbwlIwi/Yg1FPU7x1T3d6mqaqhsZ+8MgmjxiqlQcCgjzRqQxM0SsUQUVEl8iDqdSRYhxRlMhBF8cxdKkUA4TgldzNx5G8agICWAtMXRDVo9+RR8M8amtWGf8boiAsVlbN6/zNAhSdxU7SEHh4VQnp454+IhjT/GmxHsGIH15xLsbsuzMeJg9Dx5z/52zuon/uQT+f7K+3DNlugcCYdju1KbZGN8V5QY8dn2hiQkMc4BhE4zI6JHgZe5DPqrBW2ecO44QFVRZ8gpRuBBbAkmIWCukiEm/hGtGZGM6fH/nzlSFazrryytkUjZiSzayYgDcqo3izHJa1inEeSMPsW1XRmABKIYmziKbwaMvTFVlI8ZK48EA/wRcKSAAPzTfI+/HzriBV5O4W4gVk+2AdCIwARS8ynIFgRbDtV2aePYjkvwEI4qtfQLQUK91DF7JlSQ0hcv5XIaJwmoDsTFashsi59lEUjXCESTZWh6pnQIvFU0rwM6y8uTYtHZhvTgf7QArXBw9wXRQuwWNRyNSC16tKWRChsFIRNEs505nrn0k+VSKf1pJ9isw+7Rj9OubWoCW3tIvi1qDGrSlkSfxtmGVfGrGuP1XVtkr2WKVSM69YYwIJYtuGpMa1Utweq8K3h2pZa3cySf46JqPVkozGRZGxUIEKG8EcL2kjZO7AnNlhKc0gQgF3Dy47RH7MQ84TxPzmjXixQJ6XIwqm6BXMs/l4LhKMYpptxxj2DIdTGMe0QKXWMjvXe9i5ddBiRcmkNrFWuVIMXZeYW9TN1pkQk0/4zipdsO+nkNZStf2G07Nn1JJH4M8lTNliZsSObThnVdUM+FOMKfJZYijCcS25zMsn/JF1gsdL7Ry4z0FWIL4uaYRiuPWT5PkrG4VoRkJ2oLz+5gVC5c8Rx88Epyj7iAbQ3O102IKnPcx2dICpgO0NmnTA1ua6eU4d0IwdIRjUhcBqEALzXDpg1anuPv9BSoEUAG3fbUKK6dpw7p/jt6fTwaTpHwemkb5ZzxxPCyZ9/DKe/tjMpqu+UoPGR5iKPcb7mO8+bga6sisdmwqjbioas9G5w9+RsgKF5k5J24VXviExqkTYDSFgU+kmtH//OrYhr6MrO4DNZzxVTBvPsODk5TuhQ4Tswglp5kB2Qur7jNCmcUAntugQG6qZZIfiA7eezN9Xz3wfmm6jnnnW9Vx5e7FqL1b6bplQ6mJlnEms8CT6NyEvzs3Dz/+tvrmY2hB9klg13utap13sWsckLmUaQW/4XwgyNHNoDhtF4bPudjsXo4Eio0w3tCujlRzVplLNo1Plm6xNdULJakSodjEIrcLTkvCpFtDdf0cjgVZCrCFDVrdK03bQmD0tF0lxDIC43aK6MRVqHdX7VeYD7m1uiet+c/QHB3z7Yof3T+jH6+iCKtqF4aXjEtdwq/cxBvxd6KgbIOYBmXhfopk9BO/3m9k++4VOs6Xi3n+nm+3Uvx6qQNK1XprgOIV/bmva39bshVC74tD6KkZvcLcdXcWwZvkPFTm6yn9L0ce/AA==</diagram></mxfile>" height="291px" version="1.1" viewBox="-0.5 -0.5 511 291" width="511px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
     <defs></defs>
     <g>
-     <path d="M 320 242.5 L 86.37 242.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
-     <path d="M 81.12 242.5 L 88.12 239 L 86.37 242.5 L 88.12 246 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
-     <rect fill="#e1d5e7" height="190" pointer-events="all" stroke="#9673a6" width="80" x="320" y="100"></rect>
+     <path d="M 430 155 L 86.37 155" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="1 1" stroke-miterlimit="10"></path>
+     <path d="M 81.12 155 L 88.12 151.5 L 86.37 155 L 88.12 158.5 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <rect fill="#e1d5e7" height="270" pointer-events="all" stroke="#9673a6" width="80" x="430" y="20"></rect>
      <g transform="translate(-0.5 -0.5)">
       <switch>
        <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 195px; margin-left: 321px;" xmlns="http://www.w3.org/1999/xhtml">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 155px; margin-left: 431px;" xmlns="http://www.w3.org/1999/xhtml">
          <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
           <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Receiver</div>
          </div>
         </div>
        </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="360" y="199">Receiver</text>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="470" y="159">Receiver</text>
       </switch>
      </g>
-     <path d="M 80 147.5 L 313.63 147.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
-     <path d="M 318.88 147.5 L 311.88 151 L 313.63 147.5 L 311.88 144 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
-     <rect fill="#e1d5e7" height="190" pointer-events="all" stroke="#9673a6" width="80" x="0" y="100"></rect>
+     <path d="M 80 87.5 L 423.63 87.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 428.88 87.5 L 421.88 91 L 423.63 87.5 L 421.88 84 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <rect fill="#e1d5e7" height="270" pointer-events="all" stroke="#9673a6" width="80" x="0" y="20"></rect>
      <g transform="translate(-0.5 -0.5)">
       <switch>
        <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 195px; margin-left: 1px;" xmlns="http://www.w3.org/1999/xhtml">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 155px; margin-left: 1px;" xmlns="http://www.w3.org/1999/xhtml">
          <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
           <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Sender</div>
          </div>
         </div>
        </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="40" y="199">Sender</text>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="40" y="159">Sender</text>
       </switch>
      </g>
-     <path d="M 205 210 L 205 166.37" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
-     <path d="M 205 161.12 L 208.5 168.12 L 205 166.37 L 201.5 168.12 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 205 130 L 205 106.37" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 205 101.12 L 208.5 108.12 L 205 106.37 L 201.5 108.12 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
      <g transform="translate(-0.5 -0.5)">
       <switch>
        <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 185px; margin-left: 208px;" xmlns="http://www.w3.org/1999/xhtml">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 115px; margin-left: 208px;" xmlns="http://www.w3.org/1999/xhtml">
          <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
           <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">about</div>
          </div>
         </div>
        </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="208" y="188">about</text>
+       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="208" y="118">about</text>
       </switch>
      </g>
-     <path d="M 170 100 L 225 100 L 240 115 L 240 160 L 170 160 L 170 100 Z" fill="#d5e8d4" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
-     <path d="M 225 100 L 225 115 L 240 115 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
-     <path d="M 225 100 L 225 115 L 240 115" fill="none" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
+     <path d="M 170 40 L 225 40 L 240 55 L 240 100 L 170 100 L 170 40 Z" fill="#d5e8d4" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
+     <path d="M 225 40 L 225 55 L 240 55 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 225 40 L 225 55 L 240 55" fill="none" pointer-events="all" stroke="#82b366" stroke-miterlimit="10"></path>
      <g transform="translate(-0.5 -0.5)">
       <switch>
        <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 130px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 70px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
          <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
           <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">request<br>notification</div>
          </div>
         </div>
        </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="134">request...</text>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="74">request...</text>
       </switch>
      </g>
-     <path d="M 240 225 L 260 225 L 260 37.5 L 236.37 37.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
-     <path d="M 231.12 37.5 L 238.12 34 L 236.37 37.5 L 238.12 41 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 170 130 L 225 130 L 240 145 L 240 190 L 170 190 L 170 130 Z" fill="#dae8fc" pointer-events="all" stroke="#6c8ebf" stroke-dasharray="1 1" stroke-miterlimit="10"></path>
+     <path d="M 225 130 L 225 145 L 240 145 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 225 130 L 225 145 L 240 145" fill="none" pointer-events="all" stroke="#6c8ebf" stroke-dasharray="1 1" stroke-miterlimit="10"></path>
      <g transform="translate(-0.5 -0.5)">
       <switch>
        <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 190px; margin-left: 262px;" xmlns="http://www.w3.org/1999/xhtml">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 160px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
          <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
-          <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">context</div>
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">ack<br>notification</div>
          </div>
         </div>
        </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="262" y="193">context</text>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="164">ack...</text>
       </switch>
      </g>
-     <path d="M 170 210 L 225 210 L 240 225 L 240 270 L 170 270 L 170 210 Z" fill="#dae8fc" pointer-events="all" stroke="#6c8ebf" stroke-miterlimit="10"></path>
-     <path d="M 225 210 L 225 225 L 240 225 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
-     <path d="M 225 210 L 225 225 L 240 225" fill="none" pointer-events="all" stroke="#6c8ebf" stroke-miterlimit="10"></path>
+     <path d="M 205 40 L 205 30 L 273.63 30" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 278.88 30 L 271.88 33.5 L 273.63 30 L 271.88 26.5 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
      <g transform="translate(-0.5 -0.5)">
       <switch>
        <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 240px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
-         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
-          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">response<br>notification</div>
-         </div>
-        </div>
-       </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="244">response...</text>
-      </switch>
-     </g>
-     <path d="M 170 130 L 160 130 L 160 30 L 173.63 30" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
-     <path d="M 178.88 30 L 171.88 33.5 L 173.63 30 L 171.88 26.5 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
-     <g transform="translate(-0.5 -0.5)">
-      <switch>
-       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 60px; margin-left: 160px;" xmlns="http://www.w3.org/1999/xhtml">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 31px; margin-left: 250px;" xmlns="http://www.w3.org/1999/xhtml">
          <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
           <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">about</div>
          </div>
         </div>
        </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="160" y="63">about</text>
+       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="250" y="34">about</text>
       </switch>
      </g>
-     <path d="M 180 0 L 215 0 L 230 15 L 230 60 L 180 60 L 180 0 Z" fill="#ffe6cc" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
-     <path d="M 215 0 L 215 15 L 230 15 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
-     <path d="M 215 0 L 215 15 L 230 15" fill="none" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
+     <path d="M 280 0 L 315 0 L 330 15 L 330 60 L 280 60 L 280 0 Z" fill="#ffe6cc" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
+     <path d="M 315 0 L 315 15 L 330 15 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 315 0 L 315 15 L 330 15" fill="none" pointer-events="all" stroke="#d79b00" stroke-miterlimit="10"></path>
      <g transform="translate(-0.5 -0.5)">
       <switch>
        <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
-        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 48px; height: 1px; padding-top: 30px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 48px; height: 1px; padding-top: 30px; margin-left: 281px;" xmlns="http://www.w3.org/1999/xhtml">
          <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
           <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">artefact</div>
          </div>
         </div>
        </foreignObject>
-       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="34">artefact</text>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="305" y="34">artefact</text>
+      </switch>
+     </g>
+     <path d="M 430 222.5 L 86.37 222.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 81.12 222.5 L 88.12 219 L 86.37 222.5 L 88.12 226 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 240 215 L 350 215 L 350 158 C 353.9 158 353.9 152 350 152 L 350 152 L 350 90.5 C 353.9 90.5 353.9 84.5 350 84.5 L 350 84.5 L 350 37.5 L 336.37 37.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 331.12 37.5 L 338.12 34 L 336.37 37.5 L 338.12 41 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <path d="M 240 145 L 350 145 L 350 37.5 L 336.37 37.5" fill="none" pointer-events="stroke" stroke="#000000" stroke-dasharray="3 3" stroke-miterlimit="10"></path>
+     <path d="M 331.12 37.5 L 338.12 34 L 336.37 37.5 L 338.12 41 Z" fill="#000000" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 147px; margin-left: 297px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-style: italic; background-color: #ffffff; white-space: nowrap; ">context</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="11px" font-style="italic" text-anchor="middle" x="297" y="150">context</text>
+      </switch>
+     </g>
+     <path d="M 170 200 L 225 200 L 240 215 L 240 260 L 170 260 L 170 200 Z" fill="#dae8fc" pointer-events="all" stroke="#6c8ebf" stroke-miterlimit="10"></path>
+     <path d="M 225 200 L 225 215 L 240 215 Z" fill="#000000" fill-opacity="0.05" pointer-events="all" stroke="none"></path>
+     <path d="M 225 200 L 225 215 L 240 215" fill="none" pointer-events="all" stroke="#6c8ebf" stroke-miterlimit="10"></path>
+     <g transform="translate(-0.5 -0.5)">
+      <switch>
+       <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+        <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 230px; margin-left: 171px;" xmlns="http://www.w3.org/1999/xhtml">
+         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+          <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">response<br>notification</div>
+         </div>
+        </div>
+       </foreignObject>
+       <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="205" y="234">response...</text>
       </switch>
      </g>
     </g>
@@ -1858,9 +1874,10 @@ A one-way pattern is used when actors need to be made aware of an activity, but 
      </a>
     </switch>
    </svg>
-   <p>In a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="request-response-pattern①">request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
-A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
-and what the resulting action will be.</p>
+   <p>In a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="request-response-pattern①">request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return.
+This style of communication is more transactional. 
+A request-response pattern is used when some service is required from another actor and result of the service attempt is delivered as a response.
+This can include an acknowledgment phase, where before attempting the service, the actor indicates that it is willing to do the attempt or not in an additional response.</p>
    <h2 class="heading settled" data-level="5" id="activities"><span class="secno">5. </span><span class="content">Activities</span><a class="self-link" href="#activities"></a></h2>
    <p>A notification is sent by a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> to inform another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> about an activity.
 An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="activity">Activity</dfn> is some action that occurred, related to a certain <a data-link-type="dfn">artefact</a> in the network.
@@ -1886,19 +1903,19 @@ Bob (<a data-link-type="dfn" href="#actor" id="ref-for-actor①">actor</a>) noti
   <c- f>"type"</c-><c- p>:</c-> <c- u>"Create"</c-><c- p>,</c->
   <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/activities/1"</c-><c- p>,</c->
   <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/bob"</c-><c- p>,</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/bob#profile"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- p>[</c->
       <c- u>"Person"</c->
     <c- p>],</c->
-    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/joe#inbox"</c-><c- p>,</c->
+    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://example.org/bob/inbox"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Bob"</c->
   <c- p>},</c->
   <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/alice"</c-><c- p>,</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/alice#profile"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- p>[</c->
       <c- u>"Person"</c->
     <c- p>],</c->
-    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://example.org/profiles/alice#inbox"</c-><c- p>,</c->
+    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://example.org/alice/inbox"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Alice"</c->
   <c- p>},</c->
   <c- f>"object"</c-><c- p>:</c-> <c- u>"http://example.org/artefacts/1"</c-><c- p>,</c->
@@ -1978,7 +1995,7 @@ Therefore, an identifier of any kind used MUST be a valid <a data-link-type="bib
 The <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier">notification identifier</a> MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was origally posted by the <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>.
 A <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a> SHOULD define an <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier①">activity identifier</a> for every notification. 
 The <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> MUST NOT define or alter the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier②">activity identifier</a> of a received notification.
-He MAY mint any <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier①">notification identifier</a>, which in most cases, is a derivative of the <a data-link-type="dfn">inbox</a> resource <a data-link-type="biblio" href="#biblio-url">[URL]</a>, but can be any <a data-link-type="biblio" href="#biblio-url">[URL]</a> of choice.</p>
+The <a href="https://www.w3.org/TR/ldn/#receiver">receiver</a> MAY mint any <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier①">notification identifier</a>, which in most cases, is a derivative of the <a data-link-type="dfn">inbox</a> resource <a data-link-type="biblio" href="#biblio-url">[URL]</a>, but can be any <a data-link-type="biblio" href="#biblio-url">[URL]</a> of choice.</p>
    <h3 class="heading settled" data-level="5.3" id="activity-object"><span class="secno">5.3. </span><span class="content">The object of an activity</span><a class="self-link" href="#activity-object"></a></h3>
    <p>All <a data-link-type="dfn" href="#activity" id="ref-for-activity">activities</a> MUST contain a <a data-link-type="dfn" href="#object" id="ref-for-object①">object</a> using the <code>as:object</code> predicate.
 Depending on the activity type, the <a data-link-type="dfn" href="#object" id="ref-for-object②">object</a> can refer to an <a data-link-type="dfn">artefact</a> or an <a data-link-type="dfn" href="#activity" id="ref-for-activity①">activity</a>.</p>
@@ -1986,27 +2003,27 @@ Depending on the activity type, the <a data-link-type="dfn" href="#object" id="r
 Hence, if an <a data-link-type="dfn" href="#activity" id="ref-for-activity②">activity</a> is of type <code>as:Create</code>,<code>as:Remove</code>,<code>as:Update</code>,<code>as:Offer</code>, or <code>as:Announce</code>,
 the object MUST describe the <a data-link-type="dfn">artefact</a> on which the activity has effect.
 An artefact MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the <a href="https://www.w3.org/TR/activitystreams-vocabulary/#object-types">ActivityStreams Object Types</a>.
-Additionally, an artefact SHOULD have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
-   <div class="example" id="example-9e383954">
-    <a class="self-link" href="#example-9e383954"></a> Example of a document as artefact: 
+Additionally, an artefact MAY have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
+   <div class="example" id="example-729079a4">
+    <a class="self-link" href="#example-729079a4"></a> Example of a document as artefact: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
   <c- f>"id"</c-><c- p>:</c-> <c- u>"https://example.org/publications/1"</c-><c- p>,</c->
-  <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Document"</c-><c- p>],</c->
-  <c- f>"name"</c-><c- p>:</c-> <c- u>"Dataset about WOII"</c->    
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"Document"</c-><c- p>,</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Publication about WOII"</c->    
 <c- p>}</c->
 </pre>
    </div>
    <p>Some activities can only exist because of a prior activity, such as a response.
 Hence, if an <a data-link-type="dfn" href="#activity" id="ref-for-activity③">activity</a> is of type <code>as:Reject</code>, <code>as:Accept</code>, or <code>as:Undo</code>, the object MUST be another <a data-link-type="dfn" href="#activity" id="ref-for-activity④">activity</a> with type <code>as:Activity</code>.
 In case of <code>as:Reject</code> and <code>as:Accept</code>, the object SHOULD be an activity typed as <code>as:Offer</code>.</p>
-   <div class="example" id="example-8ba2a1d9">
-    <a class="self-link" href="#example-8ba2a1d9"></a> Example of an Offer as object: 
+   <div class="example" id="example-2e3b8792">
+    <a class="self-link" href="#example-2e3b8792"></a> Example of an Offer as object: 
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
-  <c- f>"id"</c-><c- p>:</c-> <c- u>"https://example.org/offers"</c-><c- p>,</c->
-  <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-><c- u>"Offer"</c-><c- p>],</c->
-  <c- f>"name"</c-><c- p>:</c-> <c- u>"Request to archive dataset about WOII"</c->    
+  <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/bob/notifications/aa534f09-76ce-4638-ad28-711622c47cc1"</c-><c- p>,</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"Offer"</c-><c- p>,</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Request to archive publication about WOII"</c->    
 <c- p>}</c->
 </pre>
    </div>
@@ -2025,9 +2042,8 @@ its contents MUST be given priority to a dereferenceable description. <a data-li
 In case conflicts arise between both descriptions, the most recent description MUST be given priority.
 This can be identified by comparing the last-modified date of the HTTP response with the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑤">activity’s</a> published date in <code>as:published</code>.</p>
    <h3 class="heading settled" data-level="5.4" id="activity-addressing"><span class="secno">5.4. </span><span class="content">Addressing the receiver and sender</span><a class="self-link" href="#activity-addressing"></a></h3>
-   <p>When a notification is sent to a <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a>,
-it is not directly delivered to a fellow <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a>, but to a related <a data-link-type="dfn">inbox</a>.
-Therefore, the notification’s payload should indicate what <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> it intends to address.
+   <p>A notification that is sent to a <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> is delivered to an <a data-link-type="dfn">inbox</a>.
+Since inboxes can be shared by more than one actor, the notification’s payload should indicate what <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> it intends to address.
 Thus, an activity MUST contain a <a data-link-type="dfn" href="#target" id="ref-for-target①">target</a> using the <code>as:target</code> predicate.</p>
    <p>Accordingly, the payload should also indicate which <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> performed the activity.
 Hence, an activity MUST also contain an <a data-link-type="dfn" href="#actor" id="ref-for-actor②">actor</a> using the <code>as:actor</code> predicate.</p>
@@ -2040,9 +2056,8 @@ They MUST be of the following type:</p>
      <p><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Application">as:Application</a> in case the receiving actor is a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#Maintainer">Maintainer</a> and an individual, organization, or a software application, respectively.</p>
    </ul>
    <p class="issue" id="issue-9d2ca58c"><a class="self-link" href="#issue-9d2ca58c"></a> How to define Service Hub types? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18></a></p>
-   <p>The <a data-link-type="dfn" href="#actor" id="ref-for-actor④">actor</a> SHOULD have an <code>ldp:inbox</code> that refers to the inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where the actor can be reached.
-The <a data-link-type="dfn" href="#target" id="ref-for-target③">target</a> MAY have such <code>ldp:inbox</code>.
-Both the <a data-link-type="dfn" href="#target" id="ref-for-target④">target</a> and <a data-link-type="dfn" href="#actor" id="ref-for-actor⑤">actor</a> MAY have a name using <code>as:name</code>.</p>
+   <p>The <a data-link-type="dfn" href="#actor" id="ref-for-actor④">actor</a> and <a data-link-type="dfn" href="#target" id="ref-for-target③">target</a> SHOULD have an <code>ldp:inbox</code> that refers to the inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where the actor can be reached.
+They MAY have a name using <code>as:name</code>.</p>
    <p>Lastly, a notification can also provide more information on how the notification got sent.
 Therefore, an activity SHOULD provide an <a data-link-type="dfn" href="#origin" id="ref-for-origin①">origin</a> using the <code>as:origin</code> predicate.
 It refers to the software component, such as the <a data-link-type="dfn">orchestrator</a>, that was responsible for sending the activity over the network.
@@ -2050,8 +2065,8 @@ Hence, property <code>origin</code> MAY be used to indicate whether a <a data-li
 The <a data-link-type="dfn" href="#origin" id="ref-for-origin②">origin</a> MAY also have an <code>ldp:inbox</code> that refers to an inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where it can be reached.</p>
    <p>When a <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> intends to respond to a notification, thus switching to the role of <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>,
 it should be able to derive a valid <a data-link-type="dfn">inbox</a> URL from the notification payload.
-In this case, it MUST use the value of <code>ldp:inbox</code> in the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑥">actor</a> description.
-If the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑦">actor</a> does not contain a <code>ldp:inbox</code>, the response notification MUST be sent to the <a data-link-type="dfn" href="#origin" id="ref-for-origin③">origin</a>'s <code>ldp:inbox</code>.</p>
+In this case, it MUST use the value of <code>ldp:inbox</code> in the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑤">actor</a> description.
+If the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑥">actor</a> does not contain a <code>ldp:inbox</code>, the response notification MUST be sent to the <a data-link-type="dfn" href="#origin" id="ref-for-origin③">origin</a>'s <code>ldp:inbox</code>.</p>
    <h3 class="heading settled" data-level="5.5" id="interpreting-dates"><span class="secno">5.5. </span><span class="content">Interpreting dates</span><a class="self-link" href="#interpreting-dates"></a></h3>
    <p>An notification payload MAY include a <code>as:published</code> or <code>as:updated</code> predicate to indicate when the activity was published and when it was last updated.
 The value MUST be a valid <a href="https://www.w3.org/TR/xmlschema11-2/#dateTime">xsd:dateTime</a>.
@@ -2065,9 +2080,9 @@ The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST
     <li data-md>
      <p><code>type</code>: this MUST include one of the types <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Remove">as:Remove</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Update">as:Update</a>, or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑧">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑦">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor⑨">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor⑧">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
      <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band①">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band①">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
@@ -2099,6 +2114,11 @@ without expecting immediate action.</p>
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c->
   <c- p>},</c->
+  <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
+  <c- p>},</c->
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
 <c- p>}</c->
 </pre>
@@ -2123,6 +2143,11 @@ A <a data-link-type="dfn">data pod</a> <a data-link-type="dfn">maintainer</a> in
   <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c->
+  <c- p>},</c->
+  <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
   <c- p>},</c->
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c-><c- p>,</c->
   <c- f>"published"</c-><c- p>:</c-> <c- u>"2021-02-15T12:34:56Z"</c->
@@ -2150,6 +2175,11 @@ A <a data-link-type="dfn">maintainer</a> informs a <a data-link-type="dfn">Servi
       <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
       <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c->
     <c- p>},</c->
+    <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
+      <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
+      <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
+    <c- p>},</c->
     <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c-><c- p>,</c->
     <c- f>"published"</c-><c- p>:</c-> <c- u>"2021-02-15T12:34:56Z"</c->
   <c- p>}</c->
@@ -2176,6 +2206,11 @@ A <a data-link-type="dfn">maintainer</a> informs a <a data-link-type="dfn">Servi
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c->
   <c- p>},</c->
+  <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
+    <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
+  <c- p>},</c->
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
 <c- p>}</c-></pre>
    <h2 class="heading settled" data-level="7" id="request-response-notification-patterns"><span class="secno">7. </span><span class="content">Request-response notification patterns</span><a class="self-link" href="#request-response-notification-patterns"></a></h2>
@@ -2200,9 +2235,9 @@ Hence, a direct response is always about the activity it is replying to.</p>
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①⓪">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑨">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①①">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⓪">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
      <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band②">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band②">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
@@ -2245,9 +2280,9 @@ Hence, a direct response is always about the activity it is replying to.</p>
     <li data-md>
      <p><code>type</code>: this MUST include one of the types <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Reject">as:Reject</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Accept">as:Accept</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①②">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①①">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①③">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①②">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
      <p><code>object</code>: the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑦">activity</a> that this new activity is replying on. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑧">activity</a>.</p>
    </ul>
@@ -2260,7 +2295,7 @@ Hence, a direct response is always about the activity it is replying to.</p>
     <li data-md>
      <p><code>origin</code>: the software component that was responsible for sending the activity over the network (eg. the <a data-link-type="dfn">Dashboard</a> or <a data-link-type="dfn">Orchestrator</a> components). It MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Application">as:Application</a>.</p>
    </ul>
-   <p>Option 1: A Service Hub <em>accepts</em> the artefact offered by an actor.</p>
+   <p>Option 1: A Service Hub <em>accepts</em> the offer by an actor.</p>
 <pre class="include-code highlight" data-code-show path="examples/direct-response-accept.jsonld"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Meemoo accepted Alba dataset from Koninklijke Bibliotheek"</c-><c- p>,</c->
@@ -2290,7 +2325,7 @@ Hence, a direct response is always about the activity it is replying to.</p>
   <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
 <c- p>}</c->
 </pre>
-   <p>Option 2: A Service Hub <em>rejects</em> the artefact offered by an actor.</p>
+   <p>Option 2: A Service Hub <em>rejects</em> the offer by an actor.</p>
 <pre class="include-code highlight" data-code-show path="examples/direct-response-reject.jsonld"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Meemoo rejected Alba dataset from Koninklijke Bibliotheek"</c-><c- p>,</c->
@@ -2302,10 +2337,10 @@ Hence, a direct response is always about the activity it is replying to.</p>
     <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
   <c- p>},</c->
   <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
+    <c- f>"id"</c-><c- p>:</c-> <c- u>"https://www.kb.nl#me"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
-    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://meemoo.be/inbox"</c-><c- p>,</c->
-    <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
+    <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://www.kb.nl/inbox"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Koninklijke Bibliotheek"</c->    
   <c- p>},</c->
   <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/offer/123"</c-><c- p>,</c->
@@ -2331,9 +2366,9 @@ Hence, an indirect response is about an <a data-link-type="dfn">artefact</a> tha
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①④">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①③">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑤">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①④">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
      <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band④">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band④">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
@@ -2376,9 +2411,9 @@ Hence, an indirect response is about an <a data-link-type="dfn">artefact</a> tha
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑥">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑤">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑦">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑥">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
      <p><code>object</code>: the <a data-link-type="dfn">artefact</a> that this activity is about, which is a result of or related to the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a> notification. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑤">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑤">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
@@ -2429,9 +2464,9 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑧">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑦">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑨">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑧">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
      <p><code>object</code>: the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑨">activity</a> that this new activity is retracting. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#activity" id="ref-for-activity①⓪">activity</a> and MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>.</p>
    </ul>
@@ -2706,18 +2741,18 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
    <b><a href="#actor">#actor</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-actor">5. Activities</a> <a href="#ref-for-actor①">(2)</a>
-    <li><a href="#ref-for-actor②">5.4. Addressing the receiver and sender</a> <a href="#ref-for-actor③">(2)</a> <a href="#ref-for-actor④">(3)</a> <a href="#ref-for-actor⑤">(4)</a> <a href="#ref-for-actor⑥">(5)</a> <a href="#ref-for-actor⑦">(6)</a>
-    <li><a href="#ref-for-actor⑧">6. One-way notification patterns</a> <a href="#ref-for-actor⑨">(2)</a>
-    <li><a href="#ref-for-actor①⓪">7.1. Pattern 5: A service request with direct response</a> <a href="#ref-for-actor①①">(2)</a> <a href="#ref-for-actor①②">(3)</a> <a href="#ref-for-actor①③">(4)</a>
-    <li><a href="#ref-for-actor①④">7.2. Pattern 6: A service request with indirect response</a> <a href="#ref-for-actor①⑤">(2)</a> <a href="#ref-for-actor①⑥">(3)</a> <a href="#ref-for-actor①⑦">(4)</a>
-    <li><a href="#ref-for-actor①⑧">7.3. Pattern 7: Retracting a prior offer</a> <a href="#ref-for-actor①⑨">(2)</a>
+    <li><a href="#ref-for-actor②">5.4. Addressing the receiver and sender</a> <a href="#ref-for-actor③">(2)</a> <a href="#ref-for-actor④">(3)</a> <a href="#ref-for-actor⑤">(4)</a> <a href="#ref-for-actor⑥">(5)</a>
+    <li><a href="#ref-for-actor⑦">6. One-way notification patterns</a> <a href="#ref-for-actor⑧">(2)</a>
+    <li><a href="#ref-for-actor⑨">7.1. Pattern 5: A service request with direct response</a> <a href="#ref-for-actor①⓪">(2)</a> <a href="#ref-for-actor①①">(3)</a> <a href="#ref-for-actor①②">(4)</a>
+    <li><a href="#ref-for-actor①③">7.2. Pattern 6: A service request with indirect response</a> <a href="#ref-for-actor①④">(2)</a> <a href="#ref-for-actor①⑤">(3)</a> <a href="#ref-for-actor①⑥">(4)</a>
+    <li><a href="#ref-for-actor①⑦">7.3. Pattern 7: Retracting a prior offer</a> <a href="#ref-for-actor①⑧">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="target">
    <b><a href="#target">#target</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-target">5. Activities</a>
-    <li><a href="#ref-for-target①">5.4. Addressing the receiver and sender</a> <a href="#ref-for-target②">(2)</a> <a href="#ref-for-target③">(3)</a> <a href="#ref-for-target④">(4)</a>
+    <li><a href="#ref-for-target①">5.4. Addressing the receiver and sender</a> <a href="#ref-for-target②">(2)</a> <a href="#ref-for-target③">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="origin">

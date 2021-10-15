@@ -9,10 +9,10 @@
     "name": "meemoo"  
   },
   "target": {
-    "id": "http://meemoo.be#me",
+    "id": "https://www.kb.nl#me",
     "type": "Organization",
-    "inbox": "http://meemoo.be/inbox",
-    "name": "meemoo"  
+    "inbox": "https://www.kb.nl/inbox",
+    "name": "Koninklijke Bibliotheek"    
   },
   "object": {
     "id": "http://example.org/offer/123",
