@@ -83,9 +83,6 @@ Within this document, the following namespace prefix bindings are used:
       <td>as
       <td>https://www.w3.org/ns/activitystreams#
     <tr>
-      <td>schema
-      <td>https://schema.org
-    <tr>
       <td>ldp
       <td>http://www.w3.org/ns/ldp#
 </table>
@@ -117,7 +114,7 @@ path: images/one-way.svg
 
 In a <dfn>one-way pattern</dfn>, the sender of a notification should not expect a direct reply from the receiver. 
 This style of communication is more informative. 
-A one-way pattern is used when actors need to be made aware of an activity, but not necessarily need to respond.
+A one-way pattern is used when another actor needs to be made aware of an activity, but not necessarily needs to respond.
 
 ## Request-response pattern
 
@@ -125,10 +122,10 @@ A one-way pattern is used when actors need to be made aware of an activity, but 
 path: images/request-response.svg
 </pre>
 
-In a <dfn>request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return, as a direct reply or as acknowledgment.
-A request-response pattern is used when an actor needs confirmation that the corresponding actor has received the notification,
-and what the resulting action will be. 
-
+In a <dfn>request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return.
+This style of communication is more transactional. 
+A request-response pattern is used when some service is required from another actor and result of the service attempt is delivered as a response.
+This can include an acknowledgment phase, where before attempting the service, the actor indicates that it is willing to do the attempt or not in an additional response.  
 
 Activities {#activities}
 ===========
