@@ -228,7 +228,7 @@ When linking to an activity inside a notification, for instance in a reply, one 
 The [=notification identifier=] MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was origally posted by the [[ldn#sender]].
 A [[ldn#sender]] SHOULD define an [=activity identifier=] for every notification. 
 The [[ldn#receiver]] MUST NOT define or alter the [=activity identifier=] of a received notification.
-He MAY mint any [=notification identifier=], which in most cases, is a derivative of the [=inbox=] resource [[URL]], but can be any [[URL]] of choice.
+The [[ldn#receiver|receiver]] MAY mint any [=notification identifier=], which in most cases, is a derivative of the [=inbox=] resource [[URL]], but can be any [[URL]] of choice.
 
 ## The object of an activity ## {#activity-object}
 
@@ -239,7 +239,7 @@ Some activities directly impact or refer to an artefact.
 Hence, if an [=activity=] is of type `as:Create`,`as:Remove`,`as:Update`,`as:Offer`, or `as:Announce`,
 the object MUST describe the [=artefact=] on which the activity has effect.
 An artefact MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types|ActivityStreams Object Types]].
-Additionally, an artefact SHOULD have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).
+Additionally, an artefact MAY have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).
 
 <div class=example>
 Example of a document as artefact:
@@ -248,8 +248,8 @@ Example of a document as artefact:
 {
   "@context": "https://www.w3.org/ns/activitystreams/",
   "id": "https://example.org/publications/1",
-  "type": ["Document"],
-  "name": "Dataset about WOII"    
+  "type": "Document",
+  "name": "Publication about WOII"    
 }
 ```
 </div>
@@ -264,9 +264,9 @@ Example of an Offer as object:
 ``` json
 {
   "@context": "https://www.w3.org/ns/activitystreams/",
-  "id": "https://example.org/offers",
-  "type": ["Offer"],
-  "name": "Request to archive dataset about WOII"    
+  "id": "http://example.org/bob/notifications/aa534f09-76ce-4638-ad28-711622c47cc1",
+  "type": "Offer",
+  "name": "Request to archive publication about WOII"    
 }
 ```
 </div>
@@ -289,9 +289,8 @@ This can be identified by comparing the last-modified date of the HTTP response 
 
 ## Addressing the receiver and sender ## {#activity-addressing}
 
-When a notification is sent to a [[ldn#receiver]],
-it is not directly delivered to a fellow [[spec-overview#actor|network actor]], but to a related [=inbox=].
-Therefore, the notification's payload should indicate what [[spec-overview#actor|network actor]] it intends to address.
+A notification that is sent to a [[ldn#receiver]] is delivered to an [=inbox=].
+Since inboxes can be shared by more than one actor, the notification's payload should indicate what [[spec-overview#actor|network actor]] it intends to address.
 Thus, an activity MUST contain a [=target=] using the `as:target` predicate.
 
 Accordingly, the payload should also indicate which [[spec-overview#actor|network actor]] performed the activity.
@@ -305,9 +304,8 @@ They MUST be of the following type:
 
 Issue(18): How to define Service Hub types?
 
-The [=actor=] SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached.
-The [=target=] MAY have such `ldp:inbox`.
-Both the [=target=] and [=actor=] MAY have a name using `as:name`.
+The [=actor=] and [=target=] SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached.
+They MAY have a name using `as:name`.
 
 Lastly, a notification can also provide more information on how the notification got sent.
 Therefore, an activity SHOULD provide an [=origin=] using the `as:origin` predicate.

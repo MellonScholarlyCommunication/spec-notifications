@@ -4,19 +4,19 @@
   "type": "Create",
   "id": "http://example.org/activities/1",
   "actor": {
-    "id": "http://example.org/profiles/bob",
+    "id": "http://example.org/bob#profile",
     "type": [
       "Person"
     ],
-    "inbox": "http://example.org/profiles/joe#inbox",
+    "inbox": "http://example.org/bob/inbox",
     "name": "Bob"
   },
   "target": {
-    "id": "http://example.org/profiles/alice",
+    "id": "http://example.org/alice#profile",
     "type": [
       "Person"
     ],
-    "inbox": "http://example.org/profiles/alice#inbox",
+    "inbox": "http://example.org/alice/inbox",
     "name": "Alice"
   },
   "object": "http://example.org/artefacts/1",
