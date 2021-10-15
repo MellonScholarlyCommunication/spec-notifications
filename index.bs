@@ -435,7 +435,7 @@ The [[JSON-LD]] payload SHOULD also contain the following property:
 - `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
 - `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
 
-Option 1: A Service Hub *accepts* the artefact offered by an actor. 
+Option 1: A Service Hub *accepts* the offer by an actor. 
 
 <pre class=include-code>
 path: examples/direct-response-accept.jsonld
@@ -443,7 +443,7 @@ highlight: json
 show: 
 </pre>
 
-Option 2: A Service Hub *rejects* the artefact offered by an actor. 
+Option 2: A Service Hub *rejects* the offer by an actor. 
 
 <pre class=include-code>
 path: examples/direct-response-reject.jsonld
