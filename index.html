@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://mellonscholarlycommunication.github.io/spec-notifications" rel="canonical">
-  <meta content="444fe419023966f85fce05d2a2a06ca58666605d" name="document-revision">
+  <meta content="eee401afb84e21dc603da691f560b77de76d7e05" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1501,7 +1501,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">List of notifications</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-15">15 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-11-16">16 November 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1519,7 +1519,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 15 October 2021,
+In addition, as of 16 November 2021,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1549,7 +1549,6 @@ Parts of this work may be from another specification document.  If so, those par
       <li><a href="#activity-id"><span class="secno">5.2</span> <span class="content">Identifying an activity</span></a>
       <li><a href="#activity-object"><span class="secno">5.3</span> <span class="content">The object of an activity</span></a>
       <li><a href="#activity-addressing"><span class="secno">5.4</span> <span class="content">Addressing the receiver and sender</span></a>
-      <li><a href="#interpreting-dates"><span class="secno">5.5</span> <span class="content">Interpreting dates</span></a>
      </ol>
     <li>
      <a href="#one-way-notification-patterns"><span class="secno">6</span> <span class="content">One-way notification patterns</span></a>
@@ -1562,8 +1561,8 @@ Parts of this work may be from another specification document.  If so, those par
     <li>
      <a href="#request-response-notification-patterns"><span class="secno">7</span> <span class="content">Request-response notification patterns</span></a>
      <ol class="toc">
-      <li><a href="#pattern-5-a-service-request-with-direct-response"><span class="secno">7.1</span> <span class="content">Pattern 5: A service request with direct response</span></a>
-      <li><a href="#pattern-6-a-service-request-with-indirect-response"><span class="secno">7.2</span> <span class="content">Pattern 6: A service request with indirect response</span></a>
+      <li><a href="#pattern-5"><span class="secno">7.1</span> <span class="content">Pattern 5: A service request with acknowledgment</span></a>
+      <li><a href="#pattern-6-a-service-request-with-offer-response"><span class="secno">7.2</span> <span class="content">Pattern 6: A service request with offer response</span></a>
       <li><a href="#pattern-7-retracting-a-prior-offer"><span class="secno">7.3</span> <span class="content">Pattern 7: Retracting a prior offer</span></a>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1725,7 +1724,7 @@ This results in two possible communication patterns:</p>
    </svg>
    <p>In a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="one-way-pattern①">one-way pattern</dfn>, the sender of a notification should not expect a direct reply from the receiver.
 This style of communication is more informative. 
-A one-way pattern is used when another actor needs to be made aware of an activity, but not necessarily needs to respond.</p>
+A one-way pattern is used when the receiving actor needs to be made aware of an activity, but not necessarily needs to respond.</p>
    <h3 class="heading settled" data-level="4.2" id="request-response-pattern"><span class="secno">4.2. </span><span class="content">Request-response pattern</span><a class="self-link" href="#request-response-pattern"></a></h3>
    <svg content="<mxfile><diagram name=&quot;one-way&quot; id=&quot;908UhZnWfeWfuIsrQv4d&quot;>3VdNc9owEP01HJvxBzbkWEiaHMhA4dC0l46w1rYS4WVkOWB+fSVbxnbsISFNJjM5oX1arbW77+2IgTvd7G8E2cZ3SIEPHIvuB+7VwHFs23PUj0byEvHsUQlEglHjVAMrdgADWgbNGIW05SgRuWTbNhhgkkAgWxgRAndttxB5+6tbEkEHWAWEd9FfjMq4RMfOqMZvgUVx9WXbvyx3NqRyNpmkMaG4a0Du9cCdCkRZrjb7KXBdvKou4/XiYW4tZ/Jwuzy4S4/fDW+/lcF+nHPkmIKARL5vaLcM/UR4Zuq1hADYEwiTs8yrQgrMEgo6mDVwJ7uYSVhtSaB3d4o6CovlhivLVsuQcT5FjqI464JNPRgpPJUCH6Gxc+mPXOKrnVfmaGqhLihh3+iwyfkGcANS5MrF7A4t0z7DX9s19q7BBgPFDSKMDEYM/6Jj5LrGamHKfEbJh53KAlWMNSYKGWOECeHXNTpp1772mSFuTcUfQMrcyI9kEtv9gD2T9431bx3qwjPW1d5ELoy8MhKV7n3TaJzSZn2ssKpz53UyxUwEcMLPM0ODiAhOxTNU1sU8yQsBnEjF8Pakee8uex1hrUC18MvIavx5qvLk8i/+zG78+YL+yfNhLjg7sulTVGWdoyplLEAwlTaI/1RaYT0PRkkaF0nZ76/FcVeLvd2wPkuLvbdxOloka8xkL2NmZK0eQK0uE86iRK0DVUNd5YlWCVMvjO9mY8MoLQkFKTuQdRFPt2KLLJFFNt5k4F1pAWMiK1I63eaconZHm8c3k/li61nSp1nrwvGHblu3pfXqPpjYC51YJ0p1AMMwBdlp2/FCb5+q404nE5QsVM2QDJNOQ9WLbauXygleHq5rEjxGxUyYZ5KzBAxOiXicq1NMFrq7sLQs03Im2HrNNWcWmLLiEj1EmT1zOBLm9dR6NvnV3B/TYd/kHztr1//Iye94L4/+Uc/o9z9q9FtdeatcQhJ0Ff51CRGG4AdBHyHo6HJtnf8uezshPo4Pyqz/bpUzpf7T6l7/Aw==</diagram><diagram name=&quot;request-response&quot; id=&quot;wvXQjPP3Ur-OENx53_RM&quot;>7Vpbd6I6GP01PtrFRS59rOLpWed0znhq14x9mhUhQFokTIhV++sngSBEUKnF1jVrnko+ciH59v72btqePlqsbwlIwi/Yg1FPU7x1T3d6mqaqhsZ+8MgmjxiqlQcCgjzRqQxM0SsUQUVEl8iDqdSRYhxRlMhBF8cxdKkUA4TgldzNx5G8agICWAtMXRDVo9+RR8M8amtWGf8boiAsVlbN6/zNAhSdxU7SEHh4VQnp454+IhjT/GmxHsGIH15xLsbsuzMeJg9Dx5z/52zuon/uQT+f7K+3DNlugcCYdju1KbZGN8V5QY8dn2hiQkMc4BhE4zI6JHgZe5DPqrBW2ecO44QFVRZ8gpRuBBbAkmIWCukiEm/hGtGZGM6fH/nzlSFazrryytkUjZiSzayYgDcqo3izHJa1inEeSMPsW1XRmABKIYmziKbwaMvTFVlI8ZK48EA/wRcKSAAPzTfI+/HzriBV5O4W4gVk+2AdCIwARS8ynIFgRbDtV2aePYjkvwEI4qtfQLQUK91DF7JlSQ0hcv5XIaJwmoDsTFashsi59lEUjXCESTZWh6pnQIvFU0rwM6y8uTYtHZhvTgf7QArXBw9wXRQuwWNRyNSC16tKWRChsFIRNEs505nrn0k+VSKf1pJ9isw+7Rj9OubWoCW3tIvi1qDGrSlkSfxtmGVfGrGuP1XVtkr2WKVSM69YYwIJYtuGpMa1Utweq8K3h2pZa3cySf46JqPVkozGRZGxUIEKG8EcL2kjZO7AnNlhKc0gQgF3Dy47RH7MQ84TxPzmjXixQJ6XIwqm6BXMs/l4LhKMYpptxxj2DIdTGMe0QKXWMjvXe9i5ddBiRcmkNrFWuVIMXZeYW9TN1pkQk0/4zipdsO+nkNZStf2G07Nn1JJH4M8lTNliZsSObThnVdUM+FOMKfJZYijCcS25zMsn/JF1gsdL7Ry4z0FWIL4uaYRiuPWT5PkrG4VoRkJ2oLz+5gVC5c8Rx88Epyj7iAbQ3O102IKnPcx2dICpgO0NmnTA1ua6eU4d0IwdIRjUhcBqEALzXDpg1anuPv9BSoEUAG3fbUKK6dpw7p/jt6fTwaTpHwemkb5ZzxxPCyZ9/DKe/tjMpqu+UoPGR5iKPcb7mO8+bga6sisdmwqjbioas9G5w9+RsgKF5k5J24VXviExqkTYDSFgU+kmtH//OrYhr6MrO4DNZzxVTBvPsODk5TuhQ4Tswglp5kB2Qur7jNCmcUAntugQG6qZZIfiA7eezN9Xz3wfmm6jnnnW9Vx5e7FqL1b6bplQ6mJlnEms8CT6NyEvzs3Dz/+tvrmY2hB9klg13utap13sWsckLmUaQW/4XwgyNHNoDhtF4bPudjsXo4Eio0w3tCujlRzVplLNo1Plm6xNdULJakSodjEIrcLTkvCpFtDdf0cjgVZCrCFDVrdK03bQmD0tF0lxDIC43aK6MRVqHdX7VeYD7m1uiet+c/QHB3z7Yof3T+jH6+iCKtqF4aXjEtdwq/cxBvxd6KgbIOYBmXhfopk9BO/3m9k++4VOs6Xi3n+nm+3Uvx6qQNK1XprgOIV/bmva39bshVC74tD6KkZvcLcdXcWwZvkPFTm6yn9L0ce/AA==</diagram></mxfile>" height="291px" version="1.1" viewBox="-0.5 -0.5 511 291" width="511px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
     <defs></defs>
@@ -1876,27 +1875,28 @@ A one-way pattern is used when another actor needs to be made aware of an activi
    </svg>
    <p>In a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="request-response-pattern①">request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return.
 This style of communication is more transactional. 
-A request-response pattern is used when some service is required from another actor and result of the service attempt is delivered as a response.
-This can include an acknowledgment phase, where before attempting the service, the actor indicates that it is willing to do the attempt or not in an additional response.</p>
+A request-response pattern is used when an actor requires some service from another actor, and result of the service attempt is delivered as a response.
+This pattern can include an acknowledgment phase, where before attempting the service, 
+the receiving actor can use an additional response notification to indicate that it will perform the service or not.</p>
    <h2 class="heading settled" data-level="5" id="activities"><span class="secno">5. </span><span class="content">Activities</span><a class="self-link" href="#activities"></a></h2>
-   <p>A notification is sent by a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> to inform another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> about an activity.
-An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="activity">Activity</dfn> is some action that occurred, related to a certain <a data-link-type="dfn">artefact</a> in the network.
-Activities are contained in the notification <strong>payload</strong>.</p>
+   <p>A notification is sent by a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> to inform another <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> about an activity.
+An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="activity">Activity</dfn> is some action that occurred, pertaining to a certain <a data-link-type="dfn">artefact</a> in the network.
+Activities are described by the notification <strong>payload</strong>.</p>
    <p>Notification payloads are expressed in <a data-link-type="biblio" href="#biblio-activitystreams-vocabulary">[activitystreams-vocabulary]</a> and use <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> as default syntax (other RDF syntaxes are allowed as well).
 A payload is uniquely identified, indicates the type of activity it is describing, and includes some descriptive metadata about the activity.
-It also describes the parties involved:</p>
+It also describes the entities involved:</p>
    <ul>
     <li data-md>
-     <p>the actor who performed the activity (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="actor">actor</dfn>);</p>
+     <p>the <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who performed the activity (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="actor">actor</dfn>);</p>
     <li data-md>
      <p>the intended <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a>; ie. the actor who is supposed to receive the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="target">target</dfn>);</p>
     <li data-md>
-     <p>the <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>; ie. software or <a data-link-type="dfn" href="#actor" id="ref-for-actor">actor</a> who was responsible for sending the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="origin">origin</dfn>);</p>
+     <p>the <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>; ie. software or <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who was responsible for sending the notification (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="origin">origin</dfn>);</p>
     <li data-md>
      <p>the artefact or former activity that this activity is about (the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="object">object</dfn>).</p>
    </ul>
    <p>The minimal example below illustrates an interaction between the two <a data-link-type="dfn">human actors</a> Bob and Alice.
-Bob (<a data-link-type="dfn" href="#actor" id="ref-for-actor①">actor</a>) notifies Alice (<a data-link-type="dfn" href="#target" id="ref-for-target">target</a>) using his network dashboard (<a data-link-type="dfn" href="#origin" id="ref-for-origin">origin</a>) to inform her about the artefact (<a data-link-type="dfn" href="#object" id="ref-for-object">object</a>) he created.</p>
+Bob (<a data-link-type="dfn" href="#actor" id="ref-for-actor">actor</a>) notifies Alice (<a data-link-type="dfn" href="#target" id="ref-for-target">target</a>) using his network dashboard (<a data-link-type="dfn" href="#origin" id="ref-for-origin">origin</a>) to inform her about the artefact (<a data-link-type="dfn" href="#object" id="ref-for-object">object</a>) he created.</p>
 <pre class="include-code highlight" data-code-show path="examples/minimal.jsonld"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams"</c-><c- p>,</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Bob created an artefact"</c-><c- p>,</c->
@@ -1923,8 +1923,7 @@ Bob (<a data-link-type="dfn" href="#actor" id="ref-for-actor①">actor</a>) noti
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://example.org/Adlib"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"Dashboard of Bob"</c->
-  <c- p>},</c->
-  <c- f>"published"</c-><c- p>:</c-> <c- u>"2014-09-30T12:34:56Z"</c->
+  <c- p>}</c->
 <c- p>}</c->
 </pre>
    <h3 class="heading settled" data-level="5.1" id="types-of-activities"><span class="secno">5.1. </span><span class="content">Types of activities</span><a class="self-link" href="#types-of-activities"></a></h3>
@@ -1934,9 +1933,9 @@ Therefore, the notification payload MUST be typed as a <code>as:Activity</code> 
 Activities, along with their types, are divided into two categories:</p>
    <ul>
     <li data-md>
-     <p>Activities that are about facts related to an artefact. This includes the types <code>Create</code>, <code>Remove</code>, and <code>Update</code>. These activities are used in a <a data-link-type="dfn" href="#one-way-pattern①" id="ref-for-one-way-pattern①">one-way pattern</a> communication.</p>
+     <p>Activities that are about an artefacts’s state. This includes the types <code>Create</code>, <code>Remove</code>, <code>Update</code>, and <code>Announce</code>. These activities are used in a <a data-link-type="dfn" href="#one-way-pattern①" id="ref-for-one-way-pattern①">one-way pattern</a> communication.</p>
     <li data-md>
-     <p>Activities that are about requesting services. This includes the types <code>Offer</code>, <code>Reject</code>, <code>Accept</code>, <code>Undo</code>, and <code>Announce</code>. These activities are used in a <a data-link-type="dfn" href="#request-response-pattern①" id="ref-for-request-response-pattern①">request-response pattern</a> communication.</p>
+     <p>Activities that pertain to applying value-adding services to an artefact. This includes the types <code>Offer</code>, <code>Reject</code>, <code>Accept</code>, <code>Undo</code>, and <code>Announce</code>. These activities are used in a <a data-link-type="dfn" href="#request-response-pattern①" id="ref-for-request-response-pattern①">request-response pattern</a> communication.</p>
    </ul>
    <p>The following table summarizes the possible activity types according to category.</p>
    <table>
@@ -1946,7 +1945,7 @@ Activities, along with their types, are divided into two categories:</p>
       <th>Purpose 
     <tbody>
      <tr>
-      <th colspan="2">Activities about facts related to an artefact
+      <th colspan="2">Activities about an artefact’s state
      <tr>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a> 
       <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> created an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> in its data pod. 
@@ -1956,51 +1955,54 @@ Activities, along with their types, are divided into two categories:</p>
      <tr>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Remove">as:Remove</a> 
       <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> deletes an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> from its data pod. 
-    <tbody>
-     <tr>
-      <th colspan="2">Activities about requesting services
      <tr>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a> 
       <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> announces the <strong>existence</strong> of an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a>. 
-      This activity is different from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a>, which denotes a fact (ie. the what, when, where and how a new artefact was created).
-      With <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a>, the sender doesn’t say anything about when the artefact was created, but only desires that the consumer is notified about its existence. 
+        This activity is different from <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a>, which denotes a fact (ie. the what, when, where and how a new artefact was created).
+        With <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a>, the sender doesn’t say anything about when the artefact was created, but only desires that the target is notified about its existence. 
+    <tbody>
+     <tr>
+      <th colspan="2">Activities pertain to applying value-adding services
      <tr>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a> 
-      <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> offers an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> to another actor in order to invoke a service. 
+      <td> A <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> offers an <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> to another <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> in order to invoke a service. 
       The execution of this service may lead to a new <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a> with the same artefact as the object. 
      <tr>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Accept">as:Accept</a> 
-      <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> accepts to execute a service on a specified artefact, as requested by another actor.
+      <td> A <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> accepts to execute a service on a specified artefact, as requested by another <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a>.
         This is a direct reply to a received <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. 
      <tr>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Reject">as:Reject</a> 
-      <td> An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> rejects to execute a service on a specified artefact, because it is somehow unable to fulfill the request by another actor.
+      <td> An <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> rejects to execute a service on a specified artefact, because it is somehow unable to fulfill the request by another <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a>.
         This is a direct reply to a received <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. 
      <tr>
+      <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a> 
+      <td>A <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> announces the <a href="http://mellonscholarlycommunication.github.io/spec-overview/#artefact">artefact</a> that resulted from executing a requested service. 
+     <tr>
       <td><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a> 
-      <td>An <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">actor</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>, which can be of any of the above types. 
+      <td>A <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> retracts a prior <a href="http://mellonscholarlycommunication.github.io/spec-overview/#activity">activity</a>, which can be of any of the above types. 
    </table>
    <h3 class="heading settled" data-level="5.2" id="activity-id"><span class="secno">5.2. </span><span class="content">Identifying an activity</span><a class="self-link" href="#activity-id"></a></h3>
    <p>To establish robust communication on a decentralized artefact exchange network,
 activities have to be at least uniquely indentifyable within the scope of the network.
-Therefore, an identifier of any kind used MUST be a valid <a data-link-type="biblio" href="#biblio-iri">[IRI]</a>.</p>
-   <p>There are two identifiers who operate at the level of the notification:</p>
+Therefore, an identifier of any kind used MUST be a valid <a data-link-type="biblio" href="#biblio-uri">[URI]</a>.</p>
+   <p>There are two identifiers that operate at the level of the notification:</p>
    <ul>
     <li data-md>
-     <p>the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="notification-identifier">notification identifier</dfn>, which is the minted <a data-link-type="biblio" href="#biblio-url">[URL]</a> at the end of the target actor as part of the <a data-link-type="dfn">inbox</a>; and</p>
+     <p>the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="notification-identifier">notification identifier</dfn>, which is the <a data-link-type="biblio" href="#biblio-url">[URL]</a> minted by the target when the notification is received in its <a data-link-type="dfn">inbox</a>; and</p>
     <li data-md>
-     <p>the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="activity-identifier">activity identifier</dfn>, which is the <a data-link-type="biblio" href="#biblio-iri">[IRI]</a> enclosed in the notification payload as value of the <code>id</code> property in the activity description.</p>
+     <p>the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="activity-identifier">activity identifier</dfn>, which is the <a data-link-type="biblio" href="#biblio-uri">[URI]</a> enclosed in the notification payload as value of the <code>id</code> property in the activity description.</p>
    </ul>
    <p>When linking to an activity inside a notification, for instance in a reply, one MUST always use the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier">activity identifier</a>.
-The <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier">notification identifier</a> MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was origally posted by the <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>.
+The <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier">notification identifier</a> MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was originally posted to the target’s <a data-link-type="dfn">inbox</a> by the <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>.
 A <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a> SHOULD define an <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier①">activity identifier</a> for every notification. 
 The <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> MUST NOT define or alter the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier②">activity identifier</a> of a received notification.
-The <a href="https://www.w3.org/TR/ldn/#receiver">receiver</a> MAY mint any <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier①">notification identifier</a>, which in most cases, is a derivative of the <a data-link-type="dfn">inbox</a> resource <a data-link-type="biblio" href="#biblio-url">[URL]</a>, but can be any <a data-link-type="biblio" href="#biblio-url">[URL]</a> of choice.</p>
+The <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> MAY mint any <a data-link-type="dfn" href="#notification-identifier" id="ref-for-notification-identifier①">notification identifier</a>, which in most cases, is a derivative of the <a data-link-type="dfn">inbox</a> resource <a data-link-type="biblio" href="#biblio-url">[URL]</a>, but can be any <a data-link-type="biblio" href="#biblio-url">[URL]</a> of choice.</p>
    <h3 class="heading settled" data-level="5.3" id="activity-object"><span class="secno">5.3. </span><span class="content">The object of an activity</span><a class="self-link" href="#activity-object"></a></h3>
    <p>All <a data-link-type="dfn" href="#activity" id="ref-for-activity">activities</a> MUST contain a <a data-link-type="dfn" href="#object" id="ref-for-object①">object</a> using the <code>as:object</code> predicate.
 Depending on the activity type, the <a data-link-type="dfn" href="#object" id="ref-for-object②">object</a> can refer to an <a data-link-type="dfn">artefact</a> or an <a data-link-type="dfn" href="#activity" id="ref-for-activity①">activity</a>.</p>
    <p>Some activities directly impact or refer to an artefact.
-Hence, if an <a data-link-type="dfn" href="#activity" id="ref-for-activity②">activity</a> is of type <code>as:Create</code>,<code>as:Remove</code>,<code>as:Update</code>,<code>as:Offer</code>, or <code>as:Announce</code>,
+Hence, if an <a data-link-type="dfn" href="#activity" id="ref-for-activity②">activity</a> is of type <code>as:Create</code>, <code>as:Remove</code>, <code>as:Update</code>, <code>as:Offer</code>, or <code>as:Announce</code>,
 the object MUST describe the <a data-link-type="dfn">artefact</a> on which the activity has effect.
 An artefact MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Object">as:Object</a> or one of the <a href="https://www.w3.org/TR/activitystreams-vocabulary/#object-types">ActivityStreams Object Types</a>.
 Additionally, an artefact MAY have additional types imposed by the application domain (e.g., <code>schema:Dataset</code> in a cultural heritage network or <code>schema:Document</code> in a scholarly communication network).</p>
@@ -2033,21 +2035,22 @@ The <a data-link-type="dfn" href="#object" id="ref-for-object④">object</a> ide
    <p>A description of the object SHOULD be delivered in one of two methods:</p>
    <ul>
     <li data-md>
-     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="out-of-band">out-of-band</dfn>: an RDF description is available by dereferencing the <a data-link-type="dfn" href="#object" id="ref-for-object⑤">object</a> identifier;</p>
+     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="out-of-band">out-of-band</dfn>: a machine-actionable description is available by dereferencing the <a data-link-type="dfn" href="#object" id="ref-for-object⑤">object</a> identifier;</p>
     <li data-md>
      <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="in-band">in-band</dfn>: the object is described as part of the notification payload.</p>
    </ul>
-   <p>If a description is given <a data-link-type="dfn" href="#in-band" id="ref-for-in-band">in-band</a>,
-its contents MUST be given priority to a dereferenceable description. <a data-link-type="dfn">Receivers</a> MAY also dereference the object’s identifier to retrieve an additional <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band">out-of-band</a> description.
-In case conflicts arise between both descriptions, the most recent description MUST be given priority.
-This can be identified by comparing the last-modified date of the HTTP response with the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑤">activity’s</a> published date in <code>as:published</code>.</p>
+   <p>Whether an implementations gives priority to <a data-link-type="dfn" href="#in-band" id="ref-for-in-band">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band">out-of-band</a> is left up to the implementor.</p>
+   <p><strong class="advisement"> As a general recommendation, 
+it is recommended to give an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band①">in-band</a> description priority to a dereferenceable <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band①">out-of-band</a> description. <a data-link-type="dfn">Receivers</a> may of course dereference the object’s identifier to retrieve an additional description as well.
+However, in case conflicts arise between both descriptions, the most recent description should be given priority.
+This can be identified by comparing the last-modified date of the HTTP response with the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑤">activity’s</a> published date in <code>as:published</code>.</strong></p>
    <h3 class="heading settled" data-level="5.4" id="activity-addressing"><span class="secno">5.4. </span><span class="content">Addressing the receiver and sender</span><a class="self-link" href="#activity-addressing"></a></h3>
    <p>A notification that is sent to a <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> is delivered to an <a data-link-type="dfn">inbox</a>.
 Since inboxes can be shared by more than one actor, the notification’s payload should indicate what <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> it intends to address.
 Thus, an activity MUST contain a <a data-link-type="dfn" href="#target" id="ref-for-target①">target</a> using the <code>as:target</code> predicate.</p>
    <p>Accordingly, the payload should also indicate which <a href="http://mellonscholarlycommunication.github.io/spec-overview/#actor">network actor</a> performed the activity.
-Hence, an activity MUST also contain an <a data-link-type="dfn" href="#actor" id="ref-for-actor②">actor</a> using the <code>as:actor</code> predicate.</p>
-   <p>Both the <a data-link-type="dfn" href="#target" id="ref-for-target②">target</a> and <a data-link-type="dfn" href="#actor" id="ref-for-actor③">actor</a> MUST be identifyable with an HTTP URI, which SHOULD be a <a data-link-type="biblio" href="#biblio-webid">WebID</a>.
+Hence, an activity MUST also contain an <a data-link-type="dfn" href="#actor" id="ref-for-actor①">actor</a> using the <code>as:actor</code> predicate.</p>
+   <p>Both the <a data-link-type="dfn" href="#target" id="ref-for-target②">target</a> and <a data-link-type="dfn" href="#actor" id="ref-for-actor②">actor</a> MUST be identifyable with an HTTP <a data-link-type="biblio" href="#biblio-uri">[URI]</a>, which SHOULD be a <a data-link-type="biblio" href="#biblio-webid">WebID</a>.
 They MUST be of the following type:</p>
    <ul>
     <li data-md>
@@ -2056,7 +2059,7 @@ They MUST be of the following type:</p>
      <p><a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Application">as:Application</a> in case the receiving actor is a <a href="http://mellonscholarlycommunication.github.io/spec-overview/#Maintainer">Maintainer</a> and an individual, organization, or a software application, respectively.</p>
    </ul>
    <p class="issue" id="issue-9d2ca58c"><a class="self-link" href="#issue-9d2ca58c"></a> How to define Service Hub types? <a href="https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18">&lt;https://github.com/MellonScholarlyCommunication/spec-notifications/issues/18></a></p>
-   <p>The <a data-link-type="dfn" href="#actor" id="ref-for-actor④">actor</a> and <a data-link-type="dfn" href="#target" id="ref-for-target③">target</a> SHOULD have an <code>ldp:inbox</code> that refers to the inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where the actor can be reached.
+   <p>The <a data-link-type="dfn" href="#actor" id="ref-for-actor③">actor</a> and <a data-link-type="dfn" href="#target" id="ref-for-target③">target</a> SHOULD have an <code>ldp:inbox</code> that refers to the inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where the actor can be reached.
 They MAY have a name using <code>as:name</code>.</p>
    <p>Lastly, a notification can also provide more information on how the notification got sent.
 Therefore, an activity SHOULD provide an <a data-link-type="dfn" href="#origin" id="ref-for-origin①">origin</a> using the <code>as:origin</code> predicate.
@@ -2064,13 +2067,14 @@ It refers to the software component, such as the <a data-link-type="dfn">orchest
 Hence, property <code>origin</code> MAY be used to indicate whether a <a data-link-type="dfn">Dashboard</a> or an <a data-link-type="dfn">Orchestrator</a> was involved in performing the activity and sending then notification. 
 The <a data-link-type="dfn" href="#origin" id="ref-for-origin②">origin</a> MAY also have an <code>ldp:inbox</code> that refers to an inbox <a data-link-type="biblio" href="#biblio-uri">[URI]</a> where it can be reached.</p>
    <p>When a <a href="https://www.w3.org/TR/ldn/#receiver">Linked Data Notifications §receiver</a> intends to respond to a notification, thus switching to the role of <a href="https://www.w3.org/TR/ldn/#sender">Linked Data Notifications §sender</a>,
-it should be able to derive a valid <a data-link-type="dfn">inbox</a> URL from the notification payload.
-In this case, it MUST use the value of <code>ldp:inbox</code> in the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑤">actor</a> description.
-If the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑥">actor</a> does not contain a <code>ldp:inbox</code>, the response notification MUST be sent to the <a data-link-type="dfn" href="#origin" id="ref-for-origin③">origin</a>'s <code>ldp:inbox</code>.</p>
-   <h3 class="heading settled" data-level="5.5" id="interpreting-dates"><span class="secno">5.5. </span><span class="content">Interpreting dates</span><a class="self-link" href="#interpreting-dates"></a></h3>
-   <p>An notification payload MAY include a <code>as:published</code> or <code>as:updated</code> predicate to indicate when the activity was published and when it was last updated.
-The value MUST be a valid <a href="https://www.w3.org/TR/xmlschema11-2/#dateTime">xsd:dateTime</a>.
-Publication and update values MUST always refer to the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑥">activity</a> and MUST NOT refer to its <a data-link-type="dfn" href="#object" id="ref-for-object⑥">object</a>.</p>
+it MUST send the response notification to all discovered <a data-link-type="dfn">inbox</a> URLs.
+A valid <a data-link-type="dfn">inbox</a> URL MUST be discovered from:</p>
+   <ul>
+    <li data-md>
+     <p>the value of <code>ldp:inbox</code> in the <a data-link-type="dfn" href="#origin" id="ref-for-origin③">origin</a> or <a data-link-type="dfn" href="#actor" id="ref-for-actor④">actor</a> description contained in the notification payload</p>
+    <li data-md>
+     <p>the <code>Link:</code> relation in the HTTP response headers of type <code>http://www.w3.org/ns/ldp#inbox</code> when dereferencing the IRI identifying the <a data-link-type="dfn" href="#origin" id="ref-for-origin④">origin</a> or <a data-link-type="dfn" href="#actor" id="ref-for-actor⑤">actor</a>; as defined in <a href="https://www.w3.org/TR/ldn/#discovery">Linked Data Notifications §discovery</a>.</p>
+   </ul>
    <h2 class="heading settled" data-level="6" id="one-way-notification-patterns"><span class="secno">6. </span><span class="content">One-way notification patterns</span><a class="self-link" href="#one-way-notification-patterns"></a></h2>
    <p>This section covers notification patterns using activity types <code>as:Create</code>, <code>as:Remove</code>, <code>as:Update</code>, and <code>as:Announce</code>.
 The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST contain at least the following properties:</p>
@@ -2080,11 +2084,11 @@ The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST
     <li data-md>
      <p><code>type</code>: this MUST include one of the types <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Create">as:Create</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Remove">as:Remove</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Update">as:Update</a>, or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑦">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor⑧">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band①">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band①">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
+     <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide either an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band②">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band②">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
    <p>The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload SHOULD also contain the following property:</p>
    <ul>
@@ -2118,8 +2122,7 @@ without expecting immediate action.</p>
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
-  <c- p>},</c->
-  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+  <c- p>}</c->
 <c- p>}</c->
 </pre>
    <h3 class="heading settled" data-level="6.2" id="pattern-2-maintainer-has-updated-an-existing-artefact"><span class="secno">6.2. </span><span class="content">Pattern 2: Maintainer has updated an existing artefact</span><a class="self-link" href="#pattern-2-maintainer-has-updated-an-existing-artefact"></a></h3>
@@ -2148,9 +2151,7 @@ A <a data-link-type="dfn">data pod</a> <a data-link-type="dfn">maintainer</a> in
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
-  <c- p>},</c->
-  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c-><c- p>,</c->
-  <c- f>"published"</c-><c- p>:</c-> <c- u>"2021-02-15T12:34:56Z"</c->
+  <c- p>}</c->
 <c- p>}</c->
 </pre>
    <h3 class="heading settled" data-level="6.3" id="pattern-3-maintainer-has-removed-an-artefact"><span class="secno">6.3. </span><span class="content">Pattern 3: Maintainer has removed an artefact</span><a class="self-link" href="#pattern-3-maintainer-has-removed-an-artefact"></a></h3>
@@ -2179,9 +2180,7 @@ A <a data-link-type="dfn">maintainer</a> informs a <a data-link-type="dfn">Servi
       <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
       <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
       <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
-    <c- p>},</c->
-    <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c-><c- p>,</c->
-    <c- f>"published"</c-><c- p>:</c-> <c- u>"2021-02-15T12:34:56Z"</c->
+    <c- p>}</c->
   <c- p>}</c->
   </pre>
    <h3 class="heading settled" data-level="6.4" id="pattern-4-maintainer-draws-attention-to-an-artefact"><span class="secno">6.4. </span><span class="content">Pattern 4: Maintainer draws attention to an artefact</span><a class="self-link" href="#pattern-4-maintainer-draws-attention-to-an-artefact"></a></h3>
@@ -2210,24 +2209,23 @@ A <a data-link-type="dfn">maintainer</a> informs a <a data-link-type="dfn">Servi
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
-  <c- p>},</c->
-  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+  <c- p>}</c->
 <c- p>}</c-></pre>
    <h2 class="heading settled" data-level="7" id="request-response-notification-patterns"><span class="secno">7. </span><span class="content">Request-response notification patterns</span><a class="self-link" href="#request-response-notification-patterns"></a></h2>
    <p>This section covers notification patterns using activity types <code>as:Offer</code>, <code>as:Reject</code>, <code>as:Accept</code>, <code>as:Undo</code>, and <code>as:Announce</code>.
 These patterns are used in interactions where a sender sends a notification to a receiver (<dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="request-notification">request notification</dfn>) and eventually expects to receive a new notification as reply (<dfn data-dfn-type="dfn" data-noexport id="response-notification">response notification<a class="self-link" href="#response-notification"></a></dfn>).</p>
-   <p>An actor employs a <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification">request notification</a> to offer one of its <a data-link-type="dfn">artefacts</a> for some activity to be conducted by a second actor.
+   <p>A <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> employs a <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification">request notification</a> to offer one of its <a data-link-type="dfn">artefacts</a> for some value-added service to be conducted by a second <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a>.
 Therefore, the enclosed activity is always of type <code>as:Offer</code>.
-The receiving actor can decide to respond in a direct or indirect way:</p>
+The receiving <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> can decide to respond in a direct or indirect way:</p>
    <ul>
     <li data-md>
-     <p>a <dfn data-dfn-type="dfn" data-noexport id="direct-reponse-notification">direct reponse notification<a class="self-link" href="#direct-reponse-notification"></a></dfn> is about accepting or rejecting the offer in the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification①">request notification</a>. For example, a scholar accepts a review request from a fellow peer; the review still needs to be done when the response is issued.</p>
+     <p>a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="offer-acknowledgment-notification">offer acknowledgment notification</dfn> is about accepting or rejecting the offer in the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification①">request notification</a>. For example, a journal accepts a review request from a researcher; the review still needs to be done when the response is issued.</p>
     <li data-md>
-     <p>an <dfn data-dfn-type="dfn" data-noexport id="indirect-reponse-notification">indirect reponse notification<a class="self-link" href="#indirect-reponse-notification"></a></dfn> is a follow-up activity that is a result of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification②">request notification</a>, but does not directly address it. For example, a scholar announces a new review after receiving a review request from a fellow peer; the revies has been done when the response is issued.</p>
+     <p>an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="offer-response-notification">offer response notification</dfn> is a follow-up activity that is a result of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification②">request notification</a>, but does not directly address it. For example, a journal announces a new review after receiving a review request from a fellow peer; the reviews has been done when the response is issued.</p>
    </ul>
-   <h3 class="heading settled" data-level="7.1" id="pattern-5-a-service-request-with-direct-response"><span class="secno">7.1. </span><span class="content">Pattern 5: A service request with direct response</span><a class="self-link" href="#pattern-5-a-service-request-with-direct-response"></a></h3>
+   <h3 class="heading settled" data-level="7.1" id="pattern-5"><span class="secno">7.1. </span><span class="content">Pattern 5: A service request with acknowledgment</span><a class="self-link" href="#pattern-5"></a></h3>
    <p>This pattern is used where a service is requested and immediate acknowledgment is required, eg. to provide guarentees that the service will be conducted.
-Hence, a direct response is always about the activity it is replying to.</p>
+Hence, an <a data-link-type="dfn" href="#offer-acknowledgment-notification" id="ref-for-offer-acknowledgment-notification">offer acknowledgment notification</a> is always about the activity it is replying to.</p>
    <p>A request <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST contain at least the following properties:</p>
    <ul>
     <li data-md>
@@ -2235,11 +2233,11 @@ Hence, a direct response is always about the activity it is replying to.</p>
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor⑨">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⓪">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band②">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band②">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
+     <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band③">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band③">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
    <p>The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload SHOULD also contain the following property:</p>
    <ul>
@@ -2270,8 +2268,7 @@ Hence, a direct response is always about the activity it is replying to.</p>
       <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
       <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
       <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
-    <c- p>},</c->
-    <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+    <c- p>}</c->
   <c- p>}</c-></pre>
    <p>A response <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST contain at least the following properties:</p>
    <ul>
@@ -2280,22 +2277,22 @@ Hence, a direct response is always about the activity it is replying to.</p>
     <li data-md>
      <p><code>type</code>: this MUST include one of the types <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Reject">as:Reject</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Accept">as:Accept</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①①">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①②">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>object</code>: the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑦">activity</a> that this new activity is replying on. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑧">activity</a>.</p>
+     <p><code>object</code>: the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑥">activity</a> that this new activity is replying on. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑦">activity</a>.</p>
    </ul>
    <p>The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload SHOULD also contain the following property:</p>
    <ul>
     <li data-md>
-     <p><code>inReplyTo</code>: points to the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier⑥">activity identifier</a> of the request notification to which this activity is a response. In a direct response, this MUST be equivalent to the value of the <code>object</code> property. It MUST be a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> and MAY NOT have further in-band description.</p>
+     <p><code>inReplyTo</code>: points to the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier⑥">activity identifier</a> of the request notification to which this activity is a response. In an <a data-link-type="dfn" href="#offer-acknowledgment-notification" id="ref-for-offer-acknowledgment-notification①">offer acknowledgment notification</a>, this MUST be equivalent to the value of the <code>object</code> property. It MUST be a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> and MAY NOT have further in-band description.</p>
     <li data-md>
-     <p><code>context</code>: the original <a data-link-type="dfn">artefact</a> in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑦">object</a> of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification③">request notification</a>. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band③">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band③">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
+     <p><code>context</code>: the original <a data-link-type="dfn">artefact</a> in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑥">object</a> of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification③">request notification</a>. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band④">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band④">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
     <li data-md>
      <p><code>origin</code>: the software component that was responsible for sending the activity over the network (eg. the <a data-link-type="dfn">Dashboard</a> or <a data-link-type="dfn">Orchestrator</a> components). It MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Application">as:Application</a>.</p>
    </ul>
-   <p>Option 1: A Service Hub <em>accepts</em> the offer by an actor.</p>
+   <p>Option 1: A Service Hub <em>accepts</em> the offer by a Maintainer (or Service Hub).</p>
 <pre class="include-code highlight" data-code-show path="examples/direct-response-accept.jsonld"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Meemoo accepted Alba dataset from Koninklijke Bibliotheek"</c-><c- p>,</c->
@@ -2321,8 +2318,7 @@ Hence, a direct response is always about the activity it is replying to.</p>
   <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#orchestrator"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c->
-  <c- p>},</c->
-  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+  <c- p>}</c->
 <c- p>}</c->
 </pre>
    <p>Option 2: A Service Hub <em>rejects</em> the offer by an actor.</p>
@@ -2351,14 +2347,13 @@ Hence, a direct response is always about the activity it is replying to.</p>
   <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#orchestrator"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c->
-  <c- p>},</c->
-  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+  <c- p>}</c->
 <c- p>}</c-></pre>
-   <h3 class="heading settled" data-level="7.2" id="pattern-6-a-service-request-with-indirect-response"><span class="secno">7.2. </span><span class="content">Pattern 6: A service request with indirect response</span><a class="self-link" href="#pattern-6-a-service-request-with-indirect-response"></a></h3>
+   <h3 class="heading settled" data-level="7.2" id="pattern-6-a-service-request-with-offer-response"><span class="secno">7.2. </span><span class="content">Pattern 6: A service request with offer response</span><a class="self-link" href="#pattern-6-a-service-request-with-offer-response"></a></h3>
    <p>This pattern is used where a service is requested and no immediate acknowledgment is required,
 as long as a follow-up activity is eventually returned, ie. 
 a <a data-link-type="dfn">service hub</a> informs a <a data-link-type="dfn">maintainer</a> that it processed an <a data-link-type="dfn">artefact</a> as a result or a prior offer.
-Hence, an indirect response is about an <a data-link-type="dfn">artefact</a> that is somehow related to the activity in the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification④">request notification</a>.</p>
+Hence, an <a data-link-type="dfn" href="#offer-response-notification" id="ref-for-offer-response-notification">offer response notification</a> is about an <a data-link-type="dfn">artefact</a> that is somehow related to the activity in the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification④">request notification</a>.</p>
    <p>A request <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST contain at least the following properties:</p>
    <ul>
     <li data-md>
@@ -2366,11 +2361,11 @@ Hence, an indirect response is about an <a data-link-type="dfn">artefact</a> tha
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①③">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who created the notification and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①④">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band④">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band④">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
+     <p><code>object</code>: the artefact that this activity is about. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑤">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑤">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
    <p>The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload SHOULD also contain the following property:</p>
    <ul>
@@ -2401,35 +2396,34 @@ Hence, an indirect response is about an <a data-link-type="dfn">artefact</a> tha
       <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
       <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
       <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->  
-    <c- p>},</c->
-    <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+    <c- p>}</c->
   <c- p>}</c-></pre>
-   <p>A indirect response <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST contain at least the following properties:</p>
+   <p>An <a data-link-type="dfn" href="#offer-response-notification" id="ref-for-offer-response-notification①">offer response notification</a> <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload MUST contain at least the following properties:</p>
    <ul>
     <li data-md>
      <p><code>id</code>: this MUST contain the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier⑧">activity identifier</a>, which MUST be a valid <a data-link-type="biblio" href="#biblio-uri">[URI]</a> (see <a href="#activity-id">§ 5.2 Identifying an activity</a>).</p>
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Announce">as:Announce</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑤">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑥">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>object</code>: the <a data-link-type="dfn">artefact</a> that this activity is about, which is a result of or related to the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a> notification. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑤">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑤">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
+     <p><code>object</code>: the <a data-link-type="dfn">artefact</a> that this activity is about, which is a result of or related to the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a> notification. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑥">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑥">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
    </ul>
    <p>The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload SHOULD also contain the following property:</p>
    <ul>
     <li data-md>
      <p><code>inReplyTo</code>: points to the <a data-link-type="dfn" href="#activity-identifier" id="ref-for-activity-identifier⑨">activity identifier</a> of the request notification to which this activity is a response. This MUST be a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> and MAY NOT have further in-band description.</p>
     <li data-md>
-     <p><code>context</code>: the original <a data-link-type="dfn">artefact</a> in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑧">object</a> of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification⑤">request notification</a>. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑥">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑥">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>). In cases where there is only a single artefact (eg. an artefact has been archived on request), this MAY equivalent to the artefact in the <code>object</code> property.</p>
+     <p><code>context</code>: the original <a data-link-type="dfn">artefact</a> in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑦">object</a> of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification⑤">request notification</a>. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑦">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑦">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>). In cases where there is only a single artefact (eg. an artefact has been archived on request), this MAY equivalent to the artefact in the <code>object</code> property.</p>
     <li data-md>
      <p><code>origin</code>: the software component that was responsible for sending the activity over the network (eg. the <a data-link-type="dfn">Dashboard</a> or <a data-link-type="dfn">Orchestrator</a> components). It MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Application">as:Application</a>.</p>
    </ul>
 <pre class="include-code highlight" data-code-show path="examples/indirect-response-announce.jsonld"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams/"</c-><c- p>,</c->
   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Meemoo accepted Alba dataset from Koninklijke Bibliotheek"</c-><c- p>,</c->
-  <c- f>"type"</c-><c- p>:</c-> <c- u>"Accept"</c-><c- p>,</c->
+  <c- f>"type"</c-><c- p>:</c-> <c- u>"Announce"</c-><c- p>,</c->
   <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#me"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
@@ -2451,8 +2445,7 @@ Hence, an indirect response is about an <a data-link-type="dfn">artefact</a> tha
   <c- f>"origin"</c-><c- p>:</c-> <c- p>{</c->
     <c- f>"id"</c-><c- p>:</c-> <c- u>"http://meemoo.be#orchestrator"</c-><c- p>,</c->
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Application"</c->
-  <c- p>},</c->
-  <c- f>"updated"</c-><c- p>:</c-> <c- u>"2021-01-28T19:56:20.114Z"</c->
+  <c- p>}</c->
 <c- p>}</c-></pre>
    <h3 class="heading settled" data-level="7.3" id="pattern-7-retracting-a-prior-offer"><span class="secno">7.3. </span><span class="content">Pattern 7: Retracting a prior offer</span><a class="self-link" href="#pattern-7-retracting-a-prior-offer"></a></h3>
    <p>This pattern is used where a prior offer needs to be retracted.
@@ -2464,16 +2457,16 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
     <li data-md>
      <p><code>type</code>: this MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Undo">as:Undo</a>. It SHOULD also contain the generic type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Activity">as:Activity</a>.</p>
     <li data-md>
-     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑦">actor</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>actor</code>: the <a data-link-type="dfn">sender</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> who created the notification  and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn" href="#actor" id="ref-for-actor①⑧">actor</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
+     <p><code>target</code>: the intended <a data-link-type="dfn">receiver</a> of the notification. This MUST contain a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the targeted <a data-link-type="dfn">maintainer</a> or <a data-link-type="dfn">service hub</a> and include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Organization">as:Organization</a>, <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Person">as:Person</a> or <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Service">as:Service</a> (see <a href="#activity-addressing">§ 5.4 Addressing the receiver and sender</a>).</p>
     <li data-md>
-     <p><code>object</code>: the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑨">activity</a> that this new activity is retracting. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#activity" id="ref-for-activity①⓪">activity</a> and MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>.</p>
+     <p><code>object</code>: the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑧">activity</a> that this new activity is retracting. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn" href="#activity" id="ref-for-activity⑨">activity</a> and MUST be of type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Offer">as:Offer</a>.</p>
    </ul>
    <p>The <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> payload SHOULD also contain the following property:</p>
    <ul>
     <li data-md>
-     <p><code>context</code>: the original <a data-link-type="dfn">artefact</a> in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑨">object</a> of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification⑦">request notification</a>. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑦">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑦">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
+     <p><code>context</code>: the original <a data-link-type="dfn">artefact</a> in a notification thread, ie. the <a data-link-type="dfn" href="#object" id="ref-for-object⑧">object</a> of the <a data-link-type="dfn" href="#request-notification" id="ref-for-request-notification⑦">request notification</a>. This MUST contain at least a <a data-link-type="biblio" href="#biblio-uri">[URI]</a> identifying the <a data-link-type="dfn">artefact</a> and MUST provide an <a data-link-type="dfn" href="#in-band" id="ref-for-in-band⑧">in-band</a> or <a data-link-type="dfn" href="#out-of-band" id="ref-for-out-of-band⑧">out-of-band</a> description (see <a href="#activity-object">§ 5.3 The object of an activity</a>).</p>
     <li data-md>
      <p><code>origin</code>: the software component that was responsible for sending the activity over the network (eg. the <a data-link-type="dfn">Dashboard</a> or <a data-link-type="dfn">Orchestrator</a> components). It MUST include the type <a href="https://www.w3.org/TR/activitystreams-vocabulary/#Application">as:Application</a>.</p>
    </ul>
@@ -2500,8 +2493,7 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
     <c- f>"type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
     <c- f>"inbox"</c-><c- p>:</c-> <c- u>"http://meemoo.be/inbox"</c-><c- p>,</c->
     <c- f>"name"</c-><c- p>:</c-> <c- u>"meemoo"</c->
-  <c- p>},</c->
-  <c- f>"published"</c-><c- p>:</c-> <c- u>"2021-02-15T12:34:56Z"</c->
+  <c- p>}</c->
 <c- p>}</c->
 </pre>
   </main>
@@ -2657,11 +2649,11 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
    <li><a href="#activity">Activity</a><span>, in §5</span>
    <li><a href="#activity-identifier">activity identifier</a><span>, in §5.2</span>
    <li><a href="#actor">actor</a><span>, in §5</span>
-   <li><a href="#direct-reponse-notification">direct reponse notification</a><span>, in §7</span>
    <li><a href="#in-band">in-band</a><span>, in §5.3</span>
-   <li><a href="#indirect-reponse-notification">indirect reponse notification</a><span>, in §7</span>
    <li><a href="#notification-identifier">notification identifier</a><span>, in §5.2</span>
    <li><a href="#object">object</a><span>, in §5</span>
+   <li><a href="#offer-acknowledgment-notification">offer acknowledgment notification</a><span>, in §7</span>
+   <li><a href="#offer-response-notification">offer response notification</a><span>, in §7</span>
    <li><a href="#one-way-pattern①">one-way pattern</a><span>, in §4.1</span>
    <li><a href="#origin">origin</a><span>, in §5</span>
    <li><a href="#out-of-band">out-of-band</a><span>, in §5.3</span>
@@ -2673,7 +2665,7 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
   <aside class="dfn-panel" data-for="term-for-concept-request">
    <a href="https://fetch.spec.whatwg.org/#concept-request">https://fetch.spec.whatwg.org/#concept-request</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request">7.2. Pattern 6: A service request with indirect response</a>
+    <li><a href="#ref-for-concept-request">7.2. Pattern 6: A service request with offer response</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2696,8 +2688,6 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
   <dl>
    <dt id="biblio-activitystreams-vocabulary">[ACTIVITYSTREAMS-VOCABULARY]
    <dd>James Snell; Evan Prodromou. <a href="https://www.w3.org/TR/activitystreams-vocabulary/">Activity Vocabulary</a>. 23 May 2017. REC. URL: <a href="https://www.w3.org/TR/activitystreams-vocabulary/">https://www.w3.org/TR/activitystreams-vocabulary/</a>
-   <dt id="biblio-iri">[IRI]
-   <dd>M. Duerst; M. Suignard. <a href="https://tools.ietf.org/html/rfc3987">Internationalized Resource Identifiers (IRIs)</a>. January 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc3987">https://tools.ietf.org/html/rfc3987</a>
    <dt id="biblio-json-ld">[JSON-LD]
    <dd>Manu Sporny; Gregg Kellogg; Markus Lanthaler. <a href="https://www.w3.org/TR/json-ld/">JSON-LD 1.0</a>. 16 January 2014. REC. URL: <a href="https://www.w3.org/TR/json-ld/">https://www.w3.org/TR/json-ld/</a>
    <dt id="biblio-ldn">[LDN]
@@ -2732,20 +2722,15 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
    <b><a href="#activity">#activity</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-activity">5.3. The object of an activity</a> <a href="#ref-for-activity①">(2)</a> <a href="#ref-for-activity②">(3)</a> <a href="#ref-for-activity③">(4)</a> <a href="#ref-for-activity④">(5)</a> <a href="#ref-for-activity⑤">(6)</a>
-    <li><a href="#ref-for-activity⑥">5.5. Interpreting dates</a>
-    <li><a href="#ref-for-activity⑦">7.1. Pattern 5: A service request with direct response</a> <a href="#ref-for-activity⑧">(2)</a>
-    <li><a href="#ref-for-activity⑨">7.3. Pattern 7: Retracting a prior offer</a> <a href="#ref-for-activity①⓪">(2)</a>
+    <li><a href="#ref-for-activity⑥">7.1. Pattern 5: A service request with acknowledgment</a> <a href="#ref-for-activity⑦">(2)</a>
+    <li><a href="#ref-for-activity⑧">7.3. Pattern 7: Retracting a prior offer</a> <a href="#ref-for-activity⑨">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="actor">
    <b><a href="#actor">#actor</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-actor">5. Activities</a> <a href="#ref-for-actor①">(2)</a>
-    <li><a href="#ref-for-actor②">5.4. Addressing the receiver and sender</a> <a href="#ref-for-actor③">(2)</a> <a href="#ref-for-actor④">(3)</a> <a href="#ref-for-actor⑤">(4)</a> <a href="#ref-for-actor⑥">(5)</a>
-    <li><a href="#ref-for-actor⑦">6. One-way notification patterns</a> <a href="#ref-for-actor⑧">(2)</a>
-    <li><a href="#ref-for-actor⑨">7.1. Pattern 5: A service request with direct response</a> <a href="#ref-for-actor①⓪">(2)</a> <a href="#ref-for-actor①①">(3)</a> <a href="#ref-for-actor①②">(4)</a>
-    <li><a href="#ref-for-actor①③">7.2. Pattern 6: A service request with indirect response</a> <a href="#ref-for-actor①④">(2)</a> <a href="#ref-for-actor①⑤">(3)</a> <a href="#ref-for-actor①⑥">(4)</a>
-    <li><a href="#ref-for-actor①⑦">7.3. Pattern 7: Retracting a prior offer</a> <a href="#ref-for-actor①⑧">(2)</a>
+    <li><a href="#ref-for-actor">5. Activities</a>
+    <li><a href="#ref-for-actor①">5.4. Addressing the receiver and sender</a> <a href="#ref-for-actor②">(2)</a> <a href="#ref-for-actor③">(3)</a> <a href="#ref-for-actor④">(4)</a> <a href="#ref-for-actor⑤">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="target">
@@ -2759,7 +2744,7 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
    <b><a href="#origin">#origin</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-origin">5. Activities</a>
-    <li><a href="#ref-for-origin①">5.4. Addressing the receiver and sender</a> <a href="#ref-for-origin②">(2)</a> <a href="#ref-for-origin③">(3)</a>
+    <li><a href="#ref-for-origin①">5.4. Addressing the receiver and sender</a> <a href="#ref-for-origin②">(2)</a> <a href="#ref-for-origin③">(3)</a> <a href="#ref-for-origin④">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="object">
@@ -2767,10 +2752,9 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
    <ul>
     <li><a href="#ref-for-object">5. Activities</a>
     <li><a href="#ref-for-object①">5.3. The object of an activity</a> <a href="#ref-for-object②">(2)</a> <a href="#ref-for-object③">(3)</a> <a href="#ref-for-object④">(4)</a> <a href="#ref-for-object⑤">(5)</a>
-    <li><a href="#ref-for-object⑥">5.5. Interpreting dates</a>
-    <li><a href="#ref-for-object⑦">7.1. Pattern 5: A service request with direct response</a>
-    <li><a href="#ref-for-object⑧">7.2. Pattern 6: A service request with indirect response</a>
-    <li><a href="#ref-for-object⑨">7.3. Pattern 7: Retracting a prior offer</a>
+    <li><a href="#ref-for-object⑥">7.1. Pattern 5: A service request with acknowledgment</a>
+    <li><a href="#ref-for-object⑦">7.2. Pattern 6: A service request with offer response</a>
+    <li><a href="#ref-for-object⑧">7.3. Pattern 7: Retracting a prior offer</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="notification-identifier">
@@ -2784,38 +2768,50 @@ Hence, a retraction is about an <a data-link-type="dfn">artefact</a> that is som
    <ul>
     <li><a href="#ref-for-activity-identifier">5.2. Identifying an activity</a> <a href="#ref-for-activity-identifier①">(2)</a> <a href="#ref-for-activity-identifier②">(3)</a>
     <li><a href="#ref-for-activity-identifier③">6. One-way notification patterns</a>
-    <li><a href="#ref-for-activity-identifier④">7.1. Pattern 5: A service request with direct response</a> <a href="#ref-for-activity-identifier⑤">(2)</a> <a href="#ref-for-activity-identifier⑥">(3)</a>
-    <li><a href="#ref-for-activity-identifier⑦">7.2. Pattern 6: A service request with indirect response</a> <a href="#ref-for-activity-identifier⑧">(2)</a> <a href="#ref-for-activity-identifier⑨">(3)</a>
+    <li><a href="#ref-for-activity-identifier④">7.1. Pattern 5: A service request with acknowledgment</a> <a href="#ref-for-activity-identifier⑤">(2)</a> <a href="#ref-for-activity-identifier⑥">(3)</a>
+    <li><a href="#ref-for-activity-identifier⑦">7.2. Pattern 6: A service request with offer response</a> <a href="#ref-for-activity-identifier⑧">(2)</a> <a href="#ref-for-activity-identifier⑨">(3)</a>
     <li><a href="#ref-for-activity-identifier①⓪">7.3. Pattern 7: Retracting a prior offer</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="out-of-band">
    <b><a href="#out-of-band">#out-of-band</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-out-of-band">5.3. The object of an activity</a>
-    <li><a href="#ref-for-out-of-band①">6. One-way notification patterns</a>
-    <li><a href="#ref-for-out-of-band②">7.1. Pattern 5: A service request with direct response</a> <a href="#ref-for-out-of-band③">(2)</a>
-    <li><a href="#ref-for-out-of-band④">7.2. Pattern 6: A service request with indirect response</a> <a href="#ref-for-out-of-band⑤">(2)</a> <a href="#ref-for-out-of-band⑥">(3)</a>
-    <li><a href="#ref-for-out-of-band⑦">7.3. Pattern 7: Retracting a prior offer</a>
+    <li><a href="#ref-for-out-of-band">5.3. The object of an activity</a> <a href="#ref-for-out-of-band①">(2)</a>
+    <li><a href="#ref-for-out-of-band②">6. One-way notification patterns</a>
+    <li><a href="#ref-for-out-of-band③">7.1. Pattern 5: A service request with acknowledgment</a> <a href="#ref-for-out-of-band④">(2)</a>
+    <li><a href="#ref-for-out-of-band⑤">7.2. Pattern 6: A service request with offer response</a> <a href="#ref-for-out-of-band⑥">(2)</a> <a href="#ref-for-out-of-band⑦">(3)</a>
+    <li><a href="#ref-for-out-of-band⑧">7.3. Pattern 7: Retracting a prior offer</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="in-band">
    <b><a href="#in-band">#in-band</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-in-band">5.3. The object of an activity</a>
-    <li><a href="#ref-for-in-band①">6. One-way notification patterns</a>
-    <li><a href="#ref-for-in-band②">7.1. Pattern 5: A service request with direct response</a> <a href="#ref-for-in-band③">(2)</a>
-    <li><a href="#ref-for-in-band④">7.2. Pattern 6: A service request with indirect response</a> <a href="#ref-for-in-band⑤">(2)</a> <a href="#ref-for-in-band⑥">(3)</a>
-    <li><a href="#ref-for-in-band⑦">7.3. Pattern 7: Retracting a prior offer</a>
+    <li><a href="#ref-for-in-band">5.3. The object of an activity</a> <a href="#ref-for-in-band①">(2)</a>
+    <li><a href="#ref-for-in-band②">6. One-way notification patterns</a>
+    <li><a href="#ref-for-in-band③">7.1. Pattern 5: A service request with acknowledgment</a> <a href="#ref-for-in-band④">(2)</a>
+    <li><a href="#ref-for-in-band⑤">7.2. Pattern 6: A service request with offer response</a> <a href="#ref-for-in-band⑥">(2)</a> <a href="#ref-for-in-band⑦">(3)</a>
+    <li><a href="#ref-for-in-band⑧">7.3. Pattern 7: Retracting a prior offer</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="request-notification">
    <b><a href="#request-notification">#request-notification</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-request-notification">7. Request-response notification patterns</a> <a href="#ref-for-request-notification①">(2)</a> <a href="#ref-for-request-notification②">(3)</a>
-    <li><a href="#ref-for-request-notification③">7.1. Pattern 5: A service request with direct response</a>
-    <li><a href="#ref-for-request-notification④">7.2. Pattern 6: A service request with indirect response</a> <a href="#ref-for-request-notification⑤">(2)</a>
+    <li><a href="#ref-for-request-notification③">7.1. Pattern 5: A service request with acknowledgment</a>
+    <li><a href="#ref-for-request-notification④">7.2. Pattern 6: A service request with offer response</a> <a href="#ref-for-request-notification⑤">(2)</a>
     <li><a href="#ref-for-request-notification⑥">7.3. Pattern 7: Retracting a prior offer</a> <a href="#ref-for-request-notification⑦">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="offer-acknowledgment-notification">
+   <b><a href="#offer-acknowledgment-notification">#offer-acknowledgment-notification</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-offer-acknowledgment-notification">7.1. Pattern 5: A service request with acknowledgment</a> <a href="#ref-for-offer-acknowledgment-notification①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="offer-response-notification">
+   <b><a href="#offer-response-notification">#offer-response-notification</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-offer-response-notification">7.2. Pattern 6: A service request with offer response</a> <a href="#ref-for-offer-response-notification①">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
