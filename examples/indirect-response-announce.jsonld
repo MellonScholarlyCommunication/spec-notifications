@@ -1,7 +1,7 @@
 {
   "@context": "https://www.w3.org/ns/activitystreams/",
   "summary": "Meemoo accepted Alba dataset from Koninklijke Bibliotheek",
-  "type": "Accept",
+  "type": "Announce",
   "actor": {
     "id": "http://meemoo.be#me",
     "type": "Organization",
@@ -23,6 +23,5 @@
   "origin": {
     "id": "http://meemoo.be#orchestrator",
     "type": "Application"
-  },
-  "updated": "2021-01-28T19:56:20.114Z"
+  }
 }

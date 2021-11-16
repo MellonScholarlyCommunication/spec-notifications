@@ -20,8 +20,7 @@
       "id": "http://example.org/Adlib",
       "type": "schema:SoftwareApplication"
     },
-    "origin" :{
+    "origin" : {
       "id"
-    },
-    "published": "2014-09-30T12:34:56Z"
+    }
   }
