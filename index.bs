@@ -644,7 +644,7 @@ highlight: json
 show: 
 </pre>
 
-## Addressing the receiver and sender 
+## Addressing the receiver and sender ## {#activity-addressing} 
 
 Notifications that are sent to a network node are delivered to an inbox. Since inboxes can be shared by more 
 than one actor, the notification’s payload should indicate what actor it intends to address. Thus, an activity 
