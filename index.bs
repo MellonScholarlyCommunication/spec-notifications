@@ -682,7 +682,7 @@ A notification can provide more information on how the notification got sent. Th
 provide an origin using the `as:origin` predicate. It refers to the software component, such as the repository, 
 that was responsible for sending the activity over the network (the software that acted as LDN Sender). 
 
-The origin MAY have an `ldp:inbox` that refers to an inbox [URI] where it can be reached.
+The origin MAY have an `ldp:inbox` that refers to an inbox [[URI]] where it can be reached.
 
 When a network node intends to respond to a notification, it MUST send the response notification to all discovered inbox URLs. 
 
