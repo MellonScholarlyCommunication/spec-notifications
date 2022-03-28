@@ -1,0 +1,31 @@
+{ 
+    "@context": "https://www.w3.org/ns/activitystreams",
+    "id": "urn:uuid:8B938492-663B-479C-8431-07F9049B4E5D",
+    "type": "Announce",
+    "published": "2022-12-02T07:00:01Z",
+    "summary": "National archive archived Springfield library data/set-1234",
+    "actor": {  
+       "id": "https://nationalarchive.org/library/ingest#service",
+       "inbox": "https://nationalarchive.org/library/ingest/inbox",
+       "name": "National Archives Library Project",
+       "type": "Application"
+    },
+    "origin": {
+       "id": "https://nationalarchive.org/ltparchiver#i",
+       "name": "National Archives Archiver",
+       "type": "Application"
+    },
+    "inReplyTo":"urn:uuid:8B938492-663B-479C-8431-07F9049B4E5D",
+    "context":"https://imagetool.com/customer/123-321/data/set-1234/",
+    "object": {
+       "id": "https://nationalarchive.org/versions/20221202070000/https://imagetool.com/customer/123-321/data/set-1234/",
+       "type": "Page"
+    },
+    "target": {
+       "id": "https://springfield.library.net/about#us",
+       "inbox": "https://springfield.library.net/inbox/",
+       "name": "Springfield Library",
+       "type": "Organization"
+    }
+}
+  
