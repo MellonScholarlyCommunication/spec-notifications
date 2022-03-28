@@ -7,7 +7,7 @@ URL: https://mellonscholarlycommunication.github.io/spec-notifications
 Editor: Miel Vander Sande, [meemoo - Flemish Institute for Archives](https://meemoo.be), miel.vandersande@meemoo.be
 Editor: Patrick Hochstenbach, [IDLab - Ghent University](https://knows.idlab.ugent.be), patrick.hochstenbach@ugent.be
 Editor: Ruben Dedecker, [IDLab - Ghent University](https://knows.idlab.ugent.be), ruben.dedecker@ugent.be
-Editor: Jeroen Werbrouck, [IDLab - Ghent University](https://knows.idlab.ugent.be), Jeroen.Werbrouck@ugent.be
+Editor: Herbert Van de Sompel, [IDLab - Ghent University](https://knows.idlab.ugent.be), herbert.vandesompel@ugent.be
 Abstract: This document lists the possible notifications that can be used in the network. 
 Markup Shorthands: markdown yes
 </pre>
@@ -44,29 +44,60 @@ table th.last {
 }
 </style>
 
-Set of documents {#set}
-=======================
-
-This document is one of the specifications produced by the **ResearcherPod** and **ErfgoedPod** project:
-
-1. [Overview](/spec-overview/)
-2. [Orchestrator](/spec-orchestrator/) 
-3. [Data Pod](/spec-datapod/)
-4. [Rule language](/spec-rulelanguage/)
-5. [Artefact Lifecycle Event Log](/spec-eventlog/)
-6. [Notifications](/spec-notifications/) (this document)
-7. [Collector](/spec-collector/)
-
 Introduction {#intro}
 =====================
 
-This document defines general requirements for using [[ldn|Linked Data Notifications]] in a decentralized artefact exchange network.
-The goal of these requirements is application-agnostic communication between actors, 
-which provides groundwork for any use case that applies a decentralized artefact exchange network and that might introduce additional requirements.
+<pre class='include'>
+path: images/network.svg
+</pre>
+*Overview of the network participants*
 
-Notifications contain a payload that represents an activity.
-This document lists the different activity types that can be used, covers the possible communication patterns between actors, and defines how to construct their payloads.
-Payloads can be extended per use case by applying domain-specific vocabularies such as [[schema-org|Schema.org]].
+This document pertains to decentralized networks in which **actors** make **artifacts** available in the network, 
+add value to available artifacts, and exchange messages about these activities. 
+
+Artifacts are resources that are made available in a network of a community of use and the nature of the 
+artifacts depends on that community. For example, in a research communication network, artifacts are 
+research outputs such as preprints, reviewed articles, datasets, and software that are part of the scholarly 
+record.
+
+In the network, a distinction is made between **data nodes** where artifacts are hosted, and **service nodes** 
+where value is added to artifacts hosted by data nodes. 
+
+Actors operate on behalf of data nodes or service nodes; they can be humans or machines, individuals or 
+organizations, authors of artifacts or providers of value-adding services. These actors exchange messages 
+that describe activities, each of which amounts to a lifecycle event in which an artifact that is hosted by a 
+data node is involved. The considered activities are events in which:
+
+- actors that operate on behalf of data nodes make artifacts available to the network and request value-added services for them, and 
+- actors that operate on behalf of service nodes add value to available artifacts. 
+
+Added value services don’t change the content of the original artifacts. Instead, the **service result** can be 
+to make an artifact discoverable, providinge additional information pertaining to the artifact (e.g. a 
+trusted timestamp, a linkage to another artifact), publishing a new resource that pertains to the artifact 
+(e.g. a review, a comment), or is a derivative of the artifact (e.g. an enhanced version, a translation, 
+an archival copy).  
+
+The messages exchanged by actors are  expressed by means of a profile of the ActivityStreams 2.0 vocabulary 
+(AS2) and exchanged using the Linked Data Notification protocol (LDN). The sender of the message uses an 
+LDN Sender application to send messages as notification over the network. The receiver uses an LDN Receiver 
+application to store the messages as notifications in an LDN Inbox.
+
+The activities are the payloads of the messages that are sent as LDN notifications.
+
+> In open data context the activities can express when research data artifacts are made available, who 
+> is (re)using the datasets in the network, which publications are referring to the dataset and how it 
+> entered in scientific search engines. Based on these activities the nodes in the network can inform the 
+> creators about reuse of their datasets or update the metadata of the datasets providing interlinking to 
+> network resources.
+
+> In publishing context the activities express the various stages in the publication process of artifacts. 
+> The activities can, for instance, express when a publication is time stamped by network service, when it 
+> was submitted or accepted by a journal, when peer-review was conducted, when it was entered in an abstract
+> & index database, and at which date archived copies were made available in a web archive.
+
+> In archiving context the activities can express the various production states of artifacts and provide in 
+> this way information about the digital provenance of the artifact. The activity can express when an artifact 
+> was created, who updated the artifact, when it was publicly available and when it was removed.
 
 Document Conventions
 =====================
@@ -89,66 +120,320 @@ Within this document, the following namespace prefix bindings are used:
 
 Examples of notification payloads use [[JSON-LD]] as syntax. 
 
+Network entities
+================
+
+This section clarifies the terminology that was introduced in the introduction.
+
+## Artifact
+
+An artifact is a resource identified by a [[URL]] that serves as the main focus of interaction between actors. 
+Examples are a digitized image in an archive, the webpage of a scientific publication, a digital representation 
+of a cultural heritage object, or a data set in a repository.
+
+Artifacts can be atomic or can be of arbitrary complexity. How they are organized is outside the scope of this 
+document and is dependent on the implementing community.
+
+## Data node
+
+A data node is an HTTP server that hosts artifacts and provides one or more LDN Inboxes via which actors that 
+operate on behalf of the data node can be reached. These LDN Inboxes are able to receive JSON-LD messages
+ pertaining to life cycle events in which an artifact hosted by the data node is involved (See Section 6 Below). 
+
+## Service node
+
+A service node is an HTTP server that provides value-added services for artifacts hosted by data nodes and 
+provides one or more LDN Inboxes via which actors that operate on behalf of the service node can receive 
+service requests pertaining to the data node artifacts (See Section 6 Below). The result of providing a 
+value-added service for an artifact - whether requested or volunteered - is communicated to an actor that 
+operates on behalf of the data node that hosts the artifact in the form of a JSON-LD message delivered to 
+that actor’s LDN Inbox. 
+
+When a service node creates a new artifact as a result of providing a value-added service for an artifact 
+hosted by a data node, then this new artifact can be made available in the network in its own right and can 
+itself become the subject of activities and messages. As a result, at that point, the service node must have 
+an associated data node via which the new artifact is made available.
+
+## Service result
+
+A service result is any outcome of providing a value-added service for an artifact hosted by a data node. 
+Service results can be resources that are made available at a network address or inline data that is 
+provided in the JSON-LD messages that are communicated to the actor that operates on behalf of the data node 
+that hosts the artifact.
+
+## Actor
+
+Actors operate on behalf of data nodes or service nodes; they can be humans or machines, individuals or 
+organizations, authors of artifacts or providers of value-adding services. An actor, identified by a [[URI]], 
+either:
+
+- operates on behalf of a data node and exchanges messages pertaining to hosted artifacts; or,
+- operates on behalf of a service node, provides value-added services for artifacts hosted by data nodes, and exchanges messages with that regard.
+
+## Target 
+
+Targets are the intended receivers of messages that are exchanged on the network. The target is a human, or 
+machine, individual or organization that is the intended audience of a message. A target, identified by a 
+[[URI]], either:
+
+- operates on behalf of a data node and is the intended audience for messages pertaining to hosted artifacts; or,
+- operates on behalf of a service node and provides value-added services for artifacts hosted by data nodes, and receives messages with that regard.
+
+## Agent
+
+Agents are the active participants in the network: they perform actions and can be identified or addressed. 
+Agents are the actors or targets that can be addressed with a [[URI]] and that can send or receive messages 
+via Linked Data Notifications.
+
 Network communication patterns
-==========
+==============================
 
-In a decentralized artefact exchange network, actors communicate by sending [[ldn|Linked Data Notifications]] to each other.
-For instance, an actor can notify other interested actors about its activities that affect particular artefacts.
-The receiving actor can then react (eg. by downloading the artefact or performing some follow-up action) and/or respond to such notification with a new notification.
+In the decentralized network, nodes, in particular the actors that are responsible for the artifacts and services 
+on these nodes, communicate by sending Linked Data Notification messages to each other. These messages are 
+delivered to LDN Inboxes that are made available on the data and service nodes on behalf of the actors managing 
+the artifacts and services on these nodes. 
 
-An actor is either 
+Depending on the type of interaction an actor is a sender or receiver of messages. This specification describes 
+two communication patterns between the nodes in the network. 
 
-- a [[spec-overview#maintainer|Maintainer]] of a data pod; or 
-- a [[spec-overview#service-hub|Service Hub]] that provides a certain service.
+In one type of pattern describes the communication as one-way, expressing facts like "I did this activity on an 
+artifact". These messages don't expect a response back from other actors in the network.
 
-Interaction is thus possible between two maintainers, between two service hubs or between a maintainer and a service hub.
-Depending on the type of interaction,
-an actor takes the role of notification [[ldn#sender]] or [[ldn#receiver]].
-This results in two possible communication patterns:
+A second communication pattern requires a more elaborate communication back and forth. This request-response style 
+of communication can span many days, weeks or months and could contain many details for each particular service. 
+However, the request-response patterns that are the focus of this specification are those that convey life cycle 
+information to the actors at the side of the data node and the service node. The actual communication requirements 
+to fulfill all the details of value-added services is not under consideration. The patterns listed in the next 
+section only support conveying the factual end result of a (complicated, internal) process: what was added to the 
+lifecycle of an artifact, the rest is treated as a black box.
 
 ## One-way pattern
 
 <pre class='include'>
-path: images/one-way.svg
+path: images/one_way_data_node.svg
 </pre>
+*Figure 1. An Archive sends a message to a Web Archive about the update of an artifact.*
 
-In a <dfn>one-way pattern</dfn>, the sender of a notification should not expect a direct reply from the receiver. 
-This style of communication is more informative. 
-A one-way pattern is used when the receiving actor needs to be made aware of an activity, but not necessarily needs to respond.
+The **one-way** pattern is used for sending an informative message pertaining to an artifact to another actor 
+in the network. In the case of data nodes, one-way patterns are used to inform an actor about CRUD (Create, 
+Read, Update, Delete) actions on artifacts. In most use-cases these messages are generated by automated processes 
+that monitor artifacts. Examples of such messages are:
+
+- An institutional repository informing a search engine about a new artifact to be indexed.
+- A repository that informs a web archive about a new version of an artifact.
+
+These two examples demonstrate how data nodes (such as the institutional repository and archive) can communicate 
+with service nodes (the search engine and web archive) about artifact updates.
+
+<pre class='include'>
+path: images/one_way_service_node.svg
+</pre>
+*Figure 2. An Overlay Journal sends a message to an Institutional Repository announcing one of its artifacts was published.* 
+
+One-way communication in the other direction is also possible: a service node that sends an unsolicited message 
+to a data node about an artifact. Examples of such messages are:
+
+- An overlay service informs an institutional repository that one of its artifacts was included in a journal issue.
+- A researcher A informs another researcher B about a comment she has written about an artifact in researcher B's data node.
+
+In the last example researcher A is acting as a service node. She has a HTTP server which contains the comment. 
+She has the means to send Linked Data Notifications about this service result. When researcher A would publish 
+this comment as artifact and receive Linked Data Notifications about it, then she would also be a data node.
+
+<pre class='include'>
+path: images/one_way_ldn_a.svg
+</pre>
+*Figure 3a. One-way pattern where a sender A as data node, using an LDN Sender, sends a notification about an Artifact to the receiver B, which has a LDN Receiver. *
+
+<pre class='include'>
+path: images/one_way_ldn_b.svg
+</pre>
+*Figure 3b. One-way pattern where a sender A a service node, using an LDN Sender, sends a notification about an Service result to the receiver B, which has a LDN Receiver. *
+
+In general, a **one-way** pattern is informative between two communicating nodes. The node that initiates the 
+communication (node A in Figure 3a and Figure 3b), does not expect a reply from the receiving node 
+(node B in Figure 3). The one-way pattern is used when the receiving actor at node B needs to be made aware 
+of an activity pertaining to a resource hosted by the sender at node A, but does not necessarily need to 
+respond. When the LDN Sender is a data node, the resource is an Artifact. When the LDN Sender is a service 
+node the resource is a Service result.
 
 ## Request-response pattern
 
 <pre class='include'>
-path: images/request-response.svg
+path: images/request_response_datanode.svg
 </pre>
+*Figure 4. An Institutional Repository requests for an artifact a peer service from a Peer-Review system. The Peer-Review system evaluates the request and sends an acknowledgment back indicating it is committed to provide this service. At some later date, the Peer-Review system responds with a link to a new peer review that contains the results of the peer review process.*
 
-In a <dfn>request-response pattern</dfn>, the sender of a notification can expect the receiver to send a notification in return.
-This style of communication is more transactional. 
-A request-response pattern is used when an actor requires some service from another actor, and result of the service attempt is delivered as a response.
-This pattern can include an acknowledgment phase, where before attempting the service, 
-the receiving actor can use an additional response notification to indicate that it will perform the service or not.  
+The **request-response** pattern is used in more elaborate communication processes, in cases where actors need 
+to ask for services from a service node and no direct results can be expected. This style of communication expects 
+that the updates to the life cycle of artifacts can take hours, days or months to be processed. In these cases, 
+it would be impractical to wait for an answer from the service node, or require software to poll a web service 
+for status updates. 
+
+The pattern starts by offering an artifact from a data node to a service node. The service node can optionally 
+evaluate the artifact and can decide if it can commit to providing services on the artifact. In the form of an 
+acknowledgment or rejection this information can be sent to the data node. The service node can start an internal 
+process (which is not in scope of this specification) to fulfill the service request. The end result of the 
+internal process will be the announcement of a new result artifact, or a rejection without a new artifact being 
+created. 
+
+Examples of such a request-response pattern are:
+
+- An institutional repository starts a peer review process for one of the artifacts and is contacting a peer review service to provide this service. The peer review service can first evaluate the request and can acknowledge or reject the request. When acknowledged, at a later date a peer review can be made available and a reference to this peer review can be sent back to the institutional repository.
+- An archive contacts a transcription service for the transliteration of one of its artifacts. The service provider publishes after some weeks a new artifact and notifies the archive about the new transliteration.
+
+<pre class='include'>
+path: images/request_response_ldn.svg
+</pre>
+*Figure 5. Request-response pattern where A, using a LDN Sender, sends a notification about a local Artifact to the LDN Receiver endpoint of B. After some time B, using its own LDN Sender, sends an acknowledgment to the LDN Receiver endpoint of A. The final result of the service that B provides, the Service Result, is sent by B, using an LDN Sender, to the LDN Receiver endpoint of A.*
+
+In general, the **request-response** pattern is transactional. The initiator of a request notification 
+(node A in Figure 5) expects the receiver (node B in Figure), to send a response notification with the result 
+of some value-added service.  The request-response pattern is used when the receiving actor at node B is 
+requested to provide a service pertaining to an artifact hosted by the sender at node A; the answer to the 
+service request is delivered as a response notification. This pattern can optionally include an acknowledgment 
+phase, where, prior to providing the service, the receiving actor can send an acknowledgement notification 
+to indicate whether or not it commits to providing the service requested by the request notification.
+
+## Chained pattern
+
+<pre class='include'>
+path: images/chained_ldn.svg
+</pre>
+*Figure 6. The output of one workflow can be the input of a second workflow. In the top part a service node A creates a value-added service result for an artifact that is stored on a data node B. The service result is made available as a network resource as Artifact on a data node C that is associated with the service node. For this Artifact a new value-added service can be requested from node D.*
+
+The **chained** pattern is used when the service result of a value-added service is made available on an 
+associated data node. This makes the service result available as a new artifact for which new value-added 
+services can be provided. An example of such a pattern is:
+
+- A transliteration service result for an image artifact that is stored on the data node of an archive is sent to an IIIF service to provide a combined view of the image and transliteration in one interface. The transliteration service result is made available as an artifact to make this happen.
 
 Activities {#activities}
 ===========
 
-A notification is sent by a [[spec-overview#actor|actor]] to inform another [[spec-overview#actor|actor]] about an activity.
-An <dfn>Activity</dfn> is some action that occurred, pertaining to a certain [=artefact=] in the network.
-Activities are described by the notification **payload**.
+A **notification** is sent by an [=agent=] to inform another [=agent=] about an **activity**. An activity is either 
+an event pertaining to a certain artifact or an event related to a service requested pertaining to an artifact 
+in the network. An activity is described by a notification **payload**.
 
-Notification payloads are expressed in [[activitystreams-vocabulary]] and use [[JSON-LD]] as default syntax (other RDF syntaxes are allowed as well). 
-A payload is uniquely identified, indicates the type of activity it is describing, and includes some descriptive metadata about the activity.
-It also describes the entities involved:
+Notification payloads are expressed using the ActivityStreams 2.0 vocabulary and use [[JSON-LD]] as default 
+syntax (other RDF syntaxes are allowed as well). Every notification message is uniquely identified, indicates 
+the type of activity it is describing, and includes at least the publication date of the activity. It also 
+describes the entities involved (depending on the network communication pattern). The table below described 
+the possible entities for each pattern and the intended use.
 
-- the [=maintainer=] or [=service hub=] who performed the activity (the <dfn>actor</dfn>);
-- the intended [[ldn#receiver]]; ie. the actor who is supposed to receive the notification (the <dfn>target</dfn>);
-- the [[ldn#sender]]; ie. software or [=maintainer=] or [=service hub=] who was responsible for sending the notification (the <dfn>origin</dfn>);
-- the artefact or former activity that this activity is about (the <dfn>object</dfn>).
+**Table 1. ActivityStreams 2.0 entities used by the One-Way and Request-Response communication pattern messages**
 
-The minimal example below illustrates an interaction between the two [=human actors=] Bob and Alice.
-Bob ([=actor=]) notifies Alice ([=target=]) using his network dashboard ([=origin=]) to inform her about the artefact ([=object=]) he created.
+<table>
+<thead>
+ <tr>
+ <th>AS2 elements</th>
+ <th>One-Way Pattern</th>
+ <th>One-Way Pattern</th>
+ <th>Request-Response Pattern</th>
+ <th>Request-Response Pattern</th>
+ </tr>
+</thead>
+<thead>
+ <tr>
+ <td></td>
+ <th>*Data node sends*</th>
+ <th>*Service node sends*</th>
+ <th>*Data node Request*</th>
+ <th>*Service node Response*</th>
+ </tr>
+</thead>
+<tbody>
+<tr>
+ <th>*id*</th>
+ <td>Message identifier</td>
+ <td>Message identifier</td>
+ <td>Message identifier</td>
+ <td>Message identifier</td>
+</tr>
+<tr>
+ <th>*type*</th>
+ <td>Activity type</td>
+ <td>Activity type</td>
+ <td>Activity type</td>
+ <td>Activity type</td>
+</tr>
+<tr>
+ <th>*published*</th>
+ <td>Activity datetime</td>
+ <td>Activity datetime</td>
+ <td>Activity datetime</td>
+ <td>Activity datetime</td>
+</tr>
+<tr>
+ <th>*actor*</th>
+ <td>Agent that performed the activity</td>
+ <td>Agent that performed the activity</td>
+ <td>Agent that performed the activity</td>
+ <td>Agent that provided the added-value service for an artifact on a data node</td>
+</tr>
+<tr>
+ <th>*origin*</th>
+ <td>Agent responsible for sending the notification</td>
+ <td>Agent responsible for sending the notification</td>
+ <td>Agent responsible for sending the notification</td>
+ <td>Agent responsible for sending the notification</td>
+</tr>
+<tr>
+ <th>*context*</th>
+ <td>*Not used*</td>
+ <td>The artifact on the data node for which an added-value service was provided</td>
+ <td>The artifact on the data node for which an added-value service was provided</td>
+ <td>The artifact on the data node for which an added-value service was provided</td>
+</tr>
+<tr>
+ <th>*inReplyTo*</th>
+ <td>*Not used*</td>
+ <td>*Not used*</td>
+ <td>*Not used*</td>
+ <td>The message identifier of the request</td>
+</tr>
+<tr>
+ <th>*object*</th>
+ <td>The artifact that is the subject of the activity</td>
+ <td>The result of the added-value service provided for an artifact on the data node</td>
+ <td>The artifact that is the subject of the activity</td>
+ <td>The result of the added-value service provided for an artifact on the data node</td>
+</tr>
+<tr>
+ <th>*target*</th>
+ <td>The agent at the service node that is the addressee of the notification</td>
+ <td>The agent at the data node that is the addressee of the notification</td>
+ <td>The agent at the service node that is the addressee of the notification</td>
+ <td>The agent at the data node that is the addressee of the notification</td>
+</tr>
+</tbody>
+</table>
+
+
+The minimal example below illustrates an interaction between the two human actors Alice and Bob. 
+Alice ([=actor=]) notifies Bob ([=target=]) via her data repository ([=origin=]) to inform him about the 
+artifact ([=object=]) she created.
+
+EXAMPLE 1. Alice notifies Bob in a one-way pattern (data node sends) about the creation of the 
+new artifact http://acme.org/artifacts/alice/five_steps_to_success.html
 
 <pre class=include-code>
-path: examples/minimal.jsonld
+path: examples/example1.jsonld
+highlight: json
+show: 
+</pre>
+
+The second example below illustrates an interaction between a service node, Fairfield City Repository, 
+and Alice involving an artifact on her data node. Fairfield City Repository ([=actor=]) notifies Alice 
+([=target=]) via their Darwin System ([=origin=]) about a new relationship between a resource in the 
+Fairfield City Repository and an artifact in Alice's data node.
+
+EXAMPLE 2. Fairfield City Repository notifies Alice in a one-way pattern (service node sends) about the 
+announcement of a new relationship between Alice's artifact on her data node and an archival copy in the 
+Fairfield City Darwin system.
+
+<pre class=include-code>
+path: examples/example2.jsonld
 highlight: json
 show: 
 </pre>
@@ -158,8 +443,8 @@ show:
 Notification payloads apply the [[activitystreams-vocabulary#activity|ActivityStreams 2.0 vocabulary]].
 Therefore, the notification payload MUST be typed as a `as:Activity` or as one of its more specialized subtypes.
 
-A decentralized artefact exchange network only allows a limited set of [[activitystreams-vocabulary#activity-types|AS2.0 Activity Types]].
-Activities, along with their types, are divided into two categories:
+The nodes in the network use a limited subset [[activitystreams-vocabulary#activity-types|AS2.0 Activity Types]].
+The activities, along with their types, are divided into two categories:
 
 - Activities that are about an artefacts's state. This includes the types `Create`, `Remove`, `Update`, and `Announce`. These activities are used in a [=one-way pattern=] communication.
 - Activities that pertain to applying value-adding services to an artefact. This includes the types `Offer`, `Reject`, `Accept`, `Undo`, and `Announce`. These activities are used in a [=request-response pattern=] communication.
@@ -169,163 +454,253 @@ The following table summarizes the possible activity types according to category
 <table>
   <thead>
     <tr>
-    <th>Activity Type
-    <th>Purpose
+    <th>Activity Type</th>
+    <th>Purpose</th>
+    </tr>
+  </thead>
   <tbody>
       <tr>
       <th colspan="2">Activities about an artefact's state</th>
     </tr>
     <tr>
-      <td>[[activitystreams-vocabulary#Create|as:Create]]
-      <td>An [[spec-overview#actor|actor]] created an [[spec-overview#artefact|artefact]] in its data pod.
+      <td>[[activitystreams-vocabulary#Create|as:Create]]</td>
+      <td>An [=actor=] created an [=artefact=] in a data node.</td>
     <tr>
-      <td>[[activitystreams-vocabulary#update|as:Update]]
-      <td>An [[spec-overview#actor|actor]] updated an [[spec-overview#artefact|artefact]] in its data pod.
+      <td>[[activitystreams-vocabulary#update|as:Update]]</td>
+      <td>An [=actor=] updated an [=artefact=] in a data node.</td>
     <tr>
-      <td>[[activitystreams-vocabulary#Remove|as:Remove]]
-      <td>An [[spec-overview#actor|actor]] deletes an [[spec-overview#artefact|artefact]] from its data pod.
+      <td>[[activitystreams-vocabulary#Remove|as:Remove]]</td>
+      <td>An [=actor=] deletes an [=artefact=] in a data node.</td>
     <tr>
-      <td>[[activitystreams-vocabulary#Announce|as:Announce]]
+      <td>[[activitystreams-vocabulary#Announce|as:Announce]]</td>
       <td>
-        An [[spec-overview#actor|actor]] announces the **existence** of an [[spec-overview#artefact|artefact]]. 
-        This activity is different from [[activitystreams-vocabulary#Create|as:Create]], which denotes a fact (ie. the what, when, where and how a new artefact was created).
-        With [[activitystreams-vocabulary#Announce|as:Announce]], the sender doesn't say anything about when the artefact was created, but only desires that the target is notified about its existence.
+        An [=actor=] announces the **existence** of an [=artefact=]. 
+        This activity is different from [[activitystreams-vocabulary#Create|as:Create]], 
+        which denotes a fact (ie. the what, when, where and how a new artefact was created).
+        With [[activitystreams-vocabulary#Announce|as:Announce]], the sender doesn't say 
+        anything about when the artefact was created, but only desires that the target is 
+        notified about its existence.
+      </td>
+  </tbody>
   <tbody>
     <tr>
       <th colspan="2">Activities pertain to applying value-adding services</th>
     </tr>
     <tr>
-      <td>[[activitystreams-vocabulary#Offer|as:Offer]]
+      <td>[[activitystreams-vocabulary#Offer|as:Offer]]</td>
       <td>
-      A [=maintainer=] or [=service hub=] offers an [[spec-overview#artefact|artefact]] to another [=maintainer=] or [=service hub=] in order to invoke a service. 
-      The execution of this service may lead to a new [[spec-overview#activity|activity]] with the same artefact as the object.
+      An [=agent=] offers an [=artefact=] to another [=agent=] in order to invoke a service. 
+      The execution of this service may lead to a new [=activity=] with the same artefact as the object.
+      </td>
     <tr>
-      <td>[[activitystreams-vocabulary#Accept|as:Accept]]
+      <td>[[activitystreams-vocabulary#Accept|as:Accept]]</td>
       <td>
-        A [=maintainer=] or [=service hub=] accepts to execute a service on a specified artefact, as requested by another [=maintainer=] or [=service hub=].
+        An [=agent=] accepts to execute a service on a specified artefact, as requested by another 
+        [=agent=]. This is a direct reply to a received [[activitystreams-vocabulary#Offer|as:Offer]].
+      </td>
+    <tr>
+      <td>[[activitystreams-vocabulary#Reject|as:Reject]]</td>
+      <td>
+        An [=agent=] rejects to execute a service on a specified artefact, because it is somehow 
+        unable to fulfill the request by another [=agent=]. 
         This is a direct reply to a received [[activitystreams-vocabulary#Offer|as:Offer]].
+      </td>
     <tr>
-      <td>[[activitystreams-vocabulary#Reject|as:Reject]]
-      <td>
-        An [=maintainer=] or [=service hub=] rejects to execute a service on a specified artefact, because it is somehow unable to fulfill the request by another [=maintainer=] or [=service hub=].
-        This is a direct reply to a received [[activitystreams-vocabulary#Offer|as:Offer]].
+      <td>[[activitystreams-vocabulary#Announce|as:Announce]]</td>
+      <td>An [=agent=] announces the [=artefact=] that resulted from executing a 
+      requested service.
+      </td>
     <tr>
-      <td>[[activitystreams-vocabulary#Announce|as:Announce]]
-      <td>A [=maintainer=] or [=service hub=] announces the [[spec-overview#artefact|artefact]] that resulted from executing a requested service.
-    <tr>
-      <td>[[activitystreams-vocabulary#Undo|as:Undo]]
-      <td>A [=maintainer=] or [=service hub=] retracts a prior [[spec-overview#activity|activity]], which can be of any of the above types.
+      <td>[[activitystreams-vocabulary#Undo|as:Undo]]<td>
+      <td>An [=agent=] etracts a prior [=activity=], which can be of any of the above types.</td>
+    </tr>
+  </tbody>
 </table>
+
+In addition to the listed activity types above, an activity MAY have additional subtypes imposed 
+by the application domain. For instance, when a service node would like to `Announce`the 
+endorsement of a publication the `schema:EndorseAction` can be used. The schema.org can be imported 
+into the activity by adding it to the `@context` section.
+
+EXAMPLE 3 Bob announces that he endorses the publication of Alice by writing a review
+
+<pre class=include-code>
+path: examples/example3.jsonld
+highlight: json
+show: 
+</pre>
 
 ## Identifying an activity ## {#activity-id}
 
-To establish robust communication on a decentralized artefact exchange network,
-activities have to be at least uniquely indentifyable within the scope of the network.
-Therefore, an identifier of any kind used MUST be a valid [[URI]].
+To establish robust communication on the network, activities have to be at least uniquely identifiable 
+within the scope of the network. Therefore, an identifier of any kind used MUST be a valid [[URI]].
 
 There are two identifiers that operate at the level of the notification:
 
-- the <dfn>notification identifier</dfn>, which is the [[URL]] minted by the target when the notification is received in its [=inbox=]; and
-- the <dfn>activity identifier</dfn>, which is the [[URI]] enclosed in the notification payload as value of the `id` property in the activity description.
+- the **notification identifier**, which is the [[URL]] minted by the target when the notification is received in its inbox; and
+- the **activity identifier**, which is the [[URI]] enclosed in the notification payload as value of the id property in the activity description. When this [[URI]] is a [[URL]] it MUST be dereferencable and return a representation of the notification itself.
 
-When linking to an activity inside a notification, for instance in a reply, one MUST always use the [=activity identifier=]. 
-The [=notification identifier=] MUST only be used to identify and retrieve the posted notification, and therefore SHOULD resolve to what was originally posted to the target's [=inbox=] by the [[ldn#sender]].
-A [[ldn#sender]] SHOULD define an [=activity identifier=] for every notification. 
-The [[ldn#receiver]] MUST NOT define or alter the [=activity identifier=] of a received notification.
-The [[ldn#receiver]] MAY mint any [=notification identifier=], which in most cases, is a derivative of the [=inbox=] resource [[URL]], but can be any [[URL]] of choice.
+In the network typically the activity identifier is the most visible identifier. This one can be read from 
+the notification payload document. In the example 1 above, the **activity identifier** is:
+
+```
+urn:uuid:0F402B08-F676-40EE-9D4B-480B3F985B65
+```
+
+The **notification identifier is the URL of the notification itself. This is the URL that is used to retrieve a 
+copy of the notification. For example, if the inbox of Bob is implemented as an Linked Data Platform Container 
+(as specified in the Linked Data Notifications specification), then it would have an URL such as:
+
+```
+https://infinity.science.com/inbox/bob/F9800F41-4636-44F7-8307-CCCEE7C5F0D7
+```
+
+In some cases the activity identifier and notification identifier can overlap. When a node makes notifications 
+publicly available (for instance, via ActivityPub outboxes) the notification will be available at a URL 
+which is reflected in the choice of activity identifier.
+
+EXAMPLE 4  Alice notifies Bob about the creation of a new artifact. She also makes this notification public 
+available at http://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65
+
+```
+GET /events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65 HTTP/1.1
+Host: acme.org
+Accept: application/ld+json
+```
+
+<pre class=include-code>
+path: examples/example4.jsonld
+highlight: json
+show: 
+</pre>
+
+When referring to an activity always the **activity identifier** MUST be used. The activity identifier of a 
+notification MUST NOT be edited or removed by any node in the network when processing incoming or outgoing 
+notifications. The **notification identifier** doesn't have any restrictions and can have any format (preferably 
+a HTTPS address).
 
 ## The object of an activity ## {#activity-object}
 
-All [=activities=] MUST contain a [=object=] using the `as:object` predicate.
-Depending on the activity type, the [=object=] can refer to an [=artefact=] or an [=activity=].
+All activities MUST contain an object using the `as:object` predicate. Depending on the activity type, the 
+object can refer to: 
 
-Some activities directly impact or refer to an artefact.
-Hence, if an [=activity=] is of type `as:Create`, `as:Remove`, `as:Update`, `as:Offer`, or `as:Announce`,
-the object MUST describe the [=artefact=] on which the activity has effect.
-An artefact MUST be of type [[activitystreams-vocabulary#Object|as:Object]] or one of the [[activitystreams-vocabulary#object-types|ActivityStreams Object Types]].
-Additionally, an artefact MAY have additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or `schema:Document` in a scholarly communication network).
+- a previous activity, when referring to a request in the acknowledgment phase of a request-response communication pattern;
+- the result of the added-value service provided for an artifact on the data node;
+- an artifact, when the service node acts as a data node on which the results of the added-value service are published.
 
-<div class=example>
-Example of a document as artefact:
+An object MUST contain an identifier, which must be an [[URI]]. The object identifier SHOULD be dereferenceable, 
+so possible artifacts can be retrieved.
 
-``` json
-{
-  "@context": "https://www.w3.org/ns/activitystreams/",
-  "id": "https://example.org/publications/1",
-  "type": "Document",
-  "name": "Publication about WOII"    
-}
-```
-</div>
+### Out-of-band versus in-band descriptions
 
-Some activities can only exist because of a prior activity, such as a response.
-Hence, if an [=activity=] is of type `as:Reject`, `as:Accept`, or `as:Undo`, the object MUST be another [=activity=] with type `as:Activity`.
-In case of `as:Reject` and `as:Accept`, the object SHOULD be an activity typed as `as:Offer`.
+The description of the object SHOULD be delivered by one of two methods:
 
-<div class=example>
-Example of an Offer as object:
+- out-of-band: a machine-actionable description is available by dereferencing the object identifier;
+- in-band: the object is described as part of the notification payload.
 
-``` json
-{
-  "@context": "https://www.w3.org/ns/activitystreams/",
-  "id": "http://example.org/bob/notifications/aa534f09-76ce-4638-ad28-711622c47cc1",
-  "type": "Offer",
-  "name": "Request to archive publication about WOII"    
-}
-```
-</div>
+Whether an implementation gives priority to in-band or out-of-band is left up to the implementer.
 
-Issue(17): can artefacts be rejected?
+As a general recommendation: give in-band descriptions priority to a dereferenceable out-of-band description. 
+Receivers may of course dereference the object identifier to retrieve an additional description as well. However 
+in case conflicts arise between both descriptions, the most recent description should be given priority. This 
+can be identified by comparing the Last-Modified date of the HTTP response with the activity published data 
+in `as:published`.
 
-An [=object=] MUST contain an identifier, which must be an [[URI]].
-The [=object=] identifier SHOULD be dereferenceable, so possible artefacts can be retrieved.
+### Direct and response activities
 
-A description of the object SHOULD be delivered in one of two methods:
+There are two types of activities:
 
-- <dfn>out-of-band</dfn>: a machine-actionable description is available by dereferencing the [=object=] identifier;
-- <dfn>in-band</dfn>: the object is described as part of the notification payload.
+- activities which directly impact or refer to an artifact;
+- activities that can only exist because of a prior activity.
 
-Whether an implementations gives priority to [=in-band=] or [=out-of-band=] is left up to the implementor.
+#### Direct activities
 
-Advisement:
-As a general recommendation, 
-it is recommended to give an [=in-band=] description priority to a dereferenceable [=out-of-band=] description.
-[=Receivers=] may of course dereference the object's identifier to retrieve an additional description as well.
-However, in case conflicts arise between both descriptions, the most recent description should be given priority.
-This can be identified by comparing the last-modified date of the HTTP response with the [=activity's=] published date in `as:published`.
+The object of a direct activity MUST describe the artifact on which the activity has effect. An artifact 
+MUST be of type `as:Object` or one of the ActivityStreams Object Types. Additionally, an artifact MAY have 
+additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or 
+`schema:Document` in a scholarly communication network).
 
-## Addressing the receiver and sender ## {#activity-addressing}
+EXAMPLE 5 Alice offers a dataset she wants to submit to Data Archive XYZ.
 
-A notification that is sent to a [[ldn#receiver]] is delivered to an [=inbox=].
-Since inboxes can be shared by more than one actor, the notification's payload should indicate what [[spec-overview#actor|network actor]] it intends to address.
-Thus, an activity MUST contain a [=target=] using the `as:target` predicate.
+<pre class=include-code>
+path: examples/example5.jsonld
+highlight: json
+show: 
+</pre>
 
-Accordingly, the payload should also indicate which [[spec-overview#actor|network actor]] performed the activity.
-Hence, an activity MUST also contain an [=actor=] using the `as:actor` predicate.
+#### Response activities
 
-Both the [=target=] and [=actor=] MUST be identifyable with an HTTP [[URI]], which SHOULD be a [[webid|WebID]].
-They MUST be of the following type:
+If an activity is of type `as:Reject`, `as:Accept`, or `as:Undo`, the object MUST be an activity with 
+type `as:Activity`. 
 
-- [[activitystreams-vocabulary#Service|as:Service]] in case the receiving actor is a [[spec-overview#Service-Hub|Service Hub]];
-- [[activitystreams-vocabulary#Person|as:Person]], [[activitystreams-vocabulary#Organization|as:Organization]], or [[activitystreams-vocabulary#Application|as:Application]] in case the receiving actor is a [[spec-overview#Maintainer|Maintainer]] and an individual, organization, or a software application, respectively.
+Response activities MUST have an `as:inReplyTo` field which contains the **activity identifier** of the 
+previous activity on which the current activity is a response.
 
-Issue(18): How to define Service Hub types?
+EXAMPLE 6 Data Archive XYZ send a response to the offer and indicates data set was accepted for further processing
 
-The [=actor=] and [=target=] SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached.
-They MAY have a name using `as:name`.
+<pre class=include-code>
+path: examples/example6.jsonld
+highlight: json
+show: 
+</pre>
 
-Lastly, a notification can also provide more information on how the notification got sent.
-Therefore, an activity SHOULD provide an [=origin=] using the `as:origin` predicate.
-It refers to the software component, such as the [=orchestrator=], that was responsible for sending the activity over the network.
-Hence, property `origin` MAY be used to indicate whether a [=Dashboard=] or an [=Orchestrator=] was involved in performing the activity and sending then notification. 
-The [=origin=] MAY also have an `ldp:inbox` that refers to an inbox [[URI]] where it can be reached.
+## Addressing the receiver and sender ## {#activity-addressing} 
 
-When a [[ldn#receiver]] intends to respond to a notification, thus switching to the role of [[ldn#sender]],
-it MUST send the response notification to all discovered [=inbox=] URLs.
-A valid [=inbox=] URL MUST be discovered from:
+Notifications that are sent to a network node are delivered to an inbox. Since inboxes can be shared by more 
+than one actor, the notification’s payload should indicate what actor it intends to address. Thus, an activity 
+MUST contain a target using the `as:target` predicate.
 
-- the value of `ldp:inbox` in the [=origin=] or [=actor=] description contained in the notification payload
-- the `Link:` relation in the HTTP response headers of type `http://www.w3.org/ns/ldp#inbox` when dereferencing the IRI identifying the [=origin=] or [=actor=]; as defined in [[ldn#discovery]].
+Accordingly, the payload should also indicate which actor performed the activity. Hence, an activity MUST also 
+contain an actor using the `as:actor` predicate.
+
+The target, origin (when used, see below) and actor MUST be identifiable with an HTTP [[URI]]. They MUST be of the 
+following Activity Streams 2.0 Object type:
+
+- as:Application when describing a software application;
+- as:Group when describing a formal or informal collective of Actors;
+- as:Organization when representing an organization;
+- as:Person when representing an individual person;
+- as:Service when representing a service of any kind.
+
+Additionally, an actor MAY have additional types imposed by the application domain.
+
+The actor and target SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached. 
+
+The actor and target MAY have a name using `as:name`.
+
+EXAMPLE 7 A Publisher accepts Alice's publication for publication in a forthcoming journal and sends a response to Alice
+
+<pre class=include-code>
+path: examples/example7.jsonld
+highlight: json
+show: 
+</pre>
+
+## The originating software application
+
+A notification can provide more information on how the notification got sent. Therefore, an activity SHOULD
+provide an origin using the `as:origin` predicate. It refers to the software component, such as the repository, 
+that was responsible for sending the activity over the network (the software that acted as LDN Sender). 
+
+The origin MAY have an `ldp:inbox` that refers to an inbox [[URI]] where it can be reached.
+
+When a network node intends to respond to a notification, it MUST send the response notification to all discovered inbox URLs. 
+
+A valid inbox URL MUST be discovered from:
+
+- the value of `ldp:inbox` in the origin or actor description contained in the notification payload
+- the `Link:` relation in the HTTP response headers of type http://www.w3.org/ns/ldp#inbox when dereferencing the IRI identifying the origin or actor; as defined in Linked Data Notifications §discovery.
+
+## The artifact context
+
+All notifications in the network are artifact centric, a notification thread starts with an agent that starts 
+some activities on an artifact or requests services for an artifact. To be able to refer in a notification back 
+to the original artifact which started the notification communication between the nodes ActivityStream2 `as:context` 
+can be used. The `as:context` , when used, MUST contain the URL to the original artifact that initiated the 
+notification exchange.
+
+In the example 5 above, Data Archive XYZ sends an `as:Accept` in context of the `as:Offer` on the artifact 
+`http://acme.org/artifacts/alice/data-set-2022-01-19.zip`.
 
 One-way notification patterns
 =============================
@@ -335,58 +710,82 @@ The [[JSON-LD]] payload MUST contain at least the following properties:
 
 - `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#activity-id]]). 
 - `type`: this MUST include one of the types [[activitystreams-vocabulary#Create|as:Create]], [[activitystreams-vocabulary#Remove|as:Remove]], [[activitystreams-vocabulary#Update|as:Update]], or [[activitystreams-vocabulary#Announce|as:Announce]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=maintainer=] or [=service hub=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=maintainer=] or [=service hub=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
-- `object`: the artefact that this activity is about. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide either an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
+- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
+- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
+- `object`: the artefact that this activity is about or the result of the added-value service provided for an artifact on the data node. This MUST contain at least a [[URI]] identifying the activity object and MUST provide either an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
 
 The [[JSON-LD]] payload SHOULD also contain the following property:
 - `origin`: the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]].
 
-## Pattern 1: Maintainer has created a new artefact
+The [[JSON-LD]] payload MAY also contain the context property when a service node provides a 
+value added service for an artifact on a data node:
 
-This pattern is used to disseminate new artefacts.
-A [=data pod=] [=maintainer=] makes a [=Service Hub=] or another [=maintainer=] aware of the creation of that artefact,
-without expecting immediate action.
+- `context`: an artifact on a data node. This MUST contain at least a [[URI]] identifying the artifact and MUST provide an in-band or out-of-band description (see [[#activity-object]]).
 
+## Pattern 1: An agent creates a new artifact
+
+This pattern is used to disseminate new artifacts. An agent makes another agent aware of the creation of that 
+artifact, without expecting immediate action.
+
+EXAMPLE 8 Springfield library informs the National Archive about the creation of a new dataset, on their hosted ImagesTool platform
 
 <pre class=include-code>
-path: examples/create.jsonld
+path: examples/example8.jsonld
 highlight: json
 show: 
 </pre>
 
 </div>
 
-## Pattern 2: Maintainer has updated an existing artefact
+## Pattern 2: An agent updates an existing artifact
 
-This pattern is used to inform involved actors about artefact changes.
-A [=data pod=] [=maintainer=] informs a [=Service Hub=] or another [=maintainer=] without obligation that the artefact has been updated and follow-up action might be needed.
+This pattern is used to inform involved actors about artifact changes on the data node. An agent informs another 
+agent without obligation that the artifact on the data node has been updated and follow-up action might be needed.
+
+EXAMPLE 9 Springfield library informs the National Archive about the update of an item in the dataset, on their 
+hosted ImagesTool platform
 
 <pre class=include-code>
-path: examples/update.jsonld
+path: examples/example9.jsonld
 highlight: json
 show: 
 </pre>
 
-## Pattern 3: Maintainer has removed an artefact
+## Pattern 3: An agent removes an artifact
 
-This pattern is used to inform involved actors about deleted artefacts.
-A [=maintainer=] informs a [=Service Hub=] or another [=maintainer=] without obligation that an artefact has been removed from its [=data pod=] and follow-up action might be needed.
+This pattern is used to inform involved actors about deleted artifacts from the data node. An agent another agent 
+without obligation that an artifact has been removed from the data node and follow-up action might be needed.
 
+EXAMPLE 10 Springfield library informs the National Archive about the removal of an item in the dataset, on 
+their hosted ImagesTool platform
 
 <pre class=include-code>
-path: examples/remove.jsonld
+path: examples/example10.jsonld
 highlight: json
 show: 
 </pre>
 
-## Pattern 4: Maintainer draws attention to an artefact
+## Pattern 4: An agent draws attention to an artifact
 
-This pattern is used to inform involved actors about an existing artefact.
-A [=maintainer=] informs a [=Service Hub=] or another [=maintainer=] without obligation that an artefact exists in its [=data pod=].
+This pattern is used to inform involved actors about an existing artifact on a data node. An agent informs 
+another agent without obligation that an artifact exists in a data node.
+
+EXAMPLE 11 Springfield library informs a Alice about an item in the dataset, on their hosted ImagesTool platform
 
 <pre class=include-code>
-path: examples/announce.jsonld
+path: examples/example11.jsonld
+highlight: json
+show: 
+</pre>
+
+## Pattern 5: A service node notifies a data node about linking event
+
+This pattern is used by a service node that wishes to inform a data node about a resource that includes one or more artifacts from the data node. 
+
+EXAMPLE 12 The Riverside Data Service informs Springfield library about the inclusion of one of its images in their "Summer in Springfield" dataset
+
+<pre class=include-code>
+path: examples/example12.jsonld
 highlight: json
 show: 
 </pre>
@@ -394,62 +793,82 @@ show:
 Request-response notification patterns
 ======================================
 
-This section covers notification patterns using activity types `as:Offer`, `as:Reject`, `as:Accept`, `as:Undo`, and `as:Announce`.
-These patterns are used in interactions where a sender sends a notification to a receiver (<dfn>request notification</dfn>) and eventually expects to receive a new notification as reply (<dfn>response notification</dfn>).
+This section covers notification patterns using activity types `as:Offer`, `as:Reject`, `as:Accept`, `as:Undo`, 
+and `as:Announce`.
+These patterns are used in interactions where a sender sends a notification to a receiver 
+(<dfn>request notification</dfn>) and eventually expects to receive a new notification as reply 
+(<dfn>response notification</dfn>).
 
-A [=maintainer=] or [=service hub=] employs a [=request notification=] to offer one of its [=artefacts=] for some value-added service to be conducted by a second [=maintainer=] or [=service hub=].
-Therefore, the enclosed activity is always of type `as:Offer`.
-The receiving [=maintainer=] or [=service hub=] can decide to respond in a direct or indirect way:
+An [=agent=] employs a [=request notification=] to offer one of its [=artefacts=] for some value-added service 
+to be conducted by a second [=agent=]. Therefore, the enclosed activity is always of type `as:Offer`. The 
+receiving [=agent=] can decide to respond in a direct or indirect way:
 
-- a <dfn>offer acknowledgment notification</dfn> is about accepting or rejecting the offer in the [=request notification=]. For example, a journal accepts a review request from a researcher; the review still needs to be done when the response is issued.
-- an <dfn>offer response notification</dfn> is a follow-up activity that is a result of the [=request notification=], but does not directly address it. For example, a journal announces a new review after receiving a review request from a fellow peer; the reviews has been done when the response is issued.
+- an offer `as:Accept` acknowledgment notification is about accepting or rejecting the offer in the [=request notification=]. For example, a journal accepts a review request from a researcher; the review still needs to be done when the response is issued.
+- an offer `as:Announce` response notification is a follow-up activity that is a result of the [=request notification=], but does not directly address it. For example, a journal announces a new review after receiving a review request from a fellow peer; the review has been done when the response is issued.
 
-## Pattern 5: A service request with acknowledgment ## {#pattern-5}
+## Pattern 5: A service request with acknowledgment 
 
-This pattern is used where a service is requested and immediate acknowledgment is required, eg. to provide guarentees that the service will be conducted.
-Hence, an [=offer acknowledgment notification=] is always about the activity it is replying to.
+This pattern is used where a service is requested and immediate acknowledgment is required, eg. to provide 
+guarantees that the service will be conducted. Hence, an offer acknowledgment notification is always about the 
+activity it is replying to.
+
+### Service Request
 
 A request [[JSON-LD]] payload MUST contain at least the following properties:
 
 - `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#activity-id]]). 
 - `type`: this MUST include the type [[activitystreams-vocabulary#Offer|as:Offer]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=maintainer=] or [=service hub=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=maintainer=] or [=service hub=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
+- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
+- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
 - `object`: the artefact that this activity is about. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
 
 The [[JSON-LD]] payload SHOULD also contain the following property:
+
 - `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
 
+EXAMPLE 13 Springfield library request the indexation of their image collection from ACME Search Engine
+
 <pre class=include-code>
-path: examples/offer.jsonld
+path: examples/example13.jsonld
 highlight: json
 show: 
 </pre>
+
+### Service Response
 
 A response [[JSON-LD]] payload MUST contain at least the following properties:
 - `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#activity-id]]). 
 - `type`: this MUST include one of the types [[activitystreams-vocabulary#Reject|as:Reject]] or [[activitystreams-vocabulary#Accept|as:Accept]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=maintainer=] or [=service hub=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=maintainer=] or [=service hub=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
+- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
+- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
 - `object`: the [=activity=] that this new activity is replying on. This MUST contain at least a [[URI]] identifying the [=activity=].
 
 The [[JSON-LD]] payload SHOULD also contain the following property:
+
 - `inReplyTo`: points to the [=activity identifier=] of the request notification to which this activity is a response. In an [=offer acknowledgment notification=], this MUST be equivalent to the value of the `object` property. It MUST be a [[URI]] and MAY NOT have further in-band description.
 - `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
-- `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
+- `origin`:  the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
 
-Option 1: A Service Hub *accepts* the offer by a Maintainer (or Service Hub). 
+#### Accept Offer
+
+A service node *accepts* the offer by an actor. 
+
+EXAMPLE 14 ACME Search Engine evaluated the offer to index the image collection from Springfield library and accepts it, while starting a new indexation process (which is not yet finished)
 
 <pre class=include-code>
-path: examples/direct-response-accept.jsonld
+path: examples/example14.jsonld
 highlight: json
 show: 
 </pre>
 
-Option 2: A Service Hub *rejects* the offer by an actor. 
+#### Reject Offer
+
+A Service node *rejects* the offer by an actor. 
+
+EXAMPLE 15 ACME Search Engine evaluated the offer to index the image collection from Springfield library and rejected it
 
 <pre class=include-code>
-path: examples/direct-response-reject.jsonld
+path: examples/example15.jsonld
 highlight: json
 show: 
 </pre>
@@ -458,40 +877,52 @@ show:
 
 This pattern is used where a service is requested and no immediate acknowledgment is required,
 as long as a follow-up activity is eventually returned, ie. 
-a [=service hub=] informs a [=maintainer=] that it processed an [=artefact=] as a result or a prior offer.
-Hence, an [=offer response notification=] is about an [=artefact=] that is somehow related to the activity in the [=request notification=].
+an [=agent=] that it processed an [=artefact=] as a result or a prior offer.
+Hence, an [=offer response notification=] is about an [=artefact=] that is somehow related to 
+the activity in the [=request notification=].
+
+### Service Request
 
 A request [[JSON-LD]] payload MUST contain at least the following properties:
 
 - `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#activity-id]]). 
 - `type`: this MUST include the type [[activitystreams-vocabulary#Offer|as:Offer]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=maintainer=] or [=service hub=] who created the notification and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=maintainer=] or [=service hub=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
+- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
+- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
 - `object`: the artefact that this activity is about. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
 
 The [[JSON-LD]] payload SHOULD also contain the following property:
-- `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
+
+- `origin`: the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
+
+EXAMPLE 16 Springfield library offers an image collection to the national archive for archiving
 
 <pre class=include-code>
-path: examples/offer.jsonld
+path: examples/example16.jsonld
 highlight: json
 show: 
 </pre>
 
+### Service Response
+
 An [=offer response notification=] [[JSON-LD]] payload MUST contain at least the following properties:
+
 - `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#activity-id]]). 
 - `type`: this MUST include the type [[activitystreams-vocabulary#Announce|as:Announce]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=maintainer=] or [=service hub=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=maintainer=] or [=service hub=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
+- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
+- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
 - `object`: the [=artefact=] that this activity is about, which is a result of or related to the [=request=] notification. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
 
 The [[JSON-LD]] payload SHOULD also contain the following property:
+
 - `inReplyTo`: points to the [=activity identifier=] of the request notification to which this activity is a response. This MUST be a [[URI]] and MAY NOT have further in-band description.
 - `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]). In cases where there is only a single artefact (eg. an artefact has been archived on request), this MAY equivalent to the artefact in the `object` property. 
-- `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
+- `origin`: the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
+
+EXAMPLE 17 The national archive announces an archived version of the Springfield library dataset
 
 <pre class=include-code>
-path: examples/indirect-response-announce.jsonld
+path: examples/example17.jsonld
 highlight: json
 show: 
 </pre>
@@ -505,20 +936,22 @@ A [[JSON-LD]] payload MUST contain at least the following properties:
 
 - `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#activity-id]]). 
 - `type`: this MUST include the type [[activitystreams-vocabulary#Undo|as:Undo]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=maintainer=] or [=service hub=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=maintainer=] or [=service hub=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
+- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#activity-addressing]]).
+- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#activity-addressing]]).
 - `object`: the [=activity=] that this new activity is retracting. This MUST contain at least a [[URI]] identifying the [=activity=] and MUST be of type [[activitystreams-vocabulary#Offer|as:Offer]].
 
 The [[JSON-LD]] payload SHOULD also contain the following property:
+
 - `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#activity-object]]).
 - `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]].
 
+EXAMPLE 18 Springfield library retracts her offer for an image collection to be archived by the national archive
+
 <pre class=include-code>
-path: examples/undo.jsonld
+path: examples/example18.jsonld
 highlight: json
 show: 
 </pre>
-
 
 <pre class=biblio>
 {
@@ -567,38 +1000,11 @@ show:
 			"https://www.w3.org/community/solid/"
 		]
 	},
-  "spec-overview": {
-		"authors": [
-      "Miel Vander Sande",
-      "Patrick Hochstenbach",
-      "Ruben Dedecker",
-      "Jeroen Werbrouck",
-      "Herbert Van de Sompel"
-    ],
-		"href": "http://mellonscholarlycommunication.github.io/spec-overview/",
-		"title": "Overview of the ResearcherPod specifications",
-		"status": "Editor’s Draft",
-		"publisher": "ResearcherPod and ErfgoedPod project"
-	},
-  "spec-rulelanguage": {
-		"authors": [
-      "Miel Vander Sande",
-      "Patrick Hochstenbach",
-      "Ruben Dedecker",
-      "Jeroen Werbrouck",
-      "Herbert Van de Sompel"
-    ],
-		"href": "http://mellonscholarlycommunication.github.io/spec-rulelanguage/",
-		"title": "Rule language for decentralized business processes",
-		"status": "Editor’s Draft",
-		"publisher": "ResearcherPod and ErfgoedPod project"
-	},
   "spec-notifications": {
 		"authors": [
       "Miel Vander Sande",
       "Patrick Hochstenbach",
       "Ruben Dedecker",
-      "Jeroen Werbrouck",
       "Herbert Van de Sompel"
     ],
 		"href": "http://mellonscholarlycommunication.github.io/spec-notifications/",
@@ -616,8 +1022,3 @@ show:
 	}
 }
 </pre>
-
-# Acknowledgement
-
-We thank Herbert Van de Sompel, [DANS + Ghent University](https://dans.knaw.nl/nl/), hvdsomp@gmail.com
-for the valuable input during this project.

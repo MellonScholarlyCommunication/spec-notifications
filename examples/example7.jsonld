@@ -1,0 +1,33 @@
+{ 
+    "@context": [ 
+      "https://www.w3.org/ns/activitystreams" ,
+      {"schema": "https://schema.org/"}
+    ], 
+    "id": "urn:uuid:9CEE5D10-E280-4DC8-909A-A5BF0F7EADF0",
+    "type": "Accept",
+    "published": "2022-06-13T00:00:01Z",
+    "summary": "Infinity Science accepts submission 1234 from Alice",
+    "actor": {
+       "id": "https://infinity.science.com/people/Jane#me",
+       "inbox": "https://infinity.science.com/people/Jane/inbox/",
+       "name": "Jane Doe",
+       "type": [ "Person" , "schema:publisher" ]
+    },
+    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "origin": {
+       "id": "https://infinity.science.com/service/card#i",
+       "name": "Infinity Science Repository",
+       "type": "Application"
+    },
+    "object": {
+       "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+       "type": "Offer"
+    },
+    "target": {     
+       "id": "https://orcid.org/0000-0007-01219-312199",
+       "inbox": "https://acme.org/inbox/alice",
+       "name": "Alice",
+       "type": "Person"
+    }
+  }  

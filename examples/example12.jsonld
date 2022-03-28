@@ -1,0 +1,40 @@
+{ 
+    "@context": "https://www.w3.org/ns/activitystreams",
+    "id": "urn:uuid:778A422E-7E98-4D48-9AB7-00A9DCF65705",
+    "type": "Announce",
+    "published": "2023-01-29T18:59:23Z",
+    "summary": "Riverside Data Service included two Springfield library images in their Summer in Springfield dataset",
+    "actor": {
+       "id": "https://riverside.data.net/about#us",
+       "inbox": "https://riverside.data.net/inbox/",
+       "name": "Riverside Data Service",
+       "type": "Organization"
+    },
+    "origin": {
+       "id": "https://lambda.riverside.data.net/profile/card#i",
+       "name": "Lambda Repository",
+       "type": "Application"
+    },
+    "object": [
+      {
+       "id": "urn:uuid:96985D9C-7757-4642-AE83-A11436C70B47",
+       "type": "Relationship",
+       "subject": "https://imagetool.com/customer/123-321/data/set-1234/image102.png",
+       "relationship":" http://purl.org/dc/terms/isPartOf",
+       "object": "https://riverside.data.net/data/summer-in-springfield"
+      },
+      {
+       "id": "urn:uuid:5EFFB5A9-8644-40FB-908D-1A6C7F8C298F",
+       "type": "Relationship",
+       "subject": "https://imagetool.com/customer/123-321/data/set-1234/image104.png",
+       "relationship":" http://purl.org/dc/terms/isPartOf",
+       "object": "https://riverside.data.net/data/summer-in-springfield"
+      }
+    ],
+    "target": {     
+       "id": "https://springfield.library.net/about#us",
+       "inbox": "https://springfield.library.net/inbox/",
+       "name": "Springfield Library",
+       "type": "Organization"
+    }
+}
