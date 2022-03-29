@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: List of notifications
+Title: Notifications in Value-Adding Networks
 Shortname: notifications
 Level: 1
 Status: LD
