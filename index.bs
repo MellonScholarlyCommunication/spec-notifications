@@ -8,6 +8,7 @@ Editor: Patrick Hochstenbach, [IDLab - Ghent University](https://knows.idlab.uge
 Editor: Miel Vander Sande, [meemoo - Flemish Institute for Archives](https://meemoo.be), miel.vandersande@meemoo.be
 Editor: Ruben Dedecker, [IDLab - Ghent University](https://knows.idlab.ugent.be), ruben.dedecker@ugent.be
 Editor: Paul Walk, [Antleaf](https://antleaf.com), paul@paulwalk.net
+Editor: Martin Klein, [Los Alamos National Laboratory](https://www.lanl.gov/library/), mklein@lanl.gov
 Editor: Herbert Van de Sompel, [IDLab - Ghent University](https://knows.idlab.ugent.be), herbert.vandesompel@ugent.be
 Abstract: This document lists the possible notifications that can be used in the network. 
 Markup Shorthands: markdown yes
