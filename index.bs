@@ -46,6 +46,8 @@ table th.last {
 }
 </style>
 
+Feedback welcome: <a href="mailto:value-added-networks@googlegroups.com">value-added-networks@googlegroups.com</a>.
+
 Introduction {#intro}
 =====================
 
