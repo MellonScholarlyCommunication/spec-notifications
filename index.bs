@@ -200,7 +200,7 @@ the artifacts and services on these nodes.
 Depending on the type of interaction an actor is a sender or receiver of messages. This specification describes 
 two communication patterns between the nodes in the network. 
 
-In one type of pattern describes the communication as one-way, expressing facts like "I did this activity on an 
+The first pattern describes the communication as one-way, expressing facts like "I did this activity on an 
 artifact". These messages don't expect a response back from other actors in the network.
 
 A second communication pattern requires a more elaborate communication back and forth. This request-response style 
@@ -252,7 +252,7 @@ path: images/one_way_ldn_a.svg
 <pre class='include'>
 path: images/one_way_ldn_b.svg
 </pre>
-*Figure 3b. One-way pattern where a sender A a service node, using an LDN Sender, sends a notification about an Service result to the receiver B, which has a LDN Receiver. *
+*Figure 3b. One-way pattern where a sender A as service node, using an LDN Sender, sends a notification about a Service result to the receiver B, which has a LDN Receiver. *
 
 In general, a **one-way** pattern is informative between two communicating nodes. The node that initiates the 
 communication (node A in Figure 3a and Figure 3b), does not expect a reply from the receiving node 
