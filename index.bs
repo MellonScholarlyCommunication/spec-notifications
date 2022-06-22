@@ -386,7 +386,7 @@ the possible entities for each pattern and the intended use.
  <th>*context*</th>
  <td>*Not used*</td>
  <td>The artifact on the data node for which an added-value service was provided</td>
- <td>*Not used*</td>
+ <td>The artifact on the data node for which an added-value service was provided</td>
  <td>The artifact on the data node for which an added-value service was provided</td>
 </tr>
 <tr>
