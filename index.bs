@@ -957,6 +957,11 @@ highlight: json
 show: 
 </pre>
 
+Acknowledgements 
+=====================
+
+Our work is funded by the Andrew W. Mellon Foundation (grant number: 1903-06675).
+
 <pre class=biblio>
 {
 	"solid-oidc": {
