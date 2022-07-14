@@ -1,7 +1,7 @@
 { 
     "@context": "https://www.w3.org/ns/activitystreams",
     "id": "urn:uuid:56BAAE95-AE3F-4DFD-AC37-2EFFE1E32BA9",
-    "type": "Create",
+    "type": "Update",
     "published": "2022-11-21T07:30:35Z",
     "summary": "Springfield library added a new image",
     "actor": {
