@@ -41,3 +41,8 @@ and open the `index.html` file:
 ```bash
 open index.html
 ```
+
+## Editing hints
+
+- All diagrams should be provided in SVG with the [Diagrams.net](https://app.diagrams.net) sources stored in the `diagrams` folder
+- All JSON-LD examples should be provided as seperate documents in the `examples` folder
