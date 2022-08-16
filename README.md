@@ -1,11 +1,12 @@
-# Requirements Template
+# Notifications in Value-Adding Networks
 
-This is the template for requirements published by Netwerk Digitaal Erfgoed.
+This is the template for the https://www.eventnotifications.net website.
 
-Requirements are written in Markdown and transformed to HTML using the
-[Bikeshed preprocessor](https://tabatkins.github.io/bikeshed/).
+Requirements are written in [Markdown](https://daringfireball.net/projects/markdown/) and transformed to HTML using the [Bikeshed preprocessor](https://tabatkins.github.io/bikeshed/).
 
 ## Generate HTML
+
+### Using Docker
 
 To view HTML output locally (using a [Docker container](https://github.com/netwerk-digitaal-erfgoed/bikeshed-docker)),
 run:
@@ -24,4 +25,19 @@ Alternatively, to update the HTML every time you make changes to [the source doc
 
 ```bash
 make watch
+```
+
+### Without Docker
+
+When Docker is not available on your machine use the `web` target which uses a cloud based
+Bikeshed processor
+
+```bash
+make web
+```
+
+and open the `index.html` file:
+
+```bash
+open index.html
 ```
