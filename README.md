@@ -42,7 +42,34 @@ and open the `index.html` file:
 open index.html
 ```
 
-## Editing hints
+## Contributor hints
 
 - All diagrams should be provided in SVG with the [Diagrams.net](https://app.diagrams.net) sources stored in the `diagrams` folder
 - All JSON-LD examples should be provided as seperate documents in the `examples` folder
+
+### Steps to contribute
+
+1. In the upper right part of the [Git repo](https://github.com/MellonScholarlyCommunication/spec-notifications) click on **Fork** and create a new fork
+2. Clone a copy of the code on your computer. E.g.
+
+```
+ssh clone git@github.com:phochste/spec-notifications.git
+```
+
+3. Make a new branch. E.g. `pr/fixing-typos`
+
+```
+ssh checkout -b pr/fixing-typos
+```
+
+4. Make your edits. Test and make sure you're happy with the result
+
+5. Commit all your changes
+
+```
+git add newfile # if you added a new file
+git commit -a # provide a description of your edits
+git push -u origin pr/fixing-typos # push changes to your own repository
+``` 
+
+6. In your own repository create a pull request
