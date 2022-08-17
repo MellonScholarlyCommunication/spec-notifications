@@ -53,13 +53,13 @@ open index.html
 2. Clone a copy of the code on your computer. E.g.
 
 ```
-ssh clone git@github.com:phochste/spec-notifications.git
+git clone git@github.com:{your-git-account-name}/spec-notifications.git
 ```
 
 3. Make a new branch. E.g. `pr/fixing-typos`
 
 ```
-ssh checkout -b pr/fixing-typos
+git checkout -b pr/fixing-typos
 ```
 
 4. Make your edits. Test and make sure you're happy with the result
@@ -73,3 +73,20 @@ git push -u origin pr/fixing-typos # push changes to your own repository
 ``` 
 
 6. In your own repository create a pull request
+
+## Update your fork with latest changes
+
+1. In your forked repo webpage click on the button `Sync fork`
+2. On your computer make sure you are in the `main` branch
+
+```
+git checkout main
+```
+
+3. Pull in the most recent version
+
+```
+git pull
+```
+
+4. Now you are ready to start a fresh editing process
