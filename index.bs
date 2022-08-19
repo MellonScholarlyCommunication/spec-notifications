@@ -56,52 +56,67 @@ path: images/network.svg
 </pre>
 *Overview of the network participants*
 
-This document pertains to decentralized networks in which **actors** make **artifacts** available in the network, 
-add value to available artifacts, and exchange messages about these activities. 
+Note: We need another pic that shows (1) DN/SN as having LDN inbox and sender (2) LDN agents that use these (3) only absolutely necessary AS2 elements (4) probably no AS2 agents (5) maybe an indication that artifact is provided in "object" by reference & service result is provided in "object" by-reference or by-value
 
-Artifacts are resources that are made available in a network of a community of use and the nature of the 
-artifacts depends on that community. For example, in a research communication network, artifacts are 
-research outputs such as preprints, reviewed articles, datasets, and software that are part of the scholarly 
-record.
+This specification details a profile for using Linked Data Notifications [[LDN]] with 
+ActivityStreams2 [[AS2]] payloads in value-adding networks. Web resources, for the purpose 
+of this specification named artifacts, are made available in the network, value is added to 
+these artifacts, and notifications with that regard are exchanged among nodes in the network. 
 
-In the network, a distinction is made between **data nodes** where artifacts are hosted, and **service nodes** 
-where value is added to artifacts hosted by data nodes. 
+The type of web resources that are considered artifacts in a value-adding network depends on 
+its community of use. For example, in a research communication value-adding network, artifacts 
+would include research outputs such as preprints, reviewed articles, datasets, workflows, and 
+software that are part of the scholarly record. 
 
-Actors operate on behalf of data nodes or service nodes; they can be humans or machines, individuals or 
-organizations, authors of artifacts or providers of value-adding services. These actors exchange messages 
-that describe activities, each of which amounts to a lifecycle event in which an artifact that is hosted by a 
-data node is involved. The considered activities are events in which:
+A value-adding service applied to an artifact does not change its content. Rather, the service 
+result can be associated with the artifact. It could, for example, be information that an 
+artifact was made discoverable by a portal; a trusted timestamp for an artifact;  information 
+about a linkage the artifact is involved in; the creation of a new resource related to the 
+artifact (e.g. an enhanced version, a translation, an archival copy). 
 
-- actors that operate on behalf of data nodes make artifacts available to the network and request value-added services for them, and 
-- actors that operate on behalf of service nodes add value to available artifacts. 
+Regarding the exchange of these LDN/AS2 notifications, the specification distinguishes between 
+Data Nodes and Service Nodes:
 
-Added value services don’t change the content of the original artifacts. Instead, the **service result** can be 
-to make an artifact discoverable, providinge additional information pertaining to the artifact (e.g. a 
-trusted timestamp, a linkage to another artifact), publishing a new resource that pertains to the artifact 
-(e.g. a review, a comment), or is a derivative of the artifact (e.g. an enhanced version, a translation, 
-an archival copy).  
+- A Data Node is a server that makes artifacts available to the network.
+- A Service Node is a value-adding provider of services related to artifacts that were made available to the network.
 
-The messages exchanged by actors are  expressed by means of a profile of the ActivityStreams 2.0 vocabulary 
-(AS2) and exchanged using the Linked Data Notification protocol (LDN). The sender of the message uses an 
-LDN Sender application to send messages as notification over the network. The receiver uses an LDN Receiver 
-application to store the messages as notifications in an LDN Inbox.
+In order to be able to communicate, each Data Node and Service Node has LDN Sender and LDN Inbox 
+capabilities that are used:
 
-The activities are the payloads of the messages that are sent as LDN notifications.
+- by a Data Node to send and receive LDN notifications pertaining to artifacts that it makes available to the network, and, 
+- by a Service Node to send and receive LDN notifications pertaining to value-adding services for artifacts that are made available to the network.
 
-> In open data context the activities can express when research data artifacts are made available, who 
-> is (re)using the datasets in the network, which publications are referring to the dataset and how it 
-> entered in scientific search engines. Based on these activities the nodes in the network can inform the 
-> creators about reuse of their datasets or update the metadata of the datasets providing interlinking to 
-> network resources.
+Agents operate on behalf of Data Nodes or Service Nodes; they can be humans or machines, 
+individuals or organizations. These agents exchange messages, each of which pertains to an 
+artifact that is hosted by a Data Node.
 
-> In publishing context the activities express the various stages in the publication process of artifacts. 
-> The activities can, for instance, express when a publication is time stamped by network service, when it 
-> was submitted or accepted by a journal, when peer-review was conducted, when it was entered in an abstract
-> & index database, and at which date archived copies were made available in a web archive.
+The intended communication style among Nodes is point-to-point, requiring no centralized hubs. 
+It is push-oriented, with only the relevant Nodes being updated about new information as it 
+becomes available. Interactions among Nodes are necessarily asynchronous because certain 
+notification patterns do not require a response and, in patterns that do, such as requesting 
+a service for an artifact, the time between a request and the announcement of the service 
+result is unpredictable and could range between almost immediate to months. The communication 
+patterns are action-oriented. The patterns express when an activity was initiated, 
+acknowledged, or yielded a result. Message payloads contain only core information (in most 
+cases URL identifiers) to convey in which value-adding activities Data Nodes, Service Nodes, 
+and artifacts are involved and what the service results are. The assumption is that further 
+information about the entities involved is available by using their identifiers in 
+auto-discovery mechanisms. As such, message payloads are typically expressed in a by reference 
+rather than by value style.
 
-> In archiving context the activities can express the various production states of artifacts and provide in 
-> this way information about the digital provenance of the artifact. The activity can express when an artifact 
-> was created, who updated the artifact, when it was publicly available and when it was removed.
+A common scenario covered by the specification is depicted in Figure 1, which includes, in
+bold case on the dashed lines, the AS2 element used in the notification payloads to convey 
+the respective entity involved in the value-adding network:
+
+- An agent at the end of a Data Node sends a notification to a Service Node's LDN Inbox (green arrow) requesting a value-adding service for an artifact made available by the Data Node. The URI of the artifact is provided in the AS2 object element of the notification.
+- An agent at the end of the Service Node consumes this request by obtaining it from the Service Node's LDN Inbox. Provided that the Service Node is willing and able to perform the requested service, it goes ahead and does so. The manner in which this is done is outside the scope of this specification. 
+- Once the value-adding service is executed, an agent at the end of the Service Node that is aware of the service result sends a notification (blue arrow) to the Data Node's LDN Inbox. The service result is provided in the AS2 object element of the notification. If the service result is a URI-identified resource, then its URI is provided there. If the service result does not have a URI (e.g. is a string) then it is provided inline in the notification. Moreover, the artifact that the service result pertains to is provided in the AS2 context element of the notification.
+- An agent at the end of the Data Node consumes this response by obtaining it from the Data Node's LDN Inbox, and acts upon the service result in a way deemed appropriate.
+
+From the perspective of LDN:
+
+- An artifact is an LDN Target and therefore has a discoverable LDN Inbox. The LDN Inbox is used to receive LDN/AS2 notifications that provide the Data Node, acting as an LDN Receiver, with value-adding information pertaining to an artifact.
+- A value-adding provider is an LDN Target and therefore has a discoverable LDN Inbox. That LDN Inbox is used to receive LDN/AS2 notifications that provide the Service Node, acting as an LDN Receiver, either with information pertaining to an artifact or with a request for the provision of a value-adding service for an artifact.
 
 Document Conventions
 =====================
@@ -1009,17 +1024,15 @@ Our work is funded by the Andrew W. Mellon Foundation (grant number: 1903-06675)
 			"https://www.w3.org/community/solid/"
 		]
 	},
-  "spec-notifications": {
+  "AS2": {
 		"authors": [
-      "Miel Vander Sande",
-      "Patrick Hochstenbach",
-      "Ruben Dedecker",
-      "Herbert Van de Sompel"
+      "James M Snell",
+      "Evan Prodromou"
     ],
-		"href": "http://mellonscholarlycommunication.github.io/spec-notifications/",
-		"title": "List of notifications",
-		"status": "Editor’s Draft",
-		"publisher": "ResearcherPod and ErfgoedPod project"
+		"href": "https://www.w3.org/TR/activitystreams-core/",
+		"title": "Activity Streams 2.0",
+		"status": "W3C Recommendation 23 May 2017",
+		"publisher": "W3C"
 	},
   "cron": {
 		"authors": ["The Open Group"
