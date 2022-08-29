@@ -51,12 +51,11 @@ Feedback welcome: <a href="mailto:value-adding-networks@googlegroups.com">value-
 Introduction {#intro}
 =====================
 
-<pre class='include'>
-path: images/network.svg
-</pre>
-*Overview of the network participants*
+<img alt="Overview of the network participants" 
+     width="800"
+     src="images/network.svg">
 
-Note: We need another pic that shows (1) DN/SN as having LDN inbox and sender (2) LDN agents that use these (3) only absolutely necessary AS2 elements (4) probably no AS2 agents (5) maybe an indication that artifact is provided in "object" by reference & service result is provided in "object" by-reference or by-value
+*Overview of the network participants*
 
 This specification details a profile for using Linked Data Notifications [[LDN]] with 
 ActivityStreams2 [[AS2]] payloads in value-adding networks. Web resources, for the purpose 
