@@ -167,6 +167,13 @@ Network entities {#NetworkEntities}
 
 This section clarifies the terminology that was introduced in the introduction.
 
+## Agent ## {#Agent}
+
+The *Agents* are the active participants in the network: they perform actions and can be identified or addressed. 
+Agents an be humans or machines, individuals or organizations and operate on behalf of Data and Service Nodes.
+Agents can be addressed with a [[URI]] in notification messages and that can send or receive messages via 
+Linked Data Notifications.
+
 ## Artifact ## {#Artifact}
 
 An *Artifact* is a Web resource identified by a [[URL]] that serves as the main focus of interaction 
@@ -206,13 +213,6 @@ A Service Result that is a Web resource identified by a [[URL]] can itself becom
 made available to the network by a Data Node that, for example, is associated with the Service Node that 
 generated the service result. This makes a Service Result available as a new Artifact for which new value-added 
 services can be provided.
-
-## Agent ## {#Agent}
-
-The *Agents* are the active participants in the network: they perform actions and can be identified or addressed. 
-Agents an be humans or machines, individuals or organizations and operate on behalf of Data and Service Nodes.
-Agents can be addressed with a [[URI]] in notification messages and that can send or receive messages via 
-Linked Data Notifications.
 
 Network communication patterns {#NetworkCommunicationPatterns}
 ==============================
