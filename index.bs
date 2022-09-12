@@ -91,7 +91,7 @@ has [LDN Sender](https://www.w3.org/TR/ldn/#sender) and [LDN Receiver](https://w
 - by a Data Node to send and receive LDN notifications pertaining to artifacts that it makes available to the network, and, 
 - by a Service Node to send and receive LDN notifications pertaining to value-adding services for artifacts that are made available to the network.
 
-[Agents](#Agent) operate on behalf of Data Node or Service Node; they can be 
+[Agents](#Agent) operate on behalf of Data Node and Service Node; they can be 
 humans or machines, individuals or organizations. These agents exchange LDN notifications, each of which pertains
 to an artifact that is hosted by a Data Node. 
 
@@ -207,29 +207,12 @@ made available to the network by a Data Node that, for example, is associated wi
 generated the service result. This makes a Service Result available as a new Artifact for which new value-added 
 services can be provided.
 
-## Actor ## {#Actor}
-
-*Actors* operate on behalf of data nodes or service nodes; they can be humans or machines, individuals or 
-organizations, authors of artifacts or providers of value-adding services. An actor, identified by a [[URI]], 
-either:
-
-- operates on behalf of a data node and exchanges messages pertaining to hosted artifacts; or,
-- operates on behalf of a service node, provides value-added services for artifacts hosted by data nodes, and exchanges messages with that regard.
-
-## Target ## {#Target}
-
-*Targets* are the intended receivers of messages that are exchanged on the network. The target is a human, or 
-machine, individual or organization that is the intended audience of a message. A target, identified by a 
-[[URI]], either:
-
-- operates on behalf of a data node and is the intended audience for messages pertaining to hosted artifacts; or,
-- operates on behalf of a service node and provides value-added services for artifacts hosted by data nodes, and receives messages with that regard.
-
 ## Agent ## {#Agent}
 
-*Agents* are the active participants in the network: they perform actions and can be identified or addressed. 
-Agents are the actors or targets that can be addressed with a [[URI]] and that can send or receive messages 
-via Linked Data Notifications.
+The *Agents* are the active participants in the network: they perform actions and can be identified or addressed. 
+Agents an be humans or machines, individuals or organizations and operate on behalf of Data and Service Nodes.
+Agents can be addressed with a [[URI]] in notification messages and that can send or receive messages via 
+Linked Data Notifications.
 
 Network communication patterns {#NetworkCommunicationPatterns}
 ==============================
