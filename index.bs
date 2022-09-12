@@ -60,7 +60,7 @@ Introduction {#Introduction}
 This specification details a profile for using Linked Data Notifications [[LDN]] with 
 ActivityStreams2 [[AS2]] payloads in value-adding networks. 
 
-A value-added network, as considered by this specification, is a network in which web 
+A value-added network, as considered by this specification, is a network in which Web 
 resources, for the purpose of this specification named [Artifacts](#Artifact), are made available by
 nodes in the network, value is added to these artifacts by other nodes in the network, 
 and LDN/AS2 notifications with that regard are exchanged among network nodes. 
@@ -150,43 +150,47 @@ This section clarifies the terminology that was introduced in the introduction.
 
 ## Artifact ## {#Artifact}
 
-An artifact is a resource identified by a [[URL]] that serves as the main focus of interaction between actors. 
-Examples are a digitized image in an archive, the webpage of a scientific publication, a digital representation 
-of a cultural heritage object, or a data set in a repository.
+An *Artifact* is a Web resource identified by a [[URL]] that serves as the main focus of interaction 
+between actors. Examples are a digitized image in an archive, the webpage of a scientific publication, 
+a digital representation of a cultural heritage object, or a data set in a repository.
 
 Artifacts can be atomic or can be of arbitrary complexity. How they are organized is outside the scope of this 
 document and is dependent on the implementing community.
 
-## Data node ## {#DataNode}
+## Data Node ## {#DataNode}
 
-A data node is an HTTP server that hosts artifacts and provides one or more LDN Inboxes via which actors that 
-operate on behalf of the data node can be reached. These LDN Inboxes are able to receive JSON-LD messages
- pertaining to life cycle events in which an artifact hosted by the data node is involved (See Section 6 Below). 
+A *Data Node* is network node that hosts [Artifacts](#Artifact) and provides one or more LDN Inboxes via 
+which actors that operate on behalf of the data node can be reached. These LDN Inboxes are able to receive 
+JSON-LD messages pertaining to life cycle events in which an artifact hosted by the data node is involved 
+(See Section 6 Below). 
 
-## Service node ## {#ServiceNode}
+## Service Node ## {#ServiceNode}
 
-A service node is an HTTP server that provides value-added services for artifacts hosted by data nodes and 
-provides one or more LDN Inboxes via which actors that operate on behalf of the service node can receive 
-service requests pertaining to the data node artifacts (See Section 6 Below). The result of providing a 
-value-added service for an artifact - whether requested or volunteered - is communicated to an actor that 
-operates on behalf of the data node that hosts the artifact in the form of a JSON-LD message delivered to 
-that actor’s LDN Inbox. 
+A *Service Node* is network node that provides value-added services for Artifacts hosted by Data Nodes and 
+provides one or more LDN Inboxes via which actors that operate on behalf of the Service Node can receive 
+service requests pertaining to the Data Node artifacts (See Section 6 Below). The [Service Result](#ServiceResult) 
+providing a value-added service for an Artifact - whether requested or volunteered - is communicated to an 
+actor that operates on behalf of the Data Node that hosts the artifact in the form of a JSON-LD message 
+delivered to that actor’s LDN Inbox. 
 
-When a service node creates a new artifact as a result of providing a value-added service for an artifact 
-hosted by a data node, then this new artifact can be made available in the network in its own right and can 
-itself become the subject of activities and messages. As a result, at that point, the service node must have 
-an associated data node via which the new artifact is made available.
+## Service Result ## {#ServiceResult}
 
-## Service result ## {#ServiceResult}
+A *Service Result* is the outcome of the provision of a value-added service by a Service Node for an 
+Artifact made available to the network by a Data Node. Different types of service results exist:
 
-A service result is any outcome of providing a value-added service for an artifact hosted by a data node. 
-Service results can be resources that are made available at a network address or inline data that is 
-provided in the JSON-LD messages that are communicated to the actor that operates on behalf of the data node 
-that hosts the artifact.
+- A Service Result can be a Web resource identified by a [[URL]], in which case that URL is provided as the 
+AS2 object in a notification sent by the Service Node.
+- A Service Result can be information that is provided inline in the AS2 object in a notification sent by the Service Node.
+    - As a special case, a service result can be linkages, in which case the AS2 activity type is Relationship and linkages are provided using AS2's [subject/relationship/object](https://www.w3.org/TR/activitystreams-vocabulary/#connections) construct.
+
+A Service Result that is a Web resource identified by a [[URL]] can itself become an Artifact when it is 
+made available to the network by a Data Node that, for example, is associated with the Service Node that 
+generated the service result. This makes a Service Result available as a new Artifact for which new value-added 
+services can be provided.
 
 ## Actor ## {#Actor}
 
-Actors operate on behalf of data nodes or service nodes; they can be humans or machines, individuals or 
+*Actors* operate on behalf of data nodes or service nodes; they can be humans or machines, individuals or 
 organizations, authors of artifacts or providers of value-adding services. An actor, identified by a [[URI]], 
 either:
 
@@ -195,7 +199,7 @@ either:
 
 ## Target ## {#Target}
 
-Targets are the intended receivers of messages that are exchanged on the network. The target is a human, or 
+*Targets* are the intended receivers of messages that are exchanged on the network. The target is a human, or 
 machine, individual or organization that is the intended audience of a message. A target, identified by a 
 [[URI]], either:
 
@@ -204,7 +208,7 @@ machine, individual or organization that is the intended audience of a message. 
 
 ## Agent ## {#Agent}
 
-Agents are the active participants in the network: they perform actions and can be identified or addressed. 
+*Agents* are the active participants in the network: they perform actions and can be identified or addressed. 
 Agents are the actors or targets that can be addressed with a [[URI]] and that can send or receive messages 
 via Linked Data Notifications.
 
@@ -243,10 +247,10 @@ Read, Update, Delete) actions on artifacts. In most use-cases these messages are
 that monitor artifacts. Examples of such messages are:
 
 - An institutional repository informing a search engine about a new artifact to be indexed.
-- A repository that informs a web archive about a new version of an artifact.
+- A repository that informs a Web archive about a new version of an artifact.
 
 These two examples demonstrate how data nodes (such as the institutional repository and archive) can communicate 
-with service nodes (the search engine and web archive) about artifact updates.
+with service nodes (the search engine and Web archive) about artifact updates.
 
 <pre class='include'>
 path: images/one_way_service_node.svg
@@ -290,7 +294,7 @@ path: images/request_response_datanode.svg
 The **request-response** pattern is used in more elaborate communication processes, in cases where actors need 
 to ask for services from a service node and no direct results can be expected. This style of communication expects 
 that the updates to the life cycle of artifacts can take hours, days or months to be processed. In these cases, 
-it would be impractical to wait for an answer from the service node, or require software to poll a web service 
+it would be impractical to wait for an answer from the service node, or require software to poll a Web service 
 for status updates. 
 
 The pattern starts by offering an artifact from a data node to a service node. The service node can optionally 
