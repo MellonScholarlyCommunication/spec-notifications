@@ -261,6 +261,29 @@ the existence of an Artifact (for instance, to inform a search engine about the 
 
 *Payload*
 
+<table>
+<thead>
+ <tr>
+ <th>Mapping table</th>
+ <th>Properties (in JSON-LD serialization)</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th>Mandatory</id>
+  <td>**id** , **type** , **actor** , **object**</td>
+ </tr>
+ <tr>
+  <th>Optional (but advised)</id>
+  <td>**origin**, **target**</td>
+ </tr>
+ <tr>
+  <th>Forbidden</th>
+  <td>**context** , **inReplyTo**</td>
+ </tr> 
+</tbody>
+</table>
+
 All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
 serializations MAY be used):
 
@@ -335,6 +358,29 @@ this fact. The Service Result doesn't have an associated LDN Inbox (is not part 
 
 *Payload*
 
+<table>
+<thead>
+ <tr>
+ <th>Mapping table</th>
+ <th>Properties (in JSON-LD serialization)</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th>Mandatory</id>
+  <td>**id**, **type** , **actor** , **context** , **object**</td>
+ </tr>
+ <tr>
+  <th>Optional (but advised)</id>
+  <td>**origin**, **target**</td>
+ </tr>
+ <tr>
+  <th>Forbidden</th>
+  <td>**inReplyTo**</td>
+ </tr> 
+</tbody>
+</table>
+
 All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
 serializations MAY be used):
 
@@ -405,6 +451,29 @@ value-added service pertaining to a Artifact on a Data Node in the network. The 
 doens't have an associated LDN Inbox (is not part of a Data Node).
 
 *Payload*
+
+<table>
+<thead>
+ <tr>
+ <th>Mapping table</th>
+ <th>Properties (in JSON-LD serialization)</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th>Mandatory</id>
+  <td>**id** , **type** , **actor** , **context** , **object**</td>
+ </tr>
+ <tr>
+  <th>Optional (but advised)</id>
+  <td>**origin** , **target**</td>
+ </tr>
+ <tr>
+  <th>Forbidden</th>
+  <td>**inReplyTo**</td>
+ </tr> 
+</tbody>
+</table>
 
 All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
 serializations MAY be used):
@@ -483,7 +552,7 @@ path: images/request_response_datanode.svg
 </pre>
 *Figure 4. An Institutional Repository requests for an artifact a peer service from a Peer-Review system. The Peer-Review system evaluates the request and sends an acknowledgment back indicating it is committed to provide this service. At some later date, the Peer-Review system responds with a link to a new peer review that contains the results of the peer review process.*
 
-The **request-response** pattern is used in more elaborate communication processes, in cases where Agents need 
+The **request-response Data Node to Service Node** pattern is used in more elaborate communication processes, in cases where Agents need 
 to ask for services from a Service Node and no direct results can be expected. This style of communication expects 
 that the updates to the life cycle of Artifacts can take hours, days or months to be processed. In these cases, 
 it would be impractical to wait for an answer from the Service Node, or require software to poll a Web service 
@@ -494,11 +563,34 @@ process (which is not in scope of this specification) to fulfill the service req
 internal process will be the announcement of a Service Result, or a rejection without a new Service Result 
 being created. 
 
-#### Data Node sends
+#### Data Node sends offer
 
-The pattern starts by offering an Artifact from a Data Node to a Service Node. 
+The request-response Data Node to Service Node pattern starts by *offering* an Artifact from a Data Node to a Service Node. 
 
 *Payload* 
+
+<table>
+<thead>
+ <tr>
+ <th>Mapping table</th>
+ <th>Properties (in JSON-LD serialization)</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th>Mandatory</id>
+  <td>**id** , **type** , **actor** , **object**</td>
+ </tr>
+ <tr>
+  <th>Optional (but advised)</id>
+  <td>**origin** , **target**</td>
+ </tr>
+ <tr>
+  <th>Forbidden</th>
+  <td>**context** , **inReplyTo**</td>
+ </tr> 
+</tbody>
+</table>
 
 All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
 serializations MAY be used):
@@ -522,6 +614,8 @@ serializations MAY be used):
  the Artifact on the Data Node. Optionaly, an in-band or out-of-band description of the Artifact may
  be provided (See [The Object of an activity](#ActivityObject)))</dd>
 </dl>
+
+Note: A Data Node MAY cancel the request with a Undo activity. Which will be explained in Section ???
 
 The notification payloads MAY have the following properties:
 
@@ -547,12 +641,46 @@ The notification payloads SHOULD NOT use the following properties:
 <dd>Not in use by a sending Data Node.</dd>
 </dl>
 
+*Example 4: The ACME Research Institute (Data Node) notifies the Data Archive XYZ 
+(Service Node) in a request-response pattern about the Artifact  
+http://acme.org/artifacts/alice/data-set-2022-01-19.zip on ACME's system they want
+to Offer for archivation.*
+
+<pre class=include-code>
+path: examples/example_rr_dn_sn_request.jsonld
+highlight: json
+show: 
+</pre>
+
 #### Service Node acknowledges
 
-The Service Node can MAY evaluate the Artifact and can decide if it can commit to providing services on 
+The Service Node MAY evaluate the Offer and can decide if it can commit to providing services on 
 the Artifact. In the form of an acknowledgment or rejection this information can be replied to the Data Node.
 
 *Payload*
+
+<table>
+<thead>
+ <tr>
+ <th>Mapping table</th>
+ <th>Properties (in JSON-LD serialization)</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th>Mandatory</id>
+  <td>**id** , **type** , **actor** , **object**</td>
+ </tr>
+ <tr>
+  <th>Optional (but highly advised)</id>
+  <td>**context** , **inReplyTo**</td>
+ </tr>
+ <tr>
+  <th>Optional (but advised)</id>
+  <td>**origin** , **target**</td>
+ </tr>
+</tbody>
+</table>
 
 All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
 serializations MAY be used):
@@ -573,7 +701,7 @@ serializations MAY be used):
  (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 
  <dt>object</dt>
- <dd>The previous activity that this acknowledgment is replying to: contains at least the [[URL]] identifying
+ <dd>The previous Offer activity that this acknowledgment is replying to: contains at least the [[URL]] identifying
  the previous activity. Optionaly, an in-band or out-of-band description of the previous activity may
  be provided (See [The Object of an activity](#ActivityObject)))</dd>
 </dl>
@@ -606,19 +734,203 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example*
+*Example 5: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+(Data Node) in a request-response pattern that it accepts the offer ACME sent in a
+previous activity notification.*
 
-Issue: Add example
+<pre class=include-code>
+path: examples/example_rr_dn_sn_acknowledge.jsonld
+highlight: json
+show: 
+</pre>
 
 #### Service Node responds
 
-Issue: Insert mapping
+The Service Node SHOULD as result of an internal process on the Artifact announce a new
+Service Result, or reject the offer of the Data Node without a new Service Result being
+created. 
 
-Issue: Add example
+##### Service Node announces Service Result 
+
+*Payload*
+
+<table>
+<thead>
+ <tr>
+ <th>Mapping table</th>
+ <th>Properties (in JSON-LD serialization)</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th>Mandatory</id>
+  <td>**id** , **type** , **actor** , **object**</td>
+ </tr>
+ <tr>
+  <th>Optional (but highly advised)</id>
+  <td>**context** , **inReplyTo**</td>
+ </tr>
+ <tr>
+  <th>Optional (but advised)</id>
+  <td>**origin** , **target**</td>
+ </tr>
+</tbody>
+</table>
+
+All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
+serializations MAY be used):
+
+<dl>
+ <dt>id</dt>
+ <dd>The activity identifier: this contain the actitivity identifier, and is a valid [[URI]] 
+ (See also [Identifying an activity](#Identifying#))</dd>
+
+ <dt>type</dt>
+ <dd>The activity type: one of type [[activitystreams-vocabulary#Announce|as:Announce]]. The
+ field MAY also have an additional generic subtype of [[activitystreams-vocabulary#Activity|as:Activity]].</dd>
+
+ <dt>actor</dt>
+ <dd>The Agent that performed the activity: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+ (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+
+ <dt>object</dt>
+ <dd>The Service Result of the value-added service provided for an Artifact on the Data Node: contains 
+ at least an in-band or out-of-band description of the Service Result is provided 
+ (See [The Object of an activity](#ActivityObject)))</dd>
+</dl>
+
+The notification payloads SHOULD have the following properties:
+
+<dl>
+<dt>context</dt>
+<dd>The original Artifact in a notification thread, ie. the **object** of the previous activity that 
+this acknowledgement is replying to. This MUST contain at least a [[URL]] identifying the Artifact and MAY provide an in-band or 
+out-of-band description (See [The Object of an activity](#ActivityObject)).</dd>
+
+<dt>inReplyTo</dt>
+<dd>Points to the activity identifier of the request notification to which this activity is a response. 
+In an offer acknowledgment notification, this MUST be equivalent to the value of the **object** property. 
+It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
+</dl>
+
+The notification payloads MAY have the following properties:
+
+<dl>
+<dt>origin</dt>
+<dd>The software component that was responsible for sending the activity over the network. When used
+it contains at least a [[URI]] identifying the component. Optionally, an in-band or out-of-band
+description of the Agent may be provided.</dd>
+
+<dt>target</dt>
+<dd>The intended Agent for receiving the notification: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+(See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+</dl>
+
+*Example 6: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+(Data Node) in a request-response pattern that it announces a new Service Result 
+pertaining to ACME's Artifact http://acme.org/artifacts/alice/data-set-2022-01-19.zip .*
+
+<pre class=include-code>
+path: examples/example_rr_dn_sn_response.jsonld
+highlight: json
+show: 
+</pre>
+
+##### Service Node rejects service
+
+*Payload*
+
+<table>
+<thead>
+ <tr>
+ <th>Mapping table</th>
+ <th>Properties (in JSON-LD serialization)</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th>Mandatory</id>
+  <td>**id** , **type** , **actor** , **object**</td>
+ </tr>
+ <tr>
+  <th>Optional (but highly advised)</id>
+  <td>**context** , **inReplyTo**</td>
+ </tr>
+ <tr>
+  <th>Optional (but advised)</id>
+  <td>**origin** , **target**</td>
+ </tr>
+</tbody>
+</table>
+
+All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
+serializations MAY be used):
+
+<dl>
+ <dt>id</dt>
+ <dd>The activity identifier: this contain the actitivity identifier, and is a valid [[URI]] 
+ (See also [Identifying an activity](#Identifying#))</dd>
+
+ <dt>type</dt>
+ <dd>The activity type: the type [[activitystreams-vocabulary#Reject|as:Reject]]. The field MAY also have an additional 
+ generic subtype of [[activitystreams-vocabulary#Activity|as:Activity]].</dd>
+
+ <dt>actor</dt>
+ <dd>The Agent that performed the activity: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+ (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+
+ <dt>object</dt>
+ <dd>The previous Offer activity that this acknowledgment is replying to: contains at least the [[URL]] identifying
+ the previous activity. Optionaly, an in-band or out-of-band description of the previous activity may
+ be provided (See [The Object of an activity](#ActivityObject)))</dd>
+</dl>
+
+The notification payloads SHOULD have the following properties:
+
+<dl>
+<dt>context</dt>
+<dd>The original Artifact in a notification thread, ie. the **object** of the previous activity that 
+this acknowledgement is replying to. This MUST contain at least a [[URL]] identifying the Artifact and MAY provide an in-band or 
+out-of-band description (See [The Object of an activity](#ActivityObject)).</dd>
+
+<dt>inReplyTo</dt>
+<dd>Points to the activity identifier of the request notification to which this activity is a response. 
+In an offer acknowledgment notification, this MUST be equivalent to the value of the **object** property. 
+It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
+</dl>
+
+The notification payloads MAY have the following properties:
+
+<dl>
+<dt>origin</dt>
+<dd>The software component that was responsible for sending the activity over the network. When used
+it contains at least a [[URI]] identifying the component. Optionally, an in-band or out-of-band
+description of the Agent may be provided.</dd>
+
+<dt>target</dt>
+<dd>The intended Agent for receiving the notification: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+(See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+</dl>
+
+*Example 7: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+(Data Node) in a request-response pattern that it rejects the offer ACME sent in a previous 
+activity notification.*
+
+<pre class=include-code>
+path: examples/example_rr_dn_sn_response_reject.jsonld
+highlight: json
+show: 
+</pre>
 
 ### Service Node to Service Node ### {#RequestResponsePatternSNSN}
 
-Issue: Add image
+<pre class='include'>
+path: images/request_response_servicenode.svg
+</pre>
 
 Issue: Add text
 
@@ -636,9 +948,18 @@ Issue: Add example
 
 #### Service Node responds
 
+##### Service Node announces Service Result
+
 Issue: Add mapping
 
 Issue: Add example
+
+##### Service Node rejects service
+
+Issue: Add mapping
+
+Issue: Add example
+
 
 Activities {#Activities}
 ===========
