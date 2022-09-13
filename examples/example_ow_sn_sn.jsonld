@@ -2,8 +2,6 @@
     "@context": "https://www.w3.org/ns/activitystreams",
     "id": "urn:uuid:239FD510-03F4-4B56-B3A0-0D3B92F3826D",
     "type": "Announce",
-    "published": "2022-06-15T03:55:50Z",
-    "summary": "Fairfield Repository created an archival copy of your artifact",
     "actor": {
        "id": "https://fairfield.org/about#us",
        "inbox": "https://fairfield.org/inbox",
@@ -24,9 +22,9 @@
        "object":"https://darwin.fairfield.org/objects/317831-13210"
     },
     "target": {     
-       "id": "https://orcid.org/0000-0007-01219-312199",
-       "inbox": "https://acme.org/inbox/alice",
-       "name": "Alice",
-       "type": "Person"
+       "id": "https://anri.go.id/profile/card#us",
+       "inbox": "https://anri.go.id/inbox/",
+       "name": "Arsip Nasional Republik Indonesia",
+       "type": "Organization"
     }
   }
