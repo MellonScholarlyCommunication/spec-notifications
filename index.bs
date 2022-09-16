@@ -251,7 +251,7 @@ to indicate whether or not it commits to providing the service requested by the 
 path: images/one_way_data_node.svg
 </pre>
 
-*Figure 2: A Data Node sends a notification about an Artifact to a Service Node*
+*Figure 2: A Data Node sends a notification about an Artifact to a Service Node.*
 
 The **one-way Data Node to Service Node** pattern is used for sending an informative message pertaining to an Artifact to another Agent 
 in the network. In the case of Data Nodes, one-way patterns could be used to inform an Agent about CRUD (Create, 
@@ -341,8 +341,7 @@ The notification payloads SHOULD NOT use the following properties:
 </dl>
 
 *Example 1: The ACME Research Institute (Data Node) notifies Infinity Science (Service Node) in 
-a one-way pattern about the creation of the new Artifact http://acme.org/artifacts/alice/five_steps_to_success.html .
-Serialized as JSON-LD.*
+a one-way pattern about the creation of the new Artifact http://acme.org/artifacts/alice/five_steps_to_success.html.*
 
 <pre class=include-code>
 path: examples/example_ow_dn_sn.jsonld
@@ -399,8 +398,7 @@ this fact. The Service Result doesn't have an associated LDN Inbox (is not part 
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
-serializations MAY be used):
+All notification payloads MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -423,7 +421,7 @@ serializations MAY be used):
  <dt>as:object</dt>
  <dd>The Service Result of the value-added service provided for an Artifact on the Data Node: contains 
  at least an in-band or out-of-band description of the Service Result is provided 
- (See [The Object of an activity](#ActivityObject)))</dd>
+ (See [The Object of an activity](#ActivityObject))).</dd>
 
 </dl>
 
@@ -449,8 +447,7 @@ The notification payloads SHOULD NOT use the following properties:
 </dl>
 
 *Example 2: The Fairfield City Repository (Service Node) notifies ACME Research Institute (Data Node) in a one-way pattern about the creation of an archival copy Service Result https://darwin.fairfield.org/objects/317831-13210
-related to ACME's Artifact http://acme.org/artifacts/alice/five_steps_to_success.html .
-Serialized as JSON-LD*
+related to ACME's Artifact http://acme.org/artifacts/alice/five_steps_to_success.html.*
 
 <pre class=include-code>
 path: examples/example_ow_sn_dn.jsonld
@@ -506,8 +503,7 @@ doens't have an associated LDN Inbox (is not part of a Data Node).
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
-serializations MAY be used):
+All notification payloads MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -530,7 +526,7 @@ serializations MAY be used):
  <dt>as:object</dt>
  <dd>The Service Result of the value-added service provided for an Artifact on the Data Node: contains 
  at least an in-band or out-of-band description of the Service Result is provided 
- (See [The Object of an activity](#ActivityObject)))</dd>
+ (See [The Object of an activity](#ActivityObject))).</dd>
 
 </dl>
 
@@ -558,7 +554,7 @@ The notification payloads SHOULD NOT use the following properties:
 *Example 3: The Fairfield City Repository (Service Node) notifies the Arsip Nasional Republik 
 Indonesia (Service Node) in a one-way pattern about the creation of an archival copy Service Result
 https://darwin.fairfield.org/objects/317831-13210 of an Artifact at the ACME Research Institute 
-(Data Node). Serialized as JSON-LD.*
+(Data Node).*
 
 <pre class=include-code>
 path: examples/example_ow_sn_sn.jsonld
@@ -599,7 +595,7 @@ path: images/request_response_data_node_offer.svg
 </pre>
 
 *Figure 5: A Data Node sends an Offer to a Service Node requesting a value-added service
-for one of its Artifacts*
+for one of its Artifacts.*
 
 The request-response Data Node to Service Node pattern starts sending an *Offer*
 pertaining to an Artifact from a Data Node to a Service Node.
@@ -638,8 +634,7 @@ pertaining to an Artifact from a Data Node to a Service Node.
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
-serializations MAY be used):
+All notification payloads MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -658,7 +653,7 @@ serializations MAY be used):
  <dt>as:object</dt>
  <dd>The Artifact that is the subject of the activity: contains at least the [[URL]] identifying
  the Artifact on the Data Node. Optionaly, an in-band or out-of-band description of the Artifact may
- be provided (See [The Object of an activity](#ActivityObject)))</dd>
+ be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
 The notification payloads MAY have the following properties:
@@ -688,7 +683,7 @@ The notification payloads SHOULD NOT use the following properties:
 *Example 4: The ACME Research Institute (Data Node) notifies the Data Archive XYZ 
 (Service Node) in a request-response pattern about the Artifact  
 http://acme.org/artifacts/alice/data-set-2022-01-19.zip on ACME's system they want
-to Offer for archivation. Serialized as JSON-LD.*
+to Offer for archivation.*
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_request.jsonld
@@ -702,8 +697,8 @@ show:
 path: images/request_response_data_node_cancel.svg
 </pre>
 
-*Figure 6: A Data Node sends an Undo to a Service Node cancelling its previous
-Offer notification*
+*Figure 6: A Data Node sends an Undo notification to a Service Node cancelling its previous
+Offer notification.*
 
 A Data Node MAY at any point send an informative *Undo* notification to a Service Node
 to cancel a previously send *Offer*. A Service Node MAY or MAY NOT use this
@@ -747,8 +742,7 @@ information to cancel some interal process.
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
-serializations MAY be used):
+All notification payloads MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -800,13 +794,11 @@ The notification payloads SHOULD NOT use the following properties:
 <dd>Not in use by a sending Data Node.</dd>
 </dl>
 
-*Example 4: The ACME Research Institute (Data Node) notifies the Data Archive XYZ 
-(Service Node) in a request-response pattern about the Artifact  
-http://acme.org/artifacts/alice/data-set-2022-01-19.zip on ACME's system they want
-to Offer for archivation. Serialized as JSON-LD.*
+*Example 5: The ACME Research Institute (Data Node) sends a cancelation to 
+Data Archive XYZ (Service Node) of the Offer that was sent in Example 4.*
 
 <pre class=include-code>
-path: examples/example_rr_dn_sn_request.jsonld
+path: examples/example_rr_dn_sn_cancel.jsonld
 highlight: json
 show: 
 </pre>
@@ -820,9 +812,9 @@ path: images/request_response_service_node_acknowledge.svg
 *Figure 7: A Service Node optionally acknowledges a previously sent Offer that was
 sent by a Data Node.*
 
-The Service Node MAY evaluate the Offer and can decide if it can commit to providing services on 
-the Artifact. In the form of an *Accept* or *Reject* this information is be replied to 
-the Data Node.
+The Service Node MAY evaluate the Offer that was sent by the Data Node and can decide 
+if it can commit to providing services on the Artifact. In the form of an *Accept* or 
+*Reject* this information is be replied to the Data Node.
 
 *Payload*
 
@@ -858,8 +850,7 @@ the Data Node.
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
-serializations MAY be used):
+All notification payloads MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -879,7 +870,7 @@ serializations MAY be used):
  <dt>as:object</dt>
  <dd>The previous Offer activity that this acknowledgment is replying to: contains at least the [[URI]] identifying
  the previous activity. Optionaly, an in-band or out-of-band description of the previous activity may
- be provided (See [The Object of an activity](#ActivityObject)))</dd>
+ be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
 The notification payloads SHOULD have the following properties:
@@ -910,9 +901,9 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 5: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+*Example 6: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it accepts the offer ACME sent in a
-previous activity notification. Serialized as JSON-LD.*
+previous activity notification.*
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_acknowledge.jsonld
@@ -968,8 +959,7 @@ created (See [Service Node Rejects](#RequestResponsePatternDNSNReject)).
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
-serializations MAY be used):
+All notification payloads MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -988,7 +978,7 @@ serializations MAY be used):
  <dt>as:object</dt>
  <dd>The Service Result of the value-added service provided for an Artifact on the Data Node: contains 
  at least an in-band or out-of-band description of the Service Result is provided 
- (See [The Object of an activity](#ActivityObject)))</dd>
+ (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
 The notification payloads SHOULD have the following properties:
@@ -1019,10 +1009,9 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 6: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+*Example 7: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it announces a new Service Result 
-pertaining to ACME's Artifact http://acme.org/artifacts/alice/data-set-2022-01-19.zip .
-Serialized as JSON-LD*
+pertaining to ACME's Artifact http://acme.org/artifacts/alice/data-set-2022-01-19.zip.*
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_response.jsonld
@@ -1080,8 +1069,7 @@ Artifact, it MAY notifiy the Data Node about this fact by sending a Reject notif
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties (expressed below as JSON-LD properties, allthough other
-serializations MAY be used):
+All notification payloads MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -1100,7 +1088,7 @@ serializations MAY be used):
  <dt>as:object</dt>
  <dd>The previous Offer activity that this acknowledgment is replying to: contains at least the [[URI]] identifying
  the previous activity. Optionaly, an in-band or out-of-band description of the previous activity may
- be provided (See [The Object of an activity](#ActivityObject)))</dd>
+ be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
 The notification payloads SHOULD have the following properties:
@@ -1131,9 +1119,9 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 7: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+*Example 8: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it rejects the offer ACME sent in a previous 
-activity notification. Serialized as JSON-LD*
+activity notification.*
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_response_reject.jsonld
@@ -1141,16 +1129,592 @@ highlight: json
 show: 
 </pre>
 
+## Request-response: Service Node to Service Node ## {#RequestResponsePatternSNSN}
+
+In some use-cases a Service Node needs the help of other Service Nodes in the network to
+provide value-added services to an Artifact from a Data Node in the network. In these 
+cases, a Service Node can forward a Service Result to another Service Node and ask for 
+futher value-added services.
+
+The **request-response Service Node to Service Node** pattern is used when an Agent on behalf
+of a Service Node needs to ask for a service from another Service Node and no direct results can
+be expected.  This style of communication expects that the updates service processes can take hours, 
+days or months to be processed. In these cases, it would be impractical to wait for an answer 
+from the Service Node, or require software to poll a Web service for status updates. 
+
+The request-response Service Node to Service Node pattern starts by Service Node (A) sending
+an *Offer* notification payload pertaining to Service Result to another Service Node (B)
+requesting a value-added service. 
+
+Service Node (B) MAY evaluate the Offer and can decide if it can commit to providing services on 
+the Service Result. In the form of an acknowledgment or rejection this information 
+can be replied to Service Node (A).
+
+Service Node (B) now starts an internal process (which is not in scope of this specification) to 
+fulfill the service request. The end result of the internal process SHOULD BE the announcement of a 
+Service Result, or a rejection without a new Service Result being created. 
+
+Service Node (A) MAY cancel notification to cancel a value-added service request by sending an
+*Undo* notification pertaining to an *Offer* to Service Node (B). This Undo is notification
+is just informative, Service Node (B) MAY or MAY NOT use this information to cancel some
+internal process. These notifications MAY be send at any stage of the request-response pattern.
+
+### Service Node sends offer ### {#RequestResponsePatternSNSNOffer}
+
+<pre class='include'>
+path: images/request_response2_service_node_offer.svg
+</pre>
+
+*Figure 10: Service Node A sends an Offer to Service Node  B requesting a value-added service
+for Service Result related to a Data Node in the network. The Offer could have been triggered by a 
+Data Node requesting a value-added service from Service Node A that Service Node A forwards
+to Service Node B.*
+
+The request-response Service Node to Service Node pattern starts by Service Node (A) sending an *Offer*
+pertaining to a Service Result to a Service Node (B).
+
+*Payload* 
+
+<table>
+<thead>
+ <tr>
+ <th>Requirements</th>
+ <td></td>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+ <th>Required</th>
+ <td>**id** (*Activity Identifier*)</td>
+</tbody>
+ <tr>
+ <td></td>
+ <td>*RDF Properties*</td>
+ </tr>
+<tbody>
+ <tr>
+  <th>Required</id>
+  <td>**rdf:type** , **as:actor** , **as:object**</td>
+ </tr>
+ </tr>
+  <th>Recommended</id>
+  <td>**as:context, **as:origin**, **as:target**</td>
+ </tr>
+ <tr>
+  <th>Not used</th>
+  <td>**as:inReplyTo**</td>
+ </tr> 
+</tbody>
+</table>
+
+All notification payloads MUST have the following properties:
+
+<dl>
+ <dt>id</dt>
+ <dd>The activity identifier: this contain the actitivity identifier, and is a valid [[URI]] 
+ (See also [Identifying an activity](#Identifying#))</dd>
+
+ <dt>rdf:type</dt>
+ <dd>The activity type: the type [[activitystreams-vocabulary#Offer|as:Offer]]. The field
+ MAY also have an additional generic subtype of [[activitystreams-vocabulary#Activity|as:Activity]].</dd>
+
+ <dt>as:actor</dt>
+ <dd>The Agent that performed the activity: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+ (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+
+ <dt>as:object</dt>
+ <dd>A Service Result that is the subject of the activity: contains at least a [[URI]] 
+ identifying the Service Result.  Optionaly, an in-band or out-of-band description of 
+ the Service Result may be provided (See [The Object of an activity](#ActivityObject)).</dd>
+</dl>
+
+Note: The Service Result MAY be a previous notification that was received from another node
+in the network.
+
+The notification payloads MAY have the following properties:
+
+<dl>
+<dt>as:origin</dt>
+<dd>The software component that was responsible for sending the activity over the network. When used
+it contains at least a [[URI]] identifying the component. Optionally, an in-band or out-of-band
+description of the Agent may be provided.</dd>
+
+<dt>as:target</dt>
+<dd>The intended Agent for receiving the notification: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+(See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+</dl>
+
+The notification payloads SHOULD NOT use the following properties:
+
+<dl>
+<dt>as:context</dt>
+<dd>Not in use by a sending Service Node A.</dd>
+
+<dt>as:inReplyTo</dt>
+<dd>Not in use by a sending Data Node.</dd>
+</dl>
+
+*Example 9: The Data Archive XYZ (Service Node A) received an Offer from ACME Research 
+Institute (Data Node). Service Node A decides to forward the offer to their Australian
+office Data Archive XYZ Australia (Service Node B).*
+
+<pre class=include-code>
+path: examples/example_rr_sn_sn_request.jsonld
+highlight: json
+show: 
+</pre>
+
+### Service Node cancels offer ### {#RequestResponsePatternSNSNUndo}
+
+<pre class='include'>
+path: images/request_response2_service_node_cancel.svg
+</pre>
+
+*Figure 11: Service Node A sends an Undo notification to Service Node B cancelling its previous
+Offer notification.*
+
+Service Node A MAY at any point send an informative *Undo* notification to a Service Node B
+to cancel a previously send *Offer*. Service Node B MAY or MAY NOT use this information to 
+cancel some interal process.
+
+*Payload* 
+
+<table>
+<thead>
+ <tr>
+ <th>Requirements</th>
+ <td></td>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+ <th>Required</th>
+ <td>**id** (*Activity Identifier*)</td>
+</tbody>
+ <tr>
+ <td></td>
+ <td>*RDF Properties*</td>
+ </tr>
+<tbody>
+ <tr>
+  <th>Required</id>
+  <td>**rdf:type** , **as:actor** , **as:object**</td>
+ </tr>
+ <tr>
+  <th>Should</id>
+  <td>**as:context**</td>
+ </tr>
+ <tr>
+  <th>Recommended</id>
+  <td>**as:origin**, **as:target**</td>
+ </tr>
+ <tr>
+  <th>Not used</th>
+  <td>**as:inReplyTo**</td>
+ </tr> 
+</tbody>
+</table>
+
+All notification payloads MUST have the following properties:
+
+<dl>
+ <dt>id</dt>
+ <dd>The activity identifier: this contain the actitivity identifier, and is a valid [[URI]] 
+ (See also [Identifying an activity](#Identifying#))</dd>
+
+ <dt>rdf:type</dt>
+ <dd>The activity type: the type [[activitystreams-vocabulary#Offer|as:Offer]]. The field
+ MAY also have an additional generic subtype of [[activitystreams-vocabulary#Activity|as:Activity]].</dd>
+
+ <dt>as:actor</dt>
+ <dd>The Agent that performed the activity: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+ (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+
+ <dt>as:object</dt>
+ <dd>The previous Offer activity that this undo tries to cancel: contains at least the [[URI]] identifying
+ the previous activity. Optionaly, an in-band or out-of-band description of the previous activity may
+ be provided (See [The Object of an activity](#ActivityObject)))</dd>
+</dl>
+
+The notification payloads SHOULD have the following properties:
+
+<dl>
+<dt>as:context</dt>
+<dd>The original Service Result in a notification thread, ie. the **object** of the previous activity that 
+this undo is trying to cancel. This MUST contain at least a [[URL]] identifying the Service Result and MAY provide an in-band or 
+out-of-band description (See [The Object of an activity](#ActivityObject)).</dd>
+</dl>
+
+The notification payloads MAY have the following properties:
+
+<dl>
+<dt>as:origin</dt>
+<dd>The software component that was responsible for sending the activity over the network. When used
+it contains at least a [[URI]] identifying the component. Optionally, an in-band or out-of-band
+description of the Agent may be provided.</dd>
+
+<dt>as:target</dt>
+<dd>The intended Agent for receiving the notification: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+(See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+</dl>
+
+The notification payloads SHOULD NOT use the following properties:
+
+<dl>
+<dt>as:inReplyTo</dt>
+<dd>Not in use by a sending Data Node.</dd>
+</dl>
+
+*Example 10: Data Archive XYZ (Service Node A) sends a cancelation to 
+Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Example 9.*
+
+<pre class=include-code>
+path: examples/example_rr_sn_sn_cancel.jsonld
+highlight: json
+show: 
+</pre>
+
+### Service Node acknowledges ### {#RequestResponsePatternSNSNAcknowledge}
+
+<pre class='include'>
+path: images/request_response2_service_node_acknowledge.svg
+</pre>
+
+*Figure 12: Service Node B optionally acknowledges a previously sent Offer that was
+sent by a Service Node A.*
+
+Service Node B MAY evaluate the Offer that was sent by Service Node A and can decide if 
+it can commit to providing services on the Service Result. In the form of an *Accept* or 
+*Reject* this information is be replied to Service Node A.
+
+*Payload*
+
+<table>
+<thead>
+ <tr>
+ <th>Requirements</th>
+ <td></td>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+ <th>Required</th>
+ <td>**id** (*Activity Identifier*)</td>
+</tbody>
+ <tr>
+ <td></td>
+ <td>*RDF Properties*</td>
+ </tr>
+<tbody>
+ <tr>
+  <th>Required</id>
+  <td>**rdf:type** , **as:actor** , **as:object**</td>
+ </tr>
+ <tr>
+  <th>Should</id>
+  <td>**as:context**, **as:inReplyTo**</td>
+ </tr>
+ <tr>
+  <th>Recommended</id>
+  <td>**as:origin**, **as:target**</td>
+ </tr>
+</tbody>
+</table>
+
+All notification payloads MUST have the following properties:
+
+<dl>
+ <dt>id</dt>
+ <dd>The activity identifier: this contain the actitivity identifier, and is a valid [[URI]] 
+ (See also [Identifying an activity](#Identifying#))</dd>
+
+ <dt>rdf:type</dt>
+ <dd>The activity type: one of the type [[activitystreams-vocabulary#Accept|as:Accept]] or 
+ [[activitystreams-vocabulary#Reject|as:Reject]]. The field MAY also have an additional generic 
+ subtype of [[activitystreams-vocabulary#Activity|as:Activity]].</dd>
+
+ <dt>as:actor</dt>
+ <dd>The Agent that performed the activity: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+ (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+
+ <dt>as:object</dt>
+ <dd>The previous Offer activity that this acknowledgment is replying to: contains at least the [[URI]] identifying
+ the previous activity. Optionaly, an in-band or out-of-band description of the previous activity may
+ be provided (See [The Object of an activity](#ActivityObject))).</dd>
+</dl>
+
+The notification payloads SHOULD have the following properties:
+
+<dl>
+<dt>as:context</dt>
+<dd>The original Service Result in a notification thread, ie. the **object** of the previous activity that 
+this acknowledgement is replying to. This MUST contain at least a [[URI]] identifying the Service Result
+and MAY provide an in-band or out-of-band description (See [The Object of an activity](#ActivityObject)).</dd>
+
+<dt>as:inReplyTo</dt>
+<dd>Points to the activity identifier of the request notification to which this activity is a response. 
+In an offer acknowledgment notification, this MUST be equivalent to the value of the **object** property. 
+It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
+</dl>
+
+The notification payloads MAY have the following properties:
+
+<dl>
+<dt>as:origin</dt>
+<dd>The software component that was responsible for sending the activity over the network. When used
+it contains at least a [[URI]] identifying the component. Optionally, an in-band or out-of-band
+description of the Agent may be provided.</dd>
+
+<dt>as:target</dt>
+<dd>The intended Agent for receiving the notification: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+(See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+</dl>
+
+*Example 11: Data Archive XYZ Australia (Service Node B) sends an Accept to 
+Data Archive XYZ (Service Node A) of the Offer that was sent in Example 9.*
+
+<pre class=include-code>
+path: examples/example_rr_sn_sn_acknowledge.jsonld
+highlight: json
+show: 
+</pre>
+
+### Service Node responds ### {#RequestResponsePatternSNSNAnnounce}
+
+<pre class='include'>
+path: images/request_response2_service_node_responds.svg
+</pre>
+
+*Figure 13: Service Node B has a Service Result available pertaining to the Service Result 
+on Service Node A. The Service Node B sends an Announce notification to Service Node A about
+this fact.*
+
+Service Node B SHOULD as result of an internal process on the Service Result of Service Node A
+announce its own new Service Result, or reject the offer of Service Node A without a new 
+Service Result being created (See [Service Node Rejects](#RequestResponsePatternSNSNReject)). 
+
+*Payload*
+
+<table>
+<thead>
+ <tr>
+ <th>Requirements</th>
+ <td></td>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+ <th>Required</th>
+ <td>**id** (*Activity Identifier*)</td>
+</tbody>
+ <tr>
+ <td></td>
+ <td>*RDF Properties*</td>
+ </tr>
+<tbody>
+ <tr>
+  <th>Required</id>
+  <td>**rdf:type** , **as:actor** , **as:object**</td>
+ </tr>
+ <tr>
+  <th>Should</id>
+  <td>**as:context**, **as:inReplyTo**</td>
+ </tr>
+ <tr>
+  <th>Recommended</id>
+  <td>**as:origin**, **as:target**</td>
+ </tr>
+</tbody>
+</table>
+
+All notification payloads MUST have the following properties:
+
+<dl>
+ <dt>id</dt>
+ <dd>The activity identifier: this contain the actitivity identifier, and is a valid [[URI]] 
+ (See also [Identifying an activity](#Identifying#))</dd>
+
+ <dt>rdf:type</dt>
+ <dd>The activity type: one of type [[activitystreams-vocabulary#Announce|as:Announce]]. The
+ field MAY also have an additional generic subtype of [[activitystreams-vocabulary#Activity|as:Activity]].</dd>
+
+ <dt>as:actor</dt>
+ <dd>The Agent that performed the activity: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+ (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+
+ <dt>as:object</dt>
+ <dd>The Service Result of the value-added service provided for a Service Result from Service Node A: contains 
+ at least an in-band or out-of-band description of the Service Result is provided 
+ (See [The Object of an activity](#ActivityObject))).</dd>
+</dl>
+
+The notification payloads SHOULD have the following properties:
+
+<dl>
+<dt>as:context</dt>
+<dd>The original Service Result from Service Node A in a notification thread, ie. the **object** of 
+the previous activity that this acknowledgement is replying to. This MUST contain at least a 
+[[URI]] identifying the Service Result from Service Node A and MAY provide an in-band or 
+out-of-band description (See [The Object of an activity](#ActivityObject)).</dd>
+
+<dt>as:inReplyTo</dt>
+<dd>Points to the activity identifier of the request notification to which this activity is a response. 
+In an offer acknowledgment notification, this MUST be equivalent to the value of the **object** property. 
+It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
+</dl>
+
+The notification payloads MAY have the following properties:
+
+<dl>
+<dt>as:origin</dt>
+<dd>The software component that was responsible for sending the activity over the network. When used
+it contains at least a [[URI]] identifying the component. Optionally, an in-band or out-of-band
+description of the Agent may be provided.</dd>
+
+<dt>as:target</dt>
+<dd>The intended Agent for receiving the notification: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+(See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+</dl>
+
+*Example 12: Data Archive XYZ Australia (Service Node B) notifies Data Archive XYZ  
+(Service Node A) in a request-response pattern that it announces a new Service Result 
+pertaining to Service Node A Service Result urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495.*
+
+<pre class=include-code>
+path: examples/example_rr_sn_sn_response.jsonld
+highlight: json
+show: 
+</pre>
+
+### Service Node rejects ### {#RequestResponsePatternSNSNReject}
+
+<pre class='include'>
+path: images/request_response2_service_node_acknowledge.svg
+</pre>
+
+*Figure 14: Service Node B is not able to create a Service Result for a Service Result from
+Service Node A. Service Node B optionally sends a Reject notification back to the Service Node A.*
+
+In case Service Node B is not able to fulfill the value-added service on a Service Result from
+Service Node A, it MAY notifiy the Data Node about this fact by sending a Reject notification.
+
+*Payload*
+
+<table>
+<thead>
+ <tr>
+ <th>Requirements</th>
+ <td></td>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+ <th>Required</th>
+ <td>**id** (*Activity Identifier*)</td>
+</tbody>
+ <tr>
+ <td></td>
+ <td>*RDF Properties*</td>
+ </tr>
+<tbody>
+ <tr>
+  <th>Required</id>
+  <td>**rdf:type** , **as:actor** , **as:object**</td>
+ </tr>
+ <tr>
+  <th>Should</id>
+  <td>**as:context**</td>
+ </tr>
+ <tr>
+  <th>Recommended</id>
+  <td>**as:origin**, **as:target**</td>
+ </tr>
+ <tr>
+  <th>Not used</th>
+  <td>**as:inReplyTo**</td>
+ </tr> 
+</tbody>
+</table>
+
+All notification payloads MUST have the following properties:
+
+<dl>
+ <dt>id</dt>
+ <dd>The activity identifier: this contain the actitivity identifier, and is a valid [[URI]] 
+ (See also [Identifying an activity](#Identifying#))</dd>
+
+ <dt>rdf:type</dt>
+ <dd>The activity type: the type [[activitystreams-vocabulary#Reject|as:Reject]]. The field MAY also have an additional 
+ generic subtype of [[activitystreams-vocabulary#Activity|as:Activity]].</dd>
+
+ <dt>as:actor</dt>
+ <dd>The Agent that performed the activity: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+ (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+
+ <dt>as:object</dt>
+ <dd>The previous Offer activity that this acknowledgment is replying to: contains at least the [[URI]] identifying
+ the previous activity. Optionaly, an in-band or out-of-band description of the previous activity may
+ be provided (See [The Object of an activity](#ActivityObject))).</dd>
+</dl>
+
+The notification payloads SHOULD have the following properties:
+
+<dl>
+<dt>as:context</dt>
+<dd>The original Service Result of Service Node A in a notification thread, ie. the **object** of the
+previous activity that this acknowledgement is replying to. This MUST contain at least a [[URI]] 
+identifying the Service Result of Service Node A and MAY provide an in-band or out-of-band description 
+(See [The Object of an activity](#ActivityObject)).</dd>
+
+<dt>as:inReplyTo</dt>
+<dd>Points to the activity identifier of the request notification to which this activity is a response. 
+In an offer acknowledgment notification, this MUST be equivalent to the value of the **object** property. 
+It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
+</dl>
+
+The notification payloads MAY have the following properties:
+
+<dl>
+<dt>as:origin</dt>
+<dd>The software component that was responsible for sending the activity over the network. When used
+it contains at least a [[URI]] identifying the component. Optionally, an in-band or out-of-band
+description of the Agent may be provided.</dd>
+
+<dt>as:target</dt>
+<dd>The intended Agent for receiving the notification: contains at least the [[URI]] identifying the Agent.
+ Optionally, an in-band or out-of-band description of the Agent may be provided 
+(See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
+</dl>
+
+*Example 13: Data Archive XYZ Australia (Service Node B) notifies the Data Archive XYZ (Service Node A) 
+in a request-response pattern that it rejects the offer sent in a previous activity notification.*
+
+<pre class=include-code>
+path: examples/example_rr_sn_sn_response_reject.jsonld
+highlight: json
+show: 
+</pre>
+
 Activities {#Activities}
 ===========
+
+Issue: WILL BE REWORKED AND INSERTED AS NEW SECTION BEFORE CURRENT SECTION 5
 
 A **notification** is sent by an [=agent=] to inform another [=agent=] about an **activity**. An activity is either 
 an event pertaining to a certain artifact or an event related to a service requested pertaining to an artifact 
 in the network. An activity is described by a notification **payload**.
 
 Notification payloads are expressed using the ActivityStreams 2.0 vocabulary and use [[JSON-LD]] as default 
-syntax (other RDF syntaxes are allowed as well). Every notification message is uniquely identified, indicates 
-the type of activity it is describing, and includes at least the publication date of the activity. It also 
+syntax. Every notification message is uniquely identified, indicates the type of activity it is describing, and includes at least the publication date of the activity. It also 
 describes the entities involved (depending on the network communication pattern). The table below described 
 the possible entities for each pattern and the intended use.
 
@@ -1534,6 +2098,8 @@ notification exchange.
 
 In the example 5 above, Data Archive XYZ sends an `as:Accept` in context of the `as:Offer` on the artifact 
 `http://acme.org/artifacts/alice/data-set-2022-01-19.zip`.
+
+Issue: FROM BELOW THIS POINT WE COULD PROB DELETE MOST THINGS
 
 One-way notification patterns {#OneWayNotificationPatterns}
 =============================
