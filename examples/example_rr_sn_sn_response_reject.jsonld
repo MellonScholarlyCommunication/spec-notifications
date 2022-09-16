@@ -17,6 +17,7 @@
        "type": "Application"
     },
     "context": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "inReplyTo": "urn:uuid:CBF81D23-E242-4B6E-9528-0EC6EAB3CA03",
     "object": {
         "id": "urn:uuid:CBF81D23-E242-4B6E-9528-0EC6EAB3CA03",
         "type": "Offer",
