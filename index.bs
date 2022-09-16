@@ -205,6 +205,11 @@ for an *Artifact* that is made available to the network by a *Data Node*. A *Ser
 can be a Web resource identified by a [[URL]] or information that is provided inline in an 
 LDN/AS2 notification.
 
+A *Service Result* that is a Web resource identified by a [[URL]] can itself become an *Artifact* 
+when it is made available to the network by a *Data Node* that, for example, is associated with 
+the *Service Node* that generated the service result. This makes a *Service Result* available as 
+a new *Artifact* for which new value-added services can be provided.
+
 Network communication patterns {#NetworkCommunicationPatterns}
 ==============================
 
