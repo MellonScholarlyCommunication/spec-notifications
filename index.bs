@@ -110,7 +110,7 @@ are typically expressed by reference (i.e. by means of the [[URL]] of an entity)
 by means of a description of an entity).
 
 A common scenario covered by the specification is depicted in Figure 1, which shows, on the dashed lines, 
-prefixed by `AS`, the AS2 element used in the notification payloads to convey the respective entity involved 
+prefixed by `AS`, the AS2 element used in the LDN/AS2 payloads to convey the respective entity involved 
 in the value-adding network:
 
 - An agent at the end of a Data Node uses an LDN Sender to send a notification to a Service Node's LDN Inbox (green arrow) requesting a value-adding service for an artifact made available by the Data Node. The URL of the artifact is provided in the AS2 object element of the notification.
@@ -160,7 +160,7 @@ Within this document, the following namespace prefix bindings to [[URI]]-s are u
 </table>
 
 When in the textual parts of this document a namespace prefix is used, it should be 
-interpreted with the bindings as stated above. In our examples notification payloads we use JSON-LD as 
+interpreted with the bindings as stated above. In our examples LDN/AS2 payloads we use JSON-LD as 
 syntax. In our JSON-LD examples we don't explicity write the prefixes. The `@context` 
 element in JSON-LD defines a mapping from terms to [[URI]]-s. We refer to the [[JSON-LD]] specification 
 for more information about this more concise way of notation.
@@ -210,11 +210,216 @@ when it is made available to the network by a *Data Node* that, for example, is 
 the *Service Node* that generated the service result. This makes a *Service Result* available as 
 a new *Artifact* for which new value-added services can be provided.
 
+Properties in LDN/AS2 Notifications {#Activities}
+===================================
+
+In a value-adding network, LDN notifications are sent from one *Agent* to another *Agent*. Notification 
+payloads are expressed using the ActivityStreams 2.0 vocabulary and SHOULD use [[JSON-LD]] as default 
+syntax, but other RDF syntaxes MAY be used. Each notification describes an [[AS2#activities|AS2 Activity]] that involves 
+either an *Artifact*, a *Service Result* pertaining to an *Artifact*, or a previous [[AS2#activities|AS2 Activity]].
+
+This section describes the properties that are used in the notifications to describe an activity and 
+provides details on their content: the core JSON-LD id and type properties and the AS2 object, origin, 
+target, actor, context, inReplyTo properties.
+
+## JSON-LD id ## {#ActivityId}
+
+An LDN/AS2 notification MUST specify an identifier for the activity, expressed in JSON-LD as 
+`@id` or shortened as `id`,  and its value MUST be a valid [[URI]]. In case this [[URI]] is a [[URL]], 
+it MUST be dereferencable and return a representation of the notification itself. When referring to an 
+activity, its activity identifier MUST be used. Nodes in the network MUST NOT edit or remove the activity 
+identifier when processing LDN/AS2 notifications. 
+
+Note that the activity identifier is distinct from the notification identifier, which is the [[URL]] 
+minted by the LDN Receiver when the LDN/AS2 notification that describes the activity is received in 
+its LDN Inbox. An LDN Receiver may choose to reflect components of the activity identifier in the 
+notification identifier it mints but, in case this happens, network nodes can not infer a relationship 
+between the activity identifier and the notification identifier on this basis. 
+
+To establish robust communication on the network, activities have to be at least uniquely identifiable 
+within the scope of the network. Therefore, an identifier of any kind used MUST be a valid [[URI]].
+
+<div class=example>
+Alice notifies Bob about the creation of a new Artifact. In the LDN/AS2 payload:
+
+- The activity identifier is `https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65`. Since 
+the activity identifier is a [[URL]], it can be dereferenced to yield the LDN/AS2 notification that Alice 
+sent to Bob. 
+- Alice is the *Agent* acting on behalf of a *Data Node* that has made her *Artifact* 
+`https://acme.org/artifacts/alice/five_steps_to_success.html` available.
+- Bob is the *Agent* acting on behalf of a *Service Node* that makes his LDN Inbox 
+`https://infinity.science.com/inbox/bob` discoverable. 
+
+<pre class=include-code>
+path: examples/example1.jsonld
+highlight: json
+show: 
+</pre>
+
+</div>
+
+## JSON-LD type ## {#ActivityType}
+
+An LDN/AS2 notification MUST specify an activity type, expressed in JSON-LD as `@type` or shortened 
+as `type`,  and its value MUST be the type of AS2 Activity that it describes. Only the subset of 
+[[AS2#activities|AS2 Activity]] Types shown here are supported:
+
+
+- AS2 Activities that express the state of an *Artifact*: `as:Create`, `as:Update`, `as:Remove`, `as:Announce`:
+    - `as:Create`: An *Agent* created an *Artifact* that is made available by a *Data Node*.
+    - `as:Update`: An *Agent* updated an *Artifact* that is made available by a *Data Node*.
+    - `as:Remove`: An *Agent* deleted an *Artifact* that is made available by a *Data Node*.
+    - `as:Announce`: An *Agent* announces the existence of an *Artifact* that is made available by a *Data Node*. 
+    Unlike `as:Create`, which conveys when an *Artifact* was created, `as:Announce` merely conveys its existence.
+- AS2 Activities that pertain to applying value-adding services to an *Artifact*: `as:Offer`, `as:Accept`, 
+`as:Reject`, `as:Announce`, and `as:Undo`:
+    - `as:Offer`: An *Agent* offers an *Artifact* to another *Agent* in order to request the provision of a service. 
+    - `as:Accept`: An *Agent* accepts to provide a service that was requested for a specific *Artifact* by another *Agent*. This is a reply to a previously received `as:Offer`.
+    - `as:Reject`: An *Agent* declines to provide a service that was requested for a specific *Artifact* by another *Agent*. This is a reply to a previously received `as:Offer`.
+    - `as:Announce`: An *Agent* announces a *Service Result* pertaining to an *Artifact* that is either the result of executing a previously requested service or is volunteered.
+    - `as:Undo`: An *Agent* retracts a prior activity of type `as:Offer`, `as:Accept`, `as:Reject`, or `as:Announce`.
+
+In addition to these AS2 Activity Types, types ([[URI]]s) originating from vocabularies chosen by an 
+application domain MAY be specified. 
+
+<div class=example>
+Bob announces that he endorses the publication of Alice by sharing a review. In the LDN/AS2 notification 
+payload:
+
+- Two activity types are indicated: `as:Announce` as a means to announce the availability of Bob’s review 
+and `schema:EndorseAction` as a means to convey that Alice’s publication is endorsed by Bob.
+- Bob is the *Agent* acting on behalf of *Service Node* `Infiniti science publishing`.
+- Bob’s review is a *Service Result* made available as a Web resource with URI 
+`https://infinity.science.com/artifacts/bob/review_123.html`.
+- Alice is the *Agent* acting on behalf of a *Data Node* that has made her Artifact 
+`https://acme.org/artifacts/alice/five_steps_to_success.html` available and that makes her LDN Inbox 
+`https://acme.org/inbox/alice` discoverable. 
+
+<pre class=include-code>
+path: examples/example2.jsonld
+highlight: json
+show: 
+</pre>
+</div>
+
+## AS2 object ## {#ActivityObject}
+
+An LDN/AS2 notification MUST specify an AS2 object, expressed by means of the `as:object` property. 
+Depending on the activity type, the AS2 object can refer to:
+
+- An *Artifact* made available by a *Data Node*; 
+- A *Service Result* generated by a *Service Node*; 
+- A previous activity.
+
+For `as:object`, one of the core [[AS2#object-types|Object Types]] MUST be expressed. In addition to 
+these [[AS2#object-types|Object Types]], types ([[URI]]s) originating from vocabularies chosen by an 
+application domain MAY be specified.
+
+In case the AS2 object is an *Artifact*, it MUST specify the *Artifact*’s [[URL]] and it is RECOMMENDED 
+that this [[URL]] supports auto-discovery mechanisms (e.g. a typed link in the HTTP Link header) to 
+allow network clients to obtain additional information about the *Artifact*.  Such additional information 
+pertaining to the *Artifact* MAY also be provided inline as part of the value of the AS2 object. 
+
+In case the AS2 object is a *Service Result*:
+
+- If the *Service Result* is a Web resource identified by a [[URL]], that [[URL]] MUST be provided as 
+the value of the AS2 object;
+- If the *Service Result* is not a Web resource identified by a [[URL]], it is provided inline as the 
+value of the AS2 object. 
+    - As a special case, a *Service Result* can be linkages, in which case the AS2 activity type is 
+    `as:Relationship` and linkages are provided using AS2’s subject/relationship/object construct.
+
+<div class="example">
+In EXAMPLE 1, Alice’s *Artifact* is the AS2 object and its [[URL]] 
+`https://acme.org/artifacts/alice/five_steps_to_success.html` is provided as the value of the object property. 
+</div>
+
+<div class="example">
+In EXAMPLE 2, Bob’s *Service Result* is the AS2 object and its [[URL]] 
+`https://infinity.science.com/artifacts/bob/review_123.html` is provided as the value of the object property.
+</div>
+
+<div class="example">
+Bob announces a linkage between Alice’s Artifact and his review thereof:
+
+- The *Service Result* is a relationship of type `http://purl.org/spar/cito/reviews` between Bob’s 
+review and Alice’s *Artifact*.
+- Bob is the *Agent* acting on behalf of *Service Node* Infiniti science publishing.
+- Alice is the *Agent* acting on behalf of a *Data Node* that has made her *Artifact* 
+`https://acme.org/artifacts/alice/five_steps_to_success.html` available and that makes her 
+LDN Inbox https://acme.org/inbox/alice discoverable.
+
+<pre class=include-code>
+path: examples/example3.jsonld
+highlight: json
+show: 
+</pre>
+</div>
+
+## AS2 actor, AS2 origin, and AS2 target ## {#ActivityAddressing}
+
+An LDN/AS2 notification:
+
+- MUST specify the *Agent* that sends the notification, expressed by means of the as:actor property and 
+its value MUST be a [[URL]] that identifies the *Agent*;
+- MAY additionally specify the LDN Sender software component that was responsible for sending the 
+notification on behalf of the *Agent*, expressed by means of the `as:origin` predicate and its value 
+MUST be a [[URL]] that identifies the software component;
+- MAY specify the *Agent* to which the notification is addressed, expressed by means of the `as:target` 
+predicate and its value MUST be a [[URL]] that identifies the *Agent*.
+
+For both `as:actor`, `as:origin`, and `as:target`, one of the core [[AS2#actor-types|AS2 Actor Types]] 
+MUST be expressed. In addition to these [[AS2#actor-types|AS2 Actor Types]], types ([[URI]]s) originating 
+from vocabularies chosen by an application domain MAY be specified. 
+
+Both `as:actor`, `as:origin`, and `as:target` SHOULD have an LDN Inbox. The [[URL]] of the LDN Inbox: 
+
+- Can be provided as the value of `ldp:inbox` in the description of these entities in the notification 
+payload;
+- Can be discovered as the link target of a link with the `http://www.w3.org/ns/ldp#inbox` link 
+relation type provided in the HTTP  Link  response header of the [[URL]] of the LDN Inbox.
+
+<div class=example>
+In EXAMPLE 5:
+
+- Bob is the *Agent* that sends the notification: the [[URL]] that identifies Bob, the [[URL]] 
+of Bob’s LDN Inbox, two actor types (an AS2 Actor Type and another), as well as Bob’s name are 
+provided in the `as:actor` property of the notification payload. 
+- Bob uses an application to send the notification. Information about the application is provided 
+in the `as:orgin` property. 
+- Bob addresses his notification to Alice. Information about Alice is provided in the `as:target` 
+property, and includes the [[URL]]] that identifies Alice, the [[URL]] of her LDN Inbox, and her 
+AS2 Actor Type. 
+</div>
+
+## AS2 context ## {#ActivityContext}
+
+When sending a notification to a *Data Node* that pertains to one of the *Artifacts* it makes 
+available, the LDN/AS2 notification SHOULD include the `as:context` property and SHOULD convey 
+the *Artifact*’s [[URL]] as its value. This specification accords no specific meaning to the 
+use of `as:context` for notifications sent to a *Service Node*.
+
+For `as:context`, one of the core [[AS2#object-types|Object Types]] MAY be expressed. In addition 
+to these [[AS2#object-types|Object Types]], types ([URIs]) originating from vocabularies chosen by 
+an application domain MAY be specified.
+
+<div class=example>
+In EXAMPLE 2 and EXAMPLE 5, Bob sends notifications about *Service Results* that pertain to 
+Alice’s *Artifact*. The [[URL]] `https://acme.org/artifacts/alice/five_steps_to_success.html` of that 
+*Artifact* is provided in the `as:context` property of these notifications. 
+</div>
+
+<div class=example>
+In EXAMPLE 1, Alice sends a notification announcing the availability of her *Artifact*.  The [[URL]] of 
+the *Artifact* is provided using the `as:object` property whereas as:context is not used because the 
+announcement does not pertain to an *Artifact* that is made available at the recipient’s end.
+</div>
+
 Network communication patterns {#NetworkCommunicationPatterns}
 ==============================
 
 In the decentralized network, nodes, in particular the actors that are responsible for the artifacts and services 
-on these nodes, communicate by sending Linked Data Notification messages to each other. These messages are 
+on these nodes, communicate by sending LDN/AS2 messages to each other. These messages are 
 delivered to LDN Inboxes that are made available on the data and service nodes on behalf of the actors managing 
 the artifacts and services on these nodes. 
 
@@ -234,13 +439,13 @@ is an Artifact. When the LDN Sender is a service node the resource is a Service 
 
 *Request-response* 
 
-A second communication pattern requires a more elaborate communication back and forth. This **request-response** style 
-of communication can span many days, weeks or months and could contain many details for each particular service. 
-However, the request-response patterns that are the focus of this specification are those that convey life cycle 
-information to the actors at the side of the data node and the service node. The actual communication requirements 
-to fulfill all the details of value-added services is not under consideration. The patterns listed in the next 
-sections only support conveying the factual end result of a (complicated, internal) process: what was added to the 
-lifecycle of an artifact, the rest is treated as a black box.
+A second communication pattern entails a more elaborate back an forth communication pattern 
+regading the provision, by a *Service Node*, of a value-added service for an *Artifact* that
+is made available by a *Data Node*. In a **request-response** communication regarding the 
+provision of a service, notifications can be exchanged between Nodes over time spans that could
+be near immediate, but could also span days, weeks or even months. The manner in which a 
+service is provided is not in scope of this specification. Considered is only when a *Service Node*
+is willing to provide a requested service or not, and if so, what the *Service Result* is.
 
 In general, the request-response pattern is transactional. The initiator of a request notification 
 expects the receiver, to send a response notification with the result of some value-added service.  
@@ -298,7 +503,7 @@ the existence of an Artifact (for instance, to inform a search engine about the 
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -321,7 +526,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject)))</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -335,7 +540,7 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-The notification payloads SHOULD NOT use the following properties:
+The LDN/AS2 payload SHOULD NOT use the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -345,14 +550,16 @@ The notification payloads SHOULD NOT use the following properties:
 <dd>Not in use by a sending Data Node.</dd>
 </dl>
 
-*Example 1: The ACME Research Institute (Data Node) notifies Infinity Science (Service Node) in 
-a one-way pattern about the creation of the new Artifact http://acme.org/artifacts/alice/five_steps_to_success.html.*
+<div class=example>
+The ACME Research Institute (Data Node) notifies Infinity Science (Service Node) in 
+a one-way pattern about the creation of the new Artifact http://acme.org/artifacts/alice/five_steps_to_success.html.
 
 <pre class=include-code>
 path: examples/example_ow_dn_sn.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ## One-way: Service Node to Data Node ## {#OneWayPatternSNDN}
 
@@ -403,7 +610,7 @@ this fact. The Service Result doesn't have an associated LDN Inbox (is not part 
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -430,7 +637,7 @@ All notification payloads MUST have the following properties:
 
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -444,21 +651,23 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-The notification payloads SHOULD NOT use the following properties:
+The LDN/AS2 payload SHOULD NOT use the following properties:
 
 <dl>
 <dt>as:inReplyTo</dt>
 <dd>Not in use by a sending Service Node in the one-way pattern.</dd>
 </dl>
 
-*Example 2: The Fairfield City Repository (Service Node) notifies ACME Research Institute (Data Node) in a one-way pattern about the creation of an archival copy Service Result https://darwin.fairfield.org/objects/317831-13210
-related to ACME's Artifact http://acme.org/artifacts/alice/five_steps_to_success.html.*
+<div class=example>
+The Fairfield City Repository (Service Node) notifies ACME Research Institute (Data Node) in a one-way pattern about the creation of an archival copy Service Result https://darwin.fairfield.org/objects/317831-13210
+related to ACME's Artifact http://acme.org/artifacts/alice/five_steps_to_success.html.
 
 <pre class=include-code>
 path: examples/example_ow_sn_dn.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ## One-way: Service Node to Service Node ## {#OneWayPatternSNSN}
 
@@ -470,9 +679,8 @@ path: images/one_way_service_node_service_node.svg
 of some Data Node to another Service Node B.* 
 
 The **one-way Service Node to Service Node** pattern is used to forward unsolicited Service Results 
-from one Service Node to another Service Node in the network. The Service Result describes a 
-value-added service pertaining to a Artifact on a Data Node in the network. The Service Result 
-doens't have an associated LDN Inbox (is not part of a Data Node).
+from one Service Node to another Service Node. The Service Result describes a 
+value-added service pertaining to a Artifact on a Data Node.
 
 *Payload*
 
@@ -508,7 +716,7 @@ doens't have an associated LDN Inbox (is not part of a Data Node).
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -535,7 +743,7 @@ All notification payloads MUST have the following properties:
 
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -549,23 +757,25 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-The notification payloads SHOULD NOT use the following properties:
+The LDN/AS2 payload SHOULD NOT use the following properties:
 
 <dl>
 <dt>as:inReplyTo</dt>
 <dd>Not in use by a sending Service Node in the one-way pattern.</dd>
 </dl>
 
-*Example 3: The Fairfield City Repository (Service Node) notifies the Arsip Nasional Republik 
+<div class=example>
+The Fairfield City Repository (Service Node) notifies the Arsip Nasional Republik 
 Indonesia (Service Node) in a one-way pattern about the creation of an archival copy Service Result
 https://darwin.fairfield.org/objects/317831-13210 of an Artifact at the ACME Research Institute 
-(Data Node).*
+(Data Node).
 
 <pre class=include-code>
 path: examples/example_ow_sn_sn.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ## Request-response: Data Node to Service Node ## {#RequestResponsePatternDNSN}
 
@@ -639,7 +849,7 @@ pertaining to an Artifact from a Data Node to a Service Node.
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -661,7 +871,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -675,7 +885,7 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-The notification payloads SHOULD NOT use the following properties:
+The LDN/AS payloads SHOULD NOT use the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -685,16 +895,18 @@ The notification payloads SHOULD NOT use the following properties:
 <dd>Not in use by a sending Data Node.</dd>
 </dl>
 
-*Example 4: The ACME Research Institute (Data Node) notifies the Data Archive XYZ 
+<div class=example>
+The ACME Research Institute (Data Node) notifies the Data Archive XYZ 
 (Service Node) in a request-response pattern about the Artifact  
 http://acme.org/artifacts/alice/data-set-2022-01-19.zip on ACME's system they want
-to Offer for archivation.*
+to Offer for archivation.
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_request.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Data Node cancels offer ### {#RequestResponsePatternDNSNUndo}
 
@@ -747,7 +959,7 @@ information to cancel some interal process.
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -769,7 +981,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject)))</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -778,7 +990,7 @@ this undo is trying to cancel. This MUST contain at least a [[URL]] identifying 
 out-of-band description (See [The Object of an activity](#ActivityObject)).</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -792,21 +1004,23 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-The notification payloads SHOULD NOT use the following properties:
+The LDN/AS2 payload SHOULD NOT use the following properties:
 
 <dl>
 <dt>as:inReplyTo</dt>
 <dd>Not in use by a sending Data Node.</dd>
 </dl>
 
-*Example 5: The ACME Research Institute (Data Node) sends a cancelation to 
-Data Archive XYZ (Service Node) of the Offer that was sent in Example 4.*
+<div class=example>
+The ACME Research Institute (Data Node) sends a cancelation to 
+Data Archive XYZ (Service Node) of the Offer that was sent in Example 12.
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_cancel.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Service Node acknowledges ### {#RequestResponsePatternDNSNAcknowledge}
 
@@ -855,7 +1069,7 @@ if it can commit to providing services on the Artifact. In the form of an *Accep
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -878,7 +1092,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -892,7 +1106,7 @@ In an offer acknowledgment notification, this MUST be equivalent to the value of
 It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -906,15 +1120,17 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 6: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+<div class=example>
+The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it accepts the offer ACME sent in a
-previous activity notification.*
+previous activity notification.
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_acknowledge.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Service Node responds ### {#RequestResponsePatternDNSNAnnounce}
 
@@ -964,7 +1180,7 @@ created (See [Service Node Rejects](#RequestResponsePatternDNSNReject)).
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -986,7 +1202,7 @@ All notification payloads MUST have the following properties:
  (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -1000,7 +1216,7 @@ In an offer acknowledgment notification, this MUST be equivalent to the value of
 It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -1014,15 +1230,17 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 7: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+<div class=example>
+The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it announces a new Service Result 
-pertaining to ACME's Artifact http://acme.org/artifacts/alice/data-set-2022-01-19.zip.*
+pertaining to ACME's Artifact http://acme.org/artifacts/alice/data-set-2022-01-19.zip.
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_response.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Service Node rejects ### {#RequestResponsePatternDNSNReject}
 
@@ -1074,7 +1292,7 @@ Artifact, it MAY notifiy the Data Node about this fact by sending a Reject notif
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -1096,7 +1314,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -1110,7 +1328,7 @@ In an offer acknowledgment notification, this MUST be equivalent to the value of
 It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -1124,15 +1342,17 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 8: The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+<div class=example>
+The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it rejects the offer ACME sent in a previous 
-activity notification.*
+activity notification.
 
 <pre class=include-code>
 path: examples/example_rr_dn_sn_response_reject.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ## Request-response: Service Node to Service Node ## {#RequestResponsePatternSNSN}
 
@@ -1148,7 +1368,7 @@ days or months to be processed. In these cases, it would be impractical to wait 
 from the Service Node, or require software to poll a Web service for status updates. 
 
 The request-response Service Node to Service Node pattern starts by Service Node (A) sending
-an *Offer* notification payload pertaining to Service Result to another Service Node (B)
+an *Offer* LDN/AS2 payload pertaining to Service Result to another Service Node (B)
 requesting a value-added service. 
 
 Service Node (B) MAY evaluate the Offer and can decide if it can commit to providing services on 
@@ -1171,7 +1391,7 @@ path: images/request_response2_service_node_offer.svg
 </pre>
 
 *Figure 10: Service Node A sends an Offer to Service Node  B requesting a value-added service
-for Service Result related to a Data Node in the network. The Offer could have been triggered by a 
+for Service Result related to a Data Node. The Offer could have been triggered by a 
 Data Node requesting a value-added service from Service Node A that Service Node A forwards
 to Service Node B.*
 
@@ -1212,7 +1432,7 @@ pertaining to a Service Result to a Service Node (B).
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -1234,10 +1454,9 @@ All notification payloads MUST have the following properties:
  the Service Result may be provided (See [The Object of an activity](#ActivityObject)).</dd>
 </dl>
 
-Note: The Service Result MAY be a previous notification that was received from another node
-in the network.
+Note: The Service Result MAY be a previous notification that was received from another Node.
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -1251,7 +1470,7 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-The notification payloads SHOULD NOT use the following properties:
+The LDN/AS2 payload SHOULD NOT use the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -1261,15 +1480,17 @@ The notification payloads SHOULD NOT use the following properties:
 <dd>Not in use by a sending Data Node.</dd>
 </dl>
 
-*Example 9: The Data Archive XYZ (Service Node A) received an Offer from ACME Research 
+<div class=example>
+The Data Archive XYZ (Service Node A) received an Offer from ACME Research 
 Institute (Data Node). Service Node A decides to forward the offer to their Australian
-office Data Archive XYZ Australia (Service Node B).*
+office Data Archive XYZ Australia (Service Node B).
 
 <pre class=include-code>
 path: examples/example_rr_sn_sn_request.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Service Node cancels offer ### {#RequestResponsePatternSNSNUndo}
 
@@ -1322,7 +1543,7 @@ cancel some interal process.
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -1344,7 +1565,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject)))</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -1353,7 +1574,7 @@ this undo is trying to cancel. This MUST contain at least a [[URL]] identifying 
 out-of-band description (See [The Object of an activity](#ActivityObject)).</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -1367,21 +1588,23 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-The notification payloads SHOULD NOT use the following properties:
+The LDN/AS2 payload SHOULD NOT use the following properties:
 
 <dl>
 <dt>as:inReplyTo</dt>
 <dd>Not in use by a sending Data Node.</dd>
 </dl>
 
-*Example 10: Data Archive XYZ (Service Node A) sends a cancelation to 
-Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Example 9.*
+<div class=example>
+Data Archive XYZ (Service Node A) sends a cancelation to 
+Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Example 17.
 
 <pre class=include-code>
 path: examples/example_rr_sn_sn_cancel.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Service Node acknowledges ### {#RequestResponsePatternSNSNAcknowledge}
 
@@ -1430,7 +1653,7 @@ it can commit to providing services on the Service Result. In the form of an *Ac
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -1453,7 +1676,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -1467,7 +1690,7 @@ In an offer acknowledgment notification, this MUST be equivalent to the value of
 It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -1481,14 +1704,16 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 11: Data Archive XYZ Australia (Service Node B) sends an Accept to 
-Data Archive XYZ (Service Node A) of the Offer that was sent in Example 9.*
+<div class=example>
+Data Archive XYZ Australia (Service Node B) sends an Accept to 
+Data Archive XYZ (Service Node A) of the Offer that was sent in Example 17.
 
 <pre class=include-code>
 path: examples/example_rr_sn_sn_acknowledge.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Service Node responds ### {#RequestResponsePatternSNSNAnnounce}
 
@@ -1538,7 +1763,7 @@ Service Result being created (See [Service Node Rejects](#RequestResponsePattern
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -1560,7 +1785,7 @@ All notification payloads MUST have the following properties:
  (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -1575,7 +1800,7 @@ In an offer acknowledgment notification, this MUST be equivalent to the value of
 It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -1589,15 +1814,17 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 12: Data Archive XYZ Australia (Service Node B) notifies Data Archive XYZ  
+<div class=example>
+Data Archive XYZ Australia (Service Node B) notifies Data Archive XYZ  
 (Service Node A) in a request-response pattern that it announces a new Service Result 
-pertaining to Service Node A Service Result urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495.*
+pertaining to Service Node A Service Result urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495.
 
 <pre class=include-code>
 path: examples/example_rr_sn_sn_response.jsonld
 highlight: json
 show: 
 </pre>
+</div>
 
 ### Service Node rejects ### {#RequestResponsePatternSNSNReject}
 
@@ -1649,7 +1876,7 @@ Service Node A, it MAY notifiy the Data Node about this fact by sending a Reject
 </tbody>
 </table>
 
-All notification payloads MUST have the following properties:
+The LDN/AS2 payload MUST have the following properties:
 
 <dl>
  <dt>id</dt>
@@ -1671,7 +1898,7 @@ All notification payloads MUST have the following properties:
  be provided (See [The Object of an activity](#ActivityObject))).</dd>
 </dl>
 
-The notification payloads SHOULD have the following properties:
+The LDN/AS2 payload SHOULD have the following properties:
 
 <dl>
 <dt>as:context</dt>
@@ -1686,7 +1913,7 @@ In an offer acknowledgment notification, this MUST be equivalent to the value of
 It MUST be a [[URI]] and MAY NOT have further in-band description.</dd>
 </dl>
 
-The notification payloads MAY have the following properties:
+The LDN/AS2 payload MAY have the following properties:
 
 <dl>
 <dt>as:origin</dt>
@@ -1700,662 +1927,16 @@ description of the Agent may be provided.</dd>
 (See [Addressing the receiver and sender](#ActivityAddressing)).</dd>
 </dl>
 
-*Example 13: Data Archive XYZ Australia (Service Node B) notifies the Data Archive XYZ (Service Node A) 
-in a request-response pattern that it rejects the offer sent in a previous activity notification.*
+<div class=example>
+Data Archive XYZ Australia (Service Node B) notifies the Data Archive XYZ (Service Node A) 
+in a request-response pattern that it rejects the offer sent in a previous activity notification.
 
 <pre class=include-code>
 path: examples/example_rr_sn_sn_response_reject.jsonld
 highlight: json
 show: 
 </pre>
-
-Activities {#Activities}
-===========
-
-Issue: WILL BE REWORKED AND INSERTED AS NEW SECTION BEFORE CURRENT SECTION 5
-
-A **notification** is sent by an [=agent=] to inform another [=agent=] about an **activity**. An activity is either 
-an event pertaining to a certain artifact or an event related to a service requested pertaining to an artifact 
-in the network. An activity is described by a notification **payload**.
-
-Notification payloads are expressed using the ActivityStreams 2.0 vocabulary and use [[JSON-LD]] as default 
-syntax. Every notification message is uniquely identified, indicates the type of activity it is describing, and includes at least the publication date of the activity. It also 
-describes the entities involved (depending on the network communication pattern). The table below described 
-the possible entities for each pattern and the intended use.
-
-**Table 1. ActivityStreams 2.0 entities used by the One-Way and Request-Response communication pattern messages**
-
-<table>
-<thead>
- <tr>
- <th>AS2 elements</th>
- <th>One-Way Pattern</th>
- <th>One-Way Pattern</th>
- <th>Request-Response Pattern</th>
- <th>Request-Response Pattern</th>
- </tr>
-</thead>
-<thead>
- <tr>
- <td></td>
- <th>*Data node sends*</th>
- <th>*Service node sends*</th>
- <th>*Data node Request*</th>
- <th>*Service node Response*</th>
- </tr>
-</thead>
-<tbody>
-<tr>
- <th>*id*</th>
- <td>Message identifier</td>
- <td>Message identifier</td>
- <td>Message identifier</td>
- <td>Message identifier</td>
-</tr>
-<tr>
- <th>*type*</th>
- <td>Activity type</td>
- <td>Activity type</td>
- <td>Activity type</td>
- <td>Activity type</td>
-</tr>
-<tr>
- <th>*published*</th>
- <td>Activity datetime</td>
- <td>Activity datetime</td>
- <td>Activity datetime</td>
- <td>Activity datetime</td>
-</tr>
-<tr>
- <th>*actor*</th>
- <td>Agent that performed the activity</td>
- <td>Agent that performed the activity</td>
- <td>Agent that performed the activity</td>
- <td>Agent that provided the added-value service for an artifact on a data node</td>
-</tr>
-<tr>
- <th>*origin*</th>
- <td>Agent responsible for sending the notification</td>
- <td>Agent responsible for sending the notification</td>
- <td>Agent responsible for sending the notification</td>
- <td>Agent responsible for sending the notification</td>
-</tr>
-<tr>
- <th>*context*</th>
- <td>*Not used*</td>
- <td>The artifact on the data node for which an added-value service was provided</td>
- <td>The artifact on the data node for which an added-value service was provided</td>
- <td>The artifact on the data node for which an added-value service was provided</td>
-</tr>
-<tr>
- <th>*inReplyTo*</th>
- <td>*Not used*</td>
- <td>*Not used*</td>
- <td>*Not used*</td>
- <td>The message identifier of the request</td>
-</tr>
-<tr>
- <th>*object*</th>
- <td>The artifact that is the subject of the activity</td>
- <td>The result of the added-value service provided for an artifact on the data node</td>
- <td>The artifact that is the subject of the activity</td>
- <td>The result of the added-value service provided for an artifact on the data node</td>
-</tr>
-<tr>
- <th>*target*</th>
- <td>The agent at the service node that is the addressee of the notification</td>
- <td>The agent at the data node that is the addressee of the notification</td>
- <td>The agent at the service node that is the addressee of the notification</td>
- <td>The agent at the data node that is the addressee of the notification</td>
-</tr>
-</tbody>
-</table>
-
-
-The minimal example below illustrates an interaction between the two human actors Alice and Bob. 
-Alice ([=actor=]) notifies Bob ([=target=]) via her data repository ([=origin=]) to inform him about the 
-artifact ([=object=]) she created.
-
-EXAMPLE 1. Alice notifies Bob in a one-way pattern (data node sends) about the creation of the 
-new artifact http://acme.org/artifacts/alice/five_steps_to_success.html
-
-<pre class=include-code>
-path: examples/example1.jsonld
-highlight: json
-show: 
-</pre>
-
-The second example below illustrates an interaction between a service node, Fairfield City Repository, 
-and Alice involving an artifact on her data node. Fairfield City Repository ([=actor=]) notifies Alice 
-([=target=]) via their Darwin System ([=origin=]) about a new relationship between a resource in the 
-Fairfield City Repository and an artifact in Alice's data node.
-
-EXAMPLE 2. Fairfield City Repository notifies Alice in a one-way pattern (service node sends) about the 
-announcement of a new relationship between Alice's artifact on her data node and an archival copy in the 
-Fairfield City Darwin system.
-
-<pre class=include-code>
-path: examples/example2.jsonld
-highlight: json
-show: 
-</pre>
-
-## Types of activities ## {#TypesOfActivities}
-
-Notification payloads apply the [[activitystreams-vocabulary#activity|ActivityStreams 2.0 vocabulary]].
-Therefore, the notification payload MUST be typed as a `as:Activity` or as one of its more specialized subtypes.
-
-The nodes in the network use a limited subset [[activitystreams-vocabulary#activity-types|AS2.0 Activity Types]].
-The activities, along with their types, are divided into two categories:
-
-- Activities that are about an artefacts's state. This includes the types `Create`, `Remove`, `Update`, and `Announce`. These activities are used in a [=one-way pattern=] communication.
-- Activities that pertain to applying value-adding services to an artefact. This includes the types `Offer`, `Reject`, `Accept`, `Undo`, and `Announce`. These activities are used in a [=request-response pattern=] communication.
-
-The following table summarizes the possible activity types according to category.
-
-<table>
-  <thead>
-    <tr>
-    <th>Activity Type</th>
-    <th>Purpose</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-      <th colspan="2">Activities about an artefact's state</th>
-    </tr>
-    <tr>
-      <td>[[activitystreams-vocabulary#Create|as:Create]]</td>
-      <td>An [=actor=] created an [=artefact=] in a data node.</td>
-    <tr>
-      <td>[[activitystreams-vocabulary#update|as:Update]]</td>
-      <td>An [=actor=] updated an [=artefact=] in a data node.</td>
-    <tr>
-      <td>[[activitystreams-vocabulary#Remove|as:Remove]]</td>
-      <td>An [=actor=] deletes an [=artefact=] in a data node.</td>
-    <tr>
-      <td>[[activitystreams-vocabulary#Announce|as:Announce]]</td>
-      <td>
-        An [=actor=] announces the **existence** of an [=artefact=]. 
-        This activity is different from [[activitystreams-vocabulary#Create|as:Create]], 
-        which denotes a fact (ie. the what, when, where and how a new artefact was created).
-        With [[activitystreams-vocabulary#Announce|as:Announce]], the sender doesn't say 
-        anything about when the artefact was created, but only desires that the target is 
-        notified about its existence.
-      </td>
-  </tbody>
-  <tbody>
-    <tr>
-      <th colspan="2">Activities pertain to applying value-adding services</th>
-    </tr>
-    <tr>
-      <td>[[activitystreams-vocabulary#Offer|as:Offer]]</td>
-      <td>
-      An [=agent=] offers an [=artefact=] to another [=agent=] in order to invoke a service. 
-      The execution of this service may lead to a new [=activity=] with the same artefact as the object.
-      </td>
-    <tr>
-      <td>[[activitystreams-vocabulary#Accept|as:Accept]]</td>
-      <td>
-        An [=agent=] accepts to execute a service on a specified artefact, as requested by another 
-        [=agent=]. This is a direct reply to a received [[activitystreams-vocabulary#Offer|as:Offer]].
-      </td>
-    <tr>
-      <td>[[activitystreams-vocabulary#Reject|as:Reject]]</td>
-      <td>
-        An [=agent=] rejects to execute a service on a specified artefact, because it is somehow 
-        unable to fulfill the request by another [=agent=]. 
-        This is a direct reply to a received [[activitystreams-vocabulary#Offer|as:Offer]].
-      </td>
-    <tr>
-      <td>[[activitystreams-vocabulary#Announce|as:Announce]]</td>
-      <td>An [=agent=] announces the [=artefact=] that resulted from executing a 
-      requested service.
-      </td>
-    <tr>
-      <td>[[activitystreams-vocabulary#Undo|as:Undo]]<td>
-      <td>An [=agent=] etracts a prior [=activity=], which can be of any of the above types.</td>
-    </tr>
-  </tbody>
-</table>
-
-In addition to the listed activity types above, an activity MAY have additional subtypes imposed 
-by the application domain. For instance, when a service node would like to `Announce`the 
-endorsement of a publication the `schema:EndorseAction` can be used. The schema.org can be imported 
-into the activity by adding it to the `@context` section.
-
-EXAMPLE 3 Bob announces that he endorses the publication of Alice by writing a review
-
-<pre class=include-code>
-path: examples/example3.jsonld
-highlight: json
-show: 
-</pre>
-
-## Identifying an activity ## {#ActivityId}
-
-To establish robust communication on the network, activities have to be at least uniquely identifiable 
-within the scope of the network. Therefore, an identifier of any kind used MUST be a valid [[URI]].
-
-There are two identifiers that operate at the level of the notification:
-
-- the **notification identifier**, which is the [[URL]] minted by the target when the notification is received in its inbox; and
-- the **activity identifier**, which is the [[URI]] enclosed in the notification payload as value of the id property in the activity description. When this [[URI]] is a [[URL]] it MUST be dereferencable and return a representation of the notification itself.
-
-In the network typically the activity identifier is the most visible identifier. This one can be read from 
-the notification payload document. In the example 1 above, the **activity identifier** is:
-
-```
-urn:uuid:0F402B08-F676-40EE-9D4B-480B3F985B65
-```
-
-The **notification identifier is the URL of the notification itself. This is the URL that is used to retrieve a 
-copy of the notification. For example, if the inbox of Bob is implemented as an Linked Data Platform Container 
-(as specified in the Linked Data Notifications specification), then it would have an URL such as:
-
-```
-https://infinity.science.com/inbox/bob/F9800F41-4636-44F7-8307-CCCEE7C5F0D7
-```
-
-In some cases the activity identifier and notification identifier can overlap. When a node makes notifications 
-publicly available (for instance, via ActivityPub outboxes) the notification will be available at a URL 
-which is reflected in the choice of activity identifier.
-
-EXAMPLE 4  Alice notifies Bob about the creation of a new artifact. She also makes this notification public 
-available at http://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65
-
-```
-GET /events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65 HTTP/1.1
-Host: acme.org
-Accept: application/ld+json
-```
-
-<pre class=include-code>
-path: examples/example4.jsonld
-highlight: json
-show: 
-</pre>
-
-When referring to an activity always the **activity identifier** MUST be used. The activity identifier of a 
-notification MUST NOT be edited or removed by any node in the network when processing incoming or outgoing 
-notifications. The **notification identifier** doesn't have any restrictions and can have any format (preferably 
-a HTTPS address).
-
-## The object of an activity ## {#ActivityObject}
-
-All activities MUST contain an object using the `as:object` predicate. Depending on the activity type, the 
-object can refer to: 
-
-- a previous activity, when referring to a request in the acknowledgment phase of a request-response communication pattern;
-- the result of the added-value service provided for an artifact on the data node;
-- an artifact, when the service node acts as a data node on which the results of the added-value service are published.
-
-An object MUST contain an identifier, which must be an [[URI]]. The object identifier SHOULD be dereferenceable, 
-so possible artifacts can be retrieved.
-
-### Out-of-band versus in-band descriptions ### {#OutInBand}
-
-The description of the object SHOULD be delivered by one of two methods:
-
-- out-of-band: a machine-actionable description is available by dereferencing the object identifier;
-- in-band: the object is described as part of the notification payload.
-
-Whether an implementation gives priority to in-band or out-of-band is left up to the implementer.
-
-As a general recommendation: give in-band descriptions priority to a dereferenceable out-of-band description. 
-Receivers may of course dereference the object identifier to retrieve an additional description as well. However 
-in case conflicts arise between both descriptions, the most recent description should be given priority. This 
-can be identified by comparing the Last-Modified date of the HTTP response with the activity published data 
-in `as:published`.
-
-### Direct and response activities ### {#DirectResponseActivities}
-
-There are two types of activities:
-
-- activities which directly impact or refer to an artifact;
-- activities that can only exist because of a prior activity.
-
-#### Direct activities #### {#DirectActivities}
-
-The object of a direct activity MUST describe the artifact on which the activity has effect. An artifact 
-MUST be of type `as:Object` or one of the ActivityStreams Object Types. Additionally, an artifact MAY have 
-additional types imposed by the application domain (e.g., `schema:Dataset` in a cultural heritage network or 
-`schema:Document` in a scholarly communication network).
-
-EXAMPLE 5 Alice offers a dataset she wants to submit to Data Archive XYZ.
-
-<pre class=include-code>
-path: examples/example5.jsonld
-highlight: json
-show: 
-</pre>
-
-#### Response activities #### {#ResponseActivities}
-
-If an activity is of type `as:Reject`, `as:Accept`, or `as:Undo`, the object MUST be an activity with 
-type `as:Activity`. 
-
-Response activities MUST have an `as:inReplyTo` field which contains the **activity identifier** of the 
-previous activity on which the current activity is a response.
-
-EXAMPLE 6 Data Archive XYZ send a response to the offer and indicates data set was accepted for further processing
-
-<pre class=include-code>
-path: examples/example6.jsonld
-highlight: json
-show: 
-</pre>
-
-## Addressing the receiver and sender ## {#ActivityAddressing} 
-
-Notifications that are sent to a network node are delivered to an inbox. Since inboxes can be shared by more 
-than one actor, the notification’s payload should indicate what actor it intends to address. Thus, an activity 
-MUST contain a target using the `as:target` predicate.
-
-Accordingly, the payload should also indicate which actor performed the activity. Hence, an activity MUST also 
-contain an actor using the `as:actor` predicate.
-
-The target, origin (when used, see below) and actor MUST be identifiable with an HTTP [[URI]]. They MUST be of the 
-following Activity Streams 2.0 Object type:
-
-- as:Application when describing a software application;
-- as:Group when describing a formal or informal collective of Actors;
-- as:Organization when representing an organization;
-- as:Person when representing an individual person;
-- as:Service when representing a service of any kind.
-
-Additionally, an actor MAY have additional types imposed by the application domain.
-
-The actor and target SHOULD have an `ldp:inbox` that refers to the inbox [[URI]] where the actor can be reached. 
-
-The actor and target MAY have a name using `as:name`.
-
-EXAMPLE 7 A Publisher accepts Alice's publication for publication in a forthcoming journal and sends a response to Alice
-
-<pre class=include-code>
-path: examples/example7.jsonld
-highlight: json
-show: 
-</pre>
-
-## The originating software application ## {#Origin}
-
-A notification can provide more information on how the notification got sent. Therefore, an activity SHOULD
-provide an origin using the `as:origin` predicate. It refers to the software component, such as the repository, 
-that was responsible for sending the activity over the network (the software that acted as LDN Sender). 
-
-The origin MAY have an `ldp:inbox` that refers to an inbox [[URI]] where it can be reached.
-
-When a network node intends to respond to a notification, it MUST send the response notification to all discovered inbox URLs. 
-
-A valid inbox URL MUST be discovered from:
-
-- the value of `ldp:inbox` in the origin or actor description contained in the notification payload
-- the `Link:` relation in the HTTP response headers of type http://www.w3.org/ns/ldp#inbox when dereferencing the IRI identifying the origin or actor; as defined in Linked Data Notifications §discovery.
-
-## The artifact context ## {#Context}
-
-All notifications in the network are artifact centric, a notification thread starts with an agent that starts 
-some activities on an artifact or requests services for an artifact. To be able to refer in a notification back 
-to the original artifact which started the notification communication between the nodes ActivityStream2 `as:context` 
-can be used. The `as:context` , when used, MUST contain the URL to the original artifact that initiated the 
-notification exchange.
-
-In the example 5 above, Data Archive XYZ sends an `as:Accept` in context of the `as:Offer` on the artifact 
-`http://acme.org/artifacts/alice/data-set-2022-01-19.zip`.
-
-Issue: FROM BELOW THIS POINT WE COULD PROB DELETE MOST THINGS
-
-One-way notification patterns {#OneWayNotificationPatterns}
-=============================
-
-This section covers notification patterns using activity types `as:Create`, `as:Remove`, `as:Update`, and `as:Announce`.
-The [[JSON-LD]] payload MUST contain at least the following properties:
-
-- `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#ActivityId]]). 
-- `type`: this MUST include one of the types [[activitystreams-vocabulary#Create|as:Create]], [[activitystreams-vocabulary#Remove|as:Remove]], [[activitystreams-vocabulary#Update|as:Update]], or [[activitystreams-vocabulary#Announce|as:Announce]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#ActivityAddressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#ActivityAddressing]]).
-- `object`: the artefact that this activity is about or the result of the added-value service provided for an artifact on the data node. This MUST contain at least a [[URI]] identifying the activity object and MUST provide either an [=in-band=] or [=out-of-band=] description (see [[#ActivityObject]]).
-
-The [[JSON-LD]] payload SHOULD also contain the following property:
-- `origin`: the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]].
-
-The [[JSON-LD]] payload MAY also contain the context property when a service node provides a 
-value added service for an artifact on a data node:
-
-- `context`: an artifact on a data node. This MUST contain at least a [[URI]] identifying the artifact and MUST provide an in-band or out-of-band description (see [[#ActivityObject]]).
-
-## Pattern 1: An agent creates a new artifact
-
-This pattern is used to disseminate new artifacts. An agent makes another agent aware of the creation of that 
-artifact, without expecting immediate action.
-
-EXAMPLE 8 Springfield library informs the National Archive about the creation of a new dataset, on their hosted ImagesTool platform
-
-<pre class=include-code>
-path: examples/example8.jsonld
-highlight: json
-show: 
-</pre>
-
 </div>
-
-## Pattern 2: An agent updates an existing artifact
-
-This pattern is used to inform involved actors about artifact changes on the data node. An agent informs another 
-agent without obligation that the artifact on the data node has been updated and follow-up action might be needed.
-
-EXAMPLE 9 Springfield library informs the National Archive about the update of an item in the dataset, on their 
-hosted ImagesTool platform
-
-<pre class=include-code>
-path: examples/example9.jsonld
-highlight: json
-show: 
-</pre>
-
-## Pattern 3: An agent removes an artifact
-
-This pattern is used to inform involved actors about deleted artifacts from the data node. An agent another agent 
-without obligation that an artifact has been removed from the data node and follow-up action might be needed.
-
-EXAMPLE 10 Springfield library informs the National Archive about the removal of an item in the dataset, on 
-their hosted ImagesTool platform
-
-<pre class=include-code>
-path: examples/example10.jsonld
-highlight: json
-show: 
-</pre>
-
-## Pattern 4: An agent draws attention to an artifact
-
-This pattern is used to inform involved actors about an existing artifact on a data node. An agent informs 
-another agent without obligation that an artifact exists in a data node.
-
-EXAMPLE 11 Springfield library informs a Alice about an item in the dataset, on their hosted ImagesTool platform
-
-<pre class=include-code>
-path: examples/example11.jsonld
-highlight: json
-show: 
-</pre>
-
-## Pattern 5: A service node notifies a data node about linking event
-
-This pattern is used by a service node that wishes to inform a data node about a resource that includes one or more artifacts from the data node. 
-
-EXAMPLE 12 The Riverside Data Service informs Springfield library about the inclusion of one of its images in their "Summer in Springfield" dataset
-
-<pre class=include-code>
-path: examples/example12.jsonld
-highlight: json
-show: 
-</pre>
-
-Request-response notification patterns {#RequestResponsePatterns}
-======================================
-
-This section covers notification patterns using activity types `as:Offer`, `as:Reject`, `as:Accept`, `as:Undo`, 
-and `as:Announce`.
-These patterns are used in interactions where a sender sends a notification to a receiver 
-(<dfn>request notification</dfn>) and eventually expects to receive a new notification as reply 
-(<dfn>response notification</dfn>).
-
-An [=agent=] employs a [=request notification=] to offer one of its [=artefacts=] for some value-added service 
-to be conducted by a second [=agent=]. Therefore, the enclosed activity is always of type `as:Offer`. The 
-receiving [=agent=] can decide to respond in a direct or indirect way:
-
-- an offer `as:Accept` acknowledgment notification is about accepting or rejecting the offer in the [=request notification=]. For example, a journal accepts a review request from a researcher; the review still needs to be done when the response is issued.
-- an offer `as:Announce` response notification is a follow-up activity that is a result of the [=request notification=], but does not directly address it. For example, a journal announces a new review after receiving a review request from a fellow peer; the review has been done when the response is issued.
-
-## Pattern 5: A service request with acknowledgment 
-
-This pattern is used where a service is requested and immediate acknowledgment is required, eg. to provide 
-guarantees that the service will be conducted. Hence, an offer acknowledgment notification is always about the 
-activity it is replying to.
-
-### Service Request
-
-A request [[JSON-LD]] payload MUST contain at least the following properties:
-
-- `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#ActivityId]]). 
-- `type`: this MUST include the type [[activitystreams-vocabulary#Offer|as:Offer]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#ActivityAddressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#ActivityAddressing]]).
-- `object`: the artefact that this activity is about. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#ActivityObject]]).
-
-The [[JSON-LD]] payload SHOULD also contain the following property:
-
-- `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
-
-EXAMPLE 13 Springfield library request the indexation of their image collection from ACME Search Engine
-
-<pre class=include-code>
-path: examples/example13.jsonld
-highlight: json
-show: 
-</pre>
-
-### Service Response
-
-A response [[JSON-LD]] payload MUST contain at least the following properties:
-- `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#ActivityId]]). 
-- `type`: this MUST include one of the types [[activitystreams-vocabulary#Reject|as:Reject]] or [[activitystreams-vocabulary#Accept|as:Accept]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#ActivityAddressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#ActivityAddressing]]).
-- `object`: the [=activity=] that this new activity is replying on. This MUST contain at least a [[URI]] identifying the [=activity=].
-
-The [[JSON-LD]] payload SHOULD also contain the following property:
-
-- `inReplyTo`: points to the [=activity identifier=] of the request notification to which this activity is a response. In an [=offer acknowledgment notification=], this MUST be equivalent to the value of the `object` property. It MUST be a [[URI]] and MAY NOT have further in-band description.
-- `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#ActivityObject]]).
-- `origin`:  the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
-
-#### Accept Offer
-
-A service node *accepts* the offer by an actor. 
-
-EXAMPLE 14 ACME Search Engine evaluated the offer to index the image collection from Springfield library and accepts it, while starting a new indexation process (which is not yet finished)
-
-<pre class=include-code>
-path: examples/example14.jsonld
-highlight: json
-show: 
-</pre>
-
-#### Reject Offer
-
-A Service node *rejects* the offer by an actor. 
-
-EXAMPLE 15 ACME Search Engine evaluated the offer to index the image collection from Springfield library and rejected it
-
-<pre class=include-code>
-path: examples/example15.jsonld
-highlight: json
-show: 
-</pre>
-
-## Pattern 6: A service request with offer response
-
-This pattern is used where a service is requested and no immediate acknowledgment is required,
-as long as a follow-up activity is eventually returned, ie. 
-an [=agent=] that it processed an [=artefact=] as a result or a prior offer.
-Hence, an [=offer response notification=] is about an [=artefact=] that is somehow related to 
-the activity in the [=request notification=].
-
-### Service Request
-
-A request [[JSON-LD]] payload MUST contain at least the following properties:
-
-- `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#ActivityId]]). 
-- `type`: this MUST include the type [[activitystreams-vocabulary#Offer|as:Offer]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#ActivityAddressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#ActivityAddressing]]).
-- `object`: the artefact that this activity is about. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#ActivityObject]]).
-
-The [[JSON-LD]] payload SHOULD also contain the following property:
-
-- `origin`: the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
-
-EXAMPLE 16 Springfield library offers an image collection to the national archive for archiving
-
-<pre class=include-code>
-path: examples/example16.jsonld
-highlight: json
-show: 
-</pre>
-
-### Service Response
-
-An [=offer response notification=] [[JSON-LD]] payload MUST contain at least the following properties:
-
-- `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#ActivityId]]). 
-- `type`: this MUST include the type [[activitystreams-vocabulary#Announce|as:Announce]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#ActivityAddressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#ActivityAddressing]]).
-- `object`: the [=artefact=] that this activity is about, which is a result of or related to the [=request=] notification. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#ActivityObject]]).
-
-The [[JSON-LD]] payload SHOULD also contain the following property:
-
-- `inReplyTo`: points to the [=activity identifier=] of the request notification to which this activity is a response. This MUST be a [[URI]] and MAY NOT have further in-band description.
-- `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#ActivityObject]]). In cases where there is only a single artefact (eg. an artefact has been archived on request), this MAY equivalent to the artefact in the `object` property. 
-- `origin`: the software component that was responsible for sending the activity over the network. It MUST include the type [[activitystreams-vocabulary#Application|as:Application]]. 
-
-EXAMPLE 17 The national archive announces an archived version of the Springfield library dataset
-
-<pre class=include-code>
-path: examples/example17.jsonld
-highlight: json
-show: 
-</pre>
-
-## Pattern 7: Retracting a prior offer
-
-This pattern is used where a prior offer needs to be retracted.
-Hence, a retraction is about an [=artefact=] that is somehow related to the activity in the [=request notification=].
-
-A [[JSON-LD]] payload MUST contain at least the following properties:
-
-- `id`: this MUST contain the [=activity identifier=], which MUST be a valid [[URI]] (see [[#ActivityId]]). 
-- `type`: this MUST include the type [[activitystreams-vocabulary#Undo|as:Undo]]. It SHOULD also contain the generic type [[activitystreams-vocabulary#Activity|as:Activity]].
-- `actor`: the [=sender=] of the notification. This MUST contain a [[URI]] identifying the [=agent=] who created the notification  and include the type [[activitystreams-vocabulary#Organization|as:Organization]] or [[activitystreams-vocabulary#Person|as:Person]] (see [[#ActivityAddressing]]).
-- `target`: the intended [=receiver=] of the notification. This MUST contain a [[URI]] identifying the targeted [=agent=] and include the type [[activitystreams-vocabulary#Organization|as:Organization]], [[activitystreams-vocabulary#Person|as:Person]] or [[activitystreams-vocabulary#Service|as:Service]] (see [[#ActivityAddressing]]).
-- `object`: the [=activity=] that this new activity is retracting. This MUST contain at least a [[URI]] identifying the [=activity=] and MUST be of type [[activitystreams-vocabulary#Offer|as:Offer]].
-
-The [[JSON-LD]] payload SHOULD also contain the following property:
-
-- `context`: the original [=artefact=] in a notification thread, ie. the [=object=] of the [=request notification=]. This MUST contain at least a [[URI]] identifying the [=artefact=] and MUST provide an [=in-band=] or [=out-of-band=] description (see [[#ActivityObject]]).
-- `origin`: the software component that was responsible for sending the activity over the network (eg. the [=Dashboard=] or [=Orchestrator=] components). It MUST include the type [[activitystreams-vocabulary#Application|as:Application]].
-
-EXAMPLE 18 Springfield library retracts her offer for an image collection to be archived by the national archive
-
-<pre class=include-code>
-path: examples/example18.jsonld
-highlight: json
-show: 
-</pre>
 
 Acknowledgements 
 =====================
