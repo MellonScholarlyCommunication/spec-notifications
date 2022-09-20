@@ -443,7 +443,14 @@ announcement does not pertain to an *Artifact* that is made available at the rec
 
 ## AS2 inReplyTo ## {#ActivityInReplyTo}
 
-Issue: TODO
+An LDN/AS2 notification that is sent in response to a previously received notification, MUST 
+include the `as:inReplyTo` property,  and, when used, its value MUST be the activity identifier 
+(value of the id property) of the previous notification. For such a notification, the `as:object` 
+property also reflects the activity identifier of the previous notification but can include
+additional information, see [[#ActivityObject]].
+
+Examples are provided in [[#RequestResponsePatternDNSNAnnounce]] and [[#RequestResponsePatternSNSNAnnounce]].
+
 
 Network communication patterns {#NetworkCommunicationPatterns}
 ==============================
