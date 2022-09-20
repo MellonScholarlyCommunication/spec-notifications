@@ -63,48 +63,51 @@ ActivityStreams2 [[AS2]] payloads in value-adding networks.
 
 A value-added network, as considered by this specification, is a network in which Web 
 resources, for the purpose of this specification named [Artifacts](#Artifact), are made available by
-nodes in the network, value is added to these artifacts by other nodes in the network, 
+nodes in the network, value is added to these *Artifacts* by other nodes in the network, 
 and LDN/AS2 notifications with that regard are exchanged among network nodes. 
 
-The type of web resources that are considered artifacts in a value-adding network depends 
+The type of web resources that are considered *Artifacts* in a value-adding network depends 
 on its community of use. For example, in a research communication value-adding network, 
-artifacts would include research outputs such as preprints, reviewed articles, datasets, 
+*Artifacts* would include research outputs such as preprints, reviewed articles, datasets, 
 workflows, and software that are part of the scholarly record. 
 
-A value-adding service applied to an artifact does not change its content. Rather, the 
+A value-adding service applied to an *Artifact* does not change its content. Rather, the 
 outcome of applying the service, for the purpose of this specification named 
-[Service Result](#ServiceResult), can be associated with the artifact. It could, for example, 
-be information that an artifact was made discoverable by a portal; a trusted timestamp for an artifact;  
-information about a linkage the artifact is involved in; the creation of a new resource 
+[Service Result](#ServiceResult), can be associated with the *Artifact*. It could, for example, 
+be information that an *Artifact* was made discoverable by a portal; a trusted timestamp for an *Artifact*;  
+information about a linkage the *Artifact* is involved in; the creation of a new resource 
 related to the artifact (e.g. an enhanced version, a translation, an archival copy). 
 
 Regarding the exchange of these LDN/AS2 notifications, the specification distinguishes 
 between two logical roles [Data Node](#DataNode) and [Service Node](#ServiceNode):
 
-- A Data Node is a network node that makes artifacts available to the network.
-- A Service Node is a network node that provides value-adding services for artifacts that are available to the network.
+- A *Data Node* is a network node that makes *Artifacts* available to the network.
+- A *Service Node* is a network node that provides value-adding services for *Artifacts* that are 
+available to the network.
 
 In order to be able to communicate, each *Data Node* and *Service Node*
 has [LDN Sender](https://www.w3.org/TR/ldn/#sender) and [LDN Receiver](https://www.w3.org/TR/ldn/#receiver) 
 (LDN Inbox) capabilities that are used:
 
-- by a Data Node to send and receive LDN notifications pertaining to artifacts that it makes available to the network, and, 
-- by a Service Node to send and receive LDN notifications pertaining to value-adding services for artifacts that are made available to the network.
+- by a *Data Node* to send and receive LDN notifications pertaining to *Artifacts* that it makes available 
+to the network, and, 
+- by a *Service Node* to send and receive LDN notifications pertaining to value-adding services for *Artifacts* 
+that are made available to the network.
 
-[Agents](#Agent) operate on behalf of Data Node and Service Node; they can be 
-humans or machines, individuals or organizations. These agents exchange LDN notifications, each of which pertains
-to an artifact that is hosted by a Data Node. 
+[Agents](#Agent) operate on behalf of *Data Node* and *Service Node*; they can be 
+humans or machines, individuals or organizations. These *Agents* exchange LDN notifications, each of which pertains
+to an *Artifact* that is hosted by a *Data Node*. 
 
-The intended communication style among Nodes is point-to-point, requiring no centralized hubs. It is 
-push-oriented, with only the relevant Nodes being updated about new information as it becomes available. 
-Interactions among Nodes are necessarily asynchronous because certain notification patterns do not require a 
-response and, in patterns that do, such as requesting a service for an artifact, the time between a request 
-and the announcement of the service result is unpredictable and could range between almost immediate to months. 
+The intended communication style among *Nodes* is point-to-point, requiring no centralized hubs. It is 
+push-oriented, with only the relevant *Nodes* being updated about new information as it becomes available. 
+Interactions among *Nodes* are necessarily asynchronous because certain notification patterns do not require a 
+response and, in patterns that do, such as requesting a service for an *Artifact*, the time between a request 
+and the announcement of the *Service Result* is unpredictable and could range between almost immediate to months. 
 
 The communication patterns are action-oriented. The patterns express when an activity was initiated, 
 acknowledged, or yielded a result. Message payloads contain only core information (in most cases [[URL]] 
-identifiers) to convey in which value-adding activities Data Nodes, Service Nodes, and artifacts are 
-involved and what the service results are. The assumption is that further information about the entities 
+identifiers) to convey in which value-adding activities *Data Nodes*, *Service Nodes*, and *Artifacts* are 
+involved and what the *Service Results* are. The assumption is that further information about the entities 
 involved is available by using their identifiers in auto-discovery mechanisms. As such, message payloads 
 are typically expressed by reference (i.e. by means of the [[URL]] of an entity) rather than by value (i.e. 
 by means of a description of an entity).
@@ -113,15 +116,38 @@ A common scenario covered by the specification is depicted in Figure 1, which sh
 prefixed by `AS`, the AS2 element used in the LDN/AS2 payloads to convey the respective entity involved 
 in the value-adding network:
 
-- An agent at the end of a Data Node uses an LDN Sender to send a notification to a Service Node's LDN Inbox (green arrow) requesting a value-adding service for an artifact made available by the Data Node. The URL of the artifact is provided in the AS2 object element of the notification.
-- An agent at the end of the Service Node uses an LDN Consumer to obtain this request from the Service Node's LDN Inbox. Provided that the Service Node is willing and able to perform the requested service, it goes ahead and does so. The manner in which this is done is outside the scope of this specification. 
-- Once the value-adding service is executed, an agent at the end of the Service Node that is aware of the service result sends a notification (blue arrow) to the Data Node's LDN Inbox. The service result is provided in the AS2 object element of the notification. Moreover, the artifact that the service result pertains to is provided in the AS2 context element of the notification.
-- An agent at the end of the Data Node consumes this response by obtaining it from the Data Node's LDN Inbox, and acts upon the service result in a way deemed appropriate.
+- An *Agent* at the end of a *Data Node* uses an LDN Sender to send a notification to a *Service Node*'s 
+LDN Inbox (green arrow) requesting a value-adding service for an *Artifact* made available by the *Data Node*. 
+The URL of the *Artifact* is provided in the AS2 object element of the notification.
+- An *Agent* at the end of the *Service Node* uses an LDN Consumer to obtain this request from the *Service Node*'s 
+LDN Inbox. Provided that the *Service Node* is willing and able to perform the requested service, it goes ahead 
+and does so. The manner in which this is done is outside the scope of this specification. 
+- Once the value-adding service is executed, an *Agent* at the end of the *Service Node* that is aware of the 
+*Service Result* sends a notification (blue arrow) to the *Data Node*'s LDN Inbox. The *Service Result* is provided 
+in the AS2 object element of the notification. Moreover, the *Artifact* that the *Service Result* pertains to 
+is provided in the AS2 context element of the notification.
+- An *Agent* at the end of the *Data Node* consumes this response by obtaining it from the *Data Node*'s LDN Inbox, 
+and acts upon the *Service Result* in a way deemed appropriate.
 
 From the perspective of LDN:
 
-- An artifact made available to the network by a Data Node is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. The LDN Inbox is used to receive LDN/AS2 notifications that provide the Data Node, acting as an LDN Consumer, with value-adding information pertaining to an artifact.
-- A Service Node that provides value-adding services to artifacts made available to the network is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. That LDN Inbox is used to receive LDN/AS2 notifications that provide the Service Node, acting as an LDN Consumer, either with information pertaining to an artifact or with a request for the provision of a value-adding service for an artifact.
+- An *Artifact* made available to the network by a *Data Node* is an LDN Target and therefore has a
+[discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. The LDN Inbox is used to receive LDN/AS2 
+notifications that provide the *Data Node*, acting as an LDN Consumer, with value-adding information pertaining 
+to an *Artifact*.
+- A *Service Node* that provides value-adding services to *Artifacts* made available to the network is an LDN Target 
+and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. That LDN Inbox is used to 
+receive LDN/AS2 notifications that provide the *Service Node*, acting as an LDN Consumer, either with information 
+pertaining to an *Artifact* or with a request for the provision of a value-adding service for an *Artifact*.
+
+From the perspective of LDN/AS2:
+
+- When an LDN/AS2 notification is sent from a *Data Node*, the *Artifact* to which the notification pertains is 
+the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification 
+is addressed is the AS2 target.
+- When an LDN/AS2 notification is sent from a *Service Node*, the *Service Result* is the AS2 object, the 
+*Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is
+the AS2 target.
 
 Conformance 
 ===========
@@ -207,7 +233,7 @@ LDN/AS2 notification.
 
 A *Service Result* that is a Web resource identified by a [[URL]] can itself become an *Artifact* 
 when it is made available to the network by a *Data Node* that, for example, is associated with 
-the *Service Node* that generated the service result. This makes a *Service Result* available as 
+the *Service Node* that generated the *Service Result*. This makes a *Service Result* available as 
 a new *Artifact* for which new value-added services can be provided.
 
 Properties in LDN/AS2 Notifications {#Activities}
@@ -493,7 +519,7 @@ to the guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:object**</td>
  </tr>
  <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
  <tr>
@@ -559,7 +585,7 @@ guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:context**, **as:object**</td>
  </tr>
  <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
  <tr>
@@ -627,7 +653,7 @@ the guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:context** , **as:object**</td>
  </tr>
  <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
  <tr>
@@ -686,7 +712,7 @@ path: images/request_response_data_node_offer.svg
 </pre>
 
 *Figure 5: A Data Node sends a notification with activity type as:Offer to a Service Node as a means 
-to request a value-added service for one of its Artifacts*
+to request a value-added service for one of its Artifacts.*
 
 The request-response pattern between a *Data Node* and a *Service Node* starts when an *Agent* operating 
 on behalf of a *Data Node* sends a notification to an *Agent* operating at the end of a *Service Node* 
@@ -722,7 +748,7 @@ to the guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:object**</td>
  </tr>
  <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
  <tr>
@@ -792,14 +818,14 @@ subject to the guidelines provided in [[#Activities]].
 <tbody>
  <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
- </tr>
- <tr>
-  <th>Should</id>
-  <td>**as:context**, **as:inReplyTo**</td>
+  <td>**rdf:type** , **as:actor** , **as:object**, **as:inReplyTo**</td>
  </tr>
  <tr>
   <th>Recommended</id>
+  <td>**as:context**</td>
+ </tr>
+ <tr>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
 </tbody>
@@ -866,11 +892,11 @@ to the guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:object**</td>
  </tr>
  <tr>
-  <th>Should</id>
+  <th>Recommended</id>
   <td>**as:context**, **as:inReplyTo**</td>
  </tr>
  <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
 </tbody>
@@ -907,7 +933,7 @@ path: images/request_response_data_node_cancel.svg
 </pre>
 
 *Figure 8:  Data Node sends a notification with activity type as:Undo to a Service Node 
-canceling its previous service request that was sent by means of an Offer notification*
+canceling its previous Offer notification.*
 
 An *Agent* operating on behalf of a *Data Node* can send a notification to an *Agent* operating 
 at the end of a *Service Node* requesting to cancel a previous request for the provision of a 
@@ -919,9 +945,6 @@ For such a notification:
 - The `as:object` property refers to the prior request for service that was sent by means of a 
 notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]). It conveys at least its 
 activity identifier (value of the id property).
-- The `as:context` property refers to the *Artifact* for which the service was requested, i.e. the 
-value of the `as:object` property of the prior request for service that was sent by means of a 
-notification with the `as:Offer` activity type (see section [[#RequestResponsePatternDNSNOffer]]).
 - The requirements regarding properties are summarized in the table below and their use is subject 
 to the guidelines provided in [[#Activities]].
 
@@ -948,16 +971,12 @@ to the guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:object**</td>
  </tr>
  <tr>
-  <th>Should</id>
-  <td>**as:context**</td>
- </tr>
- <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
  <tr>
   <th>Not used</th>
-  <td>**as:inReplyTo**</td>
+  <td>**as:context**, **as:inReplyTo**</td>
  </tr> 
 </tbody>
 </table>
@@ -1056,7 +1075,7 @@ A decided to delegate to *Service Node* B.
   <td>**rdf:type** , **as:actor** , **as:object**</td>
  </tr>
  </tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
  <tr>
@@ -1125,14 +1144,14 @@ to the guidelines provided in [[#Activities]].
 <tbody>
  <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
- </tr>
- <tr>
-  <th>Should</id>
-  <td>**as:context**, **as:inReplyTo**</td>
+  <td>**rdf:type** , **as:actor** , **as:object**, **as:inReplyTo**</td>
  </tr>
  <tr>
   <th>Recommended</id>
+  <td>**as:context**</td>
+ </tr>
+ <tr>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
 </tbody>
@@ -1200,11 +1219,11 @@ to the guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:object**</td>
  </tr>
  <tr>
-  <th>Should</id>
+  <th>Recommended</id>
   <td>**as:context**, **as:inReplyTo**</td>
  </tr>
  <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
 </tbody>
@@ -1232,7 +1251,7 @@ show:
 </pre>
 </div>
 
-### Service Node cancels service request ### {#RequestResponsePatternSNSNUndo}
+### Service Node cancels prior service request ### {#RequestResponsePatternSNSNUndo}
 
 <pre class='include'>
 path: images/request_response2_service_node_cancel.svg
@@ -1251,14 +1270,11 @@ For such a notification:
 - The `as:object` property refers to the prior request for service that was sent by means of a 
 notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]). It conveys at least its activity 
 identifier (value of the id property).
-- The `as:context` property refers to the *Service Result* for which the service was requested, i.e. 
-the value of the `as:object` property of the prior request for service that was sent by means of a 
-notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
 - The requirements regarding properties are summarized in the table below and their use is subject to 
 the guidelines provided in [[#Activities]].
 
 <table>
-<caption>Table 11: Request-response Service Node cancels service request requirements.</caption>
+<caption>Table 11: Request-response Service Node cancels prior service request requirements.</caption>
 <thead>
  <tr>
  <th>Requirements</th>
@@ -1280,16 +1296,12 @@ the guidelines provided in [[#Activities]].
   <td>**rdf:type** , **as:actor** , **as:object**</td>
  </tr>
  <tr>
-  <th>Should</id>
-  <td>**as:context**</td>
- </tr>
- <tr>
-  <th>Recommended</id>
+  <th>Optional</id>
   <td>**as:origin**, **as:target**</td>
  </tr>
  <tr>
   <th>Not used</th>
-  <td>**as:inReplyTo**</td>
+  <td>**as:context**, **as:inReplyTo**</td>
  </tr> 
 </tbody>
 </table>
