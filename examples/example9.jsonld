@@ -1,28 +1,28 @@
 { 
-    "@context": "https://www.w3.org/ns/activitystreams",
-    "id": "urn:uuid:56BAAE95-AE3F-4DFD-AC37-2EFFE1E32BA9",
-    "type": "Update",
-    "published": "2022-11-21T07:30:35Z",
-    "summary": "Springfield library added a new image",
-    "actor": {
-       "id": "https://springfield.library.net/about#us",
-       "inbox": "https://springfield.library.net/inbox/",
-       "name": "Springfield Library",
-       "type": "Organization"
-    },
-    "origin": {
-       "id": "https://imagetool.com/profile/card#i",
-       "name": "ImageTool Inc.",
-       "type": "Application"
-    },
-    "object": {
-       "id": "https://imagetool.com/customer/123-321/data/set-1234/image1.png",
-       "type": "Image"
-    },
-    "target": {     
-       "id": "https://nationalarchive.org/library/ingest#service",
-       "inbox": "https://nationalarchive.org/library/ingest/inbox",
-       "name": "National Archives Library Project",
-       "type": "Application"
-    }
+   "@context": "https://www.w3.org/ns/activitystreams",
+   "id": "urn:uuid:56BAAE95-AE3F-4DFD-AC37-2EFFE1E32BA9",
+   "type": "Update",
+   "published": "2022-11-21T07:30:35Z",
+   "summary": "Springfield library added a new image",
+   "actor": {
+      "id": "https://springfield.library.net/about#us",
+      "inbox": "https://springfield.library.net/inbox/",
+      "name": "Springfield Library",
+      "type": "Organization"
+   },
+   "origin": {
+      "id": "https://imagetool.com/profile/card#i",
+      "name": "ImageTool Inc.",
+      "type": "Application"
+   },
+   "object": {
+      "id": "https://imagetool.com/customer/123-321/data/set-1234/image1.png",
+      "type": "Image"
+   },
+   "target": {     
+      "id": "https://nationalarchive.org/library/ingest#service",
+      "inbox": "https://nationalarchive.org/library/ingest/inbox",
+      "name": "National Archives Library Project",
+      "type": "Application"
+   }
 }

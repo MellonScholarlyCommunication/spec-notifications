@@ -1,33 +1,33 @@
 { 
-    "@context": [ 
+   "@context": [ 
       "https://www.w3.org/ns/activitystreams" ,
       {"schema": "https://schema.org/"}
-    ], 
-    "id": "urn:uuid:9CEE5D10-E280-4DC8-909A-A5BF0F7EADF0",
-    "type": ["Accept","schema:ArriveAction"],
-    "published": "2022-06-13T00:00:01Z",
-    "summary": "Data Archive XYZ ingest process accepts submission 1234 from Alice",
-    "actor": {
-       "id": "https://data.archive.xyz.net/process/ingest",
-       "inbox": "https://data.archive.xyz.net/inbox/",
-       "name": "Data Archive XYZ",
-       "type": "Application"
-    },
-    "origin": {
-       "id": "https://data.archive.xyz.net/",
-       "name": "Data Archive XYZ",
-       "type": "Application"
-    },
-    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
-    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
-    "object": {
-       "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
-       "type": "Offer"
-    },
-    "target": {     
-       "id": "https://orcid.org/0000-0007-01219-312199",
-       "inbox": "https://acme.org/inbox/alice",
-       "name": "Alice",
-       "type": "Person"
-    }
-  }  
+   ], 
+   "id": "urn:uuid:9CEE5D10-E280-4DC8-909A-A5BF0F7EADF0",
+   "type": ["Accept","schema:ArriveAction"],
+   "published": "2022-06-13T00:00:01Z",
+   "summary": "Data Archive XYZ ingest process accepts submission 1234 from Alice",
+   "actor": {
+      "id": "https://data.archive.xyz.net/process/ingest",
+      "inbox": "https://data.archive.xyz.net/inbox/",
+      "name": "Data Archive XYZ",
+      "type": "Application"
+   },
+   "origin": {
+      "id": "https://data.archive.xyz.net/",
+      "name": "Data Archive XYZ",
+      "type": "Application"
+   },
+   "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+   "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+   "object": {
+      "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+      "type": "Offer"
+   },
+   "target": {     
+      "id": "https://orcid.org/0000-0007-01219-312199",
+      "inbox": "https://acme.org/inbox/alice",
+      "name": "Alice",
+      "type": "Person"
+   }
+}  

@@ -1,30 +1,30 @@
 { 
-    "@context": "https://www.w3.org/ns/activitystreams",
-    "id": "urn:uuid:55D5C3C5-C284-4A55-9D97-4A329547B220",
-    "type": "Reject",
-    "published": "2023-01-20T13:55:00Z",
-    "summary": "ACME Search Engine rejected indexation of data/set-1234",
-    "actor": {
-       "id": "https://acme.webindex.com/webcrawler#me",
-       "inbox": "https://acme.webindex.com/webcrawler/queue",
-       "name": "ACME Search Engine",
-       "type": "Application"
-    },
-    "origin": {
-       "id": "https://acme.webindex.com/profile/card#i",
-       "name": "ACME Search Engine",
-       "type": "Application"
-    },
-    "inReplyTo":"urn:uuid:4FAF311A-2459-4CEF-A74C-29CCE0552672",
-    "context":"https://imagetool.com/customer/123-321/data/set-1234/",
-    "object": {
-       "id": "urn:uuid:4FAF311A-2459-4CEF-A74C-29CCE0552672",
-       "type": "Offer"
-    },
-    "target": { 
-       "id": "https://springfield.library.net/about#us",
-       "inbox": "https://springfield.library.net/inbox/",
-       "name": "Springfield Library",
-       "type": "Organization"   
-    }
+   "@context": "https://www.w3.org/ns/activitystreams",
+   "id": "urn:uuid:55D5C3C5-C284-4A55-9D97-4A329547B220",
+   "type": "Reject",
+   "published": "2023-01-20T13:55:00Z",
+   "summary": "ACME Search Engine rejected indexation of data/set-1234",
+   "actor": {
+      "id": "https://acme.webindex.com/webcrawler#me",
+      "inbox": "https://acme.webindex.com/webcrawler/queue",
+      "name": "ACME Search Engine",
+      "type": "Application"
+   },
+   "origin": {
+      "id": "https://acme.webindex.com/profile/card#i",
+      "name": "ACME Search Engine",
+      "type": "Application"
+   },
+   "inReplyTo":"urn:uuid:4FAF311A-2459-4CEF-A74C-29CCE0552672",
+   "context":"https://imagetool.com/customer/123-321/data/set-1234/",
+   "object": {
+      "id": "urn:uuid:4FAF311A-2459-4CEF-A74C-29CCE0552672",
+      "type": "Offer"
+   },
+   "target": { 
+      "id": "https://springfield.library.net/about#us",
+      "inbox": "https://springfield.library.net/inbox/",
+      "name": "Springfield Library",
+      "type": "Organization"   
+   }
 } 

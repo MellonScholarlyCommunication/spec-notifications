@@ -5,24 +5,24 @@
     "published": "2023-04-01T12:01:59Z",
     "summary": "Springfield library removed an image",
     "actor": {
-       "id": "https://springfield.library.net/about#us",
-       "inbox": "https://springfield.library.net/inbox/",
-       "name": "Springfield Library",
-       "type": "Organization"
+      "id": "https://springfield.library.net/about#us",
+      "inbox": "https://springfield.library.net/inbox/",
+      "name": "Springfield Library",
+      "type": "Organization"
     },
     "origin": {
-       "id": "https://imagetool.com/profile/card#i",
-       "name": "ImageTool Inc.",
-       "type": "Application"
+      "id": "https://imagetool.com/profile/card#i",
+      "name": "ImageTool Inc.",
+      "type": "Application"
     },
     "object": {
-       "id": "https://imagetool.com/customer/123-321/data/set-1234/image1.png",
-       "type": "Image"
+      "id": "https://imagetool.com/customer/123-321/data/set-1234/image1.png",
+      "type": "Image"
     },
     "target": {     
-       "id": "https://nationalarchive.org/library/ingest#service",
-       "inbox": "https://nationalarchive.org/library/ingest/inbox",
-       "name": "National Archives Library Project",
-       "type": "Application"
+      "id": "https://nationalarchive.org/library/ingest#service",
+      "inbox": "https://nationalarchive.org/library/ingest/inbox",
+      "name": "National Archives Library Project",
+      "type": "Application"
     }
 }
