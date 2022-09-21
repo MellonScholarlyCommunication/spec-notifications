@@ -511,22 +511,13 @@ to the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  <tr>
   <th>Optional</id>
@@ -577,22 +568,13 @@ guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:context**, **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:context**, **as:object**</td>
  </tr>
  <tr>
   <th>Optional</id>
@@ -645,22 +627,13 @@ the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  <tr>
   <th>Optional</id>
@@ -740,22 +713,13 @@ to the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  <tr>
   <th>Optional</id>
@@ -813,22 +777,13 @@ subject to the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**, **as:inReplyTo**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**, **as:inReplyTo**</td>
  </tr>
  <tr>
   <th>Recommended</id>
@@ -884,22 +839,13 @@ to the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  <tr>
   <th>Recommended</id>
@@ -963,22 +909,13 @@ to the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  <tr>
   <th>Optional</id>
@@ -1063,22 +1000,13 @@ A for which the service is requested from *Service Node* B.
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  </tr>
   <th>Optional</id>
@@ -1135,22 +1063,13 @@ to the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**, **as:inReplyTo**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**, **as:inReplyTo**</td>
  </tr>
  <tr>
   <th>Recommended</id>
@@ -1206,22 +1125,13 @@ to the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  <tr>
   <th>Recommended</id>
@@ -1283,22 +1193,13 @@ the guidelines provided in [[#Activities]].
 <thead>
  <tr>
  <th>Requirements</th>
- <td></td>
+ <td>Properties</td>
  </tr>
 </thead>
 <tbody>
  <tr>
- <th>Required</th>
- <td>**id** (*Activity Identifier*)</td>
-</tbody>
- <tr>
- <td></td>
- <td>*RDF Properties*</td>
- </tr>
-<tbody>
- <tr>
   <th>Required</id>
-  <td>**rdf:type** , **as:actor** , **as:object**</td>
+  <td>**@id**, **@type**, **as:actor**, **as:object**</td>
  </tr>
  <tr>
   <th>Optional</id>
