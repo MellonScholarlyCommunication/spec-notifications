@@ -1228,6 +1228,11 @@ Discovery of LDN Inboxes {#Discovery}
 
 Issue: TODO
 
+Serialization of LDN/AS2 notifications {#Serialalization}
+========================================
+
+Issue: TODO
+
 Validation of LDN/AS2 notifications {#Validation}
 ===================================
 
