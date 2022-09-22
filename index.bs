@@ -186,7 +186,7 @@ human or machine, individual or organization, and operate on behalf of a *Data N
 
 ## Artifact ## {#Artifact}
 
-An *Artifact* is a Web resource identified by a [URL] that is made available to the network by 
+An *Artifact* is a Web resource identified by a [[URL]] that is made available to the network by 
 a *Data Node*, and that serves as the main focus of interaction between *Agents*. An *Artifact* can 
 be atomic or arbitrary complex. The manner in which *Artifacts* are organized is outside the 
 scope of this specification and depends on the implementing community.
