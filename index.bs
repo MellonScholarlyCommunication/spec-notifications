@@ -319,10 +319,8 @@ pertaining to the *Artifact* MAY also be provided inline as part of the value of
 
 In case the AS2 object is a *Service Result*:
 
-- If the *Service Result* is a Web resource identified by a [[URL]], that [[URL]] MUST be provided as 
-the value of the AS2 object;
-- If the *Service Result* is not a Web resource identified by a [[URL]], it is provided inline as the 
-value of the AS2 object. 
+- If the *Service Result* is a Web resource identified by a [[URL]], that [[URL]] MUST be provided as the value of the AS2 object;
+- If the *Service Result* is not a Web resource identified by a [[URL]], it is provided inline as the value of the AS2 object. 
     - As a special case, a *Service Result* can be linkages, in which case the AS2 activity type is `as:Relationship` and linkages are provided using AS2’s subject/relationship/object construct.
     - In case the AS2 object is a previous activity, it MUST at least convey its activity identifier (value of the id property of the prior activity) and it MAY convey additional information about the prior activity.
 
