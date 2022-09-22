@@ -371,6 +371,7 @@ In EXAMPLE 5:
 - Bob is the *Agent* that sends the notification: the [[URL]] that identifies Bob, the [[URL]] of Bob’s LDN Inbox, two actor types (an AS2 Actor Type and another), as well as Bob’s name are provided in the `as:actor` property of the notification payload. 
 - Bob uses an application to send the notification. Information about the application is provided in the `as:orgin` property. 
 - Bob addresses his notification to Alice. Information about Alice is provided in the `as:target` property, and includes the [[URL]]] that identifies Alice, the [[URL]] of her LDN Inbox, and her AS2 Actor Type. 
+
 </div>
 
 ## AS2 context ## {#ActivityContext}
