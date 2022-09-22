@@ -3,8 +3,9 @@ Title: Event Notifications in Value-Adding Networks
 Shortname: notifications
 Level: 1
 Status: LD
-URL: https://www.eventnotifications.net/0.1/
+URL: https://www.eventnotifications.net
 TR: https://www.eventnotifications.net
+Previous Version: https://www.eventnotifications.net/0.1/
 Editor: Patrick Hochstenbach, [Ghent University Library](https://lib.ugent.be), patrick.hochstenbach@ugent.be
 Editor: Miel Vander Sande, [meemoo - Flemish Institute for Archives](https://meemoo.be), miel.vandersande@meemoo.be
 Editor: Ruben Dedecker, [IDLab - Ghent University](https://knows.idlab.ugent.be), ruben.dedecker@ugent.be
@@ -83,17 +84,14 @@ Regarding the exchange of these LDN/AS2 notifications, the specification disting
 between two logical roles [Data Node](#DataNode) and [Service Node](#ServiceNode):
 
 - A *Data Node* is a network node that makes *Artifacts* available to the network.
-- A *Service Node* is a network node that provides value-adding services for *Artifacts* that are 
-available to the network.
+- A *Service Node* is a network node that provides value-adding services for *Artifacts* that are available to the network.
 
 In order to be able to communicate, each *Data Node* and *Service Node*
 has [LDN Sender](https://www.w3.org/TR/ldn/#sender) and [LDN Receiver](https://www.w3.org/TR/ldn/#receiver) 
 (LDN Inbox) capabilities that are used:
 
-- by a *Data Node* to send and receive LDN notifications pertaining to *Artifacts* that it makes available 
-to the network, and, 
-- by a *Service Node* to send and receive LDN notifications pertaining to value-adding services for *Artifacts* 
-that are made available to the network.
+- by a *Data Node* to send and receive LDN notifications pertaining to *Artifacts* that it makes available to the network, and, 
+- by a *Service Node* to send and receive LDN notifications pertaining to value-adding services for *Artifacts* that are made available to the network.
 
 [Agents](#Agent) operate on behalf of *Data Node* and *Service Node*; they can be 
 humans or machines, individuals or organizations. These *Agents* exchange LDN notifications, each of which pertains
@@ -117,38 +115,20 @@ A common scenario covered by the specification is depicted in Figure 1, which sh
 prefixed by `AS`, the AS2 element used in the LDN/AS2 payloads to convey the respective entity involved 
 in the value-adding network:
 
-- An *Agent* at the end of a *Data Node* uses an LDN Sender to send a notification to a *Service Node*'s 
-LDN Inbox (green arrow) requesting a value-adding service for an *Artifact* made available by the *Data Node*. 
-The URL of the *Artifact* is provided in the AS2 object element of the notification.
-- An *Agent* at the end of the *Service Node* uses an LDN Consumer to obtain this request from the *Service Node*'s 
-LDN Inbox. Provided that the *Service Node* is willing and able to perform the requested service, it goes ahead 
-and does so. The manner in which this is done is outside the scope of this specification. 
-- Once the value-adding service is executed, an *Agent* at the end of the *Service Node* that is aware of the 
-*Service Result* sends a notification (blue arrow) to the *Data Node*'s LDN Inbox. The *Service Result* is provided 
-in the AS2 object element of the notification. Moreover, the *Artifact* that the *Service Result* pertains to 
-is provided in the AS2 context element of the notification.
-- An *Agent* at the end of the *Data Node* consumes this response by obtaining it from the *Data Node*'s LDN Inbox, 
-and acts upon the *Service Result* in a way deemed appropriate.
+- An *Agent* at the end of a *Data Node* uses an LDN Sender to send a notification to a *Service Node*'s LDN Inbox (green arrow) requesting a value-adding service for an *Artifact* made available by the *Data Node*.  The URL of the *Artifact* is provided in the AS2 object element of the notification.
+- An *Agent* at the end of the *Service Node* uses an LDN Consumer to obtain this request from the *Service Node*'s LDN Inbox. Provided that the *Service Node* is willing and able to perform the requested service, it goes ahead and does so. The manner in which this is done is outside the scope of this specification. 
+- Once the value-adding service is executed, an *Agent* at the end of the *Service Node* that is aware of the *Service Result* sends a notification (blue arrow) to the *Data Node*'s LDN Inbox. The *Service Result* is provided in the AS2 object element of the notification. Moreover, the *Artifact* that the *Service Result* pertains to is provided in the AS2 context element of the notification.
+- An *Agent* at the end of the *Data Node* consumes this response by obtaining it from the *Data Node*'s LDN Inbox, and acts upon the *Service Result* in a way deemed appropriate.
 
 From the perspective of LDN:
 
-- An *Artifact* made available to the network by a *Data Node* is an LDN Target and therefore has a
-[discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. The LDN Inbox is used to receive LDN/AS2 
-notifications that provide the *Data Node*, acting as an LDN Consumer, with value-adding information pertaining 
-to an *Artifact*.
-- A *Service Node* that provides value-adding services to *Artifacts* made available to the network is an LDN Target 
-and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. That LDN Inbox is used to 
-receive LDN/AS2 notifications that provide the *Service Node*, acting as an LDN Consumer, either with information 
-pertaining to an *Artifact* or with a request for the provision of a value-adding service for an *Artifact*.
+- An *Artifact* made available to the network by a *Data Node* is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. The LDN Inbox is used to receive LDN/AS2 notifications that provide the *Data Node*, acting as an LDN Consumer, with value-adding information pertaining to an *Artifact*.
+- A *Service Node* that provides value-adding services to *Artifacts* made available to the network is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. That LDN Inbox is used to receive LDN/AS2 notifications that provide the *Service Node*, acting as an LDN Consumer, either with information pertaining to an *Artifact* or with a request for the provision of a value-adding service for an *Artifact*.
 
 From the perspective of LDN/AS2:
 
-- When an LDN/AS2 notification is sent from a *Data Node*, the *Artifact* to which the notification pertains is 
-the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification 
-is addressed is the AS2 target.
-- When an LDN/AS2 notification is sent from a *Service Node*, the *Service Result* is the AS2 object, the 
-*Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is
-the AS2 target.
+- When an LDN/AS2 notification is sent from a *Data Node*, the *Artifact* to which the notification pertains is the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.
+- When an LDN/AS2 notification is sent from a *Service Node*, the *Service Result* is the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.
 
 Conformance 
 ===========
@@ -269,13 +249,9 @@ within the scope of the network. Therefore, an identifier of any kind used MUST 
 <div class=example>
 Alice notifies Bob about the creation of a new Artifact. In the LDN/AS2 payload:
 
-- The activity identifier is `https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65`. Since 
-the activity identifier is a [[URL]], it can be dereferenced to yield the LDN/AS2 notification that Alice 
-sent to Bob. 
-- Alice is the *Agent* acting on behalf of a *Data Node* that has made her *Artifact* 
-`https://acme.org/artifacts/alice/five_steps_to_success.html` available.
-- Bob is the *Agent* acting on behalf of a *Service Node* that makes his LDN Inbox 
-`https://infinity.science.com/inbox/bob` discoverable. 
+- The activity identifier is `https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65`. Since the activity identifier is a [[URL]], it can be dereferenced to yield the LDN/AS2 notification that Alice sent to Bob. 
+- Alice is the *Agent* acting on behalf of a *Data Node* that has made her *Artifact* `https://acme.org/artifacts/alice/five_steps_to_success.html` available.
+- Bob is the *Agent* acting on behalf of a *Service Node* that makes his LDN Inbox `https://infinity.science.com/inbox/bob` discoverable. 
 
 <pre class=include-code>
 path: examples/example1.jsonld
@@ -298,8 +274,7 @@ as `type`,  and its value MUST be the type of AS2 Activity that it describes. On
     - `as:Remove`: An *Agent* deleted an *Artifact* that is made available by a *Data Node*.
     - `as:Announce`: An *Agent* announces the existence of an *Artifact* that is made available by a *Data Node*. 
     Unlike `as:Create`, which conveys when an *Artifact* was created, `as:Announce` merely conveys its existence.
-- AS2 Activities that pertain to applying value-adding services to an *Artifact*: `as:Offer`, `as:Accept`, 
-`as:Reject`, `as:Announce`, and `as:Undo`:
+- AS2 Activities that pertain to applying value-adding services to an *Artifact*: `as:Offer`, `as:Accept`, `as:Reject`, `as:Announce`, and `as:Undo`:
     - `as:Offer`: An *Agent* offers an *Artifact* to another *Agent* in order to request the provision of a service. 
     - `as:Accept`: An *Agent* accepts to provide a service that was requested for a specific *Artifact* by another *Agent*. This is a reply to a previously received `as:Offer`.
     - `as:Reject`: An *Agent* declines to provide a service that was requested for a specific *Artifact* by another *Agent*. This is a reply to a previously received `as:Offer`.
@@ -313,14 +288,10 @@ application domain MAY be specified.
 Bob announces that he endorses the publication of Alice by sharing a review. In the LDN/AS2 notification 
 payload:
 
-- Two activity types are indicated: `as:Announce` as a means to announce the availability of Bob’s review 
-and `schema:EndorseAction` as a means to convey that Alice’s publication is endorsed by Bob.
+- Two activity types are indicated: `as:Announce` as a means to announce the availability of Bob’s review and `schema:EndorseAction` as a means to convey that Alice’s publication is endorsed by Bob.
 - Bob is the *Agent* acting on behalf of *Service Node* `Infiniti science publishing`.
-- Bob’s review is a *Service Result* made available as a Web resource with URI 
-`https://infinity.science.com/artifacts/bob/review_123.html`.
-- Alice is the *Agent* acting on behalf of a *Data Node* that has made her Artifact 
-`https://acme.org/artifacts/alice/five_steps_to_success.html` available and that makes her LDN Inbox 
-`https://acme.org/inbox/alice` discoverable. 
+- Bob’s review is a *Service Result* made available as a Web resource with URI `https://infinity.science.com/artifacts/bob/review_123.html`.
+- Alice is the *Agent* acting on behalf of a *Data Node* that has made her Artifact `https://acme.org/artifacts/alice/five_steps_to_success.html` available and that makes her LDN Inbox `https://acme.org/inbox/alice` discoverable. 
 
 <pre class=include-code>
 path: examples/example2.jsonld
@@ -353,11 +324,8 @@ In case the AS2 object is a *Service Result*:
 the value of the AS2 object;
 - If the *Service Result* is not a Web resource identified by a [[URL]], it is provided inline as the 
 value of the AS2 object. 
-    - As a special case, a *Service Result* can be linkages, in which case the AS2 activity type is 
-    `as:Relationship` and linkages are provided using AS2’s subject/relationship/object construct.
-    - In case the AS2 object is a previous activity, it MUST at least convey its activity identifier 
-    (value of the id property of the prior activity) and it MAY convey additional information about 
-    the prior activity.
+    - As a special case, a *Service Result* can be linkages, in which case the AS2 activity type is `as:Relationship` and linkages are provided using AS2’s subject/relationship/object construct.
+    - In case the AS2 object is a previous activity, it MUST at least convey its activity identifier (value of the id property of the prior activity) and it MAY convey additional information about the prior activity.
 
 <div class="example">
 In EXAMPLE 1, Alice’s *Artifact* is the AS2 object and its [[URL]] 
@@ -372,12 +340,9 @@ In EXAMPLE 2, Bob’s *Service Result* is the AS2 object and its [[URL]]
 <div class="example">
 Bob announces a linkage between Alice’s Artifact and his review thereof:
 
-- The *Service Result* is a relationship of type `http://purl.org/spar/cito/reviews` between Bob’s 
-review and Alice’s *Artifact*.
+- The *Service Result* is a relationship of type `http://purl.org/spar/cito/reviews` between Bob’s review and Alice’s *Artifact*.
 - Bob is the *Agent* acting on behalf of *Service Node* Infiniti science publishing.
-- Alice is the *Agent* acting on behalf of a *Data Node* that has made her *Artifact* 
-`https://acme.org/artifacts/alice/five_steps_to_success.html` available and that makes her 
-LDN Inbox https://acme.org/inbox/alice discoverable.
+- Alice is the *Agent* acting on behalf of a *Data Node* that has made her *Artifact* `https://acme.org/artifacts/alice/five_steps_to_success.html` available and that makes her LDN Inbox https://acme.org/inbox/alice discoverable.
 
 <pre class=include-code>
 path: examples/example3.jsonld
@@ -390,13 +355,9 @@ show:
 
 An LDN/AS2 notification:
 
-- MUST specify the *Agent* that sends the notification, expressed by means of the as:actor property and 
-its value MUST be a [[URL]] that identifies the *Agent*;
-- MAY additionally specify the LDN Sender software component that was responsible for sending the 
-notification on behalf of the *Agent*, expressed by means of the `as:origin` predicate and its value 
-MUST be a [[URL]] that identifies the software component;
-- MAY specify the *Agent* to which the notification is addressed, expressed by means of the `as:target` 
-predicate and its value MUST be a [[URL]] that identifies the *Agent*.
+- MUST specify the *Agent* that sends the notification, expressed by means of the as:actor property and its value MUST be a [[URL]] that identifies the *Agent*;
+- MAY additionally specify the LDN Sender software component that was responsible for sending the notification on behalf of the *Agent*, expressed by means of the `as:origin` predicate and its value MUST be a [[URL]] that identifies the software component;
+- MAY specify the *Agent* to which the notification is addressed, expressed by means of the `as:target` predicate and its value MUST be a [[URL]] that identifies the *Agent*.
 
 For both `as:actor`, `as:origin`, and `as:target`, one of the core [[AS2#actor-types|AS2 Actor Types]] 
 MUST be expressed. In addition to these [[AS2#actor-types|AS2 Actor Types]], types ([[URI]]s) originating 
@@ -404,22 +365,15 @@ from vocabularies chosen by an application domain MAY be specified.
 
 Both `as:actor`, `as:origin`, and `as:target` SHOULD have an LDN Inbox. The [[URL]] of the LDN Inbox: 
 
-- Can be provided as the value of `ldp:inbox` in the description of these entities in the notification 
-payload;
-- Can be discovered as the link target of a link with the `http://www.w3.org/ns/ldp#inbox` link 
-relation type provided in the HTTP  Link  response header of the [[URL]] of the LDN Inbox.
+- Can be provided as the value of `ldp:inbox` in the description of these entities in the notification payload;
+- Can be discovered as the link target of a link with the `http://www.w3.org/ns/ldp#inbox` link relation type provided in the HTTP Link response header of the [[URL]] of the LDN Inbox.
 
 <div class=example>
 In EXAMPLE 5:
 
-- Bob is the *Agent* that sends the notification: the [[URL]] that identifies Bob, the [[URL]] 
-of Bob’s LDN Inbox, two actor types (an AS2 Actor Type and another), as well as Bob’s name are 
-provided in the `as:actor` property of the notification payload. 
-- Bob uses an application to send the notification. Information about the application is provided 
-in the `as:orgin` property. 
-- Bob addresses his notification to Alice. Information about Alice is provided in the `as:target` 
-property, and includes the [[URL]]] that identifies Alice, the [[URL]] of her LDN Inbox, and her 
-AS2 Actor Type. 
+- Bob is the *Agent* that sends the notification: the [[URL]] that identifies Bob, the [[URL]] of Bob’s LDN Inbox, two actor types (an AS2 Actor Type and another), as well as Bob’s name are provided in the `as:actor` property of the notification payload. 
+- Bob uses an application to send the notification. Information about the application is provided in the `as:orgin` property. 
+- Bob addresses his notification to Alice. Information about Alice is provided in the `as:target` property, and includes the [[URL]]] that identifies Alice, the [[URL]] of her LDN Inbox, and her AS2 Actor Type. 
 </div>
 
 ## AS2 context ## {#ActivityContext}
@@ -455,7 +409,6 @@ additional information, see [[#ActivityObject]].
 
 Examples are provided in [[#RequestResponsePatternDNSNAnnounce]] and [[#RequestResponsePatternSNSNAnnounce]].
 
-
 Network communication patterns {#NetworkCommunicationPatterns}
 ==============================
 
@@ -477,14 +430,9 @@ activity on an *Artifact*”. There is no expectation that such notifications yi
 In general, in a one-way communication, a *Node* provides unsolicited information to another *Node*. 
 Various one-way patterns exist:
 
-- In a one-way communication from a *Data Node* to a *Service Node*, an *Agent* operating on behalf 
-of the *Data Node* volunteers information about an activity pertaining to an *Artifact* made available 
-by the *Data Node* to an *Agent* at the end of the *Service Node*.
-- In a one-way communication from a *Service Node* to a *Data Node*, an *Agent* operating on behalf of the
-*Service Node* volunteers information regarding a *Service Result* pertaining to an *Artifact* made 
-available by the *Data Node* to an *Agent* at the end of that *Data Node*.
-- In a one-way communication from *Service Node* to *Service Node*, an *Agent* operating on behalf of 
-the sending *Node* forwards information regarding a *Service Result* to the receiving Node.
+- In a one-way communication from a *Data Node* to a *Service Node*, an *Agent* operating on behalf of the *Data Node* volunteers information about an activity pertaining to an *Artifact* made available by the *Data Node* to an *Agent* at the end of the *Service Node*.
+- In a one-way communication from a *Service Node* to a *Data Node*, an *Agent* operating on behalf of the *Service Node* volunteers information regarding a *Service Result* pertaining to an *Artifact* made available by the *Data Node* to an *Agent* at the end of that *Data Node*.
+- In a one-way communication from *Service Node* to *Service Node*, an *Agent* operating on behalf of the sending *Node* forwards information regarding a *Service Result* to the receiving Node.
 
 ### Data Node to Service Node ### {#OneWayPatternDNSN}
 
@@ -504,8 +452,7 @@ For such a notification:
 
 - The activity type is `as:Create`, `as:Remove`, `as:Update`, or `as:Announce`.
 - The `as:object` property provides information regarding the *Artifact* to which the activity pertains.
-- The requirements regarding properties are summarized in the table below and their use is subject 
-to the guidelines provided in [[#Activities]].
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 1: One-way Data Node to Service Node requirements.</caption>
@@ -561,8 +508,7 @@ For such a notification:
 - The activity type is `as:Announce`.
 - The `as:object` property conveys the *Service Result*.
 - The `as:context` property conveys information regarding the *Artifact* to which the *Service Result* pertains.
-- The requirements regarding properties are summarized in the table below and their use is subject to the 
-guidelines provided in [[#Activities]].
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 2: One-way Service Node to Data Node requirements.</caption>
@@ -620,8 +566,7 @@ For such a notification:
 - The activity type is `as:Announce`.
 - The `as:object` property conveys the *Service Result*.
 - The `as:context` property conveys information regarding the *Artifact* to which the *Service Result* pertains.
-- The requirements regarding properties are summarized in the table below and their use is subject to 
-the guidelines provided in [[#Activities]].
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 3: One-way Service Node to Service Node requirements.</caption>
@@ -675,19 +620,10 @@ In general, this *request-response* pattern is transactional. The *Data Node* th
 communication, expects a reply from the *Service Node*. The overall information flow in a 
 request-response communication is as follows:
 
-- An *Agent* operating on behalf of a *Data Node* sends a request notification to an *Agent* operating 
-at the end of a *Service Node* asking for the provision of a service for an *Artifact* that is made 
-available by the *Data Node*.
-- An *Agent* operating on behalf of the *Service Node* sends a response notification to an *Agent* at 
-the end of the *Data Node* announcing the *Service Result*.
-- Optionally, after having received a request notification, an *Agent* at the end of the *Service Node* 
-can send a response notification to an *Agent* at the end of the *Data Node* to indicate whether the 
-*Service Node* accepts or declines the request to provide a service.
-- An *Agent* operating on behalf of a *Data Node* can send a notification to an *Agent* operating at the 
-end of a *Service Node* requesting to cancel a previous request for provision of a service for an 
-*Artifact* that is made available by the *Data Node*. Such a cancellation request can 
-be sent at any stage of the request-response pattern but it is up to the *Service Node* to decide 
-whether or not it effectively results in not providing the initially requested service. 
+- An *Agent* operating on behalf of a *Data Node* sends a request notification to an *Agent* operating at the end of a *Service Node* asking for the provision of a service for an *Artifact* that is made available by the *Data Node*.
+- An *Agent* operating on behalf of the *Service Node* sends a response notification to an *Agent* at the end of the *Data Node* announcing the *Service Result*.
+- Optionally, after having received a request notification, an *Agent* at the end of the *Service Node* can send a response notification to an *Agent* at the end of the *Data Node* to indicate whether the *Service Node* accepts or declines the request to provide a service.
+- An *Agent* operating on behalf of a *Data Node* can send a notification to an *Agent* operating at the end of a *Service Node* requesting to cancel a previous request for provision of a service for an *Artifact* that is made available by the *Data Node*. Such a cancellation request can be sent at any stage of the request-response pattern but it is up to the *Service Node* to decide whether or not it effectively results in not providing the initially requested service. 
 
 ### Data Node requests service ### {#RequestResponsePatternDNSNOffer}
 
@@ -706,8 +642,7 @@ For such a notification:
 
 - The activity type is `as:Offer`.
 - The `as:object` property provides information about the *Artifact* for which the service is requested.
-- The requirements regarding properties are summarized in the table below and their use is subject 
-to the guidelines provided in [[#Activities]].
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 4: Request-response Data Node requests service requirements.</caption>
@@ -764,14 +699,9 @@ For such a notification:
 
 - The activity type is `as:Announce`.
 - The `as:object` property conveys the *Service Result*.
-- The `as:context` property refers to the *Artifact* for which the service was requested, i.e. 
-the value of the `as:object` property of the prior request for service that was sent by means of a 
-notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]).
-- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of 
-the service request that was sent by means of a notification with the `as:Offer` activity type 
-(see section [[#RequestResponsePatternDNSNOffer]]).
-- The requirements regarding properties are summarized in the table below and their use is 
-subject to the guidelines provided in [[#Activities]].
+- The `as:context` property refers to the *Artifact* for which the service was requested, i.e.  the value of the `as:object` property of the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]).
+- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the service request that was sent by means of a notification with the `as:Offer` activity type (see section [[#RequestResponsePatternDNSNOffer]]).
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 5: Request-response Service Node provides Service Result requirements.</caption>
@@ -824,16 +754,10 @@ whether or not the service will actually be provided.
 
 For such a notification:
 
-- The `as:object` property refers to the prior request for service that was sent by means of 
-a notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]). It conveys at least its 
-activity identifier (value of the `id` property).
-- The `as:context` property refers to the Artifact for which the service was requested, i.e. the
- value of the `as:object` property of the prior request for service that was sent by means of a notification 
- with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]).
-- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the service 
-request that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]).
-- The requirements regarding properties are summarized in the table below and their use is subject 
-to the guidelines provided in [[#Activities]].
+- The `as:object` property refers to the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]). It conveys at least its activity identifier (value of the `id` property).
+- The `as:context` property refers to the Artifact for which the service was requested, i.e. the value of the `as:object` property of the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]).
+- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the service request that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]).
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 6: Request-response Service Node acknowledges a service request requirements.</caption>
@@ -899,11 +823,8 @@ service for an *Artifact* that is made available by the *Data Node*.
 For such a notification:
 
 - The activity type is `as:Undo`.
-- The `as:object` property refers to the prior request for service that was sent by means of a 
-notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]). It conveys at least its 
-activity identifier (value of the `id` property).
-- The requirements regarding properties are summarized in the table below and their use is subject 
-to the guidelines provided in [[#Activities]].
+- The `as:object` property refers to the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternDNSNOffer]]). It conveys at least its activity identifier (value of the `id` property).
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 7: Request-response Service Node cancels prior service request requirements.</caption>
@@ -959,19 +880,10 @@ In general, this **request-response** pattern is transactional. The *Service Nod
 the communication, expects a reply from the *Service Node* that receives the service request. The 
 overall information flow in this request-response communication is as follows:
 
-- An *Agent* operating on behalf of a *Service Node* A sends a request notification to an *Agent* 
-operating at the end of *Service Node* B asking for the provision of a service for a *Service Result* 
-that *Service Node* A generated.
-- An *Agent* operating on behalf of *Service Node* B sends a response notification to an *Agent* at 
-the end of the *Service Node* A announcing its *Service Result*.
-- Optionally, after having received a request notification, an *Agent* at the end of the *Service Node* 
-B can send a response notification to an *Agent* at the end of the *Service Node* A to indicate whether 
-*Service Node* B accepts or declines the request to provide a service.
-- An Agent operating on behalf of *Service Node* A can send a notification to an *Agent* operating at 
-the end of a *Service Node* B requesting to cancel a service request it previously sent. Such a 
-cancellation request can be sent at any stage of the request-response pattern but it is up to 
-*Service Node* B to decide whether or not it effectively results in not providing the initially 
-requested service. 
+- An *Agent* operating on behalf of a *Service Node* A sends a request notification to an *Agent* operating at the end of *Service Node* B asking for the provision of a service for a *Service Result* that *Service Node* A generated.
+- An *Agent* operating on behalf of *Service Node* B sends a response notification to an *Agent* at the end of the *Service Node* A announcing its *Service Result*.
+- Optionally, after having received a request notification, an *Agent* at the end of the *Service Node* B can send a response notification to an *Agent* at the end of the *Service Node* A to indicate whether *Service Node* B accepts or declines the request to provide a service.
+- An Agent operating on behalf of *Service Node* A can send a notification to an *Agent* operating at the end of a *Service Node* B requesting to cancel a service request it previously sent. Such a cancellation request can be sent at any stage of the request-response pattern but it is up to *Service Node* B to decide whether or not it effectively results in not providing the initially requested service. 
 
 ### Service Node requests service ### {#RequestResponsePatternSNSNOffer}
 
@@ -991,8 +903,7 @@ asking for the provision of a service for a *Service Result* generated by *Servi
 For such a notification:
 
 - The activity type is `as:Offer`.
-- The `as:object` property provides information about the *Service Result* generated by *Service Node* 
-A for which the service is requested from *Service Node* B.
+- The `as:object` property provides information about the *Service Result* generated by *Service Node* A for which the service is requested from *Service Node* B.
 - The requirements regarding properties are summarized in the table below and their use is subject
  to the guidelines provided in [[#Activities]].
 
@@ -1050,14 +961,9 @@ response to a request from *Service Node* A.
 For such a notification:
 
 - The `as:object` property conveys the *Service Result* generated by *Service Node* B.
-- The `as:context` property refers to the *Service Result* for which the service was requested, 
-i.e. the value of the `as:object` property of the prior request for service that was sent by 
-means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
-- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the 
-service request that was sent by means of a notification with the `as:Offer` activity 
-type (see section [[#RequestResponsePatternSNSNOffer]]).
-- The requirements regarding properties are summarized in the table below and their use is subject 
-to the guidelines provided in [[#Activities]].
+- The `as:context` property refers to the *Service Result* for which the service was requested, i.e. the value of the `as:object` property of the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
+- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the service request that was sent by means of a notification with the `as:Offer` activity type (see section [[#RequestResponsePatternSNSNOffer]]).
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 9: Request-response Service Node provides Service Result requirements.</caption>
@@ -1110,14 +1016,9 @@ and to indicate whether or not the service will actually be provided.
 For such a notification:
 
 - The activity type is `as:Accept` when the service will be provided and `as:Reject` when not.
-- The `as:object` property refers to the prior request for service that was sent by means of a 
-notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]). It 
-conveys at least its activity identifier (value of the `id` property).
-- The `as:context` property refers to the *Service Result* for which the service was requested, i.e. 
-the value of the `as:object` property of the prior request for service that was sent by means of a 
-notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
-- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the 
-service request that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
+- The `as:object` property refers to the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]). It conveys at least its activity identifier (value of the `id` property).
+- The `as:context` property refers to the *Service Result* for which the service was requested, i.e.  the value of the `as:object` property of the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
+- The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the service request that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
 - The requirements regarding properties are summarized in the table below and their use is subject 
 to the guidelines provided in [[#Activities]].
 
@@ -1183,11 +1084,8 @@ for a *Service Result* that was generated by the *Data Node* A.
 For such a notification:
 
 - The activity type is `as:Undo`.
-- The `as:object` property refers to the prior request for service that was sent by means of a 
-notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]). It conveys 
-at least its activity identifier (value of the `id` property).
-- The requirements regarding properties are summarized in the table below and their use is subject to 
-the guidelines provided in [[#Activities]].
+- The `as:object` property refers to the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]). It conveys at least its activity identifier (value of the `id` property).
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 11: Request-response Service Node cancels prior service request requirements.</caption>
