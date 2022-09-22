@@ -1016,8 +1016,7 @@ For such a notification:
 - The `as:object` property refers to the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]). It conveys at least its activity identifier (value of the `id` property).
 - The `as:context` property refers to the *Service Result* for which the service was requested, i.e.  the value of the `as:object` property of the prior request for service that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
 - The `as:inReplyTo` property conveys the activity identifier (value of the `id` property) of the service request that was sent by means of a notification with the `as:Offer` activity type (see [[#RequestResponsePatternSNSNOffer]]).
-- The requirements regarding properties are summarized in the table below and their use is subject 
-to the guidelines provided in [[#Activities]].
+- The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in [[#Activities]].
 
 <table>
 <caption>Table 10: Request-response Service Node acknowledges a service request requirements.</caption>
