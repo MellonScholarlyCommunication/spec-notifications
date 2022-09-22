@@ -272,8 +272,7 @@ as `type`,  and its value MUST be the type of AS2 Activity that it describes. On
     - `as:Create`: An *Agent* created an *Artifact* that is made available by a *Data Node*.
     - `as:Update`: An *Agent* updated an *Artifact* that is made available by a *Data Node*.
     - `as:Remove`: An *Agent* deleted an *Artifact* that is made available by a *Data Node*.
-    - `as:Announce`: An *Agent* announces the existence of an *Artifact* that is made available by a *Data Node*. 
-    Unlike `as:Create`, which conveys when an *Artifact* was created, `as:Announce` merely conveys its existence.
+    - `as:Announce`: An *Agent* announces the existence of an *Artifact* that is made available by a *Data Node*.  Unlike `as:Create`, which conveys when an *Artifact* was created, `as:Announce` merely conveys its existence.
 - AS2 Activities that pertain to applying value-adding services to an *Artifact*: `as:Offer`, `as:Accept`, `as:Reject`, `as:Announce`, and `as:Undo`:
     - `as:Offer`: An *Agent* offers an *Artifact* to another *Agent* in order to request the provision of a service. 
     - `as:Accept`: An *Agent* accepts to provide a service that was requested for a specific *Artifact* by another *Agent*. This is a reply to a previously received `as:Offer`.
