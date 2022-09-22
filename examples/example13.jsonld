@@ -5,25 +5,25 @@
     "published": "2023-01-20T13:55:00Z",
     "summary": "Springfield library requests indexation of data/set-1234",
     "actor": {
-       "id": "https://springfield.library.net/about#us",
-       "inbox": "https://springfield.library.net/inbox/",
-       "name": "Springfield Library",
-       "type": "Organization"
+      "id": "https://springfield.library.net/about#us",
+      "inbox": "https://springfield.library.net/inbox/",
+      "name": "Springfield Library",
+      "type": "Organization"
     },
     "origin": {
-       "id": "https://imagetool.com/profile/card#i",
-       "name": "ImageTool Inc.",
-       "type": "Application"
+      "id": "https://imagetool.com/profile/card#i",
+      "name": "ImageTool Inc.",
+      "type": "Application"
     },
     "object": {
-       "id": "https://imagetool.com/customer/123-321/data/set-1234/",
-       "type": "Page"
+      "id": "https://imagetool.com/customer/123-321/data/set-1234/",
+      "type": "Page"
     },
     "target": {     
-       "id": "https://acme.webindex.com/webcrawler#me",
-       "inbox": "https://acme.webindex.com/webcrawler/queue",
-       "name": "ACME Search Engine",
-       "type": "Application"
+      "id": "https://acme.webindex.com/webcrawler#me",
+      "inbox": "https://acme.webindex.com/webcrawler/queue",
+      "name": "ACME Search Engine",
+      "type": "Application"
     }
 }
   

@@ -5,15 +5,15 @@
     "published": "2023-01-29T18:59:23Z",
     "summary": "Riverside Data Service included two Springfield library images in their Summer in Springfield dataset",
     "actor": {
-       "id": "https://riverside.data.net/about#us",
-       "inbox": "https://riverside.data.net/inbox/",
-       "name": "Riverside Data Service",
-       "type": "Organization"
+      "id": "https://riverside.data.net/about#us",
+      "inbox": "https://riverside.data.net/inbox/",
+      "name": "Riverside Data Service",
+      "type": "Organization"
     },
     "origin": {
-       "id": "https://lambda.riverside.data.net/profile/card#i",
-       "name": "Lambda Repository",
-       "type": "Application"
+      "id": "https://lambda.riverside.data.net/profile/card#i",
+      "name": "Lambda Repository",
+      "type": "Application"
     },
     "object": [
       {
@@ -32,9 +32,9 @@
       }
     ],
     "target": {     
-       "id": "https://springfield.library.net/about#us",
-       "inbox": "https://springfield.library.net/inbox/",
-       "name": "Springfield Library",
-       "type": "Organization"
+      "id": "https://springfield.library.net/about#us",
+      "inbox": "https://springfield.library.net/inbox/",
+      "name": "Springfield Library",
+      "type": "Organization"
     }
 }

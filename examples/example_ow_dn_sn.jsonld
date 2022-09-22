@@ -1,0 +1,26 @@
+{ 
+    "@context": "https://www.w3.org/ns/activitystreams",
+    "id": "urn:uuid:0F402B08-F676-40EE-9D4B-480B3F985B65",
+    "type": "Create",
+    "actor": {
+       "id": "https://acme.org/profile/card#us",
+       "inbox": "https://acme.org/inbox/",
+       "name": "ACME Research Institute",
+       "type": "Organization"
+    },
+    "origin": {
+       "id": "https://acme.org/system",
+       "name": "ACME Research Institute System",
+       "type": "Application"
+    },
+    "object": {
+       "id": "https://acme.org/artifacts/alice/five_steps_to_success.html",
+       "type": "Article"
+    },
+    "target": {     
+      "id": "https://infinity.science.com/profile/card#us",
+      "inbox": "https://infinity.science.com/inbox/",
+      "name": "Infinity Science",
+      "type": "Organization"
+   }
+}
