@@ -1,28 +1,28 @@
 { 
-    "@context": "https://www.w3.org/ns/activitystreams",
-    "id": "urn:uuid:778A422E-7E98-4D48-9AB7-00A9DCF65705",
-    "type": "Announce",
-    "published": "2023-01-29T18:59:23Z",
-    "summary": "Springfield library found an image about you",
-    "actor": {
-       "id": "https://springfield.library.net/about#us",
-       "inbox": "https://springfield.library.net/inbox/",
-       "name": "Springfield Library",
-       "type": "Organization"
-    },
-    "origin": {
-       "id": "https://imagetool.com/profile/card#i",
-       "name": "ImageTool Inc.",
-       "type": "Application"
-    },
-    "object": {
-       "id": "https://imagetool.com/customer/123-321/data/set-1234/image102.png",
-       "type": "Image"
-    },
-    "target": {     
-       "id": "https://orcid.org/0000-0007-01219-312199",
-       "inbox": "https://acme.org/inbox/alice",
-       "name": "Alice",
-       "type": "Person"
-    }
-  }
+   "@context": "https://www.w3.org/ns/activitystreams",
+   "id": "urn:uuid:778A422E-7E98-4D48-9AB7-00A9DCF65705",
+   "type": "Announce",
+   "published": "2023-01-29T18:59:23Z",
+   "summary": "Springfield library found an image about you",
+   "actor": {
+      "id": "https://springfield.library.net/about#us",
+      "inbox": "https://springfield.library.net/inbox/",
+      "name": "Springfield Library",
+      "type": "Organization"
+   },
+   "origin": {
+      "id": "https://imagetool.com/profile/card#i",
+      "name": "ImageTool Inc.",
+      "type": "Application"
+   },
+   "object": {
+      "id": "https://imagetool.com/customer/123-321/data/set-1234/image102.png",
+      "type": "Image"
+   },
+   "target": {     
+      "id": "https://orcid.org/0000-0007-01219-312199",
+      "inbox": "https://acme.org/inbox/alice",
+      "name": "Alice",
+      "type": "Person"
+   }
+}

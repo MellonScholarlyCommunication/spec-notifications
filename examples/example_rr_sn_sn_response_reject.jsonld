@@ -1,0 +1,73 @@
+{ 
+    "@context": [ 
+      "https://www.w3.org/ns/activitystreams" ,
+      {"schema": "https://schema.org/"}
+    ], 
+    "id": "urn:uuid:DB906BC3-09AA-4B6D-AA46-025E93BEA2E9",
+    "type": "Reject",
+    "actor": {
+        "id": "https://data.archive.xyz.au/",
+        "inbox": "https://data.archive.xyz.au/inbox/",
+        "name": "Data Archive XYZ (Australia Office)",
+        "type": "Organization"
+    },
+    "origin": {
+       "id": "https://data.archive.xyz.net/system",
+       "name": "XYZ Archiving Department",
+       "type": "Application"
+    },
+    "context": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "inReplyTo": "urn:uuid:CBF81D23-E242-4B6E-9528-0EC6EAB3CA03",
+    "object": {
+        "id": "urn:uuid:CBF81D23-E242-4B6E-9528-0EC6EAB3CA03",
+        "type": "Offer",
+        "actor": {
+           "id": "https://data.archive.xyz.net/",
+           "inbox": "https://data.archive.xyz.net/inbox/",
+           "name": "Data Archive XYZ",
+           "type": "Organization"
+        },
+        "origin": {
+           "id": "https://data.archive.xyz.net/system",
+           "name": "XYZ Archiving Department",
+           "type": "Application"
+        },
+        "object": {
+             "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+             "type": "Offer",
+             "actor": {
+                "id": "https://acme.org/profile/card#us",
+                "inbox": "https://acme.org/inbox/",
+                "name": "ACME Research Institute",
+                "type": "Organization"
+             },
+             "origin": {
+                "id": "https://acme.org/system",
+                "name": "ACME Research Institute System",
+                "type": "Application"
+             },
+             "object": {
+                "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+                "type": "schema:Dataset"
+             },
+             "target": {     
+                "id": "https://data.archive.xyz.net/",
+                "inbox": "https://data.archive.xyz.net/inbox/",
+                "name": "Data Archive XYZ",
+                "type": "Organization"
+             }
+        },
+        "target": {     
+           "id": "https://data.archive.xyz.au/",
+           "inbox": "https://data.archive.xyz.au/inbox/",
+           "name": "Data Archive XYZ (Australia Office)",
+           "type": "Organization"
+        }
+    },
+    "target": {     
+       "id": "https://data.archive.xyz.net/",
+       "inbox": "https://data.archive.xyz.net/inbox/",
+       "name": "Data Archive XYZ",
+       "type": "Organization"
+    }
+  }
