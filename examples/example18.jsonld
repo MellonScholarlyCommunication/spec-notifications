@@ -15,11 +15,32 @@
       "name": "ImageTool Inc.",
       "type": "Application"
    },
-   "inReplyTo":"urn:uuid:8B938492-663B-479C-8431-07F9049B4E5D",
-   "context":"https://imagetool.com/customer/123-321/data/set-1234/",
    "object": {
-      "id": "urn:uuid:8B938492-663B-479C-8431-07F9049B4E5D",
-      "type": "Offer"
+         "id": "urn:uuid:8B938492-663B-479C-8431-07F9049B4E5D",
+         "type": "Offer",
+         "published": "2022-12-01T00:55:00Z",
+         "summary": "Springfield library offers data/set-1234 for archiving",
+         "actor": {
+            "id": "https://springfield.library.net/about#us",
+            "inbox": "https://springfield.library.net/inbox/",
+            "name": "Springfield Library",
+            "type": "Organization"
+         },
+         "origin": {
+            "id": "https://imagetool.com/profile/card#i",
+            "name": "ImageTool Inc.",
+            "type": "Application"
+         },
+         "object": {
+            "id": "https://imagetool.com/customer/123-321/data/set-1234/",
+            "type": "Page"
+         },
+         "target": {     
+            "id": "https://nationalarchive.org/library/ingest#service",
+            "inbox": "https://nationalarchive.org/library/ingest/inbox",
+            "name": "National Archives Library Project",
+            "type": "Application"
+         }
    },
    "target": {     
       "id": "https://nationalarchive.org/library/ingest#service",

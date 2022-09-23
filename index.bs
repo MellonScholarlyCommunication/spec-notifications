@@ -66,7 +66,7 @@ ActivityStreams2 [[AS2]] payloads in value-adding networks.
 A value-added network, as considered by this specification, is a network in which Web 
 resources, for the purpose of this specification named [Artifacts](#Artifact), are made available by
 nodes in the network, value is added to these *Artifacts* by other nodes in the network, 
-and LDN/AS2 notifications with that regard are exchanged among network nodes. 
+and LDN+AS2 notifications with that regard are exchanged among network nodes. 
 
 The type of web resources that are considered *Artifacts* in a value-adding network depends 
 on its community of use. For example, in a research communication value-adding network, 
@@ -80,7 +80,7 @@ be information that an *Artifact* was made discoverable by a portal; a trusted t
 information about a linkage the *Artifact* is involved in; the creation of a new resource 
 related to the artifact (e.g. an enhanced version, a translation, an archival copy). 
 
-Regarding the exchange of these LDN/AS2 notifications, the specification distinguishes 
+Regarding the exchange of these LDN+AS2 notifications, the specification distinguishes 
 between two logical roles [Data Node](#DataNode) and [Service Node](#ServiceNode):
 
 - A *Data Node* is a network node that makes *Artifacts* available to the network.
@@ -112,7 +112,7 @@ are typically expressed by reference (i.e. by means of the [[URL]] of an entity)
 by means of a description of an entity).
 
 A common scenario covered by the specification is depicted in Figure 1, which shows, on the dashed lines, 
-prefixed by `AS`, the AS2 element used in the LDN/AS2 payloads to convey the respective entity involved 
+prefixed by `AS`, the AS2 element used in the LDN+AS2 payloads to convey the respective entity involved 
 in the value-adding network:
 
 - An *Agent* at the end of a *Data Node* uses an LDN Sender to send a notification to a *Service Node*'s LDN Inbox (green arrow) requesting a value-adding service for an *Artifact* made available by the *Data Node*.  The URL of the *Artifact* is provided in the AS2 object element of the notification.
@@ -122,13 +122,13 @@ in the value-adding network:
 
 From the perspective of LDN:
 
-- An *Artifact* made available to the network by a *Data Node* is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. The LDN Inbox is used to receive LDN/AS2 notifications that provide the *Data Node*, acting as an LDN Consumer, with value-adding information pertaining to an *Artifact*.
-- A *Service Node* that provides value-adding services to *Artifacts* made available to the network is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. That LDN Inbox is used to receive LDN/AS2 notifications that provide the *Service Node*, acting as an LDN Consumer, either with information pertaining to an *Artifact* or with a request for the provision of a value-adding service for an *Artifact*.
+- An *Artifact* made available to the network by a *Data Node* is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. The LDN Inbox is used to receive LDN+AS2 notifications that provide the *Data Node*, acting as an LDN Consumer, with value-adding information pertaining to an *Artifact*.
+- A *Service Node* that provides value-adding services to *Artifacts* made available to the network is an LDN Target and therefore has a [discoverable](https://www.w3.org/TR/ldn/#discovery) LDN Inbox. That LDN Inbox is used to receive LDN+AS2 notifications that provide the *Service Node*, acting as an LDN Consumer, either with information pertaining to an *Artifact* or with a request for the provision of a value-adding service for an *Artifact*.
 
-From the perspective of LDN/AS2:
+From the perspective of AS2:
 
-- When an LDN/AS2 notification is sent from a *Data Node*, the *Artifact* to which the notification pertains is the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.
-- When an LDN/AS2 notification is sent from a *Service Node*, the *Service Result* is the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.
+- When an LDN+AS2 notification is sent from a *Data Node*, the *Artifact* to which the notification pertains is the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.
+- When an LDN+AS2 notification is sent from a *Service Node*, the *Service Result* is the AS2 object, the *Agent* that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.
 
 Conformance 
 ===========
@@ -167,7 +167,7 @@ Within this document, the following namespace prefix bindings to [[URI]]-s are u
 </table>
 
 When in the textual parts of this document a namespace prefix is used, it should be 
-interpreted with the bindings as stated above. In our examples LDN/AS2 payloads we use JSON-LD as 
+interpreted with the bindings as stated above. In our examples LDN+AS2 payloads we use JSON-LD as 
 syntax. In our JSON-LD examples we don't explicity write the prefixes. The `@context` 
 element in JSON-LD defines a mapping from terms to [[URI]]-s. We refer to the [[JSON-LD]] specification 
 for more information about this more concise way of notation.
@@ -180,7 +180,7 @@ This section clarifies the terminology that was intuitively introduced in the in
 ## Agent ## {#Agent}
 
 An *Agent* is an active participant in the network: an Agent performs actions, can be identified 
-or addressed with a [[URI]], and can send or receive LDN/AS2 notifications. An *Agent* can be 
+or addressed with a [[URI]], and can send or receive LDN+AS2 notifications. An *Agent* can be 
 human or machine, individual or organization, and operate on behalf of a *Data Node* or a 
 *Service Node*. 
 
@@ -195,14 +195,14 @@ scope of this specification and depends on the implementing community.
 
 A *Data Node* is a network node that makes *Artifacts* available to the network and provides 
 one or more LDN Inboxes via which *Agents* that operate on behalf of the *Data Node* can be 
-reached. These LDN Inboxes are set up to receive LDN/AS2 notifications pertaining to the 
+reached. These LDN Inboxes are set up to receive LDN+AS2 notifications pertaining to the 
 *Artifacts* that are made available to the network by the *Data Node*.  
 
 ## Service Node ## {#ServiceNode}
 
 A *Service Node* is a network node that provides value-added services for *Artifacts* hosted 
 by *Data Nodes* and provides one or more LDN Inboxes via which *Agents* that operate on behalf 
-of the *Service Node* can be reached. These LDN Inboxes are set up to receive LDN/AS2 
+of the *Service Node* can be reached. These LDN Inboxes are set up to receive LDN+AS2 
 notifications pertaining to *Artifacts* that are made available to the network by *Data Nodes*. 
 
 ## Service Result ## {#ServiceResult}
@@ -210,14 +210,14 @@ notifications pertaining to *Artifacts* that are made available to the network b
 A *Service Result* is the outcome of the provision of a value-added service by a *Service Node* 
 for an *Artifact* that is made available to the network by a *Data Node*. A *Service Result* 
 can be a Web resource identified by a [[URL]] or information that is provided inline in an 
-LDN/AS2 notification.
+LDN+AS2 notification.
 
 A *Service Result* that is a Web resource identified by a [[URL]] can itself become an *Artifact* 
 when it is made available to the network by a *Data Node* that, for example, is associated with 
 the *Service Node* that generated the *Service Result*. This makes a *Service Result* available as 
 a new *Artifact* for which new value-added services can be provided.
 
-Properties in LDN/AS2 Notifications {#Activities}
+Properties in LDN+AS2 Notifications {#Activities}
 ===================================
 
 In a value-adding network, LDN notifications are sent from one *Agent* to another *Agent*. Notification 
@@ -231,14 +231,14 @@ target, actor, context, inReplyTo properties.
 
 ## JSON-LD id ## {#ActivityId}
 
-An LDN/AS2 notification MUST specify an identifier for the activity, expressed in JSON-LD as 
+An LDN+AS2 notification MUST specify an identifier for the activity, expressed in JSON-LD as 
 `@id` or shortened as `id`,  and its value MUST be a valid [[URI]]. In case this [[URI]] is a [[URL]], 
 it MUST be dereferencable and return a representation of the notification itself. When referring to an 
 activity, its activity identifier MUST be used. Nodes in the network MUST NOT edit or remove the activity 
-identifier when processing LDN/AS2 notifications. 
+identifier when processing LDN+AS2 notifications. 
 
 Note that the activity identifier is distinct from the notification identifier, which is the [[URL]] 
-minted by the LDN Receiver when the LDN/AS2 notification that describes the activity is received in 
+minted by the LDN Receiver when the LDN+AS2 notification that describes the activity is received in 
 its LDN Inbox. An LDN Receiver may choose to reflect components of the activity identifier in the 
 notification identifier it mints but, in case this happens, network nodes can not infer a relationship 
 between the activity identifier and the notification identifier on this basis. 
@@ -247,9 +247,9 @@ To establish robust communication on the network, activities have to be at least
 within the scope of the network. Therefore, an identifier of any kind used MUST be a valid [[URI]].
 
 <div class=example>
-Alice notifies Bob about the creation of a new Artifact. In the LDN/AS2 payload:
+Alice notifies Bob about the creation of a new Artifact. In the LDN+AS2 payload:
 
-- The activity identifier is `https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65`. Since the activity identifier is a [[URL]], it can be dereferenced to yield the LDN/AS2 notification that Alice sent to Bob. 
+- The activity identifier is `https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65`. Since the activity identifier is a [[URL]], it can be dereferenced to yield the LDN+AS2 notification that Alice sent to Bob. 
 - Alice is the *Agent* acting on behalf of a *Data Node* that has made her *Artifact* `https://acme.org/artifacts/alice/five_steps_to_success.html` available.
 - Bob is the *Agent* acting on behalf of a *Service Node* that makes his LDN Inbox `https://infinity.science.com/inbox/bob` discoverable. 
 
@@ -263,7 +263,7 @@ show:
 
 ## JSON-LD type ## {#ActivityType}
 
-An LDN/AS2 notification MUST specify an activity type, expressed in JSON-LD as `@type` or shortened 
+An LDN+AS2 notification MUST specify an activity type, expressed in JSON-LD as `@type` or shortened 
 as `type`,  and its value MUST be the type of AS2 Activity that it describes. Only the subset of 
 [[AS2#activities|AS2 Activity]] Types shown here are supported:
 
@@ -284,7 +284,7 @@ In addition to these AS2 Activity Types, types ([[URI]]s) originating from vocab
 application domain MAY be specified. 
 
 <div class=example>
-Bob announces that he endorses the publication of Alice by sharing a review. In the LDN/AS2 notification 
+Bob announces that he endorses the publication of Alice by sharing a review. In the LDN+AS2 notification 
 payload:
 
 - Two activity types are indicated: `as:Announce` as a means to announce the availability of Bob’s review and `schema:EndorseAction` as a means to convey that Alice’s publication is endorsed by Bob.
@@ -301,7 +301,7 @@ show:
 
 ## AS2 object ## {#ActivityObject}
 
-An LDN/AS2 notification MUST specify an AS2 object, expressed by means of the `as:object` property. 
+An LDN+AS2 notification MUST specify an AS2 object, expressed by means of the `as:object` property. 
 Depending on the activity type, the AS2 object can refer to:
 
 - An *Artifact* made available by a *Data Node*; 
@@ -350,7 +350,7 @@ show:
 
 ## AS2 actor, AS2 origin, and AS2 target ## {#ActivityAddressing}
 
-An LDN/AS2 notification:
+An LDN+AS2 notification:
 
 - MUST specify the *Agent* that sends the notification, expressed by means of the as:actor property and its value MUST be a [[URL]] that identifies the *Agent*;
 - MAY additionally specify the LDN Sender software component that was responsible for sending the notification on behalf of the *Agent*, expressed by means of the `as:origin` predicate and its value MUST be a [[URL]] that identifies the software component;
@@ -377,7 +377,7 @@ In EXAMPLE 5:
 ## AS2 context ## {#ActivityContext}
 
 When sending a notification to a *Data Node* that pertains to one of the *Artifacts* it makes 
-available, the LDN/AS2 notification SHOULD include the `as:context` property and, when included, 
+available, the LDN+AS2 notification SHOULD include the `as:context` property and, when included, 
 MUST at least convey the *Artifact*’s [[URL]] as its value. This specification accords no specific 
 meaning to the use of `as:context` for notifications sent to a *Service Node*.
 
@@ -399,7 +399,7 @@ announcement does not pertain to an *Artifact* that is made available at the rec
 
 ## AS2 inReplyTo ## {#ActivityInReplyTo}
 
-An LDN/AS2 notification that is sent in response to a previously received notification, MUST 
+An LDN+AS2 notification that is sent in response to a previously received notification, MUST 
 include the `as:inReplyTo` property,  and its value MUST be the activity identifier 
 (value of the id property) of the previous notification. For such a notification, the `as:object` 
 property also reflects the activity identifier of the previous notification but can include
@@ -411,7 +411,7 @@ Network communication patterns {#NetworkCommunicationPatterns}
 ==============================
 
 In a value-adding network, *Nodes*, in particular the *Agents* operating on behalf of *Nodes*, 
-communicate by sending LDN/AS2 notifications to each other. These notifications are delivered 
+communicate by sending LDN+AS2 notifications to each other. These notifications are delivered 
 to LDN Inboxes that are made available by *Data Nodes* and *Service Nodes* for the benefit of *Agents* 
 that manage *Artifacts* and service provision, respectively.
 
@@ -1123,12 +1123,12 @@ Discovery of LDN Inboxes {#Discovery}
 
 Issue: TODO
 
-Serialization of LDN/AS2 notifications {#Serialalization}
+Serialization of LDN+AS2 notifications {#Serialalization}
 ========================================
 
 Issue: TODO
 
-Validation of LDN/AS2 notifications {#Validation}
+Validation of LDN+AS2 notifications {#Validation}
 ===================================
 
 Issue: TODO

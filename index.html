@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://www.eventnotifications.net" rel="canonical">
-  <meta content="d9f768b8209af7ebfff57f21b971463e71ee584c" name="document-revision">
+  <meta content="5bbab41571b28946a7305a8592ef9849c2a38d8c" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1464,7 +1464,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Event Notifications in Value-Adding Networks</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2022-09-22">22 September 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2022-09-23">23 September 2022</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1488,7 +1488,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 22 September 2022,
+In addition, as of 23 September 2022,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1515,7 +1515,7 @@ Parts of this work may be from another specification document.  If so, those par
       <li><a href="#ServiceResult"><span class="secno">4.5</span> <span class="content">Service Result</span></a>
      </ol>
     <li>
-     <a href="#Activities"><span class="secno">5</span> <span class="content">Properties in LDN/AS2 Notifications</span></a>
+     <a href="#Activities"><span class="secno">5</span> <span class="content">Properties in LDN+AS2 Notifications</span></a>
      <ol class="toc">
       <li><a href="#ActivityId"><span class="secno">5.1</span> <span class="content">JSON-LD id</span></a>
       <li><a href="#ActivityType"><span class="secno">5.2</span> <span class="content">JSON-LD type</span></a>
@@ -1552,8 +1552,8 @@ Parts of this work may be from another specification document.  If so, those par
        </ol>
      </ol>
     <li><a href="#Discovery"><span class="secno">7</span> <span class="content">Discovery of LDN Inboxes</span></a>
-    <li><a href="#Serialalization"><span class="secno">8</span> <span class="content">Serialization of LDN/AS2 notifications</span></a>
-    <li><a href="#Validation"><span class="secno">9</span> <span class="content">Validation of LDN/AS2 notifications</span></a>
+    <li><a href="#Serialalization"><span class="secno">8</span> <span class="content">Serialization of LDN+AS2 notifications</span></a>
+    <li><a href="#Validation"><span class="secno">9</span> <span class="content">Validation of LDN+AS2 notifications</span></a>
     <li><a href="#ServiceDescription"><span class="secno">10</span> <span class="content">Service description of LDN Targets</span></a>
     <li><a href="#acknowledgements"><span class="secno">11</span> <span class="content">Acknowledgements</span></a>
     <li>
@@ -1574,7 +1574,7 @@ ActivityStreams2 <a data-link-type="biblio" href="#biblio-as2">[AS2]</a> payload
    <p>A value-added network, as considered by this specification, is a network in which Web
 resources, for the purpose of this specification named <a href="#Artifact">Artifacts</a>, are made available by
 nodes in the network, value is added to these <em>Artifacts</em> by other nodes in the network, 
-and LDN/AS2 notifications with that regard are exchanged among network nodes.</p>
+and LDN+AS2 notifications with that regard are exchanged among network nodes.</p>
    <p>The type of web resources that are considered <em>Artifacts</em> in a value-adding network depends
 on its community of use. For example, in a research communication value-adding network, <em>Artifacts</em> would include research outputs such as preprints, reviewed articles, datasets, 
 workflows, and software that are part of the scholarly record.</p>
@@ -1583,7 +1583,7 @@ outcome of applying the service, for the purpose of this specification named <a 
 be information that an <em>Artifact</em> was made discoverable by a portal; a trusted timestamp for an <em>Artifact</em>;  
 information about a linkage the <em>Artifact</em> is involved in; the creation of a new resource 
 related to the artifact (e.g. an enhanced version, a translation, an archival copy).</p>
-   <p>Regarding the exchange of these LDN/AS2 notifications, the specification distinguishes
+   <p>Regarding the exchange of these LDN+AS2 notifications, the specification distinguishes
 between two logical roles <a href="#DataNode">Data Node</a> and <a href="#ServiceNode">Service Node</a>:</p>
    <ul>
     <li data-md>
@@ -1613,7 +1613,7 @@ involved is available by using their identifiers in auto-discovery mechanisms. A
 are typically expressed by reference (i.e. by means of the <a data-link-type="biblio" href="#biblio-url">[URL]</a> of an entity) rather than by value (i.e. 
 by means of a description of an entity).</p>
    <p>A common scenario covered by the specification is depicted in Figure 1, which shows, on the dashed lines,
-prefixed by <code>AS</code>, the AS2 element used in the LDN/AS2 payloads to convey the respective entity involved 
+prefixed by <code>AS</code>, the AS2 element used in the LDN+AS2 payloads to convey the respective entity involved 
 in the value-adding network:</p>
    <ul>
     <li data-md>
@@ -1628,16 +1628,16 @@ in the value-adding network:</p>
    <p>From the perspective of LDN:</p>
    <ul>
     <li data-md>
-     <p>An <em>Artifact</em> made available to the network by a <em>Data Node</em> is an LDN Target and therefore has a <a href="https://www.w3.org/TR/ldn/#discovery">discoverable</a> LDN Inbox. The LDN Inbox is used to receive LDN/AS2 notifications that provide the <em>Data Node</em>, acting as an LDN Consumer, with value-adding information pertaining to an <em>Artifact</em>.</p>
+     <p>An <em>Artifact</em> made available to the network by a <em>Data Node</em> is an LDN Target and therefore has a <a href="https://www.w3.org/TR/ldn/#discovery">discoverable</a> LDN Inbox. The LDN Inbox is used to receive LDN+AS2 notifications that provide the <em>Data Node</em>, acting as an LDN Consumer, with value-adding information pertaining to an <em>Artifact</em>.</p>
     <li data-md>
-     <p>A <em>Service Node</em> that provides value-adding services to <em>Artifacts</em> made available to the network is an LDN Target and therefore has a <a href="https://www.w3.org/TR/ldn/#discovery">discoverable</a> LDN Inbox. That LDN Inbox is used to receive LDN/AS2 notifications that provide the <em>Service Node</em>, acting as an LDN Consumer, either with information pertaining to an <em>Artifact</em> or with a request for the provision of a value-adding service for an <em>Artifact</em>.</p>
+     <p>A <em>Service Node</em> that provides value-adding services to <em>Artifacts</em> made available to the network is an LDN Target and therefore has a <a href="https://www.w3.org/TR/ldn/#discovery">discoverable</a> LDN Inbox. That LDN Inbox is used to receive LDN+AS2 notifications that provide the <em>Service Node</em>, acting as an LDN Consumer, either with information pertaining to an <em>Artifact</em> or with a request for the provision of a value-adding service for an <em>Artifact</em>.</p>
    </ul>
-   <p>From the perspective of LDN/AS2:</p>
+   <p>From the perspective of AS2:</p>
    <ul>
     <li data-md>
-     <p>When an LDN/AS2 notification is sent from a <em>Data Node</em>, the <em>Artifact</em> to which the notification pertains is the AS2 object, the <em>Agent</em> that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.</p>
+     <p>When an LDN+AS2 notification is sent from a <em>Data Node</em>, the <em>Artifact</em> to which the notification pertains is the AS2 object, the <em>Agent</em> that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.</p>
     <li data-md>
-     <p>When an LDN/AS2 notification is sent from a <em>Service Node</em>, the <em>Service Result</em> is the AS2 object, the <em>Agent</em> that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.</p>
+     <p>When an LDN+AS2 notification is sent from a <em>Service Node</em>, the <em>Service Result</em> is the AS2 object, the <em>Agent</em> that sends the notification is the AS2 actor, and the Agent to which the notification is addressed is the AS2 target.</p>
    </ul>
    <h2 class="heading settled" data-level="2" id="conformance"><span class="secno">2. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
    <p>Conformance requirements are expressed with a combination of descriptive assertions and RFC 2119 terminology.
@@ -1668,14 +1668,14 @@ and notes. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a></p>
       <td>http://schema.org/ 
    </table>
    <p>When in the textual parts of this document a namespace prefix is used, it should be
-interpreted with the bindings as stated above. In our examples LDN/AS2 payloads we use JSON-LD as 
+interpreted with the bindings as stated above. In our examples LDN+AS2 payloads we use JSON-LD as 
 syntax. In our JSON-LD examples we don’t explicity write the prefixes. The <code>@context</code> element in JSON-LD defines a mapping from terms to <a data-link-type="biblio" href="#biblio-uri">[URI]</a>-s. We refer to the <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> specification 
 for more information about this more concise way of notation.</p>
    <h2 class="heading settled" data-level="4" id="NetworkEntities"><span class="secno">4. </span><span class="content">Network entities</span><a class="self-link" href="#NetworkEntities"></a></h2>
    <p>This section clarifies the terminology that was intuitively introduced in the introduction.</p>
    <h3 class="heading settled" data-level="4.1" id="Agent"><span class="secno">4.1. </span><span class="content">Agent</span><a class="self-link" href="#Agent"></a></h3>
    <p>An <em>Agent</em> is an active participant in the network: an Agent performs actions, can be identified
-or addressed with a <a data-link-type="biblio" href="#biblio-uri">[URI]</a>, and can send or receive LDN/AS2 notifications. An <em>Agent</em> can be 
+or addressed with a <a data-link-type="biblio" href="#biblio-uri">[URI]</a>, and can send or receive LDN+AS2 notifications. An <em>Agent</em> can be 
 human or machine, individual or organization, and operate on behalf of a <em>Data Node</em> or a <em>Service Node</em>.</p>
    <h3 class="heading settled" data-level="4.2" id="Artifact"><span class="secno">4.2. </span><span class="content">Artifact</span><a class="self-link" href="#Artifact"></a></h3>
    <p>An <em>Artifact</em> is a Web resource identified by a <a data-link-type="biblio" href="#biblio-url">[URL]</a> that is made available to the network by
@@ -1685,19 +1685,19 @@ scope of this specification and depends on the implementing community.</p>
    <h3 class="heading settled" data-level="4.3" id="DataNode"><span class="secno">4.3. </span><span class="content">Data Node</span><a class="self-link" href="#DataNode"></a></h3>
    <p>A <em>Data Node</em> is a network node that makes <em>Artifacts</em> available to the network and provides
 one or more LDN Inboxes via which <em>Agents</em> that operate on behalf of the <em>Data Node</em> can be 
-reached. These LDN Inboxes are set up to receive LDN/AS2 notifications pertaining to the <em>Artifacts</em> that are made available to the network by the <em>Data Node</em>.</p>
+reached. These LDN Inboxes are set up to receive LDN+AS2 notifications pertaining to the <em>Artifacts</em> that are made available to the network by the <em>Data Node</em>.</p>
    <h3 class="heading settled" data-level="4.4" id="ServiceNode"><span class="secno">4.4. </span><span class="content">Service Node</span><a class="self-link" href="#ServiceNode"></a></h3>
    <p>A <em>Service Node</em> is a network node that provides value-added services for <em>Artifacts</em> hosted
 by <em>Data Nodes</em> and provides one or more LDN Inboxes via which <em>Agents</em> that operate on behalf 
-of the <em>Service Node</em> can be reached. These LDN Inboxes are set up to receive LDN/AS2 
+of the <em>Service Node</em> can be reached. These LDN Inboxes are set up to receive LDN+AS2 
 notifications pertaining to <em>Artifacts</em> that are made available to the network by <em>Data Nodes</em>.</p>
    <h3 class="heading settled" data-level="4.5" id="ServiceResult"><span class="secno">4.5. </span><span class="content">Service Result</span><a class="self-link" href="#ServiceResult"></a></h3>
    <p>A <em>Service Result</em> is the outcome of the provision of a value-added service by a <em>Service Node</em> for an <em>Artifact</em> that is made available to the network by a <em>Data Node</em>. A <em>Service Result</em> can be a Web resource identified by a <a data-link-type="biblio" href="#biblio-url">[URL]</a> or information that is provided inline in an 
-LDN/AS2 notification.</p>
+LDN+AS2 notification.</p>
    <p>A <em>Service Result</em> that is a Web resource identified by a <a data-link-type="biblio" href="#biblio-url">[URL]</a> can itself become an <em>Artifact</em> when it is made available to the network by a <em>Data Node</em> that, for example, is associated with 
 the <em>Service Node</em> that generated the <em>Service Result</em>. This makes a <em>Service Result</em> available as 
 a new <em>Artifact</em> for which new value-added services can be provided.</p>
-   <h2 class="heading settled" data-level="5" id="Activities"><span class="secno">5. </span><span class="content">Properties in LDN/AS2 Notifications</span><a class="self-link" href="#Activities"></a></h2>
+   <h2 class="heading settled" data-level="5" id="Activities"><span class="secno">5. </span><span class="content">Properties in LDN+AS2 Notifications</span><a class="self-link" href="#Activities"></a></h2>
    <p>In a value-adding network, LDN notifications are sent from one <em>Agent</em> to another <em>Agent</em>. Notification
 payloads are expressed using the ActivityStreams 2.0 vocabulary and SHOULD use <a data-link-type="biblio" href="#biblio-json-ld">[JSON-LD]</a> as default 
 syntax, but other RDF syntaxes MAY be used. Each notification describes an <a href="https://www.w3.org/TR/activitystreams-core/#activities">AS2 Activity</a> that involves 
@@ -1706,21 +1706,21 @@ either an <em>Artifact</em>, a <em>Service Result</em> pertaining to an <em>Arti
 provides details on their content: the core JSON-LD id and type properties and the AS2 object, origin, 
 target, actor, context, inReplyTo properties.</p>
    <h3 class="heading settled" data-level="5.1" id="ActivityId"><span class="secno">5.1. </span><span class="content">JSON-LD id</span><a class="self-link" href="#ActivityId"></a></h3>
-   <p>An LDN/AS2 notification MUST specify an identifier for the activity, expressed in JSON-LD as <code>@id</code> or shortened as <code>id</code>,  and its value MUST be a valid <a data-link-type="biblio" href="#biblio-uri">[URI]</a>. In case this <a data-link-type="biblio" href="#biblio-uri">[URI]</a> is a <a data-link-type="biblio" href="#biblio-url">[URL]</a>, 
+   <p>An LDN+AS2 notification MUST specify an identifier for the activity, expressed in JSON-LD as <code>@id</code> or shortened as <code>id</code>,  and its value MUST be a valid <a data-link-type="biblio" href="#biblio-uri">[URI]</a>. In case this <a data-link-type="biblio" href="#biblio-uri">[URI]</a> is a <a data-link-type="biblio" href="#biblio-url">[URL]</a>, 
 it MUST be dereferencable and return a representation of the notification itself. When referring to an 
 activity, its activity identifier MUST be used. Nodes in the network MUST NOT edit or remove the activity 
-identifier when processing LDN/AS2 notifications.</p>
-   <p>Note that the activity identifier is distinct from the notification identifier, which is the <a data-link-type="biblio" href="#biblio-url">[URL]</a> minted by the LDN Receiver when the LDN/AS2 notification that describes the activity is received in 
+identifier when processing LDN+AS2 notifications.</p>
+   <p>Note that the activity identifier is distinct from the notification identifier, which is the <a data-link-type="biblio" href="#biblio-url">[URL]</a> minted by the LDN Receiver when the LDN+AS2 notification that describes the activity is received in 
 its LDN Inbox. An LDN Receiver may choose to reflect components of the activity identifier in the 
 notification identifier it mints but, in case this happens, network nodes can not infer a relationship 
 between the activity identifier and the notification identifier on this basis.</p>
    <p>To establish robust communication on the network, activities have to be at least uniquely identifiable
 within the scope of the network. Therefore, an identifier of any kind used MUST be a valid <a data-link-type="biblio" href="#biblio-uri">[URI]</a>.</p>
-   <div class="example" id="example-db791ca8">
-    <a class="self-link" href="#example-db791ca8"></a> Alice notifies Bob about the creation of a new Artifact. In the LDN/AS2 payload: 
+   <div class="example" id="example-5875537b">
+    <a class="self-link" href="#example-5875537b"></a> Alice notifies Bob about the creation of a new Artifact. In the LDN+AS2 payload: 
     <ul>
      <li data-md>
-      <p>The activity identifier is <code>https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65</code>. Since the activity identifier is a <a data-link-type="biblio" href="#biblio-url">[URL]</a>, it can be dereferenced to yield the LDN/AS2 notification that Alice sent to Bob.</p>
+      <p>The activity identifier is <code>https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65</code>. Since the activity identifier is a <a data-link-type="biblio" href="#biblio-url">[URL]</a>, it can be dereferenced to yield the LDN+AS2 notification that Alice sent to Bob.</p>
      <li data-md>
       <p>Alice is the <em>Agent</em> acting on behalf of a <em>Data Node</em> that has made her <em>Artifact</em> <code>https://acme.org/artifacts/alice/five_steps_to_success.html</code> available.</p>
      <li data-md>
@@ -1756,7 +1756,7 @@ within the scope of the network. Therefore, an identifier of any kind used MUST 
 <c- p>}</c-></pre>
    </div>
    <h3 class="heading settled" data-level="5.2" id="ActivityType"><span class="secno">5.2. </span><span class="content">JSON-LD type</span><a class="self-link" href="#ActivityType"></a></h3>
-   <p>An LDN/AS2 notification MUST specify an activity type, expressed in JSON-LD as <code>@type</code> or shortened
+   <p>An LDN+AS2 notification MUST specify an activity type, expressed in JSON-LD as <code>@type</code> or shortened
 as <code>type</code>,  and its value MUST be the type of AS2 Activity that it describes. Only the subset of <a href="https://www.w3.org/TR/activitystreams-core/#activities">AS2 Activity</a> Types shown here are supported:</p>
    <ul>
     <li data-md>
@@ -1788,8 +1788,8 @@ as <code>type</code>,  and its value MUST be the type of AS2 Activity that it de
    </ul>
    <p>In addition to these AS2 Activity Types, types (<a data-link-type="biblio" href="#biblio-uri">[URI]</a>s) originating from vocabularies chosen by an
 application domain MAY be specified.</p>
-   <div class="example" id="example-8dd29492">
-    <a class="self-link" href="#example-8dd29492"></a> Bob announces that he endorses the publication of Alice by sharing a review. In the LDN/AS2 notification 
+   <div class="example" id="example-e615c727">
+    <a class="self-link" href="#example-e615c727"></a> Bob announces that he endorses the publication of Alice by sharing a review. In the LDN+AS2 notification 
 payload: 
     <ul>
      <li data-md>
@@ -1835,7 +1835,7 @@ payload:
 <c- p>}</c-></pre>
    </div>
    <h3 class="heading settled" data-level="5.3" id="ActivityObject"><span class="secno">5.3. </span><span class="content">AS2 object</span><a class="self-link" href="#ActivityObject"></a></h3>
-   <p>An LDN/AS2 notification MUST specify an AS2 object, expressed by means of the <code>as:object</code> property.
+   <p>An LDN+AS2 notification MUST specify an AS2 object, expressed by means of the <code>as:object</code> property.
 Depending on the activity type, the AS2 object can refer to:</p>
    <ul>
     <li data-md>
@@ -1914,7 +1914,7 @@ pertaining to the <em>Artifact</em> MAY also be provided inline as part of the v
 <c- p>}</c-></pre>
    </div>
    <h3 class="heading settled" data-level="5.4" id="ActivityAddressing"><span class="secno">5.4. </span><span class="content">AS2 actor, AS2 origin, and AS2 target</span><a class="self-link" href="#ActivityAddressing"></a></h3>
-   <p>An LDN/AS2 notification:</p>
+   <p>An LDN+AS2 notification:</p>
    <ul>
     <li data-md>
      <p>MUST specify the <em>Agent</em> that sends the notification, expressed by means of the as:actor property and its value MUST be a <a data-link-type="biblio" href="#biblio-url">[URL]</a> that identifies the <em>Agent</em>;</p>
@@ -1945,7 +1945,7 @@ from vocabularies chosen by an application domain MAY be specified.</p>
    </div>
    <h3 class="heading settled" data-level="5.5" id="ActivityContext"><span class="secno">5.5. </span><span class="content">AS2 context</span><a class="self-link" href="#ActivityContext"></a></h3>
    <p>When sending a notification to a <em>Data Node</em> that pertains to one of the <em>Artifacts</em> it makes
-available, the LDN/AS2 notification SHOULD include the <code>as:context</code> property and, when included, 
+available, the LDN+AS2 notification SHOULD include the <code>as:context</code> property and, when included, 
 MUST at least convey the <em>Artifact</em>’s <a data-link-type="biblio" href="#biblio-url">[URL]</a> as its value. This specification accords no specific 
 meaning to the use of <code>as:context</code> for notifications sent to a <em>Service Node</em>.</p>
    <p>For <code>as:context</code>, one of the core <a href="https://www.w3.org/TR/activitystreams-core/#object-types">Object Types</a> MAY be expressed. In addition
@@ -1957,14 +1957,14 @@ Alice’s <em>Artifact</em>. The <a data-link-type="biblio" href="#biblio-url">[
 the <em>Artifact</em> is provided using the <code>as:object</code> property whereas as:context is not used because the 
 announcement does not pertain to an <em>Artifact</em> that is made available at the recipient’s end. </div>
    <h3 class="heading settled" data-level="5.6" id="ActivityInReplyTo"><span class="secno">5.6. </span><span class="content">AS2 inReplyTo</span><a class="self-link" href="#ActivityInReplyTo"></a></h3>
-   <p>An LDN/AS2 notification that is sent in response to a previously received notification, MUST
+   <p>An LDN+AS2 notification that is sent in response to a previously received notification, MUST
 include the <code>as:inReplyTo</code> property,  and its value MUST be the activity identifier 
 (value of the id property) of the previous notification. For such a notification, the <code>as:object</code> property also reflects the activity identifier of the previous notification but can include
 additional information, see <a href="#ActivityObject">§ 5.3 AS2 object</a>.</p>
    <p>Examples are provided in <a href="#RequestResponsePatternDNSNAnnounce">§ 6.2.2 Service Node provides Service Result</a> and <a href="#RequestResponsePatternSNSNAnnounce">§ 6.3.2 Service Node provides Service Result</a>.</p>
    <h2 class="heading settled" data-level="6" id="NetworkCommunicationPatterns"><span class="secno">6. </span><span class="content">Network communication patterns</span><a class="self-link" href="#NetworkCommunicationPatterns"></a></h2>
    <p>In a value-adding network, <em>Nodes</em>, in particular the <em>Agents</em> operating on behalf of <em>Nodes</em>,
-communicate by sending LDN/AS2 notifications to each other. These notifications are delivered 
+communicate by sending LDN+AS2 notifications to each other. These notifications are delivered 
 to LDN Inboxes that are made available by <em>Data Nodes</em> and <em>Service Nodes</em> for the benefit of <em>Agents</em> that manage <em>Artifacts</em> and service provision, respectively.</p>
    <p>Depending on the type of interaction an <em>Agent</em> is a sender or receiver of messages. This
 specification describes the following communication patterns between the <em>Nodes</em> in the network: <strong>one-way communication</strong> and <strong>request-response</strong> communication patterns. They are detailed in 
@@ -2084,7 +2084,7 @@ pertaining to an <em>Artifact</em> to another <em>Agent</em> in the network. The
     <li data-md>
      <p>The <code>as:object</code> property provides information regarding the <em>Artifact</em> to which the activity pertains.</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 1: One-way Data Node to Service Node requirements.</caption>
@@ -2261,7 +2261,7 @@ to a Data Node.</em></p>
     <li data-md>
      <p>The <code>as:context</code> property conveys information regarding the <em>Artifact</em> to which the <em>Service Result</em> pertains.</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 2: One-way Service Node to Data Node requirements.</caption>
@@ -2482,7 +2482,7 @@ receiving <em>Service Node</em>. The <em>Service Result</em> is the outcome of t
     <li data-md>
      <p>The <code>as:context</code> property conveys information regarding the <em>Artifact</em> to which the <em>Service Result</em> pertains.</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 3: One-way Service Node to Service Node requirements.</caption>
@@ -2655,7 +2655,7 @@ on behalf of a <em>Data Node</em> sends a notification to an <em>Agent</em> oper
     <li data-md>
      <p>The <code>as:object</code> property provides information about the <em>Artifact</em> for which the service is requested.</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 4: Request-response Data Node requests service requirements.</caption>
@@ -2840,7 +2840,7 @@ at the end of a <em>Data Node</em> conveying the <em>Service Result</em> for a s
     <li data-md>
      <p>The <code>as:inReplyTo</code> property conveys the activity identifier (value of the <code>id</code> property) of the service request that was sent by means of a notification with the <code>as:Offer</code> activity type (see section <a href="#RequestResponsePatternDNSNOffer">§ 6.2.1 Data Node requests service</a>).</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 5: Request-response Service Node provides Service Result requirements.</caption>
@@ -3027,7 +3027,7 @@ whether or not the service will actually be provided.</p>
     <li data-md>
      <p>The <code>as:inReplyTo</code> property conveys the activity identifier (value of the <code>id</code> property) of the service request that was sent by means of a notification with the <code>as:Offer</code> activity type (see <a href="#RequestResponsePatternDNSNOffer">§ 6.2.1 Data Node requests service</a>).</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 6: Request-response Service Node acknowledges a service request requirements.</caption>
@@ -3258,7 +3258,7 @@ service for an <em>Artifact</em> that is made available by the <em>Data Node</em
     <li data-md>
      <p>The <code>as:object</code> property refers to the prior request for service that was sent by means of a notification with the <code>as:Offer</code> activity type (see <a href="#RequestResponsePatternDNSNOffer">§ 6.2.1 Data Node requests service</a>). It conveys at least its activity identifier (value of the <code>id</code> property).</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 7: Request-response Service Node cancels prior service request requirements.</caption>
@@ -3531,7 +3531,7 @@ asking for the provision of a service for a <em>Service Result</em> generated by
     <li data-md>
      <p>The <code>as:object</code> property provides information about the <em>Service Result</em> generated by <em>Service Node</em> A for which the service is requested from <em>Service Node</em> B.</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 8: Request-response Service Node request service requirements.</caption>
@@ -3793,7 +3793,7 @@ response to a request from <em>Service Node</em> A.</p>
     <li data-md>
      <p>The <code>as:inReplyTo</code> property conveys the activity identifier (value of the <code>id</code> property) of the service request that was sent by means of a notification with the <code>as:Offer</code> activity type (see section <a href="#RequestResponsePatternSNSNOffer">§ 6.3.1 Service Node requests service</a>).</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 9: Request-response Service Node provides Service Result requirements.</caption>
@@ -4038,7 +4038,7 @@ and to indicate whether or not the service will actually be provided.</p>
     <li data-md>
      <p>The <code>as:inReplyTo</code> property conveys the activity identifier (value of the <code>id</code> property) of the service request that was sent by means of a notification with the <code>as:Offer</code> activity type (see <a href="#RequestResponsePatternSNSNOffer">§ 6.3.1 Service Node requests service</a>).</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 10: Request-response Service Node acknowledges a service request requirements.</caption>
@@ -4367,7 +4367,7 @@ for a <em>Service Result</em> that was generated by the <em>Data Node</em> A.</p
     <li data-md>
      <p>The <code>as:object</code> property refers to the prior request for service that was sent by means of a notification with the <code>as:Offer</code> activity type (see <a href="#RequestResponsePatternSNSNOffer">§ 6.3.1 Service Node requests service</a>). It conveys at least its activity identifier (value of the <code>id</code> property).</p>
     <li data-md>
-     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN/AS2 Notifications</a>.</p>
+     <p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="#Activities">§ 5 Properties in LDN+AS2 Notifications</a>.</p>
    </ul>
    <table>
     <caption>Table 11: Request-response Service Node cancels prior service request requirements.</caption>
@@ -4463,9 +4463,9 @@ Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Exampl
    </div>
    <h2 class="heading settled" data-level="7" id="Discovery"><span class="secno">7. </span><span class="content">Discovery of LDN Inboxes</span><a class="self-link" href="#Discovery"></a></h2>
    <p class="issue" id="issue-b7b1e314"><a class="self-link" href="#issue-b7b1e314"></a> TODO</p>
-   <h2 class="heading settled" data-level="8" id="Serialalization"><span class="secno">8. </span><span class="content">Serialization of LDN/AS2 notifications</span><a class="self-link" href="#Serialalization"></a></h2>
+   <h2 class="heading settled" data-level="8" id="Serialalization"><span class="secno">8. </span><span class="content">Serialization of LDN+AS2 notifications</span><a class="self-link" href="#Serialalization"></a></h2>
    <p class="issue" id="issue-b7b1e314①"><a class="self-link" href="#issue-b7b1e314①"></a> TODO</p>
-   <h2 class="heading settled" data-level="9" id="Validation"><span class="secno">9. </span><span class="content">Validation of LDN/AS2 notifications</span><a class="self-link" href="#Validation"></a></h2>
+   <h2 class="heading settled" data-level="9" id="Validation"><span class="secno">9. </span><span class="content">Validation of LDN+AS2 notifications</span><a class="self-link" href="#Validation"></a></h2>
    <p class="issue" id="issue-b7b1e314②"><a class="self-link" href="#issue-b7b1e314②"></a> TODO</p>
    <h2 class="heading settled" data-level="10" id="ServiceDescription"><span class="secno">10. </span><span class="content">Service description of LDN Targets</span><a class="self-link" href="#ServiceDescription"></a></h2>
    <p class="issue" id="issue-b7b1e314③"><a class="self-link" href="#issue-b7b1e314③"></a> TODO</p>
