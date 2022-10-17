@@ -5,8 +5,6 @@
    ], 
    "id": "urn:uuid:9CEE5D10-E280-4DC8-909A-A5BF0F7EADF0",
    "type": ["Accept","schema:ArriveAction"],
-   "published": "2022-06-13T00:00:01Z",
-   "summary": "Data Archive XYZ ingest process accepts submission 1234 from Alice",
    "actor": {
       "id": "https://data.archive.xyz.net/process/ingest",
       "inbox": "https://data.archive.xyz.net/inbox/",

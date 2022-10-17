@@ -2,8 +2,6 @@
     "@context": "https://www.w3.org/ns/activitystreams",
     "id": "urn:uuid:4FAF311A-2459-4CEF-A74C-29CCE0552672",
     "type": "Offer",
-    "published": "2023-01-20T13:55:00Z",
-    "summary": "Springfield library requests indexation of data/set-1234",
     "actor": {
       "id": "https://springfield.library.net/about#us",
       "inbox": "https://springfield.library.net/inbox/",

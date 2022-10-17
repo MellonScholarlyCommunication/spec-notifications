@@ -2,8 +2,6 @@
     "@context": "https://www.w3.org/ns/activitystreams",
     "id": "urn:uuid:778A422E-7E98-4D48-9AB7-00A9DCF65705",
     "type": "Announce",
-    "published": "2023-01-29T18:59:23Z",
-    "summary": "Riverside Data Service included two Springfield library images in their Summer in Springfield dataset",
     "actor": {
       "id": "https://riverside.data.net/about#us",
       "inbox": "https://riverside.data.net/inbox/",

@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://www.eventnotifications.net" rel="canonical">
-  <meta content="5bbab41571b28946a7305a8592ef9849c2a38d8c" name="document-revision">
+  <meta content="e9bd30ce447b1d83b366f127a8d1ff6c61b3c510" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -1464,7 +1464,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Event Notifications in Value-Adding Networks</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2022-09-23">23 September 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2022-10-17">17 October 2022</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1488,7 +1488,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 23 September 2022,
+In addition, as of 17 October 2022,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1716,8 +1716,8 @@ notification identifier it mints but, in case this happens, network nodes can no
 between the activity identifier and the notification identifier on this basis.</p>
    <p>To establish robust communication on the network, activities have to be at least uniquely identifiable
 within the scope of the network. Therefore, an identifier of any kind used MUST be a valid <a data-link-type="biblio" href="#biblio-uri">[URI]</a>.</p>
-   <div class="example" id="example-5875537b">
-    <a class="self-link" href="#example-5875537b"></a> Alice notifies Bob about the creation of a new Artifact. In the LDN+AS2 payload: 
+   <div class="example" id="example-f0dd1979">
+    <a class="self-link" href="#example-f0dd1979"></a> Alice notifies Bob about the creation of a new Artifact. In the LDN+AS2 payload: 
     <ul>
      <li data-md>
       <p>The activity identifier is <code>https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65</code>. Since the activity identifier is a <a data-link-type="biblio" href="#biblio-url">[URL]</a>, it can be dereferenced to yield the LDN+AS2 notification that Alice sent to Bob.</p>
@@ -1730,8 +1730,6 @@ within the scope of the network. Therefore, an identifier of any kind used MUST 
    <c- f>"@context"</c-><c- p>:</c-> <c- u>"https://www.w3.org/ns/activitystreams"</c-><c- p>,</c->
    <c- f>"id"</c-><c- p>:</c-> <c- u>"https://acme.org/events/alice/0F402B08-F676-40EE-9D4B-480B3F985B65"</c-><c- p>,</c->
    <c- f>"type"</c-><c- p>:</c-> <c- u>"Create"</c-><c- p>,</c->
-   <c- f>"published"</c-><c- p>:</c-> <c- u>"2022-06-12T12:12:12Z"</c-><c- p>,</c->
-   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Alice created an artifact"</c-><c- p>,</c->
    <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
       <c- f>"id"</c-><c- p>:</c-> <c- u>"https://orcid.org/0000-0007-01219-312199"</c-><c- p>,</c->
       <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://acme.org/inbox/alice"</c-><c- p>,</c->
@@ -1788,8 +1786,8 @@ as <code>type</code>,  and its value MUST be the type of AS2 Activity that it de
    </ul>
    <p>In addition to these AS2 Activity Types, types (<a data-link-type="biblio" href="#biblio-uri">[URI]</a>s) originating from vocabularies chosen by an
 application domain MAY be specified.</p>
-   <div class="example" id="example-e615c727">
-    <a class="self-link" href="#example-e615c727"></a> Bob announces that he endorses the publication of Alice by sharing a review. In the LDN+AS2 notification 
+   <div class="example" id="example-3a0678fa">
+    <a class="self-link" href="#example-3a0678fa"></a> Bob announces that he endorses the publication of Alice by sharing a review. In the LDN+AS2 notification 
 payload: 
     <ul>
      <li data-md>
@@ -1808,8 +1806,6 @@ payload:
    <c- p>],</c-> 
    <c- f>"id"</c-><c- p>:</c-> <c- u>"urn:uuid:42D2F3DC-0770-4F47-BF37-4F01E0382E32"</c-><c- p>,</c->
    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Announce"</c-> <c- p>,</c-> <c- u>"schema:EndorseAction"</c-> <c- p>],</c->
-   <c- f>"published"</c-><c- p>:</c-> <c- u>"2022-08-01T13:49:01Z"</c-><c- p>,</c->
-   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Bob endorses Alice's artifact"</c-><c- p>,</c->
    <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
       <c- f>"id"</c-><c- p>:</c-> <c- u>"https://orcid.org/0000-0109-01931-191019"</c-><c- p>,</c->
       <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://infinity.science.com/inbox/bob"</c-><c- p>,</c->
@@ -1867,8 +1863,8 @@ pertaining to the <em>Artifact</em> MAY also be provided inline as part of the v
    </ul>
    <div class="example" id="example-1361c108"><a class="self-link" href="#example-1361c108"></a> In EXAMPLE 1, Alice’s <em>Artifact</em> is the AS2 object and its <a data-link-type="biblio" href="#biblio-url">[URL]</a> <code>https://acme.org/artifacts/alice/five_steps_to_success.html</code> is provided as the value of the object property. </div>
    <div class="example" id="example-07e002a4"><a class="self-link" href="#example-07e002a4"></a> In EXAMPLE 2, Bob’s <em>Service Result</em> is the AS2 object and its <a data-link-type="biblio" href="#biblio-url">[URL]</a> <code>https://infinity.science.com/artifacts/bob/review_123.html</code> is provided as the value of the object property. </div>
-   <div class="example" id="example-939a9ccf">
-    <a class="self-link" href="#example-939a9ccf"></a> Bob announces a linkage between Alice’s Artifact and his review thereof: 
+   <div class="example" id="example-23528073">
+    <a class="self-link" href="#example-23528073"></a> Bob announces a linkage between Alice’s Artifact and his review thereof: 
     <ul>
      <li data-md>
       <p>The <em>Service Result</em> is a relationship of type <code>http://purl.org/spar/cito/reviews</code> between Bob’s review and Alice’s <em>Artifact</em>.</p>
@@ -1884,8 +1880,6 @@ pertaining to the <em>Artifact</em> MAY also be provided inline as part of the v
    <c- p>],</c-> 
    <c- f>"id"</c-><c- p>:</c-> <c- u>"urn:uuid:42D2F3DC-0770-4F47-BF37-4F01E0382E32"</c-><c- p>,</c->
    <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Announce"</c-> <c- p>,</c-> <c- u>"schema:EndorseAction"</c-> <c- p>],</c->
-   <c- f>"published"</c-><c- p>:</c-> <c- u>"2022-08-01T13:49:01Z"</c-><c- p>,</c->
-   <c- f>"summary"</c-><c- p>:</c-> <c- u>"Bob endorses Alice's artifact"</c-><c- p>,</c->
    <c- f>"actor"</c-><c- p>:</c-> <c- p>{</c->
       <c- f>"id"</c-><c- p>:</c-> <c- u>"https://orcid.org/0000-0109-01931-191019"</c-><c- p>,</c->
       <c- f>"inbox"</c-><c- p>:</c-> <c- u>"https://infinity.science.com/inbox/bob"</c-><c- p>,</c->
@@ -2674,8 +2668,8 @@ on behalf of a <em>Data Node</em> sends a notification to an <em>Agent</em> oper
       <th>Not used
       <td><strong>as:context</strong> , <strong>as:inReplyTo</strong>
    </table>
-   <div class="example" id="example-b26f256e">
-    <a class="self-link" href="#example-b26f256e"></a> The ACME Research Institute (Data Node) notifies the Data Archive XYZ 
+   <div class="example" id="example-2f1b2428">
+    <a class="self-link" href="#example-2f1b2428"></a> The ACME Research Institute (Data Node) notifies the Data Archive XYZ 
 (Service Node) in a request-response pattern about the Artifact  
 http://acme.org/artifacts/alice/data-set-2022-01-19.zip on ACME’s system they want
 to Offer for archivation. 
@@ -2699,7 +2693,7 @@ to Offer for archivation.
     <c- p>},</c->
     <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
        <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-       <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+       <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
     <c- p>},</c->
     <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
        <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
@@ -3046,8 +3040,8 @@ whether or not the service will actually be provided.</p>
       <th>Optional 
       <td><strong>as:origin</strong>, <strong>as:target</strong>
    </table>
-   <div class="example" id="example-c7a19476">
-    <a class="self-link" href="#example-c7a19476"></a> The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+   <div class="example" id="example-9205b62f">
+    <a class="self-link" href="#example-9205b62f"></a> The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it accepts the offer ACME sent in a
 previous activity notification. 
 <pre class="include-code highlight" data-code-show path="examples/example_rr_dn_sn_acknowledge.jsonld"><c- p>{</c-> 
@@ -3086,7 +3080,7 @@ previous activity notification.
         <c- p>},</c->
         <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
            <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-           <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+           <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
         <c- p>},</c->
         <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
            <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
@@ -3103,8 +3097,8 @@ previous activity notification.
     <c- p>}</c->
   <c- p>}</c-></pre>
    </div>
-   <div class="example" id="example-227b4831">
-    <a class="self-link" href="#example-227b4831"></a> The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+   <div class="example" id="example-9940e6ac">
+    <a class="self-link" href="#example-9940e6ac"></a> The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it rejects the offer ACME sent in a previous 
 activity notification. 
 <pre class="include-code highlight" data-code-show path="examples/example_rr_dn_sn_response_reject.jsonld"><c- p>{</c-> 
@@ -3143,7 +3137,7 @@ activity notification.
         <c- p>},</c->
         <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
            <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-           <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+           <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
         <c- p>},</c->
         <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
            <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
@@ -3277,8 +3271,8 @@ service for an <em>Artifact</em> that is made available by the <em>Data Node</em
       <th>Not used
       <td><strong>as:context</strong>, <strong>as:inReplyTo</strong>
    </table>
-   <div class="example" id="example-80dd762e">
-    <a class="self-link" href="#example-80dd762e"></a> The ACME Research Institute (Data Node) sends a cancelation to 
+   <div class="example" id="example-d4d2a649">
+    <a class="self-link" href="#example-d4d2a649"></a> The ACME Research Institute (Data Node) sends a cancelation to 
 Data Archive XYZ (Service Node) of the Offer that was sent in Example 12. 
 <pre class="include-code highlight" data-code-show path="examples/example_rr_dn_sn_cancel.jsonld"><c- p>{</c-> 
     <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c-> 
@@ -3314,7 +3308,7 @@ Data Archive XYZ (Service Node) of the Offer that was sent in Example 12.
         <c- p>},</c->
         <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
             <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-            <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+            <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
         <c- p>},</c->
         <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
             <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
@@ -3550,8 +3544,8 @@ asking for the provision of a service for a <em>Service Result</em> generated by
       <th>Not used
       <td><strong>as:context</strong>, <strong>as:inReplyTo</strong>
    </table>
-   <div class="example" id="example-2ef49ecb">
-    <a class="self-link" href="#example-2ef49ecb"></a> The Data Archive XYZ (Service Node A) received an Offer from ACME Research 
+   <div class="example" id="example-0b83b7e6">
+    <a class="self-link" href="#example-0b83b7e6"></a> The Data Archive XYZ (Service Node A) received an Offer from ACME Research 
 Institute (Data Node). Service Node A decides to delegate the offer to their Australian
 office Data Archive XYZ Australia (Service Node B). 
 <pre class="include-code highlight" data-code-show path="examples/example_rr_sn_sn_request.jsonld"><c- p>{</c-> 
@@ -3588,7 +3582,7 @@ office Data Archive XYZ Australia (Service Node B).
          <c- p>},</c->
          <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
             <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-            <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+            <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
          <c- p>},</c->
          <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
             <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
@@ -4057,8 +4051,8 @@ and to indicate whether or not the service will actually be provided.</p>
       <th>Optional 
       <td><strong>as:origin</strong>, <strong>as:target</strong>
    </table>
-   <div class="example" id="example-16fd5799">
-    <a class="self-link" href="#example-16fd5799"></a> Data Archive XYZ Australia (Service Node B) sends an Accept to 
+   <div class="example" id="example-19deefe5">
+    <a class="self-link" href="#example-19deefe5"></a> Data Archive XYZ Australia (Service Node B) sends an Accept to 
 Data Archive XYZ (Service Node A) of the Offer that was sent in Example 17. 
 <pre class="include-code highlight" data-code-show path="examples/example_rr_sn_sn_acknowledge.jsonld"><c- p>{</c-> 
     <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c-> 
@@ -4110,7 +4104,7 @@ Data Archive XYZ (Service Node A) of the Offer that was sent in Example 17.
              <c- p>},</c->
              <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
                 <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-                <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+                <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
              <c- p>},</c->
              <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
                 <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
@@ -4134,8 +4128,8 @@ Data Archive XYZ (Service Node A) of the Offer that was sent in Example 17.
     <c- p>}</c->
   <c- p>}</c-></pre>
    </div>
-   <div class="example" id="example-27b51e91">
-    <a class="self-link" href="#example-27b51e91"></a> Data Archive XYZ Australia (Service Node B) notifies the Data Archive XYZ (Service Node A) 
+   <div class="example" id="example-519887e2">
+    <a class="self-link" href="#example-519887e2"></a> Data Archive XYZ Australia (Service Node B) notifies the Data Archive XYZ (Service Node A) 
 in a request-response pattern that it rejects the offer sent in a previous activity notification. 
 <pre class="include-code highlight" data-code-show path="examples/example_rr_sn_sn_response_reject.jsonld"><c- p>{</c-> 
     <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c-> 
@@ -4187,7 +4181,7 @@ in a request-response pattern that it rejects the offer sent in a previous activ
              <c- p>},</c->
              <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
                 <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-                <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+                <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
              <c- p>},</c->
              <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
                 <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
@@ -4386,8 +4380,8 @@ for a <em>Service Result</em> that was generated by the <em>Data Node</em> A.</p
       <th>Not used
       <td><strong>as:context</strong>, <strong>as:inReplyTo</strong>
    </table>
-   <div class="example" id="example-667899a9">
-    <a class="self-link" href="#example-667899a9"></a> Data Archive XYZ (Service Node A) sends a cancelation to 
+   <div class="example" id="example-ef29d929">
+    <a class="self-link" href="#example-ef29d929"></a> Data Archive XYZ (Service Node A) sends a cancelation to 
 Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Example 17. 
 <pre class="include-code highlight" data-code-show path="examples/example_rr_sn_sn_cancel.jsonld"><c- p>{</c-> 
     <c- f>"@context"</c-><c- p>:</c-> <c- p>[</c-> 
@@ -4437,7 +4431,7 @@ Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Exampl
              <c- p>},</c->
              <c- f>"object"</c-><c- p>:</c-> <c- p>{</c->
                 <c- f>"id"</c-><c- p>:</c-> <c- u>"http://acme.org/artifacts/alice/data-set-2022-01-19.zip"</c-><c- p>,</c->
-                <c- f>"type"</c-><c- p>:</c-> <c- u>"schema:Dataset"</c->
+                <c- f>"type"</c-><c- p>:</c-> <c- p>[</c-> <c- u>"Document"</c-> <c- p>,</c-> <c- u>"schema:Dataset"</c-> <c- p>]</c->
              <c- p>},</c->
              <c- f>"target"</c-><c- p>:</c-> <c- p>{</c->     
                 <c- f>"id"</c-><c- p>:</c-> <c- u>"https://data.archive.xyz.net/"</c-><c- p>,</c->
