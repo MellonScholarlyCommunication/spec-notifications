@@ -2,8 +2,6 @@
     "@context": "https://www.w3.org/ns/activitystreams",
     "id": "urn:uuid:781D5279-A047-432F-ADD1-A88D7D8449CE",
     "type": "Remove",
-    "published": "2023-04-01T12:01:59Z",
-    "summary": "Springfield library removed an image",
     "actor": {
       "id": "https://springfield.library.net/about#us",
       "inbox": "https://springfield.library.net/inbox/",

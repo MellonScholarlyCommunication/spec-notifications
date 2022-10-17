@@ -5,8 +5,6 @@
    ], 
    "id": "urn:uuid:9CEE5D10-E280-4DC8-909A-A5BF0F7EADF0",
    "type": "Accept",
-   "published": "2022-06-13T00:00:01Z",
-   "summary": "Infinity Science accepts submission 1234 from Alice",
    "actor": {
       "id": "https://infinity.science.com/people/Jane#me",
       "inbox": "https://infinity.science.com/people/Jane/inbox/",

@@ -46,7 +46,7 @@
              },
              "object": {
                 "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
-                "type": "schema:Dataset"
+                "type": [ "Document" , "schema:Dataset" ]
              },
              "target": {     
                 "id": "https://data.archive.xyz.net/",

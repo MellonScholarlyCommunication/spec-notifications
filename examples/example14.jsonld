@@ -2,8 +2,6 @@
     "@context": "https://www.w3.org/ns/activitystreams",
     "id": "urn:uuid:AB20397A-549C-40F1-9BB7-D8E4A1F9616B",
     "type": "Accept",
-    "published": "2023-01-20T13:55:00Z",
-    "summary": "ACME accepted your data/set-1234 for indexation",
     "actor": {
       "id": "https://acme.webindex.com/webcrawler#me",
       "inbox": "https://acme.webindex.com/webcrawler/queue",

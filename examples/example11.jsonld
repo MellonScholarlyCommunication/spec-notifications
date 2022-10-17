@@ -2,8 +2,6 @@
    "@context": "https://www.w3.org/ns/activitystreams",
    "id": "urn:uuid:778A422E-7E98-4D48-9AB7-00A9DCF65705",
    "type": "Announce",
-   "published": "2023-01-29T18:59:23Z",
-   "summary": "Springfield library found an image about you",
    "actor": {
       "id": "https://springfield.library.net/about#us",
       "inbox": "https://springfield.library.net/inbox/",
