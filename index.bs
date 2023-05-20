@@ -1134,13 +1134,8 @@ entities in a Value-Adding Network follows the approach specified in the
 Linked Data Notifications [[LDN]] specification. An LDN Sender or LDN Consumer 
 does the following to discover an LDN for one of the aforementioned entities:
 
-- issue an HTTP HEAD or GET request on the URL of the entity: the URL of the 
-LDN Inbox is provided in the HTTP Link header of the response as the URL that is 
-the target of the link with a http://www.w3.org/ns/ldp#inbox relation type.
-- issue an HTTP GET request on the URL of the entity: the URL of the LDN Inbox is 
-provided in an RDF representation in the response as the URL that is 
-the object of a triple that has the entity URL as its subject and 
-http://www.w3.org/ns/ldp#inbox as its predicate. 
+- issue an HTTP HEAD or GET request on the URL of the entity: the URL of the LDN Inbox is provided in the HTTP Link header of the response as the URL that is the target of the link with a http://www.w3.org/ns/ldp#inbox relation type.
+- issue an HTTP GET request on the URL of the entity: the URL of the LDN Inbox is provided in an RDF representation in the response as the URL that is the object of a triple that has the entity URL as its subject and http://www.w3.org/ns/ldp#inbox as its predicate. 
 
 In case an Agent, Data Node, or Service Node is identified by a WebID [[WebID]], 
 the LDN Inbox of the entity can be discovered by means of the WebID Profile 
@@ -1173,14 +1168,8 @@ It is up to each application domain to agree upon the manner in which Data/Servi
 Nodes should convey implementation details, but this information can uniformly be 
 discovered, across application domains, as follows:
 
-- issue an HTTP HEAD or GET request on the URL of the Data/Service Node: the 
-implementation details are available at the URL that is provided in the HTTP Link 
-header of the response, namely the URL that is the target of the link with a 
-https://eventnotifications.net/profile relation type.
-- issue an HTTP GET request on the URL of the Data/Service Node: the implementation 
-details are available at a URL that is provided in an RDF representation 
-in the response, namely the URL that is the object of a triple that has the entity 
-URL as its subject and https://eventnotifications.net/profile as its predicate. 
+- issue an HTTP HEAD or GET request on the URL of the Data/Service Node: the implementation details are available at the URL that is provided in the HTTP Link header of the response, namely the URL that is the target of the link with a https://eventnotifications.net/profile relation type.
+- issue an HTTP GET request on the URL of the Data/Service Node: the implementation details are available at a URL that is provided in an RDF representation in the response, namely the URL that is the object of a triple that has the entity URL as its subject and https://eventnotifications.net/profile as its predicate. 
 
 Serialization of LDN+AS2 notifications {#Serialization}
 ========================================
