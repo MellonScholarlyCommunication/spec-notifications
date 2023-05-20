@@ -1176,10 +1176,60 @@ Serialization of LDN+AS2 notifications {#Serialization}
 
 Issue: TODO
 
-Validation of LDN+AS2 notifications {#Validation}
+LDN Inbox error handling {#ErrorHandling}
 ===================================
 
-Issue: TODO
+The Linked Data Notifications [[LDN]] specification prescribes the nature of HTTP 
+responses for cases when a notification is successfully received in an Inbox. But 
+it also specifies that an Inbox can reject notifications when they violate constraints 
+that are applicable to the Inbox. A constraint to an Inbox can be expressed by a 
+constraint document; the URL of each applicable constraint document can be provided 
+as the target of a link with the `http://www.w3.org/ns/ldp#constrainedBy` link relation
+type that is provided in any HTTP response of the Inbox, in the HTTP Link header 
+and/or the response body. As per [[LDP]], both machine-readable and natural language 
+constraint documents are permitted although the former are preferred because they 
+facilitate better client interaction. 
+
+The following apply regarding constraints on Inboxes provided by Data/Service Nodes:
+
+- A constraint must be expressed by a constraint document that is available at a URL that is discoverable in the manner described above. Both machine-readable and natural language constraint documents can be used. Constraint documents made available at different URLs must express different constraints. 
+- In accordance with [[LDN]], a notification that is POSTed to an Inbox but violates an applicable constraint should be rejected and the response should have an appropriate HTTP 4xx code.
+- Additionally, that response should comply with the [Problem Details for HTTP APIs](https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/) specification and the value for the type of the reported problem (`type` member of the Problem Details JSON Object) should be the URL of the constraint document that was violated.
+
+<div class="example">
+The below example shows the response to POSTing an event notification to the Inbox of a Data/Service Node for a case in which the notification violates a notification payload constraint expressed by the Inbox:
+
+- The HTTP response header shows:
+    - A  `400 Bad Request` HTTP response code indicating that the Inbox rejected the notification. 
+    - Two links in the Link header that point at constraint documents that are accessible at `https://example.org/constraints/shacl1.jsonld` and `https://example.org/constraints/constraint1.html`, respectively. The former is a machine-readable SHACL shape that constraints notification payloads; the latter is a natural language document that expresses a different constraint: “Agents must register at https://example.org/registration/ prior to posting to this Inbox.” Note that links to constraint documents must also be provided when POSTing to the Inbox is successful.
+    - A Content-Type header with the value `application/problem+json`, indicating that the HTTP response body is compliant with the [Problem Details for HTTP APIs](https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/) specification and the value for the type of the reported problem (`type` member of the Problem Details JSON Object).
+- The HTTP response body provides details about the problem that led to the rejection of the notification:
+    - The value of the `type` member is https://example.org/constraints/shacl1.jsonld. That is precisely the URL of one of the constraints expressed by the LDN Inbox, i.e. the [[SHACL]] constraint that expresses payload validation constraints. 
+    - The value of the `status` member is 400, which is a repetition of the HTTP response code available in the HTTP header; it is provided only for the benefit of self-containedness of the response body.
+    - The value of the `title` member indicates, in a manner that is meaningful to a human reader, that the notification payload failed to validate against the [[SHACL]] shape https://example.org/constraints/shacl1.jsonld.
+    - Other members, as specified in [Problem Details for HTTP APIs](https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/) specification and the value for the type of the reported problem (`type` member of the Problem Details JSON Object) , could be used to provide further error details.
+    - The value of `@context` should provide RDF clients the means to process the problem response within their workflow (the example provides the context inline but it could also be provided by-reference using a context document.)
+
+<pre class=include-code>
+path: examples/bad_request.txt
+highlight: json
+show: 
+</pre>
+
+</div>
+
+<div class="example">
+The below example shows a similar response to POSTing an event notification to the 
+Inbox of a Data/Service Node for a case in which the notification violates the 
+registration requirement constraint expressed by the Inbox:
+
+<pre class=include-code>
+path: examples/unauthorized.txt
+highlight: json
+show: 
+</pre>
+
+</div>
 
 Service description of LDN Targets {#ServiceDescription}
 ==================================

@@ -2141,7 +2141,7 @@ Parts of this work may be from another specification document.  If so, those par
       <li><a href="#DiscoveryImplementationDetails"><span class="secno">7.3</span> <span class="content">Implementation Details for Data Nodes and Service Nodes</span></a>
      </ol>
     <li><a href="#Serialization"><span class="secno">8</span> <span class="content">Serialization of LDN+AS2 notifications</span></a>
-    <li><a href="#Validation"><span class="secno">9</span> <span class="content">Validation of LDN+AS2 notifications</span></a>
+    <li><a href="#ErrorHandling"><span class="secno">9</span> <span class="content">LDN Inbox error handling</span></a>
     <li><a href="#ServiceDescription"><span class="secno">10</span> <span class="content">Service description of LDN Targets</span></a>
     <li><a href="#acknowledgements"><span class="secno">11</span> <span class="content">Acknowledgements</span></a>
     <li>
@@ -5097,10 +5097,94 @@ discovered, across application domains, as follows:</p>
    </ul>
    <h2 class="heading settled" data-level="8" id="Serialization"><span class="secno">8. </span><span class="content">Serialization of LDN+AS2 notifications</span><a class="self-link" href="#Serialization"></a></h2>
    <p class="issue" id="issue-b7b1e314"><a class="self-link" href="#issue-b7b1e314"></a> TODO</p>
-   <h2 class="heading settled" data-level="9" id="Validation"><span class="secno">9. </span><span class="content">Validation of LDN+AS2 notifications</span><a class="self-link" href="#Validation"></a></h2>
-   <p class="issue" id="issue-b7b1e314①"><a class="self-link" href="#issue-b7b1e314①"></a> TODO</p>
+   <h2 class="heading settled" data-level="9" id="ErrorHandling"><span class="secno">9. </span><span class="content">LDN Inbox error handling</span><a class="self-link" href="#ErrorHandling"></a></h2>
+   <p>The Linked Data Notifications <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> specification prescribes the nature of HTTP
+responses for cases when a notification is successfully received in an Inbox. But 
+it also specifies that an Inbox can reject notifications when they violate constraints 
+that are applicable to the Inbox. A constraint to an Inbox can be expressed by a 
+constraint document; the URL of each applicable constraint document can be provided 
+as the target of a link with the <code>http://www.w3.org/ns/ldp#constrainedBy</code> link relation
+type that is provided in any HTTP response of the Inbox, in the HTTP Link header 
+and/or the response body. As per <a data-link-type="biblio" href="#biblio-ldp">[LDP]</a>, both machine-readable and natural language 
+constraint documents are permitted although the former are preferred because they 
+facilitate better client interaction.</p>
+   <p>The following apply regarding constraints on Inboxes provided by Data/Service Nodes:</p>
+   <ul>
+    <li data-md>
+     <p>A constraint must be expressed by a constraint document that is available at a URL that is discoverable in the manner described above. Both machine-readable and natural language constraint documents can be used. Constraint documents made available at different URLs must express different constraints.</p>
+    <li data-md>
+     <p>In accordance with <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a>, a notification that is POSTed to an Inbox but violates an applicable constraint should be rejected and the response should have an appropriate HTTP 4xx code.</p>
+    <li data-md>
+     <p>Additionally, that response should comply with the <a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/">Problem Details for HTTP APIs</a> specification and the value for the type of the reported problem (<code>type</code> member of the Problem Details JSON Object) should be the URL of the constraint document that was violated.</p>
+   </ul>
+   <div class="example" id="example-02906e17">
+    <a class="self-link" href="#example-02906e17"></a> The below example shows the response to POSTing an event notification to the Inbox of a Data/Service Node for a case in which the notification violates a notification payload constraint expressed by the Inbox: 
+    <ul>
+     <li data-md>
+      <p>The HTTP response header shows:</p>
+      <ul>
+       <li data-md>
+        <p>A <code>400 Bad Request</code> HTTP response code indicating that the Inbox rejected the notification.</p>
+       <li data-md>
+        <p>Two links in the Link header that point at constraint documents that are accessible at <code>https://example.org/constraints/shacl1.jsonld</code> and <code>https://example.org/constraints/constraint1.html</code>, respectively. The former is a machine-readable SHACL shape that constraints notification payloads; the latter is a natural language document that expresses a different constraint: “Agents must register at https://example.org/registration/ prior to posting to this Inbox.” Note that links to constraint documents must also be provided when POSTing to the Inbox is successful.</p>
+       <li data-md>
+        <p>A Content-Type header with the value <code>application/problem+json</code>, indicating that the HTTP response body is compliant with the <a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/">Problem Details for HTTP APIs</a> specification and the value for the type of the reported problem (<code>type</code> member of the Problem Details JSON Object).</p>
+      </ul>
+     <li data-md>
+      <p>The HTTP response body provides details about the problem that led to the rejection of the notification:</p>
+      <ul>
+       <li data-md>
+        <p>The value of the <code>type</code> member is https://example.org/constraints/shacl1.jsonld. That is precisely the URL of one of the constraints expressed by the LDN Inbox, i.e. the <a data-link-type="biblio" href="#biblio-shacl">[SHACL]</a> constraint that expresses payload validation constraints.</p>
+       <li data-md>
+        <p>The value of the <code>status</code> member is 400, which is a repetition of the HTTP response code available in the HTTP header; it is provided only for the benefit of self-containedness of the response body.</p>
+       <li data-md>
+        <p>The value of the <code>title</code> member indicates, in a manner that is meaningful to a human reader, that the notification payload failed to validate against the <a data-link-type="biblio" href="#biblio-shacl">[SHACL]</a> shape https://example.org/constraints/shacl1.jsonld.</p>
+       <li data-md>
+        <p>Other members, as specified in <a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/">Problem Details for HTTP APIs</a> specification and the value for the type of the reported problem (<code>type</code> member of the Problem Details JSON Object) , could be used to provide further error details.</p>
+       <li data-md>
+        <p>The value of <code>@context</code> should provide RDF clients the means to process the problem response within their workflow (the example provides the context inline but it could also be provided by-reference using a context document.)</p>
+      </ul>
+    </ul>
+<pre class="include-code highlight">HTTP/<c- mf>1.1</c-> <c- mi>400</c-> Bad Reques<c- kc>t</c->
+Co<c- kc>ntent</c-><c- mi>-</c->Type<c- p>:</c-> applica<c- kc>t</c->io<c- kc>n</c->/problem+jso<c- kc>n</c->
+Co<c- kc>ntent</c-><c- mi>-</c->La<c- kc>n</c->guage<c- p>:</c-> e<c- kc>n</c->
+Li<c- kc>n</c->k<c- p>:</c-> &lt;h<c- kc>tt</c->ps<c- p>:</c->//example.org/co<c- kc>nstra</c->i<c- kc>nts</c->/shacl<c- mf>1.</c->jso<c- kc>nl</c->d>; rel=<c- u>"http://www.w3.org/ns/ldp#constrainedBy"</c->
+Li<c- kc>n</c->k<c- p>:</c-> &lt;h<c- kc>tt</c->ps<c- p>:</c->//example.org/co<c- kc>nstra</c->i<c- kc>nts</c->/co<c- kc>nstra</c->i<c- kc>nt</c-><c- mf>1.</c->h<c- kc>t</c->ml>; rel=<c- u>"http://www.w3.org/ns/ldp#constrainedBy"</c->
+
+<c- p>{</c->
+ <c- f>"@context"</c-><c- p>:</c-> <c- p>{</c-> 
+      <c- f>"type"</c-> <c- p>:</c-> <c- u>"@type"</c-> <c- p>,</c->
+      <c- f>"title"</c-><c- p>:</c-> <c- u>"http://purl.org/dc/terms/title"</c-><c- p>,</c->
+      <c- f>"status"</c-><c- p>:</c-> <c- u>"http://www.w3.org/2011/http#statusCodeNumber"</c-> 
+ <c- p>},</c->
+ <c- f>"type"</c-><c- p>:</c-> <c- u>"https://example.org/constraints/shacl1.jsonld"</c-><c- p>,</c->
+ <c- f>"title"</c-><c- p>:</c-> <c- u>"This notification message is not a valid description: Needed an actor.inbox field but found none."</c-><c- p>,</c->
+ <c- f>"status"</c-><c- p>:</c-> <c- mi>400</c->
+<c- p>}</c-></pre>
+   </div>
+   <div class="example" id="example-99e26a6f">
+    <a class="self-link" href="#example-99e26a6f"></a> The below example shows a similar response to POSTing an event notification to the 
+Inbox of a Data/Service Node for a case in which the notification violates the 
+registration requirement constraint expressed by the Inbox: 
+<pre class="include-code highlight">HTTP/<c- mf>1.1</c-> <c- mi>401</c-> U<c- kc>naut</c->horized
+Co<c- kc>ntent</c-><c- mi>-</c->Type<c- p>:</c-> applica<c- kc>t</c->io<c- kc>n</c->/problem+jso<c- kc>n</c->
+Co<c- kc>ntent</c-><c- mi>-</c->La<c- kc>n</c->guage<c- p>:</c-> e<c- kc>n</c->
+Li<c- kc>n</c->k<c- p>:</c-> &lt;h<c- kc>tt</c->ps<c- p>:</c->//example.org/co<c- kc>nstra</c->i<c- kc>nts</c->/shacl<c- mf>1.</c->jso<c- kc>nl</c->d>; rel=<c- u>"http://www.w3.org/ns/ldp#constrainedBy"</c->
+Li<c- kc>n</c->k<c- p>:</c-> &lt;h<c- kc>tt</c->ps<c- p>:</c->//example.org/co<c- kc>nstra</c->i<c- kc>nts</c->/co<c- kc>nstra</c->i<c- kc>nt</c-><c- mf>1.</c->h<c- kc>t</c->ml>; rel=<c- u>"http://www.w3.org/ns/ldp#constrainedBy"</c->
+
+<c- p>{</c->
+ <c- f>"@context"</c-><c- p>:</c-> <c- p>{</c-> 
+      <c- f>"type"</c-> <c- p>:</c-> <c- u>"@type"</c-> <c- p>,</c->
+      <c- f>"title"</c-><c- p>:</c-> <c- u>"http://purl.org/dc/terms/title"</c-><c- p>,</c->
+      <c- f>"status"</c-><c- p>:</c-> <c- u>"http://www.w3.org/2011/http#statusCodeNumber"</c-> 
+ <c- p>},</c->
+ <c- f>"type"</c-><c- p>:</c-> <c- u>"https://example.org/constraints/constraint1.html"</c-><c- p>,</c->
+ <c- f>"title"</c-><c- p>:</c-> <c- u>"Agents musty register prior to posting to this Inbox"</c-><c- p>,</c->
+ <c- f>"status"</c-><c- p>:</c-> <c- mi>401</c->
+<c- p>}</c-></pre>
+   </div>
    <h2 class="heading settled" data-level="10" id="ServiceDescription"><span class="secno">10. </span><span class="content">Service description of LDN Targets</span><a class="self-link" href="#ServiceDescription"></a></h2>
-   <p class="issue" id="issue-b7b1e314②"><a class="self-link" href="#issue-b7b1e314②"></a> TODO</p>
+   <p class="issue" id="issue-b7b1e314①"><a class="self-link" href="#issue-b7b1e314①"></a> TODO</p>
    <h2 class="heading settled" data-level="11" id="acknowledgements"><span class="secno">11. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Our work is funded by the Andrew W. Mellon Foundation (grant number: 1903-06675).</p>
   </main>
@@ -5245,8 +5329,12 @@ discovered, across application domains, as follows:</p>
    <dd>Manu Sporny; Gregg Kellogg; Markus Lanthaler. <a href="https://www.w3.org/TR/json-ld/"><cite>JSON-LD 1.0</cite></a>. 3 November 2020. REC. URL: <a href="https://www.w3.org/TR/json-ld/">https://www.w3.org/TR/json-ld/</a>
    <dt id="biblio-ldn">[LDN]
    <dd>Sarven Capadisli; Amy Guy. <a href="https://linkedresearch.org/ldn/"><cite>Linked Data Notifications</cite></a>. URL: <a href="https://linkedresearch.org/ldn/">https://linkedresearch.org/ldn/</a>
+   <dt id="biblio-ldp">[LDP]
+   <dd>Steve Speicher; John Arwe; Ashok Malhotra. <a href="https://www.w3.org/2012/ldp/hg/ldp.html"><cite>Linked Data Platform 1.0</cite></a>. URL: <a href="https://www.w3.org/2012/ldp/hg/ldp.html">https://www.w3.org/2012/ldp/hg/ldp.html</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
+   <dt id="biblio-shacl">[SHACL]
+   <dd>Holger Knublauch; Dimitris Kontokostas. <a href="https://w3c.github.io/data-shapes/shacl/"><cite>Shapes Constraint Language (SHACL)</cite></a>. URL: <a href="https://w3c.github.io/data-shapes/shacl/">https://w3c.github.io/data-shapes/shacl/</a>
    <dt id="biblio-uri">[URI]
    <dd>T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://www.rfc-editor.org/rfc/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. January 2005. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>
    <dt id="biblio-url">[URL]
@@ -5258,5 +5346,4 @@ discovered, across application domains, as follows:</p>
   <div style="counter-reset:issue">
    <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314" title="Jump to section">↵</a></div>
    <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314①" title="Jump to section">↵</a></div>
-   <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314②" title="Jump to section">↵</a></div>
   </div>

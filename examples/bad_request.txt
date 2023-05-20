@@ -1,0 +1,16 @@
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+json
+Content-Language: en
+Link: <https://example.org/constraints/shacl1.jsonld>; rel="http://www.w3.org/ns/ldp#constrainedBy"
+Link: <https://example.org/constraints/constraint1.html>; rel="http://www.w3.org/ns/ldp#constrainedBy"
+
+{
+ "@context": { 
+      "type" : "@type" ,
+      "title": "http://purl.org/dc/terms/title",
+      "status": "http://www.w3.org/2011/http#statusCodeNumber" 
+ },
+ "type": "https://example.org/constraints/shacl1.jsonld",
+ "title": "This notification message is not a valid description: Needed an actor.inbox field but found none.",
+ "status": 400
+}
