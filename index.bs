@@ -179,10 +179,9 @@ This section clarifies the terminology that was intuitively introduced in the in
 
 ## Agent ## {#Agent}
 
-An *Agent* is an active participant in the network: an Agent performs actions, can be identified 
-or addressed with a [[URI]], and can send or receive LDN+AS2 notifications. An *Agent* can be 
-human or machine, individual or organization, and operate on behalf of a *Data Node* or a 
-*Service Node*. 
+An *Agent* is an active participant in the network: an *Agent* performs actions, can 
+be human or machine, individual or organization, and operates on behalf of a 
+*Data Node* or a *Service Node*. 
 
 ## Artifact ## {#Artifact}
 
@@ -193,17 +192,24 @@ scope of this specification and depends on the implementing community.
 
 ## Data Node ## {#DataNode}
 
-A *Data Node* is a network node that makes *Artifacts* available to the network and provides 
-one or more LDN Inboxes via which *Agents* that operate on behalf of the *Data Node* can be 
-reached. These LDN Inboxes are set up to receive LDN+AS2 notifications pertaining to the 
-*Artifacts* that are made available to the network by the *Data Node*.  
+A *Data Node* is a network node that makes *Artifacts* available to the network. A 
+*Data Node* provides one or more LDN Inboxes via which *Agents* that operate on 
+behalf of the *Data Node* can be reached. These LDN Inboxes are set up to receive 
+LDN+AS2 notifications pertaining to the *Artifacts* that are made available to the 
+network by the *Data Node*. A *Data Node* must be identified by a [[URL]], which 
+preferably is a [[WebID]]. From this URL, additional information about the *Data Node*, 
+such as the location of its LDN Inbox(es), can be made discoverable.  
 
 ## Service Node ## {#ServiceNode}
 
-A *Service Node* is a network node that provides value-added services for *Artifacts* hosted 
-by *Data Nodes* and provides one or more LDN Inboxes via which *Agents* that operate on behalf 
-of the *Service Node* can be reached. These LDN Inboxes are set up to receive LDN+AS2 
-notifications pertaining to *Artifacts* that are made available to the network by *Data Nodes*. 
+A *Service Node* is a network node that provides value-added services for *Artifacts* 
+hosted by *Data Nodes*.  A *Service Node* provides one or more LDN Inboxes via which 
+*Agents* that operate on behalf of the *Service Node* can be reached. These LDN 
+Inboxes are set up to receive LDN+AS2 notifications pertaining to *Artifacts* that are 
+made available to the network by *Data Nodes*. A *Service Node* must be identified by 
+a [[URL]], which preferably is a [[WebID]]. From this URL, additional information 
+about the *Service Node*, such as the location of its LDN Inbox(es), can be made 
+discoverable.
 
 ## Service Result ## {#ServiceResult}
 
@@ -1121,9 +1127,51 @@ show:
 Discovery of LDN Inboxes {#Discovery}
 ========================
 
-Issue: TODO
+## LDN Inboxes of Network Entities ## {#DiscoveryInboxes}
 
-Serialization of LDN+AS2 notifications {#Serialalization}
+Discovery of an LDN Inbox for the Agent, Artifact, Data Node, and Service Node 
+entities in a Value-Adding Network follows the approach specified in the 
+Linked Data Notifications [[LDN]] specification. An LDN Sender or LDN Consumer 
+does the following to discover an LDN for one of the aforementioned entities:
+
+- issue an HTTP HEAD or GET request on the URL of the entity: the URL of the LDN Inbox is provided in the HTTP Link header of the response as the URL that is the target of the link with a http://www.w3.org/ns/ldp#inbox relation type.
+- issue an HTTP GET request on the URL of the entity: the URL of the LDN Inbox is provided in an RDF representation in the response as the URL that is the object of a triple that has the entity URL as its subject and http://www.w3.org/ns/ldp#inbox as its predicate. 
+
+In case an Agent, Data Node, or Service Node is identified by a WebID [[WebID]], 
+the LDN Inbox of the entity can be discovered by means of the WebID Profile 
+Document [[WebID]] that is returned when issuing an HTTP GET on the WebID. In the 
+RDF representation of that document, the URL of the LDN Inbox is the 
+object of a triple that has the entity’s WebID as its subject and 
+http://www.w3.org/ns/ldp#inbox as its predicate. 
+
+## Entity information ## {#DiscoveryEntityInformation}
+
+Notification payloads in a Value-Adding Network contain only core information 
+(in most cases [[URL]] identifiers) about an Agent, Artifact, Data Node, or 
+Service Node. The assumption is that further information about these entities 
+is available by using their identifiers in auto-discovery mechanisms. How exactly 
+such information is provided by these entities depends on choices made when 
+deploying a Value-Adding Network instantiation but the overall approaches as 
+described above for the discovery of LDN Inboxes can be used as a guideline.
+
+## Implementation Details for Data Nodes and Service Nodes ## {#DiscoveryImplementationDetails}
+
+Data Nodes and Service Nodes can advertise details regarding the specific application 
+domain of the generic Value-Adding Network specification that they implement, 
+including:
+
+- the Profile URI for the specific application domain
+- the AS2 Activity Types that are supported
+- the activities, expressed as URIs from vocabularies chosen by the application domain, that are supported
+
+It is up to each application domain to agree upon the manner in which Data/Service 
+Nodes should convey implementation details, but this information can uniformly be 
+discovered, across application domains, as follows:
+
+- issue an HTTP HEAD or GET request on the URL of the Data/Service Node: the implementation details are available at the URL that is provided in the HTTP Link header of the response, namely the URL that is the target of the link with a https://eventnotifications.net/profile relation type.
+- issue an HTTP GET request on the URL of the Data/Service Node: the implementation details are available at a URL that is provided in an RDF representation in the response, namely the URL that is the object of a triple that has the entity URL as its subject and https://eventnotifications.net/profile as its predicate. 
+
+Serialization of LDN+AS2 notifications {#Serialization}
 ========================================
 
 Issue: TODO

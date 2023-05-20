@@ -2047,7 +2047,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Event Notifications in Value-Adding Networks</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-05-17">17 May 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-05-20">20 May 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2070,7 +2070,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 17 May 2023,
+In addition, as of 20 May 2023,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2133,8 +2133,14 @@ Parts of this work may be from another specification document.  If so, those par
         <li><a href="#RequestResponsePatternSNSNUndo"><span class="secno">6.3.4</span> <span class="content">Service Node cancels prior service request</span></a>
        </ol>
      </ol>
-    <li><a href="#Discovery"><span class="secno">7</span> <span class="content">Discovery of LDN Inboxes</span></a>
-    <li><a href="#Serialalization"><span class="secno">8</span> <span class="content">Serialization of LDN+AS2 notifications</span></a>
+    <li>
+     <a href="#Discovery"><span class="secno">7</span> <span class="content">Discovery of LDN Inboxes</span></a>
+     <ol class="toc">
+      <li><a href="#DiscoveryInboxes"><span class="secno">7.1</span> <span class="content">LDN Inboxes of Network Entities</span></a>
+      <li><a href="#DiscoveryEntityInformation"><span class="secno">7.2</span> <span class="content">Entity information</span></a>
+      <li><a href="#DiscoveryImplementationDetails"><span class="secno">7.3</span> <span class="content">Implementation Details for Data Nodes and Service Nodes</span></a>
+     </ol>
+    <li><a href="#Serialization"><span class="secno">8</span> <span class="content">Serialization of LDN+AS2 notifications</span></a>
     <li><a href="#Validation"><span class="secno">9</span> <span class="content">Validation of LDN+AS2 notifications</span></a>
     <li><a href="#ServiceDescription"><span class="secno">10</span> <span class="content">Service description of LDN Targets</span></a>
     <li><a href="#acknowledgements"><span class="secno">11</span> <span class="content">Acknowledgements</span></a>
@@ -2257,23 +2263,27 @@ for more information about this more concise way of notation.</p>
    <h2 class="heading settled" data-level="4" id="NetworkEntities"><span class="secno">4. </span><span class="content">Network entities</span><a class="self-link" href="#NetworkEntities"></a></h2>
    <p>This section clarifies the terminology that was intuitively introduced in the introduction.</p>
    <h3 class="heading settled" data-level="4.1" id="Agent"><span class="secno">4.1. </span><span class="content">Agent</span><a class="self-link" href="#Agent"></a></h3>
-   <p>An <em>Agent</em> is an active participant in the network: an Agent performs actions, can be identified
-or addressed with a <a data-link-type="biblio" href="#biblio-uri">[URI]</a>, and can send or receive LDN+AS2 notifications. An <em>Agent</em> can be 
-human or machine, individual or organization, and operate on behalf of a <em>Data Node</em> or a <em>Service Node</em>.</p>
+   <p>An <em>Agent</em> is an active participant in the network: an <em>Agent</em> performs actions, can
+be human or machine, individual or organization, and operates on behalf of a <em>Data Node</em> or a <em>Service Node</em>.</p>
    <h3 class="heading settled" data-level="4.2" id="Artifact"><span class="secno">4.2. </span><span class="content">Artifact</span><a class="self-link" href="#Artifact"></a></h3>
    <p>An <em>Artifact</em> is a Web resource identified by a <a data-link-type="biblio" href="#biblio-url">[URL]</a> that is made available to the network by
 a <em>Data Node</em>, and that serves as the main focus of interaction between <em>Agents</em>. An <em>Artifact</em> can 
 be atomic or arbitrary complex. The manner in which <em>Artifacts</em> are organized is outside the 
 scope of this specification and depends on the implementing community.</p>
    <h3 class="heading settled" data-level="4.3" id="DataNode"><span class="secno">4.3. </span><span class="content">Data Node</span><a class="self-link" href="#DataNode"></a></h3>
-   <p>A <em>Data Node</em> is a network node that makes <em>Artifacts</em> available to the network and provides
-one or more LDN Inboxes via which <em>Agents</em> that operate on behalf of the <em>Data Node</em> can be 
-reached. These LDN Inboxes are set up to receive LDN+AS2 notifications pertaining to the <em>Artifacts</em> that are made available to the network by the <em>Data Node</em>.</p>
+   <p>A <em>Data Node</em> is a network node that makes <em>Artifacts</em> available to the network. A <em>Data Node</em> provides one or more LDN Inboxes via which <em>Agents</em> that operate on 
+behalf of the <em>Data Node</em> can be reached. These LDN Inboxes are set up to receive 
+LDN+AS2 notifications pertaining to the <em>Artifacts</em> that are made available to the 
+network by the <em>Data Node</em>. A <em>Data Node</em> must be identified by a <a data-link-type="biblio" href="#biblio-url">[URL]</a>, which 
+preferably is a <a data-link-type="biblio" href="#biblio-webid">[WebID]</a>. From this URL, additional information about the <em>Data Node</em>, 
+such as the location of its LDN Inbox(es), can be made discoverable.</p>
    <h3 class="heading settled" data-level="4.4" id="ServiceNode"><span class="secno">4.4. </span><span class="content">Service Node</span><a class="self-link" href="#ServiceNode"></a></h3>
-   <p>A <em>Service Node</em> is a network node that provides value-added services for <em>Artifacts</em> hosted
-by <em>Data Nodes</em> and provides one or more LDN Inboxes via which <em>Agents</em> that operate on behalf 
-of the <em>Service Node</em> can be reached. These LDN Inboxes are set up to receive LDN+AS2 
-notifications pertaining to <em>Artifacts</em> that are made available to the network by <em>Data Nodes</em>.</p>
+   <p>A <em>Service Node</em> is a network node that provides value-added services for <em>Artifacts</em> hosted by <em>Data Nodes</em>.  A <em>Service Node</em> provides one or more LDN Inboxes via which <em>Agents</em> that operate on behalf of the <em>Service Node</em> can be reached. These LDN 
+Inboxes are set up to receive LDN+AS2 notifications pertaining to <em>Artifacts</em> that are 
+made available to the network by <em>Data Nodes</em>. A <em>Service Node</em> must be identified by 
+a <a data-link-type="biblio" href="#biblio-url">[URL]</a>, which preferably is a <a data-link-type="biblio" href="#biblio-webid">[WebID]</a>. From this URL, additional information 
+about the <em>Service Node</em>, such as the location of its LDN Inbox(es), can be made 
+discoverable.</p>
    <h3 class="heading settled" data-level="4.5" id="ServiceResult"><span class="secno">4.5. </span><span class="content">Service Result</span><a class="self-link" href="#ServiceResult"></a></h3>
    <p>A <em>Service Result</em> is the outcome of the provision of a value-added service by a <em>Service Node</em> for an <em>Artifact</em> that is made available to the network by a <em>Data Node</em>. A <em>Service Result</em> can be a Web resource identified by a <a data-link-type="biblio" href="#biblio-url">[URL]</a> or information that is provided inline in an 
 LDN+AS2 notification.</p>
@@ -5039,13 +5049,58 @@ Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Exampl
   <c- p>}</c-></pre>
    </div>
    <h2 class="heading settled" data-level="7" id="Discovery"><span class="secno">7. </span><span class="content">Discovery of LDN Inboxes</span><a class="self-link" href="#Discovery"></a></h2>
+   <h3 class="heading settled" data-level="7.1" id="DiscoveryInboxes"><span class="secno">7.1. </span><span class="content">LDN Inboxes of Network Entities</span><a class="self-link" href="#DiscoveryInboxes"></a></h3>
+   <p>Discovery of an LDN Inbox for the Agent, Artifact, Data Node, and Service Node
+entities in a Value-Adding Network follows the approach specified in the 
+Linked Data Notifications <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> specification. An LDN Sender or LDN Consumer 
+does the following to discover an LDN for one of the aforementioned entities:</p>
+   <ul>
+    <li data-md>
+     <p>issue an HTTP HEAD or GET request on the URL of the entity: the URL of the LDN Inbox is provided in the HTTP Link header of the response as the URL that is the target of the link with a http://www.w3.org/ns/ldp#inbox relation type.</p>
+    <li data-md>
+     <p>issue an HTTP GET request on the URL of the entity: the URL of the LDN Inbox is provided in an RDF representation in the response as the URL that is the object of a triple that has the entity URL as its subject and http://www.w3.org/ns/ldp#inbox as its predicate.</p>
+   </ul>
+   <p>In case an Agent, Data Node, or Service Node is identified by a WebID <a data-link-type="biblio" href="#biblio-webid">[WebID]</a>,
+the LDN Inbox of the entity can be discovered by means of the WebID Profile 
+Document <a data-link-type="biblio" href="#biblio-webid">[WebID]</a> that is returned when issuing an HTTP GET on the WebID. In the 
+RDF representation of that document, the URL of the LDN Inbox is the 
+object of a triple that has the entity’s WebID as its subject and 
+http://www.w3.org/ns/ldp#inbox as its predicate.</p>
+   <h3 class="heading settled" data-level="7.2" id="DiscoveryEntityInformation"><span class="secno">7.2. </span><span class="content">Entity information</span><a class="self-link" href="#DiscoveryEntityInformation"></a></h3>
+   <p>Notification payloads in a Value-Adding Network contain only core information
+(in most cases <a data-link-type="biblio" href="#biblio-url">[URL]</a> identifiers) about an Agent, Artifact, Data Node, or 
+Service Node. The assumption is that further information about these entities 
+is available by using their identifiers in auto-discovery mechanisms. How exactly 
+such information is provided by these entities depends on choices made when 
+deploying a Value-Adding Network instantiation but the overall approaches as 
+described above for the discovery of LDN Inboxes can be used as a guideline.</p>
+   <h3 class="heading settled" data-level="7.3" id="DiscoveryImplementationDetails"><span class="secno">7.3. </span><span class="content">Implementation Details for Data Nodes and Service Nodes</span><a class="self-link" href="#DiscoveryImplementationDetails"></a></h3>
+   <p>Data Nodes and Service Nodes can advertise details regarding the specific application
+domain of the generic Value-Adding Network specification that they implement, 
+including:</p>
+   <ul>
+    <li data-md>
+     <p>the Profile URI for the specific application domain</p>
+    <li data-md>
+     <p>the AS2 Activity Types that are supported</p>
+    <li data-md>
+     <p>the activities, expressed as URIs from vocabularies chosen by the application domain, that are supported</p>
+   </ul>
+   <p>It is up to each application domain to agree upon the manner in which Data/Service
+Nodes should convey implementation details, but this information can uniformly be 
+discovered, across application domains, as follows:</p>
+   <ul>
+    <li data-md>
+     <p>issue an HTTP HEAD or GET request on the URL of the Data/Service Node: the implementation details are available at the URL that is provided in the HTTP Link header of the response, namely the URL that is the target of the link with a https://eventnotifications.net/profile relation type.</p>
+    <li data-md>
+     <p>issue an HTTP GET request on the URL of the Data/Service Node: the implementation details are available at a URL that is provided in an RDF representation in the response, namely the URL that is the object of a triple that has the entity URL as its subject and https://eventnotifications.net/profile as its predicate.</p>
+   </ul>
+   <h2 class="heading settled" data-level="8" id="Serialization"><span class="secno">8. </span><span class="content">Serialization of LDN+AS2 notifications</span><a class="self-link" href="#Serialization"></a></h2>
    <p class="issue" id="issue-b7b1e314"><a class="self-link" href="#issue-b7b1e314"></a> TODO</p>
-   <h2 class="heading settled" data-level="8" id="Serialalization"><span class="secno">8. </span><span class="content">Serialization of LDN+AS2 notifications</span><a class="self-link" href="#Serialalization"></a></h2>
-   <p class="issue" id="issue-b7b1e314①"><a class="self-link" href="#issue-b7b1e314①"></a> TODO</p>
    <h2 class="heading settled" data-level="9" id="Validation"><span class="secno">9. </span><span class="content">Validation of LDN+AS2 notifications</span><a class="self-link" href="#Validation"></a></h2>
-   <p class="issue" id="issue-b7b1e314②"><a class="self-link" href="#issue-b7b1e314②"></a> TODO</p>
+   <p class="issue" id="issue-b7b1e314①"><a class="self-link" href="#issue-b7b1e314①"></a> TODO</p>
    <h2 class="heading settled" data-level="10" id="ServiceDescription"><span class="secno">10. </span><span class="content">Service description of LDN Targets</span><a class="self-link" href="#ServiceDescription"></a></h2>
-   <p class="issue" id="issue-b7b1e314③"><a class="self-link" href="#issue-b7b1e314③"></a> TODO</p>
+   <p class="issue" id="issue-b7b1e314②"><a class="self-link" href="#issue-b7b1e314②"></a> TODO</p>
    <h2 class="heading settled" data-level="11" id="acknowledgements"><span class="secno">11. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Our work is funded by the Andrew W. Mellon Foundation (grant number: 1903-06675).</p>
   </main>
@@ -5196,11 +5251,12 @@ Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Exampl
    <dd>T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://www.rfc-editor.org/rfc/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. January 2005. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>
    <dt id="biblio-url">[URL]
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
+   <dt id="biblio-webid">[WebID]
+   <dd>Andrei Sambra; Henry Story; Tim Berners-Lee. <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html"><cite>WebID 1.0</cite></a>. Editor’s Draft. URL: <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
    <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314" title="Jump to section">↵</a></div>
    <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314①" title="Jump to section">↵</a></div>
    <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314②" title="Jump to section">↵</a></div>
-   <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314③" title="Jump to section">↵</a></div>
   </div>
