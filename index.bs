@@ -5,6 +5,8 @@ Level: 1
 Status: LD
 URL: https://www.eventnotifications.net
 TR: https://www.eventnotifications.net
+Logo: images/logo.png
+Favicon: images/favicon-32x32.png
 Previous Version: https://www.eventnotifications.net/0.1/
 Editor: Patrick Hochstenbach, [Ghent University Library](https://lib.ugent.be), patrick.hochstenbach@ugent.be
 Editor: Miel Vander Sande, [meemoo - Flemish Institute for Archives](https://meemoo.be), miel.vandersande@meemoo.be
@@ -14,10 +16,18 @@ Editor: Martin Klein, [Los Alamos National Laboratory](https://www.lanl.gov/libr
 Editor: Herbert Van de Sompel, [IDLab - Ghent University](https://knows.idlab.ugent.be), herbert.vandesompel@ugent.be
 Abstract: This document lists the possible notifications that can be used in the network. 
 Markup Shorthands: markdown yes 
-Boilerplate: conformance no, index no
+Boilerplate: logo yes, conformance no, index no
 </pre>
 
 <style>
+p[data-fill-with="logo"] {
+  display: block;
+  float: right;
+  width: 150px;
+  height: 150px;
+  margin: 0.4rem 0 0.2rem .4rem;
+  background-image: url([LOGO])
+}
 table {
   margin: 25px auto;
   border-collapse: collapse;
