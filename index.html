@@ -2056,7 +2056,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Event Notifications in Value-Adding Networks</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-06-05">5 June 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-07-11">11 July 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2079,7 +2079,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 5 June 2023,
+In addition, as of 11 July 2023,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -3642,8 +3642,8 @@ whether or not the service will actually be provided.</p>
       <th>Optional 
       <td><strong>as:origin</strong>, <strong>as:target</strong>
    </table>
-   <div class="example" id="example-9205b62f">
-    <a class="self-link" href="#example-9205b62f"></a> The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
+   <div class="example" id="example-acknowledge">
+    <a class="self-link" href="#example-acknowledge"></a> The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it accepts the offer ACME sent in a
 previous activity notification. 
 <pre class="include-code highlight"><c- p>{</c-> 
@@ -5105,7 +5105,56 @@ discovered, across application domains, as follows:</p>
      <p>issue an HTTP GET request on the URL of the Data/Service Node: the implementation details are available at a URL that is provided in an RDF representation in the response, namely the URL that is the object of a triple that has the entity URL as its subject and https://eventnotifications.net/profile as its predicate.</p>
    </ul>
    <h2 class="heading settled" data-level="8" id="Serialization"><span class="secno">8. </span><span class="content">Serialization of LDN+AS2 notifications</span><a class="self-link" href="#Serialization"></a></h2>
-   <p class="issue" id="issue-b7b1e314"><a class="self-link" href="#issue-b7b1e314"></a> TODO</p>
+   <p>The payload of Event Notifications can be serialized in different formats. In accordance with the <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> specification,
+both Sender and Receiver MUST at least support the <a data-link-type="biblio" href="#biblio-json-ld">JSON-LD 1.0</a>. 
+Other RDF syntaxes such as Turtle MAY be made available as well.</p>
+   <p>In case of JSON-LD, Senders MAY apply <a data-link-type="biblio" href="#biblio-json-ld11-framing">JSON-LD 1.1 frame</a> during serialization in order to provide more predictable JSON-LD payloads.
+Predictable JSON-LD will ease the implementation of Event Notifications in environments where plain JSON processing is the norm.</p>
+   <p>The framing of the payloads will produce JSON documents with predictable property names, as long as the right <code>@context</code> is set for the community.
+JSON implementations should still be aware of the semantic equivalence between a string value and an array of size one with a string value. 
+For instance, <code>"foo" : "bar"</code> and <code>"foo" : [ "bar" ]</code> will both contain for the <code>foo</code> property the same string value.</p>
+   <p>A JSON-LD 1.1 frame should beware of possible nesting of <code>as:Activity</code> types.
+For instance, the presence of an <code>as:Offer</code> as object of an <code>as:Accept</code>, as per <a href="#example-acknowledge">Example 14</a>, can lead to unexpected JSON documents. 
+Therefore, any frame SHOULD include the <a href="#ActivityId">activity identifier</a> as top level <code>@id</code>, as illustrated below.</p>
+   <div class="example" id="example-b0ee6f14">
+    <a class="self-link" href="#example-b0ee6f14"></a> Possible frame that will generate the predictable JSON-LD playload from <a href="#example-acknowledge">Example 14</a>. 
+<pre>{
+"@context": "https://www.w3.org/ns/activitystreams#",
+"@id": "urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB"
+}
+</pre>
+    <p>Additionally, namespace prefixes can be passed in the context parameter of the frame to shorten the syntax. These will transform the output to a turtle-like syntax.</p>
+<pre>{  
+   "@context": [
+     "https://www.w3.org/ns/activitystreams" ,
+     {
+"schema": "https://schema.org/",
+" ... ": " ... "
+}
+   ],
+  "id": "urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB"
+}
+</pre>
+    <p>will result in</p>
+<pre>{  
+   ...
+   "type": "schema:Dataset" ,
+   ...
+}
+</pre>
+    <p>The framing result of example 14 can be seen in following JSON-LD Playground example</p>
+   </div>
+   <p>To discover the activity identifier from any notification, while ignoring the nested activities, one can match the expected notification types from <a href="#ActivityType">§ 5.2 JSON-LD type</a>, and then eliminate identifiers from nested activities by, for example, checking whether they occur as objects of <code>as:object</code> .</p>
+   <p>When sending a notification, Senders SHOULD include the HTTP header <code>content-type</code> in the request with the <code>profile</code> parameter set to <code>https://www.eventnotifications.net</code>,
+as described in the <a data-link-type="biblio" href="#biblio-dx-prof-conneg">Content Negotiation by Profile specification</a>. 
+For example, for requests with payloads serialized to JSON-LD, 
+the <code>content-type</code> header should be set to <code>application/ld+json; profile="https://www.eventnotifications.net</code>.</p>
+   <p>Some communities will use Event Notifications in conjunction with a community-specific profile, e.g., additional vocabularies introduced by the community to further specify activities described in the notification payload.
+In this case, it is RECOMMENDED to add the profile URI coined by that community to the <code>profile</code> parameter. 
+For example, in the context of the <a href="https://notify.coar-repositories.org">COAR notify project</a>, 
+the <code>content-type</code> header could be set to <code>application/ld+json; profile="https://www.eventnotifications.net https://notify.coar-repositories.org</code>. 
+Note that in case of JSON-LD payloads, the <a data-link-type="biblio" href="#biblio-json-ld11">JSON-LD 1.1</a> specification [recommends to also add the JSON-LD document profile, 
+which is identified by an URI starting with <code>http://www.w3.org/ns/json-ld</code>, to the <code>profile parameter</code>](https://www.w3.org/TR/json-ld11/#iana-considerations).</p>
    <h2 class="heading settled" data-level="9" id="ErrorHandling"><span class="secno">9. </span><span class="content">LDN Inbox error handling</span><a class="self-link" href="#ErrorHandling"></a></h2>
    <p>The Linked Data Notifications <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> specification prescribes the nature of HTTP
 responses for cases when a notification is successfully received in an Inbox. But 
@@ -5193,7 +5242,7 @@ Li<c- kc>n</c->k<c- p>:</c-> &lt;h<c- kc>tt</c->ps<c- p>:</c->//example.org/co<c
 <c- p>}</c-></pre>
    </div>
    <h2 class="heading settled" data-level="10" id="ServiceDescription"><span class="secno">10. </span><span class="content">Service description of LDN Targets</span><a class="self-link" href="#ServiceDescription"></a></h2>
-   <p class="issue" id="issue-b7b1e314①"><a class="self-link" href="#issue-b7b1e314①"></a> TODO</p>
+   <p class="issue" id="issue-b7b1e314"><a class="self-link" href="#issue-b7b1e314"></a> TODO</p>
    <h2 class="heading settled" data-level="11" id="acknowledgements"><span class="secno">11. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Our work is funded by the Andrew W. Mellon Foundation (grant number: 1903-06675).</p>
   </main>
@@ -5334,8 +5383,14 @@ Li<c- kc>n</c->k<c- p>:</c-> &lt;h<c- kc>tt</c->ps<c- p>:</c->//example.org/co<c
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
+   <dt id="biblio-dx-prof-conneg">[DX-PROF-CONNEG]
+   <dd>Lars G. Svensson; Nicholas Car. <a href="https://w3c.github.io/dxwg/connegp/"><cite>Content Negotiation by Profile</cite></a>. URL: <a href="https://w3c.github.io/dxwg/connegp/">https://w3c.github.io/dxwg/connegp/</a>
    <dt id="biblio-json-ld">[JSON-LD]
    <dd>Manu Sporny; Gregg Kellogg; Markus Lanthaler. <a href="https://www.w3.org/TR/json-ld/"><cite>JSON-LD 1.0</cite></a>. 3 November 2020. REC. URL: <a href="https://www.w3.org/TR/json-ld/">https://www.w3.org/TR/json-ld/</a>
+   <dt id="biblio-json-ld11">[JSON-LD11]
+   <dd>Gregg Kellogg; Pierre-Antoine Champin; Dave Longley. <a href="https://w3c.github.io/json-ld-syntax/"><cite>JSON-LD 1.1</cite></a>. URL: <a href="https://w3c.github.io/json-ld-syntax/">https://w3c.github.io/json-ld-syntax/</a>
+   <dt id="biblio-json-ld11-framing">[JSON-LD11-FRAMING]
+   <dd>Dave Longley; Gregg Kellogg; Pierre-Antoine Champin. <a href="https://w3c.github.io/json-ld-framing/"><cite>JSON-LD 1.1 Framing</cite></a>. URL: <a href="https://w3c.github.io/json-ld-framing/">https://w3c.github.io/json-ld-framing/</a>
    <dt id="biblio-ldn">[LDN]
    <dd>Sarven Capadisli; Amy Guy. <a href="https://linkedresearch.org/ldn/"><cite>Linked Data Notifications</cite></a>. URL: <a href="https://linkedresearch.org/ldn/">https://linkedresearch.org/ldn/</a>
    <dt id="biblio-ldp">[LDP]
@@ -5354,5 +5409,4 @@ Li<c- kc>n</c->k<c- p>:</c-> &lt;h<c- kc>tt</c->ps<c- p>:</c->//example.org/co<c
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
    <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314" title="Jump to section">↵</a></div>
-   <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314①" title="Jump to section">↵</a></div>
   </div>
