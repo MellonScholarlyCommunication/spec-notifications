@@ -797,7 +797,7 @@ For such a notification:
 </tbody>
 </table>
 
-<div class=example>
+<div class=example id="example-acknowledge">
 The Data Archive XYZ (Service Node) notifies the ACME Research Institute 
 (Data Node) in a request-response pattern that it accepts the offer ACME sent in a
 previous activity notification.
@@ -1184,7 +1184,72 @@ discovered, across application domains, as follows:
 Serialization of LDN+AS2 notifications {#Serialization}
 ========================================
 
-Issue: TODO
+The payload of Event Notifications can be serialized in different formats. In accordance with the [[LDN]] specification, 
+both Sender and Receiver MUST at least support the [[JSON-LD|JSON-LD 1.0]]. 
+Other RDF syntaxes such as Turtle MAY be made available as well. 
+
+In case of JSON-LD, Senders MAY apply [[json-ld11-framing|JSON-LD 1.1 frame]] during serialization in order to provide more predictable JSON-LD payloads. 
+Predictable JSON-LD will ease the implementation of Event Notifications in environments where plain JSON processing is the norm. 
+
+The framing of the payloads will produce JSON documents with predictable property names, as long as the right `@context` is set for the community. 
+JSON implementations should still be aware of the semantic equivalence between a string value and an array of size one with a string value. 
+For instance, `"foo" : "bar"` and `"foo" : [ "bar" ]` will both contain for the `foo` property the same string value. 
+
+A JSON-LD 1.1 frame should beware of possible nesting of `as:Activity` types. 
+For instance, the presence of an `as:Offer` as object of an `as:Accept`, as per <a href="#example-acknowledge">Example 14</a>, can lead to unexpected JSON documents. 
+Therefore, any frame SHOULD include the [activity identifier](#ActivityId) as top level `@id`, as illustrated below.
+
+<div class="example">
+Possible frame that will generate the predictable JSON-LD playload from <a href="#example-acknowledge">Example 14</a>.
+<pre>
+{
+"@context": "https://www.w3.org/ns/activitystreams#",
+"@id": "urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB"
+}
+</pre>
+
+Additionally, namespace prefixes can be passed in the context parameter of the frame to shorten the syntax. These will transform the output to a turtle-like syntax.
+
+<pre>
+{  
+   "@context": [
+     "https://www.w3.org/ns/activitystreams" ,
+     {
+"schema": "https://schema.org/",
+" ... ": " ... "
+}
+   ],
+  "id": "urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB"
+}
+</pre>
+
+
+will result in 
+<pre>
+{  
+   ...
+   "type": "schema:Dataset" ,
+   ...
+}
+</pre>
+
+The framing result of example 14 can be seen in following JSON-LD Playground example
+
+</div>
+
+To discover the activity identifier from any notification, while ignoring the nested activities, one can match the expected notification types from [[#ActivityType]], and then eliminate identifiers from nested activities by, for example, checking whether they occur as objects of `as:object` .
+
+When sending a notification, Senders SHOULD include the HTTP header `content-type` in the request with the `profile` parameter set to `https://www.eventnotifications.net`, 
+as described in the [[dx-prof-conneg|Content Negotiation by Profile specification]]. 
+For example, for requests with payloads serialized to JSON-LD, 
+the `content-type` header should be set to `application/ld+json; profile="https://www.eventnotifications.net`. 
+
+Some communities will use Event Notifications in conjunction with a community-specific profile, e.g., additional vocabularies introduced by the community to further specify activities described in the notification payload. 
+In this case, it is RECOMMENDED to add the profile URI coined by that community to the `profile` parameter. 
+For example, in the context of the [COAR notify project](https://notify.coar-repositories.org), 
+the `content-type` header could be set to  `application/ld+json; profile="https://www.eventnotifications.net https://notify.coar-repositories.org`. 
+Note that in case of JSON-LD payloads, the [[json-ld11|JSON-LD 1.1]] specification [recommends to also add the JSON-LD document profile, 
+which is identified by an URI starting with `http://www.w3.org/ns/json-ld`, to the `profile parameter`](https://www.w3.org/TR/json-ld11/#iana-considerations).
 
 LDN Inbox error handling {#ErrorHandling}
 ===================================
