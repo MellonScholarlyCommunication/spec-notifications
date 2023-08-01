@@ -1269,7 +1269,7 @@ The following apply regarding constraints on Inboxes provided by Data/Service No
 
 - A constraint must be expressed by a constraint document that is available at a URL that is discoverable in the manner described above. Both machine-readable and natural language constraint documents can be used. Constraint documents made available at different URLs must express different constraints. 
 - In accordance with [[LDN]], a notification that is POSTed to an Inbox but violates an applicable constraint should be rejected and the response should have an appropriate HTTP 4xx code.
-- Additionally, that response should comply with the [Problem Details for HTTP APIs](https://datatracker.ietf.org/doc/draft-ietf-httpapi-rfc7807bis/) specification and the value for the type of the reported problem (`type` member of the Problem Details JSON Object) should be the URL of the constraint document that was violated.
+- Additionally, that response should comply with the [Problem Details for HTTP APIs](https://www.rfc-editor.org/info/rfc9457) specification and the value for the type of the reported problem (`type` member of the Problem Details JSON Object) should be the URL of the constraint document that was violated.
 
 <div class="example">
 The below example shows the response to POSTing an event notification to the Inbox of a Data/Service Node for a case in which the notification violates a notification payload constraint expressed by the Inbox:
