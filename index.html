@@ -2056,7 +2056,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Event Notifications in Value-Adding Networks</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-08-01">1 August 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-09-06">6 September 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2079,7 +2079,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 1 August 2023,
+In addition, as of 6 September 2023,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2143,11 +2143,12 @@ Parts of this work may be from another specification document.  If so, those par
        </ol>
      </ol>
     <li>
-     <a href="#Discovery"><span class="secno">7</span> <span class="content">Discovery of LDN Inboxes</span></a>
+     <a href="#Discovery"><span class="secno">7</span> <span class="content">Discovery and Description</span></a>
      <ol class="toc">
-      <li><a href="#DiscoveryInboxes"><span class="secno">7.1</span> <span class="content">LDN Inboxes of Network Entities</span></a>
+      <li><a href="#DiscoveryInboxes"><span class="secno">7.1</span> <span class="content">LDN Inboxes of network entities</span></a>
       <li><a href="#DiscoveryEntityInformation"><span class="secno">7.2</span> <span class="content">Entity information</span></a>
-      <li><a href="#DiscoveryImplementationDetails"><span class="secno">7.3</span> <span class="content">Implementation Details for Data Nodes and Service Nodes</span></a>
+      <li><a href="#DiscoveryImplementationDetails"><span class="secno">7.3</span> <span class="content">Community specific implementation details</span></a>
+      <li><a href="##ServiceDescription"><span class="secno">7.4</span> <span class="content">Service description of Service Nodes</span></a>
      </ol>
     <li><a href="#Serialization"><span class="secno">8</span> <span class="content">Serialization of LDN+AS2 notifications</span></a>
     <li><a href="#ErrorHandling"><span class="secno">9</span> <span class="content">LDN Inbox error handling</span></a>
@@ -5057,8 +5058,8 @@ Data Archive XYZ Australia (Service Node B) of the Offer that was sent in Exampl
     <c- p>}</c->
   <c- p>}</c-></pre>
    </div>
-   <h2 class="heading settled" data-level="7" id="Discovery"><span class="secno">7. </span><span class="content">Discovery of LDN Inboxes</span><a class="self-link" href="#Discovery"></a></h2>
-   <h3 class="heading settled" data-level="7.1" id="DiscoveryInboxes"><span class="secno">7.1. </span><span class="content">LDN Inboxes of Network Entities</span><a class="self-link" href="#DiscoveryInboxes"></a></h3>
+   <h2 class="heading settled" data-level="7" id="Discovery"><span class="secno">7. </span><span class="content">Discovery and Description</span><a class="self-link" href="#Discovery"></a></h2>
+   <h3 class="heading settled" data-level="7.1" id="DiscoveryInboxes"><span class="secno">7.1. </span><span class="content">LDN Inboxes of network entities</span><a class="self-link" href="#DiscoveryInboxes"></a></h3>
    <p>Discovery of an LDN Inbox for the Agent, Artifact, Data Node, and Service Node
 entities in a Value-Adding Network follows the approach specified in the 
 Linked Data Notifications <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> specification. An LDN Sender or LDN Consumer 
@@ -5083,7 +5084,7 @@ is available by using their identifiers in auto-discovery mechanisms. How exactl
 such information is provided by these entities depends on choices made when 
 deploying a Value-Adding Network instantiation but the overall approaches as 
 described above for the discovery of LDN Inboxes can be used as a guideline.</p>
-   <h3 class="heading settled" data-level="7.3" id="DiscoveryImplementationDetails"><span class="secno">7.3. </span><span class="content">Implementation Details for Data Nodes and Service Nodes</span><a class="self-link" href="#DiscoveryImplementationDetails"></a></h3>
+   <h3 class="heading settled" data-level="7.3" id="DiscoveryImplementationDetails"><span class="secno">7.3. </span><span class="content">Community specific implementation details</span><a class="self-link" href="#DiscoveryImplementationDetails"></a></h3>
    <p>Data Nodes and Service Nodes can advertise details regarding the specific application
 domain of the generic Value-Adding Network specification that they implement, 
 including:</p>
@@ -5094,6 +5095,8 @@ including:</p>
      <p>the AS2 Activity Types that are supported</p>
     <li data-md>
      <p>the activities, expressed as URIs from vocabularies chosen by the application domain, that are supported</p>
+    <li data-md>
+     <p>the expected network communication patterns (e.g. network communication patterns, incoming and outgoing LDN+AS2 notification messages)</p>
    </ul>
    <p>It is up to each application domain to agree upon the manner in which Data/Service
 Nodes should convey implementation details, but this information can uniformly be 
@@ -5104,6 +5107,8 @@ discovered, across application domains, as follows:</p>
     <li data-md>
      <p>issue an HTTP GET request on the URL of the Data/Service Node: the implementation details are available at a URL that is provided in an RDF representation in the response, namely the URL that is the object of a triple that has the entity URL as its subject and https://eventnotifications.net/profile as its predicate.</p>
    </ul>
+   <h3 class="heading settled" data-level="7.4" id="#ServiceDescription"><span class="secno">7.4. </span><span class="content">Service description of Service Nodes</span><a class="self-link" href="#%23ServiceDescription"></a></h3>
+   <p>Each Service Node can advertise the services they offer by means of a Service Description document. Both machine-readable and natural language Service Description documents are permitted and may, for example, include a description of the incoming and outgoing LDN+AS2 notifications that are supported by the LDN Inbox associated with the Service Node. To support discovery of Service Description documents, Service Nodes can make use of existing mechanisms such as the <a href="https://www.ietf.org/archive/id/draft-smith-api-catalog-03.html">API-Catalog</a> specification. The content of Service Node service descriptions resemble the information that can be provided for an application domain, including supported the AS2 Activity Type, specializations of the generic AS2 types and possible network communication patterns.</p>
    <h2 class="heading settled" data-level="8" id="Serialization"><span class="secno">8. </span><span class="content">Serialization of LDN+AS2 notifications</span><a class="self-link" href="#Serialization"></a></h2>
    <p>The payload of Event Notifications can be serialized in different formats. In accordance with the <a data-link-type="biblio" href="#biblio-ldn">[LDN]</a> specification,
 both Sender and Receiver MUST at least support the <a data-link-type="biblio" href="#biblio-json-ld">JSON-LD 1.0</a>. 
