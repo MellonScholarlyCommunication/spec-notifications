@@ -1134,10 +1134,10 @@ show:
 </pre>
 </div>
 
-Discovery of LDN Inboxes {#Discovery}
+Discovery and Description {#Discovery}
 ========================
 
-## LDN Inboxes of Network Entities ## {#DiscoveryInboxes}
+## LDN Inboxes of network entities ## {#DiscoveryInboxes}
 
 Discovery of an LDN Inbox for the Agent, Artifact, Data Node, and Service Node 
 entities in a Value-Adding Network follows the approach specified in the 
@@ -1164,7 +1164,7 @@ such information is provided by these entities depends on choices made when
 deploying a Value-Adding Network instantiation but the overall approaches as 
 described above for the discovery of LDN Inboxes can be used as a guideline.
 
-## Implementation Details for Data Nodes and Service Nodes ## {#DiscoveryImplementationDetails}
+## Community specific implementation details ## {#DiscoveryImplementationDetails}
 
 Data Nodes and Service Nodes can advertise details regarding the specific application 
 domain of the generic Value-Adding Network specification that they implement, 
@@ -1173,6 +1173,7 @@ including:
 - the Profile URI for the specific application domain
 - the AS2 Activity Types that are supported
 - the activities, expressed as URIs from vocabularies chosen by the application domain, that are supported
+- the expected network communication patterns (e.g. network communication patterns, incoming and outgoing LDN+AS2 notification messages)
 
 It is up to each application domain to agree upon the manner in which Data/Service 
 Nodes should convey implementation details, but this information can uniformly be 
@@ -1180,6 +1181,11 @@ discovered, across application domains, as follows:
 
 - issue an HTTP HEAD or GET request on the URL of the Data/Service Node: the implementation details are available at the URL that is provided in the HTTP Link header of the response, namely the URL that is the target of the link with a https://eventnotifications.net/profile relation type.
 - issue an HTTP GET request on the URL of the Data/Service Node: the implementation details are available at a URL that is provided in an RDF representation in the response, namely the URL that is the object of a triple that has the entity URL as its subject and https://eventnotifications.net/profile as its predicate. 
+
+## Service description of Service Nodes ## {##ServiceDescription}
+
+Each Service Node can advertise the services they offer by means of a Service Description document. Both machine-readable and natural language Service Description documents are permitted and may, for example, include a description of the incoming and outgoing LDN+AS2 notifications that are supported by the LDN Inbox associated with the Service Node. To support discovery of Service Description documents, Service Nodes can make use of existing mechanisms such as the [API-Catalog](https://www.ietf.org/archive/id/draft-smith-api-catalog-03.html) specification. The content of Service Node service descriptions resemble the information that can be provided for an application domain, including supported the AS2 Activity Type, specializations of the generic AS2 types and possible network communication patterns. 
+
 
 Serialization of LDN+AS2 notifications {#Serialization}
 ========================================
